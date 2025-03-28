@@ -1,6 +1,7 @@
 import { useState } from "react";
 import "./Navbar.css"; // Import external CSS
 import logo from "../../assets/warrior img.jpg";  // Correct way to import
+import Dropdowncourses from "../dropdown-courses-menus/dropdowncourses";
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -22,16 +23,8 @@ const Navbar = () => {
             <li><a href="#">HOME</a></li>
             <li><a href="#">ABOUT US</a></li>
             <li className="dropdown">
-              <button onClick={() => setIsOpen(!isOpen)} className="dropdown-btn">
-                COURSES &#9662;
-              </button>
-              {isOpen && (
-                <ul className="dropdown-menu">
-                  <li><a href="#">Course 1</a></li>
-                  <li><a href="#">Course 2</a></li>
-                </ul>
-              )}
-            </li>
+          <Dropdowncourses/>
+        </li>
             <li><a href="#">ONLINE EXAM</a></li>
             <li><a href="#">ONLINE REGISTRATION</a></li>
             <li><a href="#">CERTIFICATE VERIFY</a></li>

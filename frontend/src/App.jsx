@@ -6,6 +6,8 @@ import Navbar from './Components/Navbar/Navbar'
 import Welcome from './Components/welcome text/Welcome';
 import Cards from './Components/cards/Cards';
 import Footer from './Components/footer/footer';
+import Dropdowncourses from './Components/dropdown-courses-menus/dropdowncourses';
+
 
 function App() {
 
@@ -17,6 +19,7 @@ function App() {
      <Welcome/>
      <Cards/>
      <Footer/>
+     <Dropdowncourses/>
     </>
   )
 }
