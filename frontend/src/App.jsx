@@ -5,6 +5,7 @@ import Hero from './Components/hero/hero'
 import Navbar from './Components/Navbar/Navbar'
 import Welcome from './Components/welcome text/Welcome';
 import Cards from './Components/cards/Cards';
+import Footer from './Components/footer/footer';
 
 function App() {
 
@@ -15,6 +16,7 @@ function App() {
      <Hero/>
      <Welcome/>
      <Cards/>
+     <Footer/>
     </>
   )
 }

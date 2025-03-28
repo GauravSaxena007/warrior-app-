@@ -1,66 +1,109 @@
 /* Top orange line */
 .top-line {
-    background-color: orange;
-    height: 5px;
-    width: 100%;
-    position: fixed;
-    top: 0;
-    left: 0;
-    z-index: 1000;
-  }
+  background-color: rgb(170, 126, 44);
+  height: 5px;
+  width: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 1000;
+}
+
+/* Logo container (sticks to the top-left) */
+.logo-container {
+  position: fixed;
+  top: -10px; /* Moved slightly upward */
+  left: 10px;
+  z-index: 1001;
+  padding: 5px;
+}
+
+.logo {
+  height: 120px; /* Adjusted for better proportions */
+}
+
+/* Navbar Styling */
+.navbar {
+  background-color: rgb(184, 125, 16);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 5px 10px; /* Reduced padding */
+  border-radius: 30px;
   
-  /* Logo container (sticks to the top-left) */
-  .logo-container {
-    position: absolute;
-    top: 10px;  /* Keep it near the top */
-    left: 20px; /* Adjust spacing from the left */
-    z-index: 1001;
-    background: white;
-    padding: 5px;
-    border-bottom-left-radius: 10px;
-    border-bottom-right-radius: 10px;
-  }
-  
-  .logo {
-    height: 60px;
-    display: block;
-  }
-  
-  /* Navbar Styling */
-  .navbar {
-    background-color: orange;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 15px 20px;
-    border-top-left-radius: 30px;
-    border-top-right-radius: 30px;
-    
-    position: fixed;  /* Fix navbar at the top */
-    top: 20px;  /* Adjust to prevent overlap with logo */
-    left: 50%;
-    transform: translateX(-50%); /* Center horizontally */
-    width: 80%; /* Adjust width */
-    z-index: 1000;
-  }
-  
-  .nav-links {
-    list-style: none;
-    display: flex;
-    gap: 20px;
-    color: white;
-  }
-  
-  .nav-links a {
-    text-decoration: none;
-    color: white;
-    font-weight: bold;
-  }
-  
-  .contact-box {
-    background-color: green;
-    color: white;
-    padding: 8px 15px;
-    border-radius: 20px;
-  }
-  
+  position: fixed;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 75%;
+  z-index: 1000;
+}
+
+/* Push content down to prevent it from being hidden behind the navbar */
+body {
+  padding-top: 80px;
+}
+
+/* Navigation Links */
+.nav-links {
+  list-style: none;
+  display: flex;
+  gap: 20px;
+}
+
+.nav-links a {
+  text-decoration: none;
+  color: white;
+  font-weight: bold;
+  font-size: 13px; /* Adjust font size */
+  padding: 111px 1px; /* Reduce padding */
+}
+
+/* Dropdown Menu Styling */
+.dropdown-menu {
+  background: rgb(184, 125, 16); /* Match navbar color */
+  border: none;
+  box-shadow: none;
+  padding: 5px 0;
+}
+
+
+.dropdown-menu li {
+  padding: 10px;
+}
+
+.dropdown-menu li a {
+  background: transparent; /* Remove white */
+  color: white;
+  padding: 5px 10px;
+  display: block;
+}
+
+.dropdown-menu li a:hover {
+  background: rgba(255, 255, 255, 0.2);
+}
+
+.dropdown-btn {
+  background: transparent; /* Remove white background */
+  color: white;
+  border: none;
+  font-weight: bold;
+  font-size: 14px;
+  padding: 1px 1px;
+  cursor: pointer;
+}
+
+/* Contact Section (Centered) */
+.contact-info {
+  position: fixed;
+  top: 70px; /* Adjusted for better centering */
+  left: 21%;
+  transform: translateX(-50%);
+  background: green;
+  padding: 1px 9px;
+  border-radius: 20px;
+  box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.1);
+  z-index: 1001;
+  font-weight: bold;
+  color: rgb(255, 255, 255);
+}

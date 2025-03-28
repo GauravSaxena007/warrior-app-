@@ -10,7 +10,7 @@ const Navbar = () => {
       {/* Top orange line */}
       <div className="top-line"></div>
 
-      {/* Logo - Completely outside the navbar */}
+      {/* Logo - Positioned outside the navbar */}
       <div className="logo-container">
         <img src={logo} alt="Logo" className="logo" />
       </div>
@@ -39,10 +39,12 @@ const Navbar = () => {
             <li><a href="#">LOGIN</a></li>
           </ul>
         </div>
-        <div className="contact-box">
-          <span className="phone-icon">📞</span> 9422123456
-        </div>
       </nav>
+
+      {/* Contact Number - Placed Outside Navbar */}
+      <div className="contact-info">
+        Franchisee Enquiery : 📞 9422123456
+      </div>
     </>
   );
 };
