@@ -20,7 +20,7 @@ const Navbar = () => {
       <nav className="navbar">
         <div className="nav-container">
           <ul className="nav-links">
-            <li><a href="#">HOME</a></li>
+            <li><a href="/">HOME</a></li>
             <li><a href="#">ABOUT US</a></li>
             <li className="dropdown">
           <Dropdowncourses/>
