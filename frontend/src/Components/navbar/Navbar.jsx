@@ -2,6 +2,7 @@ import { useState } from "react";
 import "./Navbar.css"; // Import external CSS
 import logo from "../../assets/warrior img.jpg";  // Correct way to import
 import Dropdowncourses from "../dropdown-courses-menus/dropdowncourses";
+import Profile from "../Profile/Profile";
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -29,8 +30,10 @@ const Navbar = () => {
             <li><a href="#">ONLINE REGISTRATION</a></li>
             <li><a href="#">CERTIFICATE VERIFY</a></li>
             <li><a href="/contact">CONTACT US</a></li>
-            <li><a href="#">LOGIN</a></li>
-          </ul>
+            <li><a href="#">
+              <Profile/>
+              </a></li>
+           </ul>
         </div>
       </nav>
 

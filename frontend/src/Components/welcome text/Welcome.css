@@ -1,18 +1,43 @@
-h1 {
+/* Center the entire container */
+.welcome-container {
+    margin-top: 30px; /* Adjust as needed */
+    padding-top: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Centers content horizontally */
+    justify-content: center; /* Centers content vertically if needed */
+    text-align: center; /* Ensures the heading is centered */
+    width: 80%; /* Adjust width for better text layout */
+    max-width: 1000px; /* Prevents text from becoming too wide on large screens */
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* Style the heading */
+.welcome-title {
     color: orange;
     font-family: Helvetica, sans-serif;
     font-weight: bold;
     font-size: 24px; /* Adjust size as needed */
     position: relative;
     display: inline-block; /* Ensures the underline doesn't stretch full width */
-  }
-  
-  h1::after {
+    text-align: center; /* Centers text */
+}
+
+/* Add underline below the heading */
+.welcome-title::after {
     content: "";
     display: block;
     width: 50px; /* Adjust the width of the underline */
     height: 3px; /* Adjust thickness */
     background-color: orange; /* Matches heading color */
-    margin: 5px auto 0; /* Adds spacing below the text */
-  }
-  
+    margin: 10px auto 0; /* Centers the underline */
+}
+
+/* Justify the welcome text */
+.welcome-text {
+    text-align: justify; /* Justifies text */
+    font-size: 16px;
+    line-height: 1.6; /* Improves readability */
+    color: #333; /* Adjust color for better contrast */
+}

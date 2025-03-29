@@ -1,0 +1,70 @@
+/* Make sure the entire page has the background color */
+
+/* Login Page Wrapper */
+.login-page {
+    background-color: #2f475a !important;
+    height: 100vh;
+    width: 100vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Login Box */
+.login-box {
+    text-align: center;
+    background: #2f475a;
+    padding: 20px;
+    border-radius: 8px;
+    width: 350px;
+    box-shadow: 0 0 10px rgba(182, 167, 167, 0.2);
+}
+
+/* Login Title (With Gear Icon) */
+.login-title {
+    font-size: 24px;
+    font-weight: bold;
+    color: rgb(201, 80, 80);
+    margin-bottom: 20px;
+}
+
+/* Login Form */
+.login-form {
+    background: #d60000; /* Red Background */
+    padding: 20px;
+    border-radius: 5px;
+}
+
+/* Login Header */
+.login-header {
+    font-size: 18px;
+    font-weight: bold;
+    color: rgb(255, 255, 255);
+    margin-bottom: 15px;
+}
+
+/* Input Fields */
+.login-input {
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+}
+
+/* Submit Button */
+.login-btn {
+    width: 100%;
+    padding: 10px;
+    background: red;
+    color: white;
+    font-size: 16px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.login-btn:hover {
+    background: darkred;
+}

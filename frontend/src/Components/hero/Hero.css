@@ -7,7 +7,7 @@
   padding: 5px; /* Reduced padding */
   max-width: 1100px; /* Slightly smaller width */
   margin: auto;
-  transform: translateY(-20px); /* Moves section 20px upward */
+  transform: translateY(15px); /* Moves section 20px upward */
 }
 
 /* Left side - Image */
@@ -82,10 +82,4 @@
 }
 
 /* Welcome Text */
-.welcome-text {
-  text-align: center;
-  color: #e26d14;
-  font-weight: bold;
-  font-size: 18px; /* Reduce text size */
-  margin-top: 10px; /* Shift upwards */
-}
+

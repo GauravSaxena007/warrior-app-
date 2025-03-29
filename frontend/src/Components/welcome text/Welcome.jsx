@@ -3,9 +3,9 @@ import "./Welcome.css"; // Import external CSS
 
 const Welcome = () => {
   return (
-    <div>
-      <h1>WELCOME TO RCSAS COMPUTER EDUCATION FRANCHISE</h1>
-      <p>
+    <div className="welcome-container">
+      <h1 className="welcome-title">WELCOME TO RCSAS COMPUTER EDUCATION FRANCHISE</h1>
+      <p className="welcome-text">
         RCSAS Education provides Best Computer Education Franchise Business opportunity in India to help people, who are interested in starting their own business and taking a Low Cost Franchise. It is one of the Top Computer Education Franchise Businesses in India.
         <br /><br />
         We offer more advanced IT education courses that are synchronized with advanced technological revolutions at a global level.
