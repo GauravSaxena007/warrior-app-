@@ -28,16 +28,16 @@ const Footer = () => {
 
         {/* Right Section - Social Links */}
         <div className="footer-social">
-          <a href="https://facebook.com" target="_blank" rel="noopener noreferrer">
-            <img src="/path-to-facebook-icon.png" alt="Facebook" />
-          </a>
-          <a href="https://instagram.com" target="_blank" rel="noopener noreferrer">
-            <img src="/path-to-instagram-icon.png" alt="Instagram" />
-          </a>
-          <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer">
-            <img src="/path-to-linkedin-icon.png" alt="LinkedIn" />
-          </a>
-        </div>
+  <a href="https://facebook.com" target="_blank" rel="noopener noreferrer">
+    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/cd/Facebook_logo_%28square%29.png/600px-Facebook_logo_%28square%29.png" alt="Facebook" width="24" />
+  </a>
+  <a href="https://instagram.com" target="_blank" rel="noopener noreferrer">
+    <img src="https://upload.wikimedia.org/wikipedia/commons/a/a5/Instagram_icon.png" alt="Instagram" width="24" />
+  </a>
+  <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer">
+    <img src="https://upload.wikimedia.org/wikipedia/commons/c/ca/LinkedIn_logo_initials.png" alt="LinkedIn" width="24" />
+  </a>
+</div>
         
       </div>
     </footer>

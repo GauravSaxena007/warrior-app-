@@ -1,13 +1,13 @@
-/* Make sure the entire page has the background color */
-
-/* Login Page Wrapper */
+/* Ensure full-page background ONLY for the login page */
 .login-page {
     background-color: #2f475a !important;
-    height: 100vh;
-    width: 100vw;
+    min-height: 100vh; /* Ensures it covers the full viewport height */
+    width: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
+    margin: 0;
+    padding: 0;
 }
 
 /* Login Box */
@@ -20,7 +20,7 @@
     box-shadow: 0 0 10px rgba(182, 167, 167, 0.2);
 }
 
-/* Login Title (With Gear Icon) */
+/* Login Title */
 .login-title {
     font-size: 24px;
     font-weight: bold;
@@ -67,4 +67,10 @@
 
 .login-btn:hover {
     background: darkred;
+}
+
+/* Ensure body & html remain normal for other pages */
+body, html {
+    margin: 0;
+    padding: 0;
 }

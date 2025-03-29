@@ -8,6 +8,7 @@
   max-width: 1100px; /* Slightly smaller width */
   margin: auto;
   transform: translateY(15px); /* Moves section 20px upward */
+  margin-top: 100px; /* Pushes hero section below navbar */
 }
 
 /* Left side - Image */

@@ -35,12 +35,7 @@
 }
 /* Apply background color to the entire page */
 /* Ensure the entire page has background */
-html, body {
-  height: 100%;
-  margin: 0;
-  padding: 0;
-  background-color: #ffffff !important; /* Ensure it applies */
-}
+
 
 /* Only apply on login page */
 .login-page {
