@@ -28,14 +28,14 @@ const Navbar = () => {
             <li><a href="#">ONLINE EXAM</a></li>
             <li><a href="#">ONLINE REGISTRATION</a></li>
             <li><a href="#">CERTIFICATE VERIFY</a></li>
-            <li><a href="#">CONTACT US</a></li>
+            <li><a href="/contact">CONTACT US</a></li>
             <li><a href="#">LOGIN</a></li>
           </ul>
         </div>
       </nav>
 
       {/* Contact Number - Placed Outside Navbar */}
-      <div className="contact-info">
+      <div className="contact-info-1">
         Franchisee Enquiery : 📞 9422123456
       </div>
     </>

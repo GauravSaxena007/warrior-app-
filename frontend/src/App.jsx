@@ -9,6 +9,7 @@ import Cards from './Components/cards/Cards';
 import Footer from './Components/footer/Footer';
 import Dropdowncourses from './Components/dropdown-courses-menus/dropdowncourses';
 import Home from "./Components/Home/Home";
+import Contact from "./Components/contact/contact";
 
 function App() {
   return (
@@ -19,6 +20,7 @@ function App() {
         <Route path="/card" element={<Cards />} />
         <Route path="/welcome" element={<Welcome />} />
         <Route path="/dropdowncourses" element={<Dropdowncourses />} />
+        <Route path="/contact" element={<Contact/>} />
       </Routes>
       <Footer />
     </Router>

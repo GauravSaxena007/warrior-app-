@@ -64,6 +64,10 @@ body {
 .dropdown {
   position: relative;
   z-index: 5000; /* Ensure dropdown is above all elements */
+  padding: 0; /* Remove extra padding */
+  margin-top: -7.9px;
+  display: flex;
+  align-items: center; /* Align with other nav links */
 }
 
 .dropdown-btn {
@@ -90,6 +94,7 @@ body {
   box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
   display: none;
   z-index: 5100;
+  
 }
 
 /* Dropdown items */
@@ -97,6 +102,7 @@ body {
   list-style: none;
   position: relative;
   padding: 8px 10px; /* Reduced padding to remove extra gaps */
+  
 }
 
 /* Dropdown links */
@@ -104,17 +110,20 @@ body {
   display: block;
   color: rgb(0, 0, 0);
   text-decoration: none;
-  padding: 8px 12px;
+  padding: 1px 15px;
+  line-height: 0.3; /* Adjust line height */
+  
 }
 
 /* Show dropdown on hover */
 .dropdown:hover .dropdown-menu {
   display: block;
+  
 }
 
 /* Hover effect */
 .dropdown-menu li a:hover {
-  background: rgba(0, 0, 0, 0.1);
+  background: transparent;
 }
 
 /* Submenu */
@@ -159,7 +168,7 @@ body {
 }
 
 /* Contact Section (Centered) */
-.contact-info {
+.contact-info-1 {
   position: fixed;
   top: 65px;
   left: 21%;
