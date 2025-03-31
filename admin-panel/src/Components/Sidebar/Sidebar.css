@@ -1,0 +1,68 @@
+/* Sidebar Container */
+.sidebar {
+  width: 250px;
+  background: #2C3E50; /* Dark blue-gray */
+  color: white;
+  height: 100vh;
+  position: fixed;  /* Stick to left */
+  left: 0;
+  top: 0;
+  overflow-y: auto; /* Enable scrolling if needed */
+  padding: 20px;
+  transition: width 0.3s ease-in-out; /* Smooth transition */
+}
+
+/* Sidebar Title */
+.sidebar-title {
+  font-size: 22px;
+  font-weight: bold;
+  margin-bottom: 20px;
+  text-align: center;
+  text-transform: uppercase;
+}
+
+/* Sidebar Menu */
+.sidebar-menu {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+/* Sidebar Menu Items */
+.sidebar-menu li {
+  display: flex;
+  align-items: center;
+  padding: 12px 15px;
+  cursor: pointer;
+  border-radius: 5px;
+  transition: background 0.3s ease-in-out;
+  color: rgb(255, 255, 255);  /* Ensure text remains white */
+  font-size: 16px;
+}
+
+/* Ensure Links inside Sidebar are white */
+.sidebar-menu li a {
+  text-decoration: none;
+  color: white;
+  display: flex;
+  align-items: center;
+  width: 100%;
+}
+
+/* Hover Effect */
+.sidebar-menu li:hover {
+  background: #1A252F; /* Darker on hover */
+}
+
+/* Sidebar Icons */
+.sidebar-menu .icon {
+  margin-right: 12px;
+  font-size: 18px;
+}
+
+/* Responsive Sidebar */
+@media (max-width: 768px) {
+  .sidebar {
+      width: 200px; /* Smaller width for mobile */
+  }
+}
