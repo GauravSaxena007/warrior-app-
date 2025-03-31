@@ -12,6 +12,10 @@ const Profile = () => {
         <li>
           <Link to="/settings">Destrict Coordinator Login</Link>
         </li>
+        <li><a href="http://localhost:3001" target="_blank" rel="noopener noreferrer">Admin </a></li>
+        <li>
+          <Link to="/franchprofile">Franchisee Profile (Hide krna h)</Link>
+        </li>
       </ul>
     </div>
   );

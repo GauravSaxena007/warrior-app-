@@ -1,0 +1,94 @@
+/* Dropdown Container */
+.dropdown-container {
+    position: relative;
+    display: inline-block;
+}
+  
+/* Dropdown Button */
+.dropdown-btn {
+    background-color: rgb(184, 125, 16); /* Match navbar color */
+    color: white;
+    font-weight: bold;
+    font-size: 14px;
+    border: none;
+    padding: 10px 15px;
+    cursor: pointer;
+    border-radius: 5px;
+}
+  
+.dropdown-btn:hover {
+    background-color: rgb(160, 105, 10);
+}
+  
+/* Main Dropdown Menu */
+.dropdown-menu {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background-color: rgb(184, 125, 16);
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    width: 250px; /* Adjust width */
+    border-radius: 5px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+    z-index: 3001;
+}
+  
+.dropdown-menu .dropdown-item {
+    position: relative;
+}
+  
+.dropdown-menu a {
+    display: block;
+    color: white;
+    text-decoration: none;
+    padding: 10px;
+    transition: background 0.3s;
+}
+  
+.dropdown-menu a:hover {
+    background: rgba(255, 255, 255, 0.2);
+}
+  
+/* Submenu: Positioned to open to the right */
+.submenu {
+    position: absolute;
+    top: 0;
+    left: 100%; /* Opens to the right */
+    background-color: rgb(184, 125, 16);
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    width: 200px; /* Adjust width */
+    border-radius: 5px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+    display: none;
+}
+
+/* Ensure the submenu opens to the right */
+.dropdown-item {
+    position: relative;
+}
+
+/* Show submenu when hovering over the parent item */
+.dropdown-item:hover .submenu {
+    display: block;
+    left: 100%; /* Ensures submenu opens to the right */
+    top: 0;
+}
+  
+.submenu li {
+    padding: 10px;
+}
+  
+.submenu a {
+    color: white;
+    text-decoration: none;
+    padding: 10px;
+    display: block;
+}
+  
+.submenu a:hover {
+    background: rgba(255, 255, 255, 0.2);
+}
