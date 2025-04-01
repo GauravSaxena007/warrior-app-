@@ -181,3 +181,30 @@ body {
   font-weight: bold;
   color: rgb(255, 255, 255);
 }
+/* Ensure navbar remains fixed at the top while scrolling */
+
+/* Initially, navbar is visible */
+.navbar {
+  position: fixed;
+  top: 0;
+  width: 75%;
+  transition: top 0.5s;
+}
+
+.top-line {
+  transition: top 0.3s ease-in-out;
+}
+
+.hidden-nav {
+  top: -90px; /* Moves navbar out of view */
+}
+/* Hide navbar by moving it up */
+.hidden-nav {
+  top: -80px; /* Moves navbar out of view */
+  transition: top 0;
+}
+
+/* Ensure smooth transition */
+.navbar, .top-line, .logo-container, .contact-info-1 {
+  transition: top 0s;
+}

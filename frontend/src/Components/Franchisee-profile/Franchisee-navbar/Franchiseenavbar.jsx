@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import "./FranchiseeNavbar.css"; // Updated CSS filename
 import StudentRegistration from "../Student-registration/StudentRegistration";
+import Applycertificate from "../Apply-certificate/Applycertificate";
 
 
 const FranchiseeNavbar = () => {
@@ -41,6 +42,7 @@ const FranchiseeNavbar = () => {
 
       {/* Conditional Rendering of Student Registration */}
       {activeTab === "Student Registration" && <StudentRegistration/>}
+      {activeTab === "Apply for Certificates" && <Applycertificate/>}
     </div>
   );
 };
