@@ -1,0 +1,95 @@
+/* Table Container */
+.table-container {
+    width: 100%;
+    overflow-x: auto;
+    margin-top: 10px;
+}
+
+/* Table Styling */
+.transaction-table {
+    width: 100%;
+    border-collapse: collapse;
+    background: white;
+    border: 1px solid #ddd;
+}
+
+/* Table Header */
+.transaction-table thead th {
+    background-color: #28a745;  /* Green Header */
+    color: white;
+    font-size: 14px;
+    padding: 12px;
+    text-align: left;
+    border: 1px solid #ddd;
+}
+
+/* Table Rows */
+.transaction-table tbody tr {
+    border-bottom: 1px solid #ddd; /* Adds lines between rows */
+}
+
+/* Table Cells */
+.transaction-table tbody td {
+    font-size: 14px;
+    padding: 10px;
+    text-align: left;
+    border: 1px solid #ddd; /* Adds borders to each cell */
+}
+
+/* Hover Effect */
+.transaction-table tbody tr:hover {
+    background-color: #f1f1f1;
+}
+
+/* Button Styling */
+.statement-btn {
+    background-color: #17a2b8;
+    border: none;
+    font-size: 13px;
+    padding: 5px 12px;
+    color: white;
+    border-radius: 5px;
+    border: 1px solid #138496;
+    cursor: pointer;
+}
+
+.statement-btn:hover {
+    background-color: #138496;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .transaction-table thead {
+        display: none; /* Hide header on small screens */
+    }
+
+    .transaction-table, 
+    .transaction-table tbody, 
+    .transaction-table tr, 
+    .transaction-table td {
+        display: block;
+        width: 100%;
+    }
+
+    .transaction-table tr {
+        margin-bottom: 10px;
+        border: 1px solid #ddd;
+        padding: 10px;
+        background: white;
+    }
+
+    .transaction-table td {
+        text-align: right;
+        padding-left: 50%;
+        position: relative;
+    }
+
+    .transaction-table td::before {
+        content: attr(data-label);
+        position: absolute;
+        left: 10px;
+        font-weight: bold;
+        text-transform: uppercase;
+        color: #333;
+    }
+}

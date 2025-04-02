@@ -2,6 +2,9 @@ import React, { useState } from "react";
 import "./FranchiseeNavbar.css"; // Updated CSS filename
 import StudentRegistration from "../Student-registration/StudentRegistration";
 import Applycertificate from "../Apply-certificate/Applycertificate";
+import Transaction from "../Transaction/Transaction";
+import Issuedcertificate from "../Issued-certificate/Issuedcertificate";
+import Franchiseecerti from "../Franchisee-certificate/Franchiseecerti";
 
 
 const FranchiseeNavbar = () => {
@@ -43,6 +46,9 @@ const FranchiseeNavbar = () => {
       {/* Conditional Rendering of Student Registration */}
       {activeTab === "Student Registration" && <StudentRegistration/>}
       {activeTab === "Apply for Certificates" && <Applycertificate/>}
+      {activeTab === "Transactions" && <Transaction/>}
+      {activeTab === "Issued Certificates" && <Issuedcertificate/>}
+      {activeTab === "Franchisee Certificate" && <Franchiseecerti/>}
     </div>
   );
 };

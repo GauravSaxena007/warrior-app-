@@ -1,0 +1,95 @@
+.certificate-container {
+    width: 800px;
+    height: 600px;
+    margin: 20px auto;
+    padding: 20px;
+    border: 5px solid #d4af37; /* Gold border */
+    background: #fff;
+    position: relative;
+    font-family: 'Arial', sans-serif;
+    text-align: center;
+    box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+.certificate-header {
+    color: red;
+    font-size: 22px;
+    font-weight: bold;
+    text-transform: uppercase;
+    margin-bottom: 10px;
+}
+
+.certificate-subheader {
+    color: #000;
+    font-size: 18px;
+    font-weight: bold;
+    text-transform: uppercase;
+    margin-bottom: 10px;
+}
+
+.franchisee-text {
+    background: red;
+    color: white;
+    font-size: 20px;
+    padding: 5px 15px;
+    display: inline-block;
+    border-radius: 5px;
+    font-weight: bold;
+    margin-bottom: 15px;
+}
+
+.details {
+    font-size: 18px;
+    margin: 15px 0;
+    font-weight: bold;
+}
+
+.details input {
+    font-size: 16px;
+    border: none;
+    border-bottom: 1px solid #000;
+    text-align: center;
+    width: auto;
+    outline: none;
+    margin-left: 5px;
+}
+
+.photo-container {
+    width: 100px;
+    height: 120px;
+    border: 2px solid #000;
+    position: absolute;
+    right: 20px;
+    top: 100px;
+    background: #eee;
+}
+
+.photo-container img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.membership-text {
+    font-size: 16px;
+}
+
+.valid-date {
+    font-size: 16px;
+    font-weight: bold;
+}
+
+.download-btn {
+    margin-top: 15px;
+    background: #0073e6;
+    color: white;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.download-btn:hover {
+    background: #005bb5;
+}

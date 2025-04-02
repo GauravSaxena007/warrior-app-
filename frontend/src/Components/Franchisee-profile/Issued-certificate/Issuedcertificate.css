@@ -1,0 +1,103 @@
+.table-container {
+    width: 80%;  /* Shrink the table to 80% */
+    max-width: 1000px;  /* Limit maximum width */
+    margin: 20px auto; /* Center the table */
+    padding: 10px;
+}
+
+.table-controls {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 5px;
+}
+
+.search-bar {
+    padding: 5px;
+    width: 180px; 
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.custom-table {
+    width: 100%;
+    border-collapse: collapse;
+    text-align: left;
+    border: 1px solid #ddd;
+    table-layout: fixed;  /* Distribute columns evenly */
+}
+
+.custom-table th, .custom-table td {
+    padding: 8px;
+    border: 1px solid #ddd;
+    font-size: 14px;
+    text-overflow: ellipsis; /* Handle overflow text */
+    overflow: hidden;
+    white-space: nowrap; /* Prevent wrapping */
+}
+
+.custom-table th {
+    background-color: #f4f4f4;
+    cursor: pointer;
+}
+
+.download-btn {
+    background-color: #1e90ff;
+    color: white;
+    padding: 5px 10px;
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+    font-size: 13px;
+}
+
+.download-btn:hover {
+    background-color: #0073e6;
+}
+
+.no-data {
+    text-align: center;
+    font-weight: bold;
+    color: red;
+}
+
+.pagination {
+    display: flex;
+    justify-content: center;
+    margin-top: 10px;
+}
+
+.pagination button {
+    padding: 5px 8px;
+    margin: 0 5px;
+    border: 1px solid #ccc;
+    background-color: #f9f9f9;
+    cursor: pointer;
+}
+
+.pagination button:hover {
+    background-color: #ddd;
+}
+
+.pagination button:disabled {
+    background-color: #eee;
+    cursor: not-allowed;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .table-container {
+        width: 95%; /* More space for small screens */
+    }
+
+    .custom-table {
+        font-size: 12px; /* Reduce font size */
+    }
+
+    .search-bar {
+        width: 100%; /* Full width search bar on small screens */
+    }
+
+    .pagination {
+        flex-wrap: wrap;
+    }
+}
