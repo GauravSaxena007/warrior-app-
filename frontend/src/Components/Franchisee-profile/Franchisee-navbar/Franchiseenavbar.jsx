@@ -41,8 +41,7 @@ const FranchiseeNavbar = () => {
       </nav>
 
       {/* Green Active Tab Indicator */}
-      <div className="franch-active-tab-indicator">{activeTab}</div>
-
+      
       {/* Conditional Rendering of Student Registration */}
       {activeTab === "Student Registration" && <StudentRegistration/>}
       {activeTab === "Apply for Certificates" && <Applycertificate/>}

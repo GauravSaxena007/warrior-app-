@@ -31,6 +31,11 @@ const Franchiseecerti = () => {
   };
 
   return (
+    <div>
+       <h4 className="text-white p-2 bg-success mx-auto text-left m-5" style={{ width: "65%" }}>
+  Franchisee Certificate
+</h4>
+    
     <div className="certificate-container">
       <div className="input-section">
         <input type="text" placeholder="Enter Name" value={name} onChange={(e) => setName(e.target.value)} />
@@ -46,6 +51,7 @@ const Franchiseecerti = () => {
         <p>Membership No: <strong>{membershipNo}</strong> is valid upto <strong>{validUpto}</strong></p>
         {photo && <img src={photo} alt="Uploaded" className="certificate-photo" />}
       </div>
+    </div>
     </div>
   );
 };

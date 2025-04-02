@@ -41,7 +41,12 @@ const StudentRegistration = () => {
     };
 
     return (
+        <div>
+             <h4 className="text-white p-2 bg-success mx-auto text-left" style={{ width: "80%" }}>
+  Student Registration
+</h4>
         <div className="registration-container">
+            
             <form onSubmit={handleSubmit} onReset={handleReset}>
                 <div className="form-row">
                     {/* Left Column */}
@@ -162,6 +167,7 @@ const StudentRegistration = () => {
                     <button type="reset" className="reset-button">Reset</button>
                 </div>
             </form>
+        </div>
         </div>
     );
 };

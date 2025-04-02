@@ -81,6 +81,10 @@ const Issuedcertificate = () => {
   const currentRecords = filteredData.slice(indexOfFirstRecord, indexOfLastRecord);
 
   return (
+    <div>
+      <h4 className="text-white p-2 bg-success mx-auto text-left m-3" style={{ width: "75%" }}>
+  Issued Certificate
+</h4>
     <div className="table-container">
       {/* Top Controls: Records per Page and Search */}
       <div className="table-controls">
@@ -150,6 +154,7 @@ const Issuedcertificate = () => {
           Next
         </button>
       </div>
+    </div>
     </div>
   );
 };

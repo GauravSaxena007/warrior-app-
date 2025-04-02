@@ -1,5 +1,5 @@
 .table-container {
-    width: 80%;  /* Shrink the table to 80% */
+    width: 180%;  /* Shrink the table to 80% */
     max-width: 1000px;  /* Limit maximum width */
     margin: 20px auto; /* Center the table */
     padding: 10px;
@@ -19,7 +19,7 @@
 }
 
 .custom-table {
-    width: 100%;
+    width: 101%;
     border-collapse: collapse;
     text-align: left;
     border: 1px solid #ddd;
