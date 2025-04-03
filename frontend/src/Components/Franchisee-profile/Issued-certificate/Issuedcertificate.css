@@ -27,12 +27,12 @@
 }
 
 .custom-table th, .custom-table td {
-    padding: 8px;
+    padding: 5px;
     border: 1px solid #ddd;
     font-size: 14px;
     text-overflow: ellipsis; /* Handle overflow text */
     overflow: hidden;
-    white-space: nowrap; /* Prevent wrapping */
+    white-space: wrap; /* Prevent wrapping */
 }
 
 .custom-table th {
