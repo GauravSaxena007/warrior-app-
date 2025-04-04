@@ -33,7 +33,7 @@ const Navbar = () => {
             <li className="dropdown"><Dropdowncourses /></li>
             <li><a href="#">ONLINE EXAM</a></li>
             <li><a href="#">ONLINE REGISTRATION</a></li>
-            <li><a href="#">CERTIFICATE VERIFY</a></li>
+            <li><a href="/verify">CERTIFICATE VERIFY</a></li>
             <li><a href="/contact">CONTACT US</a></li>
             <li><a href="#"><Profile /></a></li>
           </ul>

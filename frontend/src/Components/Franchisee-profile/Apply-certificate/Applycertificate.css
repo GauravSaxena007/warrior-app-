@@ -12,7 +12,9 @@
     border-radius: 5px;
     cursor: pointer;
     margin-bottom: 15px;
-  }
+    align-self: flex-start;  /* Align to the left */
+    margin-left: 0;  /* Ensure it's at the left */
+}
   
   .request-btn:hover {
     background-color: darkblue;

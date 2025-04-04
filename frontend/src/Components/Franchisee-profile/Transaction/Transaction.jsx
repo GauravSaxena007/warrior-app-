@@ -33,9 +33,9 @@ const Transaction = () => {
   };
 
   return (
-    <div className="container mt-4">
-      <h4 className="text-white p-2 bg-success">Transaction List</h4>
-      <div className="d-flex justify-content-between p-2 bg-light">
+    <div className="container mt-1">
+      <h4 className="text-white p-2 w-80 bg-success text-left" style={{ width: "100%" }}>Transaction List</h4>
+      <div className="d-flex justify-content-between p-2 bg-light"  style={{ width: "100%" }}>
         <select className="form-select w-auto">
           <option>10</option>
           <option>25</option>

@@ -1,0 +1,93 @@
+/* Container */
+.profile-container {
+    width: 95%; /* Increased width */
+    max-width: 1100px; /* Made it wider */
+    margin: 5px auto;
+    font-family: Arial, sans-serif;
+}
+
+/* Header */
+.profile-header {
+    background-color: #4CAF50;
+    color: white;
+    font-size: 20px;
+    font-weight: bold;
+    padding: 12px;
+    text-align: left;
+}
+
+/* Table Styling */
+.profile-table {
+    display: flex;
+    justify-content: space-between;
+    border: 1px solid #ddd;
+    background-color: white;
+    width: 100%;
+    padding: 10px;
+    box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.1); /* Added shadow */
+}
+
+table {
+    width: 100%; /* Fixed width */
+    border-collapse: collapse;
+}
+
+td {
+    padding: 12px;
+    border: 1px solid #ddd;
+    font-size: 16px;
+}
+
+/* Make Strong Text Darker */
+strong {
+    color: #222;
+    font-weight: bold;
+}
+
+/* Profile Section */
+.profile-section {
+    text-align: center;
+    width: 220px; /* Increased width */
+    padding: 20px;
+    border-left: 1px solid #ddd;
+    background-color: #f9f9f9;
+    border-radius: 5px;
+}
+
+.profile-img {
+    width: 100%;
+    height: auto;
+    border: 2px solid #ccc;
+    border-radius: 8px;
+}
+
+.profile-text {
+    font-size: 15px;
+    color: #666;
+    margin-top: 8px;
+}
+
+/* Profile Button */
+.profile-button {
+    background-color: #20a8d8;
+    color: white;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 12px;
+    font-size: 14px;
+    transition: 0.3s;
+}
+
+.profile-button:hover {
+    background-color: #1b8aba;
+}
+
+/* Note Section */
+.profile-note {
+    font-size: 14px;
+    color: red;
+    text-align: center;
+    margin-top: 15px;
+}

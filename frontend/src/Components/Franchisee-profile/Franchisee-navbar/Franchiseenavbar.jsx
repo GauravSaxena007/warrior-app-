@@ -5,10 +5,11 @@ import Applycertificate from "../Apply-certificate/Applycertificate";
 import Transaction from "../Transaction/Transaction";
 import Issuedcertificate from "../Issued-certificate/Issuedcertificate";
 import Franchiseecerti from "../Franchisee-certificate/Franchiseecerti";
-
+import FranchProfile from "../Profile/franchprofile";
 
 const FranchiseeNavbar = () => {
-  const [activeTab, setActiveTab] = useState("Dashboard");
+  // Set default active tab to "Student Registration"
+  const [activeTab, setActiveTab] = useState("Student Registration");
 
   return (
     <div>
@@ -40,14 +41,13 @@ const FranchiseeNavbar = () => {
         </ul>
       </nav>
 
-      {/* Green Active Tab Indicator */}
-      
-      {/* Conditional Rendering of Student Registration */}
-      {activeTab === "Student Registration" && <StudentRegistration/>}
-      {activeTab === "Apply for Certificates" && <Applycertificate/>}
-      {activeTab === "Transactions" && <Transaction/>}
-      {activeTab === "Issued Certificates" && <Issuedcertificate/>}
-      {activeTab === "Franchisee Certificate" && <Franchiseecerti/>}
+      {/* Conditional Rendering of Components */}
+      {activeTab === "Student Registration" && <StudentRegistration />}
+      {activeTab === "Apply for Certificates" && <Applycertificate />}
+      {activeTab === "Transactions" && <Transaction />}
+      {activeTab === "Issued Certificates" && <Issuedcertificate />}
+      {activeTab === "Franchisee Certificate" && <Franchiseecerti />}
+      {activeTab === "Profile" && <FranchProfile/>}
     </div>
   );
 };
