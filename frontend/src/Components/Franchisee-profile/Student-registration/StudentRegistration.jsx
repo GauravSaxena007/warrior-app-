@@ -42,7 +42,7 @@ const StudentRegistration = () => {
 
     return (
         <div>
-             <h4 className="text-white p-2 bg-success mx-auto text-left" style={{ width: "80%" }}>
+             <h4 className="pro-h mx-auto text-left" style={{ width: "80%" }}>
   Student Registration
 </h4>
         <div className="registration-container">

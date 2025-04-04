@@ -1,4 +1,11 @@
-
+.pro-h{
+    background-color: #4CAF50;
+    color: white;
+    font-size: 20px;
+    font-weight: bold;
+    padding: 12px;
+    text-align: left;
+}
   
   /* Form Container */
   .registration-container {

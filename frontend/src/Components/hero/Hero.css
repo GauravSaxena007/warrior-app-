@@ -82,5 +82,63 @@
   background: darkgreen;
 }
 
-/* Welcome Text */
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .hero-container {
+    flex-direction: column; /* Stack image and form */
+    align-items: center;
+    text-align: center;
+    padding: 25px;
+    margin-top: 50px;
+  }
+
+  .hero-left {
+    width: 100%;
+    text-align: center;
+  }
+
+  .hero-img {
+    width: 100%;
+    max-width: 400px; /* Limit image size */
+  }
+
+  .hero-text {
+    position: relative;
+    top: 0;
+    left: 0;
+    font-size: 12px;
+  }
+
+  .hero-right {
+    flex: none;
+    width: 100%;
+    margin-top: 15px; /* Move form below the image */
+  }
+}
+
+/* Slider Styling */
+.slider-container {
+  width: 100%;
+  max-width: 1100px;
+  margin: auto;
+  overflow: hidden;
+}
+
+.slider {
+  display: flex;
+  transition: transform 0.5s ease-in-out;
+}
+
+.slide {
+  min-width: 100%;
+  box-sizing: border-box;
+}
+
+.slide img {
+  width: 100%;
+  height: auto;
+  border-radius: 8px;
+}
+
 

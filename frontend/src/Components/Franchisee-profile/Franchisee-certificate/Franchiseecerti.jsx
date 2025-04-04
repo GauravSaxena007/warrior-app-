@@ -32,7 +32,7 @@ const Franchiseecerti = () => {
 
   return (
     <div>
-       <h4 className="text-white p-2 bg-success mx-auto text-left m-5" style={{ width: "65%" }}>
+       <h4 className="pro-h p-2.5 mx-auto text-left m-5" style={{ width: "65%" }}>
   Franchisee Certificate
 </h4>
     

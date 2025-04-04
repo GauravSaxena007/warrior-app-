@@ -82,7 +82,7 @@ const Issuedcertificate = () => {
 
   return (
     <div>
-      <h4 className="text-white p-2 bg-success mx-auto text-left m-3" style={{ width: "75%" }}>
+      <h4 className="pro-h p-2.5 mx-auto text-left m-3" style={{ width: "75%" }}>
   Issued Certificate
 </h4>
     <div className="table-container">
