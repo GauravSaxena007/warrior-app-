@@ -100,4 +100,8 @@
     .pagination {
         flex-wrap: wrap;
     }
-}
+    .pro-h {
+        width: 95% !important;
+      }
+
+

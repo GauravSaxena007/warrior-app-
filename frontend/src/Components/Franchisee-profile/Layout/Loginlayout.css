@@ -204,3 +204,68 @@ body {
 .navbar-2, .top-line-2, .logo-container-2, .contact-info-1-2 {
     transition: top 0s;
 }
+
+/* 🔻 Hamburger Button for Smaller Screens */
+.hamburger-2 {
+    display: none;
+    font-size: 30px;
+    background: red;
+    border: none;
+    color: white;
+    cursor: pointer;
+    position: fixed;
+    top: 19px;
+    right: 20px;
+    z-index: 3000;
+    padding: 10px;
+    border-radius: 5px;
+  }
+  
+  /* 📱 Mobile Menu */
+  .mobile-menu-2 {
+    display: none;
+    flex-direction: column;
+    position: fixed;
+    top: 60px;
+    right: 0;
+    width: 300px;
+    background: rgb(146, 82, 82);
+    border-radius: 10px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+    z-index: 2500;
+    padding: 10px;
+  }
+  
+  .mobile-menu-2.open {
+    display: flex;
+  }
+  
+  .mobile-nav-links-2 {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  
+  .mobile-nav-links-2 li {
+    padding: 10px;
+    text-align: center;
+  }
+  
+  .mobile-nav-links-2 a {
+    color: white;
+    text-decoration: none;
+    font-size: 16px;
+    display: block;
+  }
+  
+  /* 🧠 Hide desktop nav, show hamburger at smaller widths */
+  @media (max-width: 1004px) {
+    .navbar-2 {
+      display: none;
+    }
+  
+    .hamburger-2 {
+      display: block;
+    }
+  }
+  

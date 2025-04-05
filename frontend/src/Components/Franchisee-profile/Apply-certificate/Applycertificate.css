@@ -58,3 +58,98 @@
     background-color: darkblue;
   }
   
+
+/* Container */
+.container {
+  padding: 10px 20px;
+  margin-top: -10px; /* Shifts everything upward */
+}
+
+/* Request Button */
+.request-btn {
+  background-color: blue;
+  color: white;
+  padding: 10px 15px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-bottom: 10px;
+  margin-top: 0;
+  align-self: flex-start;
+  margin-left: 0;
+}
+
+.request-btn:hover {
+  background-color: darkblue;
+}
+
+/* Table Styling */
+.styled-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 0;
+}
+
+.styled-table th,
+.styled-table td {
+  border: 1px solid gray;
+  padding: 10px;
+  text-align: center;
+}
+
+.styled-table th {
+  background-color: #f2f2f2;
+}
+
+/* Status Colors */
+.status {
+  color: orange;
+  font-weight: bold;
+}
+
+.icard-status {
+  color: red;
+  font-weight: bold;
+}
+
+/* Edit Button */
+.edit-btn {
+  background-color: blue;
+  color: white;
+  padding: 5px 10px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.edit-btn:hover {
+  background-color: darkblue;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .container {
+    padding: 5px 10px;
+    margin-top: -15px; /* Further shift upward for mobile */
+  }
+
+  .request-btn {
+    width: 100%;
+    padding: 10px;
+    font-size: 16px;
+    margin-bottom: 10px;
+  }
+
+  .styled-table {
+    font-size: 14px;
+    display: block;
+    overflow-x: auto;
+    margin-top: 0;
+  }
+
+  .styled-table th,
+  .styled-table td {
+    white-space: nowrap;
+  }
+}
+
