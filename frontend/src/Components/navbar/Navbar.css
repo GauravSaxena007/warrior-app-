@@ -130,7 +130,7 @@ body {
 .hamburger {
   display: none;
   font-size: 30px;
-  background: red; /* 🔴 RED BACKGROUND */
+  background: #ff0000; /* 🔴 RED BACKGROUND */
   border: none;
   color: white;
   cursor: pointer;
@@ -149,8 +149,8 @@ body {
   position: fixed;
   top: 50px;
   right: 0;
-  width: 450px;
-  background: rgb(146, 82, 82); /* 🔴 RED BACKGROUND */
+  width: 250px;
+  background: #ff0000; /* 🔴 RED BACKGROUND */
   border-radius: 10px;
   box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
   z-index: 2500;
@@ -203,10 +203,10 @@ body {
     left: 35%;
     transform: translateX(-50%);
     padding: 5px 10px; /* Slightly bigger padding */
-    font-size: 14px; /* Adjust text size for better fit */
-  }
-}
+    font-size: 12.9px; /* Adjust text size for better fit */
 
+      /* Blue glow effect */
+}
 
 /* 🔻 Hide Navbar on Scroll */
 .hidden-nav {
