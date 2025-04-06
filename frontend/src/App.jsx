@@ -7,7 +7,7 @@ import Navbar from './Components/Navbar/Navbar';
 import Welcome from './Components/welcome text/Welcome';
 import Cards from './Components/cards/Cards';
 import Footer from './Components/footer/Footer';
-import Dropdowncourses from './Components/dropdown-courses-menus/dropdowncourses';
+import Dropdowncourses from './Components/Courses/dropdowncourses';
 import Home from "./Components/Home/Home";
 import Contact from "./Components/contact/contact";
 import Login from "./Components/Profile/Login";
@@ -15,6 +15,7 @@ import FranchiseeNavbar from "./Components/Franchisee-profile/Franchisee-navbar/
 import Loginlayout from "./Components/Franchisee-profile/Layout/Loginlayout";
 import Certiverify from "./Components/Franchisee-profile/Certi-verify/Certiverify";
 import Testing from "./Components/testing";
+import Courses from "./Components/Courses/Courses";
 
 function Layout() {
   const location = useLocation();
@@ -39,6 +40,7 @@ function Layout() {
         <Route path="/franchprofile" element={<div />} />
         <Route path="/verify" element={<Certiverify/>} />
         <Route path="/testing" element={<Testing/>} />
+        <Route path="/courses" element={<Courses/>} />
       </Routes>
 
       {/* Show Footer on all pages except login */}

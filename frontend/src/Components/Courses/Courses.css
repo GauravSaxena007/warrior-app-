@@ -1,0 +1,54 @@
+.courses-section {
+    padding: 0.3rem 1rem;
+    background-color: #f8f9fa;
+    border-radius: 1.5rem;
+  }
+  
+  .courses-title {
+    font-size: 1.75rem;
+    font-weight: bold;
+    color: #2c2c2c;
+  }
+  
+  .course-card {
+    min-height: 260px;
+    border-radius: 12px;
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    font-size: 0.92rem;
+  }
+  
+  .course-title {
+    font-size: 1.05rem;
+    margin-bottom: 0.75rem;
+    color: #343a40;
+  }
+  
+  .course-details {
+    max-height: 120px;
+    overflow-y: auto;
+    font-size: 0.88rem;
+    padding-left: 1rem;
+    margin-bottom: 0.75rem;
+  }
+  
+  .course-details li {
+    margin-bottom: 4px;
+  }
+  
+  .course-footer {
+    font-size: 0.85rem;
+    background-color: #f1f1f1;
+    border-top: 1px solid #ddd;
+    padding: 0.6rem 1rem;
+    color: #444;
+  }
+  
+  .explore-btn {
+    padding: 10px 25px;
+    font-size: 1rem;
+    border-radius: 25px;
+  }
+  

@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import "./Navbar.css";
 import logo from "../../assets/warrior img.jpg";
-import Dropdowncourses from "../dropdown-courses-menus/dropdowncourses";
+import Dropdowncourses from "../Courses/dropdowncourses";
 import Profile from "../Profile/Profile";
 
 const Navbar = () => {
