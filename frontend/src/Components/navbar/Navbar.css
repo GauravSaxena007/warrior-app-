@@ -125,6 +125,19 @@ body {
   display: block;
 }
 
+.hidden-nav {
+  top: -120px; /* Move navbar & logo out of view */
+  transition: top ;
+}
+.contact-info-1 {
+  top: 65px; /* your original position */
+  transition: top ;
+}
+
+.contact-info-1.hidden-nav {
+  top: -120px; /* hidden position */
+}
+
 
 /* 🔥 HAMBURGER MENU (Mobile) */
 .hamburger {

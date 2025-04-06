@@ -7,11 +7,40 @@ const Settings = () => {
   const [welcomeTitle, setWelcomeTitle] = useState("WELCOME TO RCSAS COMPUTER EDUCATION FRANCHISE");
   const [welcomeText, setWelcomeText] = useState("RCSAS Education provides the best computer education franchise business opportunity in India...");
 
+  const [footerLogo, setFooterLogo] = useState(null);
+  const [email, setEmail] = useState("rcsasedu@gmail.com");
+  const [phone1, setPhone1] = useState("07122702727");
+  const [phone2, setPhone2] = useState("9422123456");
+  const [socialLinks, setSocialLinks] = useState(["https://facebook.com", "https://instagram.com"]);
+
   const handlePhotoChange = (event) => {
     const file = event.target.files[0];
     if (file) {
       setPhoto(URL.createObjectURL(file));
     }
+  };
+
+  const handleFooterLogoChange = (event) => {
+    const file = event.target.files[0];
+    if (file) {
+      setFooterLogo(URL.createObjectURL(file));
+    }
+  };
+
+  const handleAddSocialLink = () => {
+    setSocialLinks([...socialLinks, ""]);
+  };
+
+  const handleDeleteSocialLink = (index) => {
+    const updated = [...socialLinks];
+    updated.splice(index, 1);
+    setSocialLinks(updated);
+  };
+
+  const handleSocialLinkChange = (index, value) => {
+    const updated = [...socialLinks];
+    updated[index] = value;
+    setSocialLinks(updated);
   };
 
   const handleSave = () => {
@@ -20,55 +49,113 @@ const Settings = () => {
       franchiseNumber,
       welcomeTitle,
       welcomeText,
+      footerLogo,
+      email,
+      phone1,
+      phone2,
+      socialLinks,
     };
     console.log("Updated Data:", updatedData);
-    alert("Changes saved successfully!"); // Replace with an API call if needed
+    alert("Changes saved successfully!");
   };
 
   return (
-    <div className="settings-container">
-      <h2 className="settings-title">Update Settings</h2>
+    <div className="settings-grid">
+      {/* Main Settings */}
+      <div className="settings-container settings-main">
+        <h2 className="settings-title">Main Settings</h2>
 
-      {/* Photo Upload */}
-      <div className="form-group">
-        <label>Upload Photo:</label>
-        <input type="file" onChange={handlePhotoChange} />
-        {photo && <img src={photo} alt="Preview" className="preview-img" />}
+        <div className="form-group">
+          <label>Upload Photo:</label>
+          <input type="file" onChange={handlePhotoChange} />
+          {photo && <img src={photo} alt="Preview" className="preview-img" />}
+        </div>
+
+        <div className="form-group">
+          <label>Franchisee Enquiry Number:</label>
+          <input
+            type="text"
+            value={franchiseNumber}
+            onChange={(e) => setFranchiseNumber(e.target.value)}
+          />
+        </div>
+
+        <div className="form-group">
+          <label>Welcome Title:</label>
+          <input
+            type="text"
+            value={welcomeTitle}
+            onChange={(e) => setWelcomeTitle(e.target.value)}
+          />
+        </div>
+
+        <div className="form-group">
+          <label>Welcome Description:</label>
+          <textarea
+            rows="4"
+            value={welcomeText}
+            onChange={(e) => setWelcomeText(e.target.value)}
+          />
+        </div>
       </div>
 
-      {/* Franchisee Enquiry Number */}
-      <div className="form-group">
-        <label>Franchisee Enquiry Number:</label>
-        <input
-          type="text"
-          value={franchiseNumber}
-          onChange={(e) => setFranchiseNumber(e.target.value)}
-        />
+      {/* Footer Settings */}
+      <div className="settings-container settings-footer">
+        <h2 className="settings-title">Footer Settings</h2>
+
+        <div className="form-group">
+          <label>Footer Logo:</label>
+          <input type="file" onChange={handleFooterLogoChange} />
+          {footerLogo && <img src={footerLogo} alt="Footer Logo" className="preview-img" />}
+        </div>
+
+        <div className="form-group">
+          <label>Email:</label>
+          <input
+            type="email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+          />
+        </div>
+
+        <div className="form-group">
+          <label>Phone Number 1:</label>
+          <input
+            type="text"
+            value={phone1}
+            onChange={(e) => setPhone1(e.target.value)}
+          />
+        </div>
+
+        <div className="form-group">
+          <label>Phone Number 2:</label>
+          <input
+            type="text"
+            value={phone2}
+            onChange={(e) => setPhone2(e.target.value)}
+          />
+        </div>
+
+        <div className="form-group">
+          <label>Social Media Links:</label>
+          {socialLinks.map((link, index) => (
+            <div key={index} className="social-input-row">
+              <input
+                type="text"
+                value={link}
+                onChange={(e) => handleSocialLinkChange(index, e.target.value)}
+              />
+              <button onClick={() => handleDeleteSocialLink(index)}>Delete</button>
+            </div>
+          ))}
+          <button onClick={handleAddSocialLink}>Add Social Link</button>
+        </div>
       </div>
 
-      {/* Welcome Section */}
-      <div className="form-group">
-        <label>Welcome Title:</label>
-        <input
-          type="text"
-          value={welcomeTitle}
-          onChange={(e) => setWelcomeTitle(e.target.value)}
-        />
+      {/* Save Button Full Width */}
+      <div className="save-btn-wrapper">
+        <button className="save-btn" onClick={handleSave}>Save Changes</button>
       </div>
-
-      <div className="form-group">
-        <label>Welcome Description:</label>
-        <textarea
-          rows="4"
-          value={welcomeText}
-          onChange={(e) => setWelcomeText(e.target.value)}
-        />
-      </div>
-
-      {/* Save Button */}
-      <button className="save-btn" onClick={handleSave}>
-        Save Changes
-      </button>
     </div>
   );
 };

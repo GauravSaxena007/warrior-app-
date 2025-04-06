@@ -1,0 +1,98 @@
+.carousel-manager {
+    padding: 20px;
+    max-width: 900px;
+    margin: auto;
+  }
+  
+  .upload-section {
+    margin-top: 20px;
+  }
+  
+  .preview-image,
+  .current-carousel {
+    margin-top: 30px;
+  }
+  
+  .carousel-gallery {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+  
+  .carousel-item-box {
+    position: relative;
+  }
+  
+  .carousel-item-box img {
+    width: 150px;
+    height: 100px;
+    object-fit: cover;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+  }
+  
+  .carousel-item-box .btn-delete {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    padding: 2px 6px;
+    font-size: 12px;
+    background: red;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  
+  .btn-add {
+    margin-top: 10px;
+    padding: 6px 12px;
+    background: green;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  .carousel-gallery {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-top: 10px;
+  }
+  
+  .carousel-gallery img {
+    width: 120px;  /* smaller width */
+    height: 70px;  /* consistent height */
+    object-fit: cover;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  }
+  
+  .carousel-item-box {
+    position: relative;
+  }
+  
+  .btn-delete {
+    position: absolute;
+    top: 4px;
+    right: 4px;
+    background-color: #e74c3c;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    padding: 4px 6px;
+    font-size: 12px;
+    cursor: pointer;
+  }
+  
+  .btn-add {
+    margin-top: 10px;
+    padding: 6px 14px;
+    background-color: #2ecc71;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: bold;
+  }
+  

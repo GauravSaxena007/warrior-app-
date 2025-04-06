@@ -11,9 +11,9 @@ const Sidebar = () => {
         <li><Link to="/" className="menu-link"><FaTachometerAlt className="icon" /> Dashboard</Link></li>
         <li><Link to="/settings" className="menu-link"><FaCog className="icon" /> Settings</Link></li>
         <li><Link to="/addcourses" className="menu-link"><FaFileAlt className="icon" /> Add Courses</Link></li>
-        <li><Link to="/slider-management" className="menu-link"><FaImages className="icon" /> Slider Management</Link></li>
+        <li><Link to="/slider" className="menu-link"><FaImages className="icon" /> Slider Management</Link></li>
         <li><Link to="/team-management" className="menu-link"><FaUsers className="icon" /> Team Management</Link></li>
-        <li><Link to="/enquiries" className="menu-link"><FaEnvelope className="icon" /> Enquiries</Link></li>
+        <li><Link to="/enquiry" className="menu-link"><FaEnvelope className="icon" /> Enquiries</Link></li>
       </ul>
     </aside>
   );

@@ -3,6 +3,8 @@ import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import Sidebar from "./Components/Sidebar/Sidebar";
 import Settings from "./Components/Settings/Settings"; 
 import Addcourses from "./Components/Add-courses/Addcourses";
+import Slider from "./Components/Slider/Slider";
+import Enquiries from "./Components/Enquiries/Enquiries";
 
 function App() {
   return (
@@ -13,6 +15,8 @@ function App() {
           <Routes>
             <Route path="/settings" element={<Settings />} />
             <Route path="/addcourses" element={<Addcourses/>} />
+            <Route path="/slider" element={<Slider/>} />
+            <Route path="/enquiry" element={<Enquiries/>} />
             {/* Add more routes here */}
           </Routes>
         </div>
