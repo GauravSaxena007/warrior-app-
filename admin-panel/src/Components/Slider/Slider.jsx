@@ -66,7 +66,9 @@ const Slider = () => {
               <img key={i} src={img} alt={`Preview ${i}`} />
             ))}
           </div>
-          <button onClick={handleAddImages} className="btn-add">Add to Carousel</button>
+          <button onClick={handleAddImages} className="btn-add">
+            Add to Carousel
+          </button>
         </div>
       )}
 
@@ -94,6 +96,30 @@ const Slider = () => {
             </div>
           ))}
         </div>
+      </div>
+
+      {/* Save & Delete All Buttons */}
+      <div style={{ marginTop: "20px", display: "flex", gap: "10px" }}>
+        <button
+          className="btn-save"
+          onClick={() => {
+            localStorage.setItem("carouselImages", JSON.stringify(images));
+            alert("Images saved to localStorage!");
+          }}
+        >
+          Save
+        </button>
+        <button
+          className="btn-delete-all"
+          onClick={() => {
+            if (window.confirm("Are you sure you want to delete all images?")) {
+              setImages([]);
+              localStorage.removeItem("carouselImages");
+            }
+          }}
+        >
+          Delete All
+        </button>
       </div>
     </div>
   );

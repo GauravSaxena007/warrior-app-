@@ -95,4 +95,31 @@
     cursor: pointer;
     font-weight: bold;
   }
+  .btn-save {
+    background-color: #28a745;
+    color: white;
+    padding: 10px 18px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .btn-save:hover {
+    background-color: #218838;
+  }
+  
+  .btn-delete-all {
+    background-color: #dc3545;
+    color: white;
+    padding: 10px 18px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .btn-delete-all:hover {
+    background-color: #c82333;
+  }
   

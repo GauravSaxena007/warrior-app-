@@ -1,155 +1,194 @@
-/* Admin Panel Styles */
-.admin-container {
-    max-width: 800px;
-    margin: auto;
-    padding: 20px;
-    font-family: Arial, sans-serif;
-    background-color: #f8f9fa;
-    border-radius: 10px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-  }
-  
-  .admin-title {
-    text-align: center;
-    font-size: 24px;
-    font-weight: bold;
-    margin-bottom: 20px;
-    color: #343a40;
-  }
-  
-  .add-button {
-    display: block;
-    margin: 10px auto;
-    padding: 10px 15px;
-    background-color: #007bff;
-    color: white;
-    border: none;
-    cursor: pointer;
-    border-radius: 5px;
-    font-size: 16px;
-  }
-  
-  .add-button:hover {
-    background-color: #0056b3;
-  }
-  
+/* Make sure everything uses box-sizing */
+* {
+  box-sizing: border-box;
+}
+
+/* Wrapper for cards */
+.card-wrapper {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: space-between;
+}
+
+/* Individual Card */
+.card {
+  flex: 1 1 calc(33.333% - 13.5px); /* 3 cards in a row with 20px gap */
+  background: white;
+  border-radius: 16px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+  border: 1px solid #e0e0e0;
+  transition: 0.3s ease;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  min-height: 200px;
+}
+
+/* Hover effect */
+.card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+}
+
+/* Card inner spacing */
+.card-body {
+  padding: 16px;
+}
+
+/* Card Title */
+.card-title {
+  font-weight: 600;
+  font-size: 1.2rem;
+  margin-bottom: 1rem;
+  color: #333;
+}
+
+/* Course Details */
+.course-details {
+  padding-left: 20px;
+  font-size: 0.95rem;
+  line-height: 1.6;
+  margin-bottom: 10px;
+}
+
+.course-details li {
+  margin-bottom: 4px;
+  font-size: 0.9rem;
+}
+
+/* Footer */
+.card-footer {
+  background-color: #f1f1f1;
+  font-size: 0.9rem;
+  border-top: 1px solid #ddd;
+  padding: 12px 18px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+/* Space between Duration and Code */
+.card-footer div span:first-child {
+  margin-right: 15px;
+}
+
+/* Dialog modal overlay */
+.dialog-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Modal content box */
+.dialog-content {
+  background-color: #fff;
+  padding: 30px;
+  width: 90%;
+  max-width: 500px;
+  border-radius: 16px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+  position: relative;
+}
+
+/* Modal Title */
+.dialog-title {
+  margin-bottom: 25px;
+  font-size: 1.6rem;
+  font-weight: bold;
+  text-align: center;
+}
+
+/* Form Inputs */
+.input-field {
+  width: 100%;
+  padding: 12px;
+  margin: 10px 0;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  font-size: 1rem;
+  transition: border-color 0.3s ease;
+}
+
+.input-field:focus {
+  outline: none;
+  border-color: #007bff;
+}
+
+/* Duration select dropdowns */
+.duration-section {
+  display: flex;
+  align-items: center;
+  margin-bottom: 15px;
+}
+
+.dropdown {
+  padding: 10px;
+  margin-right: 10px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+}
+
+/* Buttons */
+.btn {
+  margin-top: 10px;
+  padding: 10px 18px;
+  border-radius: 8px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  margin-right: 10px;
+}
+
+.btn-primary {
+  background-color: #007bff;
+  color: white;
+  border: none;
+}
+
+.btn-primary:hover {
+  background-color: #0056b3;
+}
+
+.btn-danger {
+  background-color: #dc3545;
+  color: white;
+  border: none;
+}
+
+.btn-danger:hover {
+  background-color: #c82333;
+}
+
+.btn-secondary {
+  background-color: #6c757d;
+  color: white;
+  border: none;
+}
+
+.btn-secondary:hover {
+  background-color: #5a6268;
+}
+
+
+/* Medium screen: 2 cards per row */
+@media (max-width: 992px) {
   .card {
-    background: #fff;
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    flex: 1 1 calc(50% - 10px);
   }
-  
-  .course-list {
-    list-style-type: none;
-    padding: 0;
+}
+
+/* Small screen: 1 card per row */
+@media (max-width: 768px) {
+  .card {
+    flex: 1 1 100%;
   }
-  
-  .course-group {
-    font-size: 18px;
-    font-weight: bold;
-    margin-top: 15px;
-    color: #007bff;
-  }
-  
-  .course-item {
-    background: #f8f9fa;
-    margin: 10px 0;
-    padding: 10px;
-    border-radius: 5px;
-    display: flex;
-    flex-direction: column;
-    gap: 5px;
-    border-left: 5px solid #007bff;
-    color: #000;
-  }
-  
-  .course-item strong {
-    color: #28a745;
-  }
-  
-  .delete-button {
-    background-color: #dc3545;
-    color: white;
-    border: none;
-    padding: 5px 10px;
-    cursor: pointer;
-    border-radius: 5px;
-    align-self: flex-start;
-  }
-  
-  .delete-button:hover {
-    background-color: #c82333;
-  }
-  
-  /* Modal Styles */
-  .dialog-overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.5);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-  
-  .dialog-content {
-    background: white;
-    padding: 20px;
-    border-radius: 10px;
-    width: 350px;
-    text-align: center;
-    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
-  }
-  
-  .input-field {
-    width: 100%;
-    padding: 8px;
-    margin: 8px 0;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-  }
-  
-  .duration-section {
-    display: flex;
-    gap: 10px;
-    justify-content: center;
-  }
-  
-  .dropdown {
-    padding: 8px;
-    border-radius: 5px;
-    border: 1px solid #ccc;
-  }
-  
-  .save-button {
-    background-color: #28a745;
-    color: white;
-    border: none;
-    padding: 10px 15px;
-    cursor: pointer;
-    border-radius: 5px;
-    font-size: 14px;
-    margin-top: 10px;
-  }
-  
-  .save-button:hover {
-    background-color: #218838;
-  }
-  
-  .close-button {
-    background-color: #6c757d;
-    color: white;
-    border: none;
-    padding: 10px 15px;
-    cursor: pointer;
-    border-radius: 5px;
-    font-size: 14px;
-    margin-left: 10px;
-  }
-  
-  .close-button:hover {
-    background-color: #5a6268;
-  }
+}
