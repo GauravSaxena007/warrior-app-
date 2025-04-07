@@ -1,7 +1,7 @@
 import React from "react";
 import "./Courses.css";
 
-const courses = [
+export const courses = [
   {
     id: 1,
     title: "Advanced Diploma in Hardware & Networking",

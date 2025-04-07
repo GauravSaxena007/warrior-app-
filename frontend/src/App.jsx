@@ -22,10 +22,17 @@ function Layout() {
   const isLoginPage = location.pathname === "/login";
   const isFranchiseeProfile = location.pathname === "/franchprofile";
 
+  // ✅ NEW: Add this to control navbar visibility
+  const hideNavbarPaths = ["/login"];
+  const shouldHideNavbar = hideNavbarPaths.includes(location.pathname);
+
   return (
     <div className={isLoginPage ? "login-page" : ""}>
       {/* Show Loginlayout only on /franchprofile */}
-      {isFranchiseeProfile ? <Loginlayout /> : <Navbar />}
+      {isFranchiseeProfile ? <Loginlayout /> : null}
+
+      {/* ✅ NEW: Conditionally render Navbar */}
+      {!shouldHideNavbar && !isFranchiseeProfile && <Navbar />}
 
       {/* Show Franchisee Navbar only on /franchprofile */}
       {isFranchiseeProfile && <FranchiseeNavbar />}
@@ -38,9 +45,9 @@ function Layout() {
         <Route path="/contact" element={<Contact />} />
         <Route path="/login" element={<Login />} />
         <Route path="/franchprofile" element={<div />} />
-        <Route path="/verify" element={<Certiverify/>} />
-        <Route path="/testing" element={<Testing/>} />
-        <Route path="/courses" element={<Courses/>} />
+        <Route path="/verify" element={<Certiverify />} />
+        <Route path="/testing" element={<Testing />} />
+        <Route path="/courses" element={<Courses />} />
       </Routes>
 
       {/* Show Footer on all pages except login */}
