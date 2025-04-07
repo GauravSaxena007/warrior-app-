@@ -1,0 +1,72 @@
+.contact-admin {
+    padding: 20px;
+  }
+  
+  .contact-admin h3,
+  .contact-admin h4 {
+    margin-bottom: 20px;
+    font-weight: 600;
+  }
+  
+  .contact-admin .card {
+    background-color: #f9f9f9;
+    border: 1px solid #ddd;
+    border-radius: 12px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+  }
+  
+  .contact-admin .form-group label {
+    font-weight: 500;
+  }
+  
+  .contact-admin .form-control {
+    border-radius: 8px;
+    box-shadow: none;
+    border: 1px solid #ccc;
+  }
+  
+  .contact-admin textarea.form-control {
+    resize: vertical;
+    min-height: 80px;
+  }
+  
+  .contact-admin button {
+    border-radius: 6px;
+  }
+  
+  .table th,
+  .table td {
+    vertical-align: middle;
+    font-size: 14px;
+  }
+  
+  .table th {
+    background-color: #f1f1f1;
+    font-weight: 600;
+  }
+  
+  .btn-sm {
+    padding: 4px 10px;
+    font-size: 13px;
+  }
+  
+  iframe {
+    border-radius: 8px;
+    margin-top: 10px;
+  }
+  .contact-admin {
+    padding: 10px 20px;
+    margin-top: 0; /* ensure there's no extra top margin */
+  }
+  
+  /* Optional: reduce padding inside cards */
+  .contact-admin .card {
+    padding: 15px;
+  }
+  
+  /* If there's a container wrapping everything with extra padding/margin, reduce it */
+  .container {
+    margin-top: 0 !important;
+    padding-top: 0 !important;
+  }
+  

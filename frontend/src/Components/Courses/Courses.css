@@ -51,4 +51,9 @@
     font-size: 1rem;
     border-radius: 25px;
   }
+  @media (max-width: 768px) {
+    .courses-section {
+      margin-top: 80px !important; /* This will push it down visibly */
+    }
+  }
   

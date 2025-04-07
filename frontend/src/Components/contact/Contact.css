@@ -98,8 +98,6 @@
     margin-right: 0;
 }
 
-
-/* Contact Info Boxes */
 /* Contact Info Boxes */
 .info-box {
     display: flex;
@@ -124,3 +122,48 @@
     min-width: 250px;
 }
 
+/* =================== */
+/* === RESPONSIVE === */
+/* =================== */
+@media (max-width: 768px) {
+    .contact-form,
+    .map-container {
+        min-width: 100%;
+    }
+
+    .contact-container {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .phone, .email, .address {
+        min-width: 100%;
+    }
+
+    .contact-page {
+        padding: 150px 10px;
+    }
+}
+
+@media (max-width: 480px) {
+    .contact-form input,
+    .contact-form select,
+    .contact-form textarea {
+        font-size: 13px;
+        padding: 8px;
+    }
+
+    .contact-form .btn {
+        padding: 6px;
+        font-size: 14px;
+    }
+
+    .map-container {
+        height: 250px;
+    }
+
+    .info-box {
+        flex-direction: column;
+        gap: 10px;
+    }
+}

@@ -1,5 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { FaPhone } from "react-icons/fa"; // Add at top
 import { FaTachometerAlt, FaCog, FaFileAlt, FaImages, FaUsers, FaEnvelope } from "react-icons/fa";
 import "./Sidebar.css"; 
 
@@ -14,6 +15,7 @@ const Sidebar = () => {
         <li><Link to="/slider" className="menu-link"><FaImages className="icon" /> Slider Management</Link></li>
         <li><Link to="/team-management" className="menu-link"><FaUsers className="icon" /> Team Management</Link></li>
         <li><Link to="/enquiry" className="menu-link"><FaEnvelope className="icon" /> Enquiries</Link></li>
+        <li><Link to="/contactuss" className="menu-link"><FaPhone className="icon" /> Contact</Link></li>
       </ul>
     </aside>
   );

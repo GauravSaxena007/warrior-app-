@@ -5,6 +5,7 @@ import Settings from "./Components/Settings/Settings";
 import Addcourses from "./Components/Add-courses/Addcourses";
 import Slider from "./Components/Slider/Slider";
 import Enquiries from "./Components/Enquiries/Enquiries";
+import Contactus from "./Components/Contact-Us/contactus";
 
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
             <Route path="/addcourses" element={<Addcourses/>} />
             <Route path="/slider" element={<Slider/>} />
             <Route path="/enquiry" element={<Enquiries/>} />
+            <Route path="/contactuss" element={<Contactus/>} />
             {/* Add more routes here */}
           </Routes>
         </div>
