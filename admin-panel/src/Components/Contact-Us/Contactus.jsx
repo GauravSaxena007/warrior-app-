@@ -1,189 +1,256 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import axios from "axios";
 import "./Contactus.css";
 
 const Contactus = () => {
-  const [contactInfo, setContactInfo] = useState({
-    phone: "9422123456 | 07122072727",
-    email: "rcsasedu@gmail.com",
-    address: "393-A, Indraprastha, Hanuman Nagar, Nagpur - 440009. (Maharashtra)",
-    mapSrc:
-      localStorage.getItem("mapSrc") ||
-      "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3620.102429233749!2d75.82268047528643!3d25.165173377706048!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x396f84f365e468ed%3A0xa7d6ff6de1677c52!2sDadabari%2C%20Kota%2C%20Rajasthan%20324009!5e0!3m2!1sen!2sin!4v1711555555555"
+  const [contactData, setContactData] = useState({
+    phone: "",
+    email: "",
+    address: "",
+    mapUrl: "",
   });
+  const [formSubmissions, setFormSubmissions] = useState([]);
+  const [editingId, setEditingId] = useState(null);
+  const [editFormData, setEditFormData] = useState(null);
 
-  const [editing, setEditing] = useState(false);
+  useEffect(() => {
+    axios.get("http://localhost:5000/api/contact/info")
+      .then(response => setContactData(response.data))
+      .catch(error => console.error("Error fetching contact info:", error));
 
-  const [contactSubmissions, setContactSubmissions] = useState([
-    {
-      id: 1,
-      name: "John Doe",
-      state: "Maharashtra",
-      city: "Nagpur",
-      area: "Hanuman Nagar",
-      address: "123 Sample Street",
-      pin: "440009",
-      mobile: "9876543210",
-      email: "john@example.com"
-    },
-    {
-      id: 2,
-      name: "Jane Smith",
-      state: "Rajasthan",
-      city: "Kota",
-      area: "Dadabari",
-      address: "456 Another Rd",
-      pin: "324009",
-      mobile: "9123456789",
-      email: "jane@example.com"
-    }
-  ]);
+    axios.get("http://localhost:5000/api/contact/submissions")
+      .then(response => setFormSubmissions(response.data))
+      .catch(error => console.error("Error fetching submissions:", error));
+  }, []);
 
   const handleChange = (e) => {
-    const { name, value } = e.target;
-    setContactInfo((prev) => ({ ...prev, [name]: value }));
+    setContactData({ ...contactData, [e.target.name]: e.target.value });
   };
 
-  const handleSave = () => {
-    localStorage.setItem("mapSrc", contactInfo.mapSrc);
-    setEditing(false);
-    alert("Contact information updated!");
-  };
-
-  const handleDeleteSubmission = (id) => {
-    if (window.confirm("Are you sure you want to delete this submission?")) {
-      setContactSubmissions((prev) => prev.filter((entry) => entry.id !== id));
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    if (!contactData.mapUrl.startsWith('https://www.google.com/maps/embed')) {
+      alert('Please enter a valid Google Maps embed URL');
+      return;
     }
+    axios.put("http://localhost:5000/api/contact/info", contactData)
+      .then(() => alert("Contact info updated!"))
+      .catch(error => console.error("Error updating contact info:", error));
   };
 
-  const handleSaveSubmission = (entry) => {
-    // Future: Make an API call to save
-    console.log("Saving submission:", entry);
-    alert(`Saved submission from ${entry.name}`);
+  const handleEditChange = (e) => {
+    const { name, value } = e.target;
+    setEditFormData({ ...editFormData, [name]: value });
+  };
+
+  const startEditing = (submission) => {
+    setEditingId(submission._id);
+    setEditFormData({ ...submission });
+  };
+
+  const saveEdit = (e) => {
+    e.preventDefault();
+    axios.put(`http://localhost:5000/api/contact/submissions/${editingId}`, editFormData)
+      .then(() => {
+        setFormSubmissions(formSubmissions.map(sub => sub._id === editingId ? editFormData : sub));
+        setEditingId(null);
+        setEditFormData(null);
+        alert("Submission updated!");
+      })
+      .catch(error => console.error("Error updating submission:", error));
+  };
+
+  const cancelEdit = () => {
+    setEditingId(null);
+    setEditFormData(null);
+  };
+
+  const deleteSubmission = (id) => {
+    axios.delete(`http://localhost:5000/api/contact/submissions/${id}`)
+      .then(() => {
+        setFormSubmissions(formSubmissions.filter(sub => sub._id !== id));
+        alert("Submission deleted!");
+      })
+      .catch(error => console.error("Error deleting submission:", error));
   };
 
   return (
-    <div className="contact-admin container">
-      <h3>Admin - Contact Info</h3>
-      <div className="card p-3 mb-4">
-        {editing ? (
-          <>
-            <div className="form-group mb-2">
-              <label>Phone</label>
-              <input
-                type="text"
-                name="phone"
-                className="form-control"
-                value={contactInfo.phone}
-                onChange={handleChange}
-              />
-            </div>
-            <div className="form-group mb-2">
-              <label>Email</label>
-              <input
-                type="email"
-                name="email"
-                className="form-control"
-                value={contactInfo.email}
-                onChange={handleChange}
-              />
-            </div>
-            <div className="form-group mb-2">
-              <label>Address</label>
-              <textarea
-                name="address"
-                className="form-control"
-                value={contactInfo.address}
-                onChange={handleChange}
-              />
-            </div>
-            <div className="form-group mb-2">
-              <label>Google Map Embed Link</label>
-              <textarea
-                name="mapSrc"
-                className="form-control"
-                value={contactInfo.mapSrc}
-                onChange={handleChange}
-                placeholder="Paste Google Maps embed URL here"
-              />
-            </div>
-            <button className="btn btn-success" onClick={handleSave}>
-              Save
-            </button>
-          </>
-        ) : (
-          <>
-            <p><strong>Phone:</strong> {contactInfo.phone}</p>
-            <p><strong>Email:</strong> {contactInfo.email}</p>
-            <p><strong>Address:</strong> {contactInfo.address}</p>
-            <p>
-              <strong>Google Map:</strong><br />
-              <iframe
-                src={contactInfo.mapSrc}
-                width="100%"
-                height="250"
-                style={{ border: 0 }}
-                allowFullScreen=""
-                loading="lazy"
-                title="Preview Map"
-              ></iframe>
-            </p>
-            <button className="btn btn-primary" onClick={() => setEditing(true)}>
-              Edit
-            </button>
-          </>
-        )}
-      </div>
+    <div className="contactus-admin">
+      <div className="container">
+        <h2>Edit Contact Info</h2>
+        <form onSubmit={handleSubmit} className="form-section">
+          <input
+            type="text"
+            name="phone"
+            placeholder="Phone"
+            value={contactData.phone}
+            onChange={handleChange}
+            required
+          />
+          <input
+            type="email"
+            name="email"
+            placeholder="Email"
+            value={contactData.email}
+            onChange={handleChange}
+            required
+          />
+          <textarea
+            name="address"
+            placeholder="Address"
+            value={contactData.address}
+            onChange={handleChange}
+            required
+          />
+          <input
+            type="text"
+            name="mapUrl"
+            placeholder="Google Map Embed URL"
+            value={contactData.mapUrl}
+            onChange={handleChange}
+            required
+          />
+          <button type="submit" className="btn btn-primary">Save</button>
+        </form>
 
-      <h4>Submitted Contact Forms</h4>
-      <div className="table-responsive">
-        <table className="table table-bordered align-middle">
-          <thead className="table-light">
-            <tr>
-              <th>Name</th>
-              <th>State</th>
-              <th>City</th>
-              <th>Area</th>
-              <th>Address</th>
-              <th>Pin</th>
-              <th>Mobile</th>
-              <th>Email</th>
-              <th>Actions</th>
-            </tr>
-          </thead>
-          <tbody>
-            {contactSubmissions.map((entry) => (
-              <tr key={entry.id}>
-                <td>{entry.name}</td>
-                <td>{entry.state}</td>
-                <td>{entry.city}</td>
-                <td>{entry.area}</td>
-                <td>{entry.address}</td>
-                <td>{entry.pin}</td>
-                <td>{entry.mobile}</td>
-                <td>{entry.email}</td>
-                <td>
-                  <button
-                    className="btn btn-sm btn-success me-2"
-                    onClick={() => handleSaveSubmission(entry)}
-                  >
-                    Save
-                  </button>
-                  <button
-                    className="btn btn-sm btn-danger"
-                    onClick={() => handleDeleteSubmission(entry.id)}
-                  >
-                    Delete
-                  </button>
-                </td>
-              </tr>
-            ))}
-            {contactSubmissions.length === 0 && (
+        <h3>Form Submissions</h3>
+        <div className="submissions-table">
+          <table>
+            <thead>
               <tr>
-                <td colSpan="9" className="text-center text-muted">No submissions available.</td>
+                <th>Name</th>
+                <th>State</th>
+                <th>City</th>
+                <th>Area</th>
+                <th>Address</th>
+                <th>Pin</th>
+                <th>Mobile</th>
+                <th>Email</th>
+                <th>Actions</th>
               </tr>
-            )}
-          </tbody>
-        </table>
+            </thead>
+            <tbody>
+              {formSubmissions.map((item) => (
+                <tr key={item._id}>
+                  {editingId === item._id ? (
+                    <>
+                      <td>
+                        <input
+                          type="text"
+                          name="contactPerson"
+                          value={editFormData.contactPerson}
+                          onChange={handleEditChange}
+                          className="input-field"
+                        />
+                      </td>
+                      <td>
+                        <select
+                          name="state"
+                          value={editFormData.state}
+                          onChange={handleEditChange}
+                          className="input-field"
+                        >
+                          <option value="">Select State</option>
+                          <option value="Maharashtra">Maharashtra</option>
+                          <option value="Rajasthan">Rajasthan</option>
+                        </select>
+                      </td>
+                      <td>
+                        <select
+                          name="city"
+                          value={editFormData.city}
+                          onChange={handleEditChange}
+                          className="input-field"
+                        >
+                          <option value="">Select City</option>
+                          <option value="Nagpur">Nagpur</option>
+                          <option value="Kota">Kota</option>
+                        </select>
+                      </td>
+                      <td>
+                        <input
+                          type="text"
+                          name="area"
+                          value={editFormData.area}
+                          onChange={handleEditChange}
+                          className="input-field"
+                        />
+                      </td>
+                      <td>
+                        <textarea
+                          name="address"
+                          value={editFormData.address}
+                          onChange={handleEditChange}
+                          className="input-field"
+                        ></textarea>
+                      </td>
+                      <td>
+                        <input
+                          type="text"
+                          name="pinCode"
+                          value={editFormData.pinCode}
+                          onChange={handleEditChange}
+                          className="input-field"
+                        />
+                      </td>
+                      <td>
+                        <input
+                          type="text"
+                          name="mobileNo"
+                          value={editFormData.mobileNo}
+                          onChange={handleEditChange}
+                          className="input-field"
+                        />
+                      </td>
+                      <td>
+                        <input
+                          type="email"
+                          name="email"
+                          value={editFormData.email}
+                          onChange={handleEditChange}
+                          className="input-field"
+                        />
+                      </td>
+                      <td>
+                        <button onClick={saveEdit} className="action-btn save-btn">
+                          Save
+                        </button>
+                        <button onClick={cancelEdit} className="action-btn cancel-btn">
+                          Cancel
+                        </button>
+                      </td>
+                    </>
+                  ) : (
+                    <>
+                      <td>{item.name}</td>
+                      <td>{item.state}</td>
+                      <td>{item.city}</td>
+                      <td>{item.area}</td>
+                      <td>{item.address}</td>
+                      <td>{item.pin}</td>
+                      <td>{item.mobile}</td>
+                      <td>{item.email}</td>
+                      <td>
+                        <button
+                          onClick={() => startEditing(item)}
+                          className="action-btn edit-btn"
+                        >
+                          Edit
+                        </button>
+                        <button
+                          onClick={() => deleteSubmission(item._id)}
+                          className="action-btn delete-btn"
+                        >
+                          Delete
+                        </button>
+                      </td>
+                    </>
+                  )}
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
       </div>
     </div>
   );

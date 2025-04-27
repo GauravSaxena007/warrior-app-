@@ -16,6 +16,150 @@
   flex: 1;
   position: relative;
 }
+/* Hero Section */
+.hero-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #fff;
+  padding: 5px; /* Reduced padding */
+  max-width: 1100px; /* Slightly smaller width */
+  margin: auto;
+  transform: translateY(15px); /* Moves section 20px upward */
+  margin-top: -7px; /* Pushes hero section below navbar */
+}
+
+/* Left side - Image */
+.hero-left {
+  flex: 1;
+  position: relative;
+}
+
+.hero-img {
+  width: 95%; /* Reduce image size slightly */
+  border-radius: 8px;
+}
+
+/* Banner Text */
+.hero-text {
+  position: absolute;
+  top: 25%; /* Move text up slightly */
+  left: 8%;
+  color: #003366;
+  font-size: 14px; /* Reduce text size */
+  font-weight: bold;
+  background: rgba(255, 255, 255, 0.8);
+  padding: 8px;
+  border-radius: 5px;
+}
+
+/* Right side - Form */
+.hero-right {
+  flex: 0.45; /* Reduce the width slightly */
+  background: #f8f8f8;
+  padding: 15px; /* Reduce padding */
+  border-radius: 8px;
+  box-shadow: 0px 3px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Form Title */
+.form-title-1 {
+  color: #e26d14;
+  text-align: center;
+  font-size: 18px; /* Reduce title size */
+  margin-bottom: 10px;
+}
+
+/* Enquiry Form */
+.enquiry-form {
+  display: flex;
+  flex-direction: column;
+}
+
+.enquiry-form input,
+.enquiry-form select {
+  width: 100%;
+  padding: 5px; /* Reduce input field padding */
+  margin-bottom: 8px;
+  border: 1px solid #e26d14;
+  border-radius: 5px;
+}
+
+/* Submit Button */
+.enquiry-btn {
+  background: green;
+  color: white;
+  padding: 10px; /* Reduce button padding */
+  border: none;
+  border-radius: 5px;
+  font-size: 14px; /* Slightly smaller */
+  cursor: pointer;
+}
+
+.enquiry-btn:hover {
+  background: darkgreen;
+}
+
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .hero-container {
+    flex-direction: column; /* Stack image and form */
+    align-items: center;
+    text-align: center;
+    padding: 25px;
+    margin-top: -21px;
+  }
+
+  .hero-left {
+    width: 100%;
+    text-align: center;
+  }
+
+  .hero-img {
+    width: 100%;
+    max-width: 400px; /* Limit image size */
+  }
+
+  .hero-text {
+    position: relative;
+    top: 0;
+    left: 0;
+    font-size: 12px;
+  }
+
+  .hero-right {
+    flex: none;
+    width: 100%;
+    margin-top: 15px; /* Move form below the image */
+  }
+}
+
+/* Slider Styling */
+.slider-container {
+  width: 100%;
+  max-width: 1100px;
+  margin: auto;
+  overflow: hidden;
+}
+
+.slider {
+  display: flex;
+  transition: transform 0.5s ease-in-out;
+}
+
+.slide {
+  min-width: 100%;
+  box-sizing: border-box;
+}
+
+.slide img {
+  width: 100%;
+  height: auto;
+  border-radius: 8px;
+}
+
+
 
 .hero-img {
   width: 95%; /* Reduce image size slightly */

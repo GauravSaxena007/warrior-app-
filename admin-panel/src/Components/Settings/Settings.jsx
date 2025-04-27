@@ -1,5 +1,6 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./Settings.css";
+import axios from "axios";
 
 const Settings = () => {
   const [photo, setPhoto] = useState(null);
@@ -13,17 +14,36 @@ const Settings = () => {
   const [phone2, setPhone2] = useState("9422123456");
   const [socialLinks, setSocialLinks] = useState(["https://facebook.com", "https://instagram.com"]);
 
+  useEffect(() => {
+    // Fetch initial settings from backend
+    axios.get("http://localhost:5000/api/settings")
+      .then((response) => {
+        const data = response.data;
+        console.log("Fetched settings:", data); // Debug log
+        setPhoto(data.photo ? `http://localhost:5000/${data.photo}` : null);
+        setFranchiseNumber(data.franchiseNumber || "9422123456");
+        setWelcomeTitle(data.welcomeTitle || "WELCOME TO RCSAS COMPUTER EDUCATION FRANCHISE");
+        setWelcomeText(data.welcomeText || "RCSAS Education provides the best computer education franchise business opportunity in India...");
+        setFooterLogo(data.footerLogo ? `http://localhost:5000/${data.footerLogo}` : null);
+        setEmail(data.email || "rcsasedu@gmail.com");
+        setPhone1(data.phone1 || "07122702727");
+        setPhone2(data.phone2 || "9422123456");
+        setSocialLinks(data.socialLinks || ["https://facebook.com", "https://instagram.com"]);
+      })
+      .catch((error) => console.error("Error fetching settings:", error));
+  }, []);
+
   const handlePhotoChange = (event) => {
     const file = event.target.files[0];
     if (file) {
-      setPhoto(URL.createObjectURL(file));
+      setPhoto(file); // Store file object instead of URL for upload
     }
   };
 
   const handleFooterLogoChange = (event) => {
     const file = event.target.files[0];
     if (file) {
-      setFooterLogo(URL.createObjectURL(file));
+      setFooterLogo(file); // Store file object instead of URL for upload
     }
   };
 
@@ -44,19 +64,36 @@ const Settings = () => {
   };
 
   const handleSave = () => {
-    const updatedData = {
-      photo,
-      franchiseNumber,
-      welcomeTitle,
-      welcomeText,
-      footerLogo,
-      email,
-      phone1,
-      phone2,
-      socialLinks,
-    };
-    console.log("Updated Data:", updatedData);
-    alert("Changes saved successfully!");
+    const formData = new FormData();
+    if (photo && typeof photo !== "string") formData.append("photo", photo);
+    formData.append("franchiseNumber", franchiseNumber);
+    formData.append("welcomeTitle", welcomeTitle);
+    formData.append("welcomeText", welcomeText);
+    if (footerLogo && typeof footerLogo !== "string") formData.append("footerLogo", footerLogo);
+    formData.append("email", email);
+    formData.append("phone1", phone1);
+    formData.append("phone2", phone2);
+    formData.append("socialLinks", JSON.stringify(socialLinks));
+
+    axios.post("http://localhost:5000/api/settings", formData, {
+      headers: { "Content-Type": "multipart/form-data" },
+    })
+      .then((response) => {
+        console.log("Save response data:", response.data); // Debug log
+        alert("Changes saved successfully!");
+        // Refresh settings to update logo URLs
+        axios.get("http://localhost:5000/api/settings")
+          .then((res) => {
+            const data = res.data;
+            console.log("Refreshed settings:", data); // Debug log
+            setPhoto(data.photo ? `http://localhost:5000/${data.photo}` : null);
+            setFooterLogo(data.footerLogo ? `http://localhost:5000/${data.footerLogo}` : null);
+          });
+      })
+      .catch((error) => {
+        console.error("Error saving settings:", error);
+        alert("Failed to save changes.");
+      });
   };
 
   return (
@@ -68,7 +105,7 @@ const Settings = () => {
         <div className="form-group">
           <label>Upload Photo:</label>
           <input type="file" onChange={handlePhotoChange} />
-          {photo && <img src={photo} alt="Preview" className="preview-img" />}
+          {photo && typeof photo === "string" && <img src={photo} alt="Preview" className="preview-img" />}
         </div>
 
         <div className="form-group">
@@ -106,7 +143,7 @@ const Settings = () => {
         <div className="form-group">
           <label>Footer Logo:</label>
           <input type="file" onChange={handleFooterLogoChange} />
-          {footerLogo && <img src={footerLogo} alt="Footer Logo" className="preview-img" />}
+          {footerLogo && typeof footerLogo === "string" && <img src={footerLogo} alt="Footer Logo" className="preview-img" />}
         </div>
 
         <div className="form-group">

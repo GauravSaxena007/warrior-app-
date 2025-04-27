@@ -1,59 +1,169 @@
-import React from "react";
-import "./Contact.css"; // Make sure to add styles here
+import React, { useState, useEffect } from "react";
+import axios from "axios";
+import "./Contact.css";
 
 const Contact = () => {
+  const [formData, setFormData] = useState({
+    contactPerson: "",
+    state: "",
+    city: "",
+    area: "",
+    address: "",
+    pinCode: "",
+    mobileNo: "",
+    email: "",
+  });
+  const [contactInfo, setContactInfo] = useState({
+    phone: "",
+    email: "",
+    address: "",
+    mapUrl: "",
+  });
+
+  useEffect(() => {
+    axios.get("http://localhost:5000/api/contact/info")
+      .then(response => {
+        console.log("Contact Info Response:", response.data);
+        setContactInfo(response.data);
+      })
+      .catch(error => console.error("Error fetching contact info:", error));
+  }, []);
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData({ ...formData, [name]: value });
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    axios.post("http://localhost:5000/api/contact/submissions", {
+      name: formData.contactPerson,
+      state: formData.state,
+      city: formData.city,
+      area: formData.area,
+      address: formData.address,
+      pin: formData.pinCode,
+      mobile: formData.mobileNo,
+      email: formData.email,
+    })
+      .then(() => {
+        alert("Form submitted successfully!");
+        setFormData({
+          contactPerson: "",
+          state: "",
+          city: "",
+          area: "",
+          address: "",
+          pinCode: "",
+          mobileNo: "",
+          email: "",
+        });
+      })
+      .catch(error => console.error("Error submitting form:", error));
+  };
+
   return (
     <div className="contact-page">
       <div className="container">
         <div className="row">
-          {/* Google Map Section */}
           <div className="col-md-6">
-          <iframe
-  title="Google Map"
-  className="google-map"
-  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3620.102429233749!2d75.82268047528643!3d25.165173377706048!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x396f84f365e468ed%3A0xa7d6ff6de1677c52!2sDadabari%2C%20Kota%2C%20Rajasthan%20324009!5e0!3m2!1sen!2sin!4v1711555555555"
-  width="100%"
-  height="350"
-  style={{ border: 0 }}
-  allowFullScreen=""
-  loading="lazy"
-></iframe>
+            {contactInfo.mapUrl && contactInfo.mapUrl.startsWith('https://www.google.com/maps/embed') ? (
+              <iframe
+                title="Google Map"
+                className="google-map"
+                src={contactInfo.mapUrl}
+                width="100%"
+                height="350"
+                style={{ border: 0 }}
+                allowFullScreen=""
+                loading="lazy"
+              />
+            ) : (
+              <p>Map not available {contactInfo.mapUrl && `(Invalid URL: ${contactInfo.mapUrl})`}</p>
+            )}
           </div>
-
-          {/* Contact Form Section */}
           <div className="col-md-6">
             <div className="contact-form">
               <h4>SEND A MESSAGE</h4>
               <p>Your email address will not be published. Required fields are marked.</p>
-              <form>
+              <form onSubmit={handleSubmit}>
                 <div className="row">
                   <div className="col-md-6">
-                    <input type="text" placeholder="Contact Person *" required />
+                    <input
+                      type="text"
+                      name="contactPerson"
+                      placeholder="Contact Person *"
+                      value={formData.contactPerson}
+                      onChange={handleChange}
+                      required
+                    />
                   </div>
                   <div className="col-md-6">
-                    <select>
-                      <option>Select State</option>
-                    </select>
-                  </div>
+  <input
+    type="text"
+    name="state"
+    value={formData.state}
+    onChange={handleChange}
+    placeholder="Enter State"
+    className="form-control"
+  />
+</div>
+
+<div className="col-md-6">
+  <input
+    type="text"
+    name="city"
+    value={formData.city}
+    onChange={handleChange}
+    placeholder="Enter City"
+    className="form-control"
+  />
+</div>
                   <div className="col-md-6">
-                    <select>
-                      <option>Select City</option>
-                    </select>
-                  </div>
-                  <div className="col-md-6">
-                    <input type="text" placeholder="Area" />
+                    <input
+                      type="text"
+                      name="area"
+                      placeholder="Area"
+                      value={formData.area}
+                      onChange={handleChange}
+                    />
                   </div>
                   <div className="col-12">
-                    <textarea placeholder="Address"></textarea>
+                    <textarea
+                      name="address"
+                      placeholder="Address"
+                      value={formData.address}
+                      onChange={handleChange}
+                    ></textarea>
                   </div>
                   <div className="col-md-6">
-                    <input type="text" placeholder="Pin Code" />
+                    <input
+                      type="text"
+                      name="pinCode"
+                      placeholder="Pin Code"
+                      value={formData.pinCode}
+                      onChange={handleChange}
+                    />
                   </div>
                   <div className="col-md-6">
-                    <input type="text" placeholder="Mobile No. *" required />
+                    <input
+                      type="text"
+                      name="mobileNo"
+                      placeholder="Mobile No. *"
+                      value={formData.mobileNo}
+                      onChange={handleChange}
+                      required
+                    />
                   </div>
                   <div className="col-12">
-                    <input type="email" placeholder="Email *" required />
+                    <input
+                      type="email"
+                      name="email"
+                      placeholder="Email *"
+                      value={formData.email}
+                      onChange={handleChange}
+                      required
+                    />
                   </div>
                 </div>
                 <button type="submit" className="btn btn-success">
@@ -63,20 +173,18 @@ const Contact = () => {
             </div>
           </div>
         </div>
-
-        {/* Contact Info Section */}
         <div className="contact-info">
           <h5>CONTACT INFO</h5>
-          <p>Welcome to RCSAS Website. We are glad to have you around.</p>
+          <p>We are glad to have you around.</p>
           <div className="info-box">
             <div className="phone">
-              <strong>Phone:</strong> 9422123456 | 07122072727
+              <strong>Phone:</strong> {contactInfo.phone}
             </div>
             <div className="email">
-              <strong>Email:</strong> rcsasedu@gmail.com
+              <strong>Email:</strong> {contactInfo.email}
             </div>
             <div className="address">
-              <strong>Address:</strong> 393-A, Indraprastha, Hanuman Nagar, Nagpur - 440009. (Maharashtra)
+              <strong>Address:</strong> {contactInfo.address}
             </div>
           </div>
         </div>

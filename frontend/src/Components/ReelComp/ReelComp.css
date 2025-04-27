@@ -1,0 +1,81 @@
+.reel-comp-container {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    margin-top: 1.9rem;
+  }
+  
+  .text-strip-container {
+    width: 100%;
+    overflow: hidden;
+    padding: 1px 0;
+    position: relative;
+    margin-top: 3px;
+  }
+  
+  .text-strip-track {
+    display: inline-flex;
+    white-space: nowrap;
+    will-change: transform;
+    animation: scroll-marquee 25s linear infinite;
+  }
+  
+  .text-strip {
+    display: inline-flex;
+    white-space: nowrap;
+  }
+  
+  .text-strip span {
+    margin: 0 50px;
+    font-size: 18px;
+    white-space: nowrap;
+  }
+  
+  @keyframes scroll-marquee {
+    0% {
+      transform: translateX(0);
+    }
+    100% {
+      transform: translateX(-50%);
+    }
+  }
+  
+  @media (max-width: 992px) {
+    .text-strip span {
+      font-size: 16px;
+      margin: 0 40px;
+    }
+  }
+  
+  @media (max-width: 768px) {
+    .text-strip span {
+      font-size: 15px;
+      margin: 0 30px;
+    }
+  }
+  
+  @media (max-width: 576px) {
+    .text-strip span {
+      font-size: 14px;
+      margin: 0 20px;
+    }
+    .reel-comp-container {
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      margin-top: 4.5rem;
+    }
+  }
+  
+  @media (max-width: 400px) {
+    .text-strip span {
+      font-size: 13px;
+      margin: 0 21px;
+    }
+    .reel-comp-container {
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      margin-top: 4.5rem;
+    }
+  }

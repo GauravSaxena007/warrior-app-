@@ -1,76 +1,139 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import axios from 'axios';
 import "./Transaction.css";
-
-const transaction = [
-  { id: 1, receiptNo: 5015, center: "BUNDI (GALAXY COMPUTER EDUCATION)", students: 10, amount: 1122.0, date: "07-05-2024", method: "Unified Payments" },
-  { id: 10, receiptNo: 1658, center: "BUNDI (GALAXY COMPUTER EDUCATION)", students: 10, amount: 1292.65, date: "24-03-2022", method: "Net Banking" },
-  { id: 11, receiptNo: 1241, center: "BUNDI (GALAXY COMPUTER EDUCATION)", students: 2, amount: 372.3, date: "09-12-2021", method: "Net Banking" },
-  { id: 12, receiptNo: 1104, center: "BUNDI (GALAXY COMPUTER EDUCATION)", students: 10, amount: 1269.9, date: "12-11-2021", method: "Net Banking" },
-  { id: 2, receiptNo: 4545, center: "BUNDI (GALAXY COMPUTER EDUCATION)", students: 5, amount: 669.5, date: "17-01-2024", method: "Unified Payments" },
-  { id: 3, receiptNo: 4022, center: "BUNDI (GALAXY COMPUTER EDUCATION)", students: 5, amount: 561.0, date: "20-09-2023", method: "Unified Payments" },
-  { id: 4, receiptNo: 2881, center: "BUNDI (GALAXY COMPUTER EDUCATION)", students: 5, amount: 561.0, date: "09-01-2023", method: "Unified Payments" }
-];
 
 const Transaction = () => {
   const [search, setSearch] = useState("");
-  const [data, setData] = useState(transaction);
+  const [data, setData] = useState([]);
   const [sortOrder, setSortOrder] = useState("asc");
+  const [sortKey, setSortKey] = useState("receiptNo");
+  const [error, setError] = useState(null);
+
+  useEffect(() => {
+    const fetchTransactions = async () => {
+      try {
+        const token = localStorage.getItem('token');
+        if (!token) {
+          throw new Error('Please log in to view transactions');
+        }
+
+        const res = await axios.get(`${import.meta.env.VITE_API_URL}/api/transactions`, {
+          headers: { Authorization: `Bearer ${token}` },
+        });
+        console.log('Transactions API response:', res.data);
+        setData(Array.isArray(res.data) ? res.data : []);
+      } catch (err) {
+        console.error("Error fetching transactions:", err.message);
+        setError(err.message || "Failed to load transactions. Please try again.");
+      }
+    };
+
+    fetchTransactions();
+  }, []);
 
   const handleSearch = (e) => {
     setSearch(e.target.value);
   };
 
   const handleSort = (key) => {
+    setSortKey(key);
+    const newSortOrder = sortOrder === "asc" ? "desc" : "asc";
+    setSortOrder(newSortOrder);
     const sortedData = [...data].sort((a, b) => {
-      if (sortOrder === "asc") {
-        return a[key] > b[key] ? 1 : -1;
+      const aValue = a[key] || '';
+      const bValue = b[key] || '';
+      if (newSortOrder === "asc") {
+        return aValue > bValue ? 1 : -1;
       } else {
-        return a[key] < b[key] ? 1 : -1;
+        return aValue < bValue ? 1 : -1;
       }
     });
     setData(sortedData);
-    setSortOrder(sortOrder === "asc" ? "desc" : "asc");
   };
 
+  if (error) {
+    return (
+      <div className="container" style={{ boxShadow: 'none' }}>
+        <h4 className="pro-h p-2 w-80 text-left" style={{ width: "100%" }}>
+          Transaction List
+        </h4>
+        <p style={{ color: 'red', textAlign: 'center' }}>{error}</p>
+        <button
+          className="btn btn-primary"
+          onClick={() => window.location.reload()}
+        >
+          Retry
+        </button>
+      </div>
+    );
+  }
+
   return (
-    <div className="container mt-1">
-      <h4 className="pro-h p-2 w-80 text-left" style={{ width: "100%" }}>Transaction List</h4>
-      <div className="d-flex justify-content-between p-2 bg-light"  style={{ width: "100%" }}>
+    <div className="container-transaction" style={{ boxShadow: 'none', background: 'transparent' }}>
+      <h4 className="pro-h p-2 w-80 text-left" style={{ width: "100%" }}>
+        Transaction List
+      </h4>
+      <div className="d-flex justify-content-between p-2 bg-light" style={{ width: "100%" }}>
         <select className="form-select w-auto">
           <option>10</option>
           <option>25</option>
           <option>50</option>
         </select>
-        <input type="text" className="form-control w-25" placeholder="Search..." value={search} onChange={handleSearch} />
+        <input
+          type="text"
+          className="form-control w-25"
+          placeholder="Search..."
+          value={search}
+          onChange={handleSearch}
+        />
       </div>
 
       <table className="table table-striped table-hover mt-2">
         <thead className="table-dark">
           <tr>
-            <th onClick={() => handleSort("id")}>Sr. No.</th>
-            <th onClick={() => handleSort("receiptNo")}>Receipt No</th>
-            <th>Center Name</th>
-            <th onClick={() => handleSort("students")}>No. of Students</th>
+            <th>Sr. No.</th>
+            <th onClick={() => handleSort("receiptNo")}>Receipt No.</th>
+            <th onClick={() => handleSort("centerName")}>Center Name</th>
+            <th onClick={() => handleSort("studentCount")}>No. of Students</th>
             <th onClick={() => handleSort("amount")}>Amount</th>
-            <th onClick={() => handleSort("date")}>Payment Date</th>
+            <th onClick={() => handleSort("paymentDate")}>Payment Date</th>
             <th>Payment Method</th>
             <th>Action</th>
           </tr>
         </thead>
         <tbody>
           {data
-            .filter((transaction) => transaction.center.toLowerCase().includes(search.toLowerCase()))
+            .filter(transaction =>
+              transaction.centerName?.toLowerCase().includes(search.toLowerCase()) || ''
+            )
             .map((transaction, index) => (
-              <tr key={transaction.id}>
+              <tr key={transaction._id}>
                 <td>{index + 1}</td>
-                <td>{transaction.receiptNo}</td>
-                <td>{transaction.center}</td>
-                <td>{transaction.students}</td>
-                <td>{transaction.amount.toFixed(2)}</td>
-                <td>{transaction.date}</td>
-                <td>{transaction.method}</td>
+                <td>{transaction.receiptNo || 'N/A'}</td>
+                <td>{transaction.centerName || 'N/A'}</td>
+                <td>{transaction.studentCount || 0}</td>
+                <td>{transaction.amount?.toFixed(2) || '0.00'}</td>
                 <td>
-                  <button className="btn btn-info btn-sm">Statement</button>
+                  {transaction.paymentDate
+                    ? new Date(transaction.paymentDate).toLocaleDateString()
+                    : 'N/A'}
+                </td>
+                <td>{transaction.paymentMethod || 'N/A'}</td>
+                <td>
+                  {transaction.receiptUpload ? (
+                    <a
+                      href={`${import.meta.env.VITE_API_URL}/api/transactions/uploads/${transaction.receiptUpload}`}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="btn btn-info btn-sm"
+                    >
+                      Statement
+                    </a>
+                  ) : (
+                    <button className="btn btn-secondary btn-sm" disabled>
+                      No File
+                    </button>
+                  )}
                 </td>
               </tr>
             ))}

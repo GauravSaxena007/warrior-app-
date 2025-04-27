@@ -8,8 +8,9 @@
   left: 0;
   top: 0;
   overflow-y: auto; /* Enable scrolling if needed */
-  padding: 20px;
-  transition: width 0.3s ease-in-out; /* Smooth transition */
+  padding: 10px;
+  transition: width 0.3s ease-in-out, transform 0.3s ease-in-out; /* Added transform for potential mobile toggle */
+  animation: slideIn 0.5s ease-out forwards; /* Entrance animation */
 }
 
 /* Sidebar Title */
@@ -19,6 +20,7 @@
   margin-bottom: 20px;
   text-align: center;
   text-transform: uppercase;
+  animation: fadeIn 0.6s ease-in; /* Subtle title fade-in */
 }
 
 /* Sidebar Menu */
@@ -32,12 +34,14 @@
 .sidebar-menu li {
   display: flex;
   align-items: center;
-  padding: 12px 15px;
+  padding: 5px 15px;
   cursor: pointer;
   border-radius: 5px;
-  transition: background 0.3s ease-in-out;
+  transition: background 0.3s ease-in-out, transform 0.2s ease; /* Added transform for hover */
   color: rgb(255, 255, 255);  /* Ensure text remains white */
   font-size: 16px;
+  animation: fadeInUp 0.4s ease-out forwards; /* Item entrance animation */
+  animation-delay: calc(0.1s * var(--index)); /* Staggered effect */
 }
 
 /* Ensure Links inside Sidebar are white */
@@ -47,22 +51,79 @@
   display: flex;
   align-items: center;
   width: 100%;
+  transition: color 0.3s ease; /* Smooth color transition */
 }
 
 /* Hover Effect */
 .sidebar-menu li:hover {
   background: #1A252F; /* Darker on hover */
+  transform: translateX(5px); /* Subtle shift on hover */
 }
 
 /* Sidebar Icons */
 .sidebar-menu .icon {
   margin-right: 12px;
   font-size: 18px;
+  transition: transform 0.3s ease; /* Icon animation */
+}
+
+.sidebar-menu li:hover .icon {
+  transform: scale(1.2); /* Slight icon enlargement on hover */
 }
 
 /* Responsive Sidebar */
 @media (max-width: 768px) {
   .sidebar {
-      width: 200px; /* Smaller width for mobile */
+    width: 200px; /* Smaller width for mobile */
+    transform: translateX(-100%); /* Hidden by default */
+    animation: none; /* Disable entrance animation on mobile */
+  }
+
+  .sidebar.open {
+    transform: translateX(0); /* Slide in when toggled */
+    animation: slideInMobile 0.3s ease-out forwards; /* Mobile entrance */
+  }
+}
+
+/* Animation Keyframes */
+@keyframes slideIn {
+  from {
+    transform: translateX(-20px);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+@keyframes slideInMobile {
+  from {
+    transform: translateX(-100%);
+  }
+  to {
+    transform: translateX(0);
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
   }
 }

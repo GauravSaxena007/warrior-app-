@@ -1,0 +1,66 @@
+/* Enquiries.css */
+.enquiries-container {
+    padding: 20px;
+    font-family: Arial, sans-serif;
+  }
+  
+  .enquiries-container h2 {
+    font-size: 24px;
+    margin-bottom: 20px;
+    color: #333;
+  }
+  
+  .enquiries-container p {
+    font-size: 16px;
+    color: #888;
+  }
+  
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+  }
+  
+  th, td {
+    padding: 12px;
+    text-align: left;
+    font-size: 16px;
+    color: #333;
+  }
+  
+  th {
+    background-color: #f2f2f2;
+    color: #555;
+  }
+  
+  td {
+    background-color: #fff;
+    border-bottom: 1px solid #ddd;
+  }
+  
+  button {
+    background-color: red;
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: background-color 0.3s ease;
+  }
+  
+  button:hover {
+    background-color: darkred;
+  }
+  
+  button:focus {
+    outline: none;
+  }
+  
+  table tr:nth-child(even) td {
+    background-color: #f9f9f9;
+  }
+  
+  table tr:hover td {
+    background-color: #e9e9e9;
+  }
+  

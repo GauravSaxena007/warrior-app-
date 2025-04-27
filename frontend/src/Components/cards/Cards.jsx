@@ -1,33 +1,49 @@
-import React from "react";
-import { Link } from "react-router-dom"; // Import Link
-import { courses } from "./data";
+import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
+import './Cards.css';
 
 const Cards = () => {
+  const [cards, setCards] = useState([]);
+
+  // Fetch cards on mount
+  useEffect(() => {
+    const fetchCards = async () => {
+      try {
+        const response = await fetch(`${import.meta.env.VITE_API_URL}/api/cards`);
+        const data = await response.json();
+        setCards(data);
+      } catch (err) {
+        console.error('Error fetching cards:', err);
+      }
+    };
+    fetchCards();
+  }, []);
+
   return (
     <section className="container my-4">
       <div className="row">
-        {courses.map((course) => (
-          <div className="col-md-4 mb-4" key={course.id}>
-            <div className="card h-100 shadow-lg">
+        {cards.map((card) => (
+          <div className="col-md-4 mb-4" key={card._id}>
+            <div className="card shadow-lg">
               <img
-                src={course.image}
+                src={card.image}
                 className="card-img-top img-fluid"
-                alt={course.title}
+                alt={card.title}
               />
               <div className="card-body">
-                <h5 className="card-title">{course.title}</h5>
+                <h5 className="card-title">{card.title}</h5>
                 <ul className="card-text">
-                  {course.details.map((item, index) => (
+                  {card.details.map((item, index) => (
                     <li key={index}>{item}</li>
                   ))}
                 </ul>
               </div>
               <div className="card-footer d-flex justify-content-between">
                 <span>
-                  <strong>Course Duration:</strong> {course.duration}
+                  <strong>Card Duration:</strong> {card.duration}
                 </span>
                 <span>
-                  <strong>Code:</strong> {course.code}
+                  <strong>Code:</strong> {card.code}
                 </span>
               </div>
             </div>
@@ -35,10 +51,10 @@ const Cards = () => {
         ))}
       </div>
 
-      {/* Explore Courses Button */}
+      {/* Explore Cards Button */}
       <div className="text-center mt-4">
         <Link to="/courses" className="btn btn-primary px-4 py-2">
-          Explore Courses
+          Explore Cards
         </Link>
       </div>
     </section>

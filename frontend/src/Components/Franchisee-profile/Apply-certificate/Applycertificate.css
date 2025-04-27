@@ -1,155 +1,169 @@
-/* Applycertificate.css */
-
-.container {
-    padding: 20px;
-  }
-  
-  .request-btn {
-    background-color: blue;
-    color: white;
-    padding: 10px 15px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    margin-bottom: 15px;
-    align-self: flex-start;  /* Align to the left */
-    margin-left: 0;  /* Ensure it's at the left */
+.container-app-certi {
+  padding: 20px;
+  margin-top: 50px;
+  background-color: #ffffff;
+  border-radius: 10px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
-  
-  .request-btn:hover {
-    background-color: darkblue;
-  }
-  
-  .styled-table {
-    width: 100%;
-    border-collapse: collapse;
-  }
-  
-  .styled-table th, .styled-table td {
-    border: 1px solid gray;
-    padding: 10px;
-    text-align: center;
-  }
-  
-  .styled-table th {
-    background-color: #f2f2f2;
-  }
-  
-  .status {
-    color: orange;
-    font-weight: bold;
-  }
-  
-  .icard-status {
-    color: red;
-    font-weight: bold;
-  }
-  
-  .edit-btn {
-    background-color: blue;
-    color: white;
-    padding: 5px 10px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-  }
-  
-  .edit-btn:hover {
-    background-color: darkblue;
-  }
-  
 
-/* Container */
-.container {
-  padding: 10px 20px;
-  margin-top: -10px; /* Shifts everything upward */
+/* Heading */
+.pro-h {
+  font-size: 28px;
+  font-weight: 600;
+  margin-bottom: 20px;
 }
 
 /* Request Button */
-.request-btn {
-  background-color: blue;
+.request-btn-certi {
+  background-color: #2563eb;
   color: white;
-  padding: 10px 15px;
+  padding: 10px 20px;
   border: none;
-  border-radius: 5px;
+  border-radius: 6px;
   cursor: pointer;
   margin-bottom: 10px;
-  margin-top: 0;
-  align-self: flex-start;
-  margin-left: 0;
+  font-weight: 500;
+  transition: background-color 0.3s ease;
+  display: inline-block;
+}
+.refresh-btn-certi{
+  background-color: #eb2567;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  margin-bottom: 10px;
+  font-weight: 500;
+  transition: background-color 0.3s ease;
+  display: inline-block;
 }
 
 .request-btn:hover {
-  background-color: darkblue;
+  background-color: #1e40af;
 }
 
-/* Table Styling */
+/* Table */
 .styled-table {
   width: 100%;
   border-collapse: collapse;
-  margin-top: 0;
+  border-radius: 8px;
+  overflow: hidden;
+  margin-bottom: 40px;
 }
 
 .styled-table th,
 .styled-table td {
-  border: 1px solid gray;
-  padding: 10px;
+  border: 1px solid #e5e7eb;
+  padding: 12px 10px;
   text-align: center;
+  font-size: 15px;
+  color: #374151;
 }
 
 .styled-table th {
-  background-color: #f2f2f2;
+  background-color: #f9fafb;
+  color: #111827;
+  font-weight: 600;
 }
 
 /* Status Colors */
 .status {
+  font-weight: 600;
+}
+
+.status.approved {
+  color: green;
+}
+
+.status.pending {
   color: orange;
-  font-weight: bold;
 }
 
-.icard-status {
-  color: red;
-  font-weight: bold;
-}
-
-/* Edit Button */
-.edit-btn {
-  background-color: blue;
-  color: white;
-  padding: 5px 10px;
+/* Buttons */
+.edit-btn,
+.delete-btn {
+  padding: 6px 12px;
   border: none;
-  border-radius: 5px;
+  border-radius: 6px;
   cursor: pointer;
+  transition: all 0.2s ease;
+  font-size: 14px;
+}
+
+.edit-btn {
+  background-color: #3b82f6;
+  color: white;
 }
 
 .edit-btn:hover {
-  background-color: darkblue;
+  background-color: #1e40af;
 }
 
-/* Responsive Design */
+.delete-btn {
+  background-color: #ef4444;
+  color: white;
+}
+
+.delete-btn:hover {
+  background-color: #dc2626;
+}
+
+/* Responsive: Make table rows into cards */
 @media (max-width: 768px) {
-  .container {
-    padding: 5px 10px;
-    margin-top: -15px; /* Further shift upward for mobile */
+  .container-app-certi {
+    padding: 10px;
+    margin-top: 80px;
+  }
+
+  .pro-h {
+    font-size: 22px;
   }
 
   .request-btn {
     width: 100%;
-    padding: 10px;
+    text-align: center;
     font-size: 16px;
-    margin-bottom: 10px;
   }
 
-  .styled-table {
-    font-size: 14px;
-    display: block;
-    overflow-x: auto;
-    margin-top: 0;
+  .styled-table thead {
+    display: none; /* Hide table header on mobile */
   }
 
-  .styled-table th,
+  .styled-table,
+  .styled-table tbody,
+  .styled-table tr,
   .styled-table td {
-    white-space: nowrap;
+    display: block;
+    width: 100%;
+  }
+
+  .styled-table tr {
+    margin-bottom: 15px;
+    background: #f9fafb;
+    padding: 10px;
+    border-radius: 10px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+  }
+
+  .styled-table td {
+    text-align: right;
+    padding-left: 50%;
+    position: relative;
+    font-size: 14px;
+    border: none;
+    border-bottom: 1px solid #e5e7eb;
+  }
+
+  .styled-table td::before {
+    content: attr(data-label);
+    position: absolute;
+    left: 10px;
+    width: 45%;
+    padding-left: 10px;
+    font-weight: 600;
+    text-align: left;
+    color: #000000;
   }
 }
-

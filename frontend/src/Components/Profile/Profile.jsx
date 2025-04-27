@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import { FaUserTie, FaUserShield } from 'react-icons/fa'; // Import icons
 import "./Profile.css"; // Import your CSS file
 
 const Profile = () => {
@@ -6,16 +7,18 @@ const Profile = () => {
     <div className="dropdown-container-1">
       <span className="dropdown-label-1">LOGIN</span>
       <ul className="dropdown-menu-1">
-        <li>
-          <Link to="/login">Franchisee Login</Link>
-        </li>
-        <li>
-          <Link to="/settings">Destrict Coordinator Login</Link>
-        </li>
-        <li><a href="http://localhost:3001" target="_blank" rel="noopener noreferrer">Admin </a></li>
-        <li>
-          <Link to="/franchprofile">Franchisee Profile (Hide krna h)</Link>
-        </li>
+      <li>
+  <Link to="/login" style={{ display: 'flex', alignItems: 'center' }}>
+    <FaUserTie style={{ marginRight: '5px' }} />
+    Franchisee Login
+  </Link>
+</li>
+<li>
+  <Link to="/adminlogin" style={{ display: 'flex', alignItems: 'center' }}>
+    <FaUserShield style={{ marginRight: '5px' }} />
+    Admin Login
+  </Link>
+</li>
       </ul>
     </div>
   );

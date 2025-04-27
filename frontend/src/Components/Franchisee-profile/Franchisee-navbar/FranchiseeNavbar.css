@@ -1,105 +1,104 @@
 /* Tricolor Banner */
 .franch-tricolor-banner {
-    background: linear-gradient(to right, #ff9933, white, #138808);
-    padding: 12px;
-    text-align: center;
-    font-size: 20px;
-    font-weight: bold;
-    color: #333;
-    margin-top: 21px;
-  }
-  
-  /* Navigation Bar */
-  .franch-navbar {
-    background-color: #ffffff;
-    padding: 15px 0;
-    display: flex;
-    justify-content: center;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
-    position: relative;
-    z-index: 10;
-  }
-  
-  /* Navigation Links */
+  background: linear-gradient(to right, #ff9933, white, #138808);
+  padding: 12px;
+  text-align: center;
+  font-size: 20px;
+  font-weight: bold;
+  color: #333;
+  margin-top: 21px;
+}
+
+/* Navigation Bar */
+.franch-navbar {
+  background-color: #ffffff;
+  padding: 15px 0;
+  display: flex;
+  justify-content: center;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  position: relative;
+  z-index: 10;
+}
+
+/* Navigation Links */
+.franch-nav-links {
+  list-style: none;
+  display: flex;
+  gap: 25px;
+  padding: 0;
+  margin: 0;
+  flex-wrap: wrap; /* Allows wrapping if needed on small screens */
+  justify-content: center;
+}
+
+.franch-nav-links li {
+  padding: 12px 20px;
+  cursor: pointer;
+  color: rgb(0, 0, 0);
+  font-weight: 500;
+  transition: all 0.3s ease;
+  border-radius: 5px;
+  font-size: 16px;
+}
+
+.franch-nav-links li:hover {
+  background-color: #e6b411;
+}
+
+/* Active Tab Styling */
+.franch-nav-links .franch-active {
+  background-color: #28a745;
+  color: white;
+  font-weight: bold;
+}
+
+/* Active Tab Indicator */
+.franch-active-tab-indicator {
+  text-align: center;
+  font-size: 20px;
+  font-weight: bold;
+  padding: 10px;
+  color: #28a745;
+  margin-top: 10px;
+}
+
+/* ✅ Responsive Design (Keep links side by side) */
+@media (max-width: 768px) {
   .franch-nav-links {
-    list-style: none;
-    display: flex;
-    gap: 25px;
-    padding: 0;
-    margin: 0;
-    flex-wrap: wrap; /* Allows wrapping if needed on small screens */
-    justify-content: center;
+    gap: 12px;
+    flex-wrap: wrap;
+    padding: 10px 5px;
   }
-  
+
   .franch-nav-links li {
-    padding: 12px 20px;
-    cursor: pointer;
-    color: rgb(0, 0, 0);
-    font-weight: 500;
-    transition: all 0.3s ease;
-    border-radius: 5px;
+    font-size: 14px;
+    padding: 8px 14px;
+  }
+
+  .franch-tricolor-banner {
+    margin-top: 70px;
     font-size: 16px;
-  }
-  
-  .franch-nav-links li:hover {
-    background-color: #e6b411;
-  }
-  
-  /* Active Tab Styling */
-  .franch-nav-links .franch-active {
-    background-color: #28a745;
-    color: white;
-    font-weight: bold;
-  }
-  
-  /* Active Tab Indicator */
-  .franch-active-tab-indicator {
-    text-align: center;
-    font-size: 20px;
-    font-weight: bold;
     padding: 10px;
-    color: #28a745;
-    margin-top: 10px;
   }
-  
-  /* ✅ Responsive Design (Keep links side by side) */
-  @media (max-width: 768px) {
-    .franch-nav-links {
-      gap: 12px;
-      flex-wrap: wrap;
-      padding: 10px 5px;
-    }
-  
-    .franch-nav-links li {
-      font-size: 14px;
-      padding: 8px 14px;
-    }
-  
-    .franch-tricolor-banner {
-      margin-top: 70px;
-      font-size: 16px;
-      padding: 10px;
-    }
-  
-    .franch-active-tab-indicator {
-      font-size: 16px;
-      padding: 8px;
-      margin-top: 8px;
-    }
+
+  .franch-active-tab-indicator {
+    font-size: 16px;
+    padding: 8px;
+    margin-top: 8px;
   }
-  
-  @media (max-width: 420px) {
-    .franch-nav-links li {
-      font-size: 13px;
-      padding: 6px 12px;
-    }
-  
-    .franch-tricolor-banner {
-      font-size: 14px;
-    }
-  
-    .franch-active-tab-indicator {
-      font-size: 14px;
-    }
+}
+
+@media (max-width: 420px) {
+  .franch-nav-links li {
+    font-size: 13px;
+    padding: 6px 12px;
   }
-  
+
+  .franch-tricolor-banner {
+    font-size: 14px;
+  }
+
+  .franch-active-tab-indicator {
+    font-size: 14px;
+  }
+}

@@ -1,0 +1,172 @@
+.cards-admin-wrapper {
+    max-width: 1200px;
+    margin: auto;
+    padding: 20px;
+  }
+  
+  /* Horizontal 3 cards in a row */
+  .cards-row {
+    display: flex;
+    gap: 20px;
+    justify-content: space-between;
+    margin-bottom: 30px;
+  }
+  
+  .custom-card {
+    width: 32%;
+    min-width: 300px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    background-color: #fff;
+    height: 450px; /* Fixed height for card */
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .custom-img {
+    height: 180px;
+    object-fit: cover;
+    width: 100%;
+  }
+  
+  .card-body {
+    flex-grow: 1;
+    padding: 20px;
+    overflow-y: auto; /* Enables vertical scrolling if content overflows */
+    max-height: 250px; /* Limits the card body height, enabling scrolling */
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .card-title {
+    font-size: 1.2rem;
+    margin-bottom: 10px;
+  }
+  
+  .card-text {
+    font-size: 0.9rem;
+    color: #555;
+  }
+  
+  .card-footer {
+    padding: 10px 20px;
+    font-size: 0.9rem;
+    background-color: #f8f9fa;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .card-footer button {
+    padding: 5px 10px;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  .card-footer .btn-warning {
+    background-color: #ffc107;
+    color: #fff;
+    border: none;
+  }
+  
+  .card-footer .btn-danger {
+    background-color: #dc3545;
+    color: #fff;
+    border: none;
+  }
+  
+  .course-form {
+    background: #fff;
+    padding: 2rem;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.05);
+    max-width: 700px;
+    margin: 0 auto;
+  }
+  
+  .course-form h4 {
+    font-size: 1.5rem;
+    margin-bottom: 20px;
+  }
+  
+  .course-form label {
+    font-weight: bold;
+    display: block;
+    margin-bottom: 5px;
+  }
+  
+  .course-form input,
+  .course-form textarea {
+    width: 100%;
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #ddd;
+    margin-bottom: 15px;
+  }
+  
+  .course-form button {
+    padding: 10px 20px;
+    background-color: #28a745;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  .course-form button:hover {
+    background-color: #218838;
+  }
+  
+  /* Media queries for responsiveness */
+  @media (max-width: 768px) {
+    .cards-row {
+      flex-direction: column;
+      align-items: center;
+    }
+  
+    .custom-card {
+      width: 80%;
+      margin-bottom: 20px;
+    }
+  }
+  .card-form-mqqc {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 24px;
+    background-color: #fff;
+    border-radius: 12px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  .card-form-mqqc .form-label {
+    font-weight: 500;
+    margin-bottom: 6px;
+    display: block;
+  }
+  
+  .card-form-mqqc .form-control {
+    width: 100%;
+    padding: 10px 12px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    font-size: 15px;
+  }
+  
+  .card-form-mqqc .mb-3 {
+    margin-bottom: 20px;
+  }
+  
+  .card-form-mqqc textarea.form-control {
+    min-height: 100px;
+    resize: vertical;
+  }
+  
+  .card-form-mqqc button {
+    width: 100%;
+    padding: 10px;
+    font-size: 16px;
+    border-radius: 8px;
+    background-color: #218838;
+  }
+  

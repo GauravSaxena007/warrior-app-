@@ -1,0 +1,147 @@
+.container-courier-detail {
+    max-width: 1000px;
+    margin: 5px auto;
+    padding: 7px;
+    background-color: #fff;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  }
+  
+  .courier-title {
+    font-size: 24px;
+    font-weight: 600;
+    margin-bottom: 20px;
+    text-align: center;
+    color: #333;
+  }
+  
+  .center-head-display {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 5px;
+    font-size: 16px;
+    font-weight: 500;
+    color: #444;
+    gap: 10px;
+  }
+  
+  .refresh-btn-courier {
+    padding: 6px 14px;
+    background-color: #1976d2;
+    color: #fff;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background 0.3s ease;
+  }
+  
+  .refresh-btn:hover {
+    background-color: #115293;
+  }
+  
+  .courier-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+  }
+  
+  .courier-table thead {
+    background-color: #1976d2;
+    color: #fff;
+  }
+  
+  .courier-table th,
+  .courier-table td {
+    padding: 12px;
+    border: 1px solid #ddd;
+    text-align: center;
+    font-size: 15px;
+  }
+  
+  .courier-table tr:nth-child(even) {
+    background-color: #f9f9f9;
+  }
+  
+  .courier-table tr:hover {
+    background-color: #f1f1f1;
+  }
+  
+  .no-data {
+    text-align: center;
+    color: #999;
+    font-style: italic;
+    padding: 20px;
+  }
+  
+  /* Responsive Design */
+  @media (max-width: 768px) {
+    .courier-container {
+      padding: 15px;
+      margin: 20px auto;
+    }
+  
+    .courier-title {
+      font-size: 20px;
+    }
+  
+    .center-head-display {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 10px;
+      font-size: 14px;
+    }
+  
+    .refresh-btn {
+      width: 100%;
+      font-size: 14px;
+      padding: 10px 0;
+      text-align: center;
+    }
+  
+    .courier-table th,
+    .courier-table td {
+      font-size: 14px;
+      padding: 10px;
+    }
+  
+    .courier-table td {
+      word-wrap: break-word; /* Prevent text overflow */
+    }
+  
+    .no-data {
+      font-size: 14px;
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .courier-container {
+      padding: 10px;
+    }
+  
+    .courier-title {
+      font-size: 18px;
+    }
+  
+    .center-head-display {
+      font-size: 12px;
+      gap: 5px;
+    }
+  
+    .refresh-btn {
+      padding: 8px 0;
+      font-size: 12px;
+    }
+  
+    .courier-table th,
+    .courier-table td {
+      font-size: 12px;
+      padding: 8px;
+    }
+  
+    .no-data {
+      font-size: 12px;
+    }
+  }
+  

@@ -1,0 +1,80 @@
+.reel-admin-container {
+    padding: 20px;
+    max-width: 800px;
+    margin: auto;
+    background: #f9f9f9;
+    border-radius: 12px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+  }
+  
+  .toggle-section,
+  .style-section {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin: 15px 0;
+  }
+  
+  .style-section div {
+    display: flex;
+    flex-direction: column;
+    margin-right: 15px;
+  }
+  
+  .toggle-section button {
+    padding: 10px 20px;
+    background-color: #007bff;
+    border: none;
+    color: white;
+    border-radius: 8px;
+    cursor: pointer;
+  }
+  
+  .edit-section {
+    margin-bottom: 20px;
+  }
+  
+  .edit-section input {
+    display: block;
+    width: 100%;
+    margin: 5px 0;
+    padding: 10px;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+    font-size: 16px;
+  }
+  
+  .preview-section {
+    background-color: white;
+    padding: 15px;
+    border-radius: 10px;
+    border: 1px solid #ccc;
+  }
+  
+  .text-strip-container {
+    overflow: hidden;
+    white-space: nowrap;
+    padding: 10px;
+  }
+  
+  .text-strip {
+    display: inline-block;
+    animation: scroll-left 15s linear infinite;
+  }
+  
+  .text-strip span {
+    display: inline-block;
+    margin-right: 50px;
+    font-weight: bold;
+    font-size: 16px;
+  }
+  
+  @keyframes scroll-left {
+    0% {
+      transform: translateX(100%);
+    }
+    100% {
+      transform: translateX(-100%);
+    }
+  }
+  

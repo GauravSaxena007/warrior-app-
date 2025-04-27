@@ -1,0 +1,342 @@
+/* CSS Variables for Consistency */
+:root {
+  --primary-color: #007bff;
+  --primary-hover: #0056b3;
+  --success-color: #28a745;
+  --success-hover: #218838;
+  --warning-color: #ffc107;
+  --warning-hover: #e0a800;
+  --danger-color: #dc3545;
+  --danger-hover: #c82333;
+  --neutral-color: #6c757d;
+  --neutral-hover: #5a6268;
+  --background-color: #ffffff;
+  --text-color: #333333;
+  --border-color: #dddddd;
+  --shadow-color: rgba(0, 0, 0, 0.05);
+  --modal-shadow: rgba(0, 0, 0, 0.15);
+}
+
+/* Container */
+.container-fra-ma {
+  max-width: 5500px;
+  margin: -15px;
+  padding: 15px;
+  background-color: var(--background-color);
+  border-radius: 12px;
+  box-shadow: 0 4px 20px var(--shadow-color);
+  margin-left: -100px;
+  margin-top: -200px;
+}
+
+/* Title */
+.title {
+  font-size: 1.75rem;
+  font-weight: 600;
+  margin-bottom: 24px;
+  color: var(--text-color);
+  text-align: center;
+  line-height: 1.4;
+}
+
+/* Add Button */
+.button {
+  background-color: var(--primary-color);
+  color: #ffffff;
+  padding: 12px 24px;
+  border: none;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: 500;
+  cursor: pointer;
+  margin-bottom: 24px;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+  display: inline-block;
+}
+
+.button:hover {
+  background-color: var(--primary-hover);
+  transform: translateY(-2px);
+}
+
+.button:focus {
+  outline: 2px solid var(--primary-hover);
+  outline-offset: 2px;
+}
+
+/* Table */
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 16px;
+  table-layout: fixed; /* Important: forces columns to be equal and stay inside */
+  word-wrap: break-word;
+}
+
+.table th,
+.table td {
+  padding: 8px 10px; /* Smaller padding */
+  border: 1px solid var(--border-color);
+  text-align: left;
+  font-size: 0.75rem; /* Even smaller font size */
+  line-height: 1.4;
+  overflow-wrap: break-word;
+  word-break: break-word;
+  box-sizing: border-box;
+}
+
+.table th {
+  background-color: #f8f9fa;
+  font-weight: 600;
+  color: var(--text-color);
+  overflow-wrap: break-word;
+}
+
+/* Action Buttons */
+.action-button {
+  padding: 5px 5px; /* Even smaller */
+  margin:3px;
+  width: 50px;
+  border-radius: 6px;
+  font-size: 0.75rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.edit-button {
+  background-color: var(--warning-color);
+  color: #ffffff;
+  border: none;
+}
+
+.edit-button:hover {
+  background-color: var(--warning-hover);
+  transform: translateY(-2px);
+}
+
+.delete-button {
+  background-color: var(--danger-color);
+  color: #ffffff;
+  border: none;
+}
+
+.delete-button:hover {
+  background-color: var(--danger-hover);
+  transform: translateY(-2px);
+}
+
+.action-button:focus {
+  outline: 2px solid var(--primary-hover);
+  outline-offset: 2px;
+}
+
+.edit-button {
+  background-color: var(--warning-color);
+  color: #ffffff;
+  border: none;
+}
+
+.edit-button:hover {
+  background-color: var(--warning-hover);
+  transform: translateY(-2px);
+}
+
+.delete-button {
+  background-color: var(--danger-color);
+  color: #ffffff;
+  border: none;
+}
+
+.delete-button:hover {
+  background-color: var(--danger-hover);
+  transform: translateY(-2px);
+}
+
+.action-button:focus {
+  outline: 2px solid var(--primary-hover);
+  outline-offset: 2px;
+}
+
+/* Modal Overlay */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  animation: fadeIn 0.3s ease-out;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+/* Modal Content */
+.modal-content {
+  background-color: var(--background-color);
+  padding: 24px;
+  border-radius: 12px;
+  width: min(90vw, 600px);
+  max-height: 90vh;
+  overflow-y: auto;
+  box-shadow: 0 8px 30px var(--modal-shadow);
+  box-sizing: border-box;
+  animation: slideUp 0.3s ease-out;
+}
+
+@keyframes slideUp {
+  from { transform: translateY(20px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+
+/* Form Layout */
+.modal-content form {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 16px;
+}
+
+/* Modal Title */
+.modal-content h3 {
+  font-size: 1.5rem;
+  font-weight: 600;
+  text-align: center;
+  margin-bottom: 16px;
+  color: var(--text-color);
+}
+
+/* Input */
+.input {
+  width: 100%;
+  padding: 10px 12px;
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  font-size: 0.9375rem;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+  box-sizing: border-box;
+}
+
+.input:focus {
+  border-color: var(--primary-color);
+  box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.1);
+  outline: none;
+}
+
+/* Duration Buttons */
+.duration-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  align-items: center;
+  margin-top: 12px;
+}
+
+/* Modal Actions */
+.modal-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+  margin-top: 16px;
+}
+
+/* Save & Cancel Buttons */
+.save-button {
+  background-color: var(--success-color);
+  color: #ffffff;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 8px;
+  font-size: 0.9375rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.save-button:hover {
+  background-color: var(--success-hover);
+  transform: translateY(-2px);
+}
+
+.cancel-button {
+  background-color: var(--neutral-color);
+  color: #ffffff;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 8px;
+  font-size: 0.9375rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.cancel-button:hover {
+  background-color: var(--neutral-hover);
+  transform: translateY(-2px);
+}
+
+.save-button:focus,
+.cancel-button:focus {
+  outline: 2px solid var(--primary-hover);
+  outline-offset: 2px;
+}
+
+/* Responsive Design */
+@media (min-width: 768px) {
+  .modal-content {
+    max-width: 700px;
+  }
+
+  .modal-content form {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .modal-content h3,
+  .duration-buttons,
+  .modal-actions {
+    grid-column: span 2;
+  }
+}
+
+@media (max-width: 767px) {
+  .container {
+    padding: 16px;
+    margin: 20px auto;
+  }
+
+  .modal-content {
+    padding: 20px;
+    width: 95vw;
+  }
+
+  .table th,
+  .table td {
+    padding: 10px;
+    font-size: 0.8125rem;
+  }
+
+  .title {
+    font-size: 1.5rem;
+  }
+
+  .button,
+  .save-button,
+  .cancel-button {
+    font-size: 0.875rem;
+    padding: 10px 16px;
+  }
+
+  .action-button {
+    padding: 6px 10px;
+    font-size: 0.8125rem;
+  }
+
+  .input {
+    font-size: 0.875rem;
+  }
+}

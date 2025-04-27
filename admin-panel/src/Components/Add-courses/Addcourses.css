@@ -1,194 +1,347 @@
-/* Make sure everything uses box-sizing */
-* {
-  box-sizing: border-box;
+/* Existing styles */
+.courses-section {
+  background-color: #f5f7fa;
+  padding: 2rem 0;
 }
 
-/* Wrapper for cards */
-.card-wrapper {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 20px;
-  justify-content: space-between;
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
 }
 
-/* Individual Card */
-.card {
-  flex: 1 1 calc(33.333% - 13.5px); /* 3 cards in a row with 20px gap */
-  background: white;
-  border-radius: 16px;
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
-  border: 1px solid #e0e0e0;
-  transition: 0.3s ease;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  min-height: 200px;
+.my-5 {
+  margin-top: 3rem;
+  margin-bottom: 3rem;
 }
 
-/* Hover effect */
-.card:hover {
-  transform: translateY(-6px);
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
-}
-
-/* Card inner spacing */
-.card-body {
-  padding: 16px;
-}
-
-/* Card Title */
-.card-title {
+.courses-section h2 {
+  color: #2d3748;
+  font-size: 2rem;
   font-weight: 600;
-  font-size: 1.2rem;
   margin-bottom: 1rem;
-  color: #333;
 }
 
-/* Course Details */
+.bg-green-600 {
+  background-color: #2f855a;
+  border: none;
+  color: #ffffff;
+  font-size: 1.125rem;
+  padding: 1rem 5rem;
+  border-radius: 0.5rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.bg-green-600:hover,
+.hover\:bg-green-700:hover {
+  background-color: #276749;
+}
+
+.card-wrapper {
+  display: grid;
+  gap: 1.5rem;
+  grid-template-columns: repeat(3, 1fr); /* 3 cards side by side */
+ 
+}
+
+.card {
+  background-color: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 0.5rem;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  overflow-y: auto; 
+}
+
+.card-body {
+  margin-top: -1.5rem;
+  padding: 0.1rem; /* Reduced padding for compact layout */
+}
+
+.card-title {
+  color: #2d3748;
+  font-size: 1.1rem; /* Slightly reduced font size */
+  font-weight: 500;
+}
+
 .course-details {
-  padding-left: 20px;
-  font-size: 0.95rem;
-  line-height: 1.6;
-  margin-bottom: 10px;
+  list-style: disc;
+  padding-left: 1.5rem;
+  margin-bottom: 0.5rem; /* Reduced margin */
 }
 
 .course-details li {
-  margin-bottom: 4px;
-  font-size: 0.9rem;
+  color: #4a5568;
+  font-size: 0.9rem; /* Slightly reduced font size */
+  margin-bottom: 0.3rem; /* Reduced margin */
 }
 
-/* Footer */
 .card-footer {
-  background-color: #f1f1f1;
-  font-size: 0.9rem;
-  border-top: 1px solid #ddd;
-  padding: 12px 18px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  flex-wrap: wrap;
+  padding: 0.5rem 1rem; /* Reduced padding */
+  border-top: 1px solid #e2e8f0;
+  background-color: #f9fafb;
 }
 
-/* Space between Duration and Code */
-.card-footer div span:first-child {
-  margin-right: 15px;
+.btn-danger {
+  background-color: #e53e3e;
+  border: none;
+  color: #ffffff;
+  font-size: 0.75rem; /* Slightly reduced font size */
+  padding: 0.25rem 0.75rem; /* Reduced padding */
+  border-radius: 0.25rem;
 }
 
-/* Dialog modal overlay */
+.btn-danger:hover {
+  background-color: #c53030;
+}
+
 .dialog-overlay {
   position: fixed;
   top: 0;
   left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0, 0, 0, 0.5);
-  z-index: 1000;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.6);
   display: flex;
-  align-items: center;
   justify-content: center;
+  align-items: center;
 }
 
-/* Modal content box */
 .dialog-content {
-  background-color: #fff;
-  padding: 30px;
-  width: 90%;
+  background-color: #ffffff;
+  border-radius: 0.5rem;
+  padding: 2rem;
+  width: 100%;
   max-width: 500px;
-  border-radius: 16px;
-  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
-  position: relative;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
 }
 
-/* Modal Title */
 .dialog-title {
-  margin-bottom: 25px;
-  font-size: 1.6rem;
-  font-weight: bold;
-  text-align: center;
+  color: #2d3748;
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin-bottom: 1.5rem;
 }
 
-/* Form Inputs */
 .input-field {
   width: 100%;
-  padding: 12px;
-  margin: 10px 0;
-  border-radius: 8px;
-  border: 1px solid #ccc;
+  padding: 0.75rem;
+  margin-bottom: 1rem;
+  border: 1px solid #e2e8f0;
+  border-radius: 0.25rem;
   font-size: 1rem;
-  transition: border-color 0.3s ease;
+  color: #2d3748;
 }
 
 .input-field:focus {
-  outline: none;
-  border-color: #007bff;
+  border-color: #2f855a;
+  box-shadow: 0 0 0 3px rgba(47, 133, 90, 0.1);
 }
 
-/* Duration select dropdowns */
 .duration-section {
   display: flex;
-  align-items: center;
-  margin-bottom: 15px;
+  gap: 1rem;
+  margin-bottom: 1rem;
 }
 
 .dropdown {
-  padding: 10px;
-  margin-right: 10px;
-  border-radius: 6px;
-  border: 1px solid #ccc;
+  padding: 0.75rem;
+  border: 1px solid #e2e8f0;
+  border-radius: 0.25rem;
+  font-size: 1rem;
+  color: #2d3748;
+  background-color: #ffffff;
+  flex: 1;
 }
 
-/* Buttons */
-.btn {
-  margin-top: 10px;
-  padding: 10px 18px;
-  border-radius: 8px;
-  font-size: 1rem;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  margin-right: 10px;
+.dropdown:focus {
+  outline: none;
+  border-color: #2f855a;
+  box-shadow: 0 0 0 3px rgba(47, 133, 90, 0.1);
 }
 
 .btn-primary {
-  background-color: #007bff;
-  color: white;
+  background-color: #2f855a;
   border: none;
+  color: #ffffff;
+  font-size: 1rem;
+  padding: 0.75rem 1.5rem;
+  border-radius: 0.25rem;
 }
 
 .btn-primary:hover {
-  background-color: #0056b3;
-}
-
-.btn-danger {
-  background-color: #dc3545;
-  color: white;
-  border: none;
-}
-
-.btn-danger:hover {
-  background-color: #c82333;
+  background-color: #276749;
 }
 
 .btn-secondary {
-  background-color: #6c757d;
-  color: white;
+  background-color: #a0aec0;
   border: none;
+  color: #ffffff;
+  font-size: 1rem;
+  padding: 0.75rem 1.5rem;
+  border-radius: 0.25rem;
+}
+
+.footer-course-content {
+  color: #2d3748;
+  font-size: small;
 }
 
 .btn-secondary:hover {
-  background-color: #5a6268;
+  background-color: #718096;
 }
 
+.d-flex {
+  display: flex;
+}
 
-/* Medium screen: 2 cards per row */
-@media (max-width: 992px) {
-  .card {
-    flex: 1 1 calc(50% - 10px);
+.gap-2 {
+  gap: 0.5rem;
+}
+
+.justify-content-end {
+  justify-content: flex-end;
+}
+
+.mt-3 {
+  margin-top: 1rem;
+}
+
+.mb-3 {
+  margin-bottom: 1rem;
+}
+
+.mb-4 {
+  margin-bottom: 1.5rem;
+}
+
+.me-3 {
+  margin-right: 1rem;
+}
+
+.text-center {
+  text-align: center;
+}
+
+.mt-2 {
+  margin-top: 0.5rem;
+}
+
+.mt-md-0 {
+  margin-top: 0;
+}
+
+.align-items-center {
+  align-items: center;
+}
+
+.justify-content-between {
+  justify-content: space-between;
+}
+
+.flex-wrap {
+  flex-wrap: wrap;
+}
+
+/* New dropdown styles */
+.dropdown-container {
+  position: relative;
+  display: inline-block;
+  margin-left: 1rem;
+  margin-bottom: 1rem;
+}
+
+.dropdown-btn {
+  background-color: #2f855a;
+  color: #ffffff;
+  font-size: 1.125rem;
+  padding: 0.75rem 1.5rem;
+  border: none;
+  border-radius: 0.25rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.dropdown-btn:hover {
+  background-color: #276749;
+}
+
+.dropdown-menu {
+  position: absolute;
+  background-color: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 0.25rem;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  list-style: none;
+  padding: 0;
+  margin: 0.5rem 0 0 0;
+  min-width: 200px;
+  z-index: 1000;
+}
+
+.dropdown-item a {
+  display: block;
+  padding: 0.75rem 1rem;
+  color: #2d3748;
+  text-decoration: none;
+  font-size: 0.95rem;
+}
+
+.dropdown-item a:hover {
+  background-color: #f7fafc;
+}
+
+/* Category heading with star bullet */
+.category-heading {
+  color: #2d3748;
+  font-size: 1.25rem;
+  font-weight: 500;
+  margin-bottom: 0.1rem;
+  padding-left: 1.5rem;
+  position: relative;
+}
+
+.category-heading::before {
+  content: "★";
+  position: absolute;
+  left: 0;
+  top: 0;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .container {
+    padding: 0 0.5rem;
+  }
+
+  .bg-green-600 {
+    padding: 0.75rem 2rem;
+  }
+
+  .dialog-content {
+    width: 90%;
+    padding: 1.5rem;
+  }
+
+  .card-wrapper {
+    grid-template-columns: 1fr; /* Single column on mobile */
   }
 }
 
-/* Small screen: 1 card per row */
-@media (max-width: 768px) {
-  .card {
-    flex: 1 1 100%;
+@media (max-width: 576px) {
+  .courses-section h2 {
+    font-size: 1.5rem;
+  }
+
+  .card-title {
+    font-size: 1.1rem;
+  }
+
+  .course-details li {
+    font-size: 0.9rem;
+  }
+
+  .dropdown-btn {
+    font-size: 1rem;
+    padding: 0.5rem 1rem;
   }
 }

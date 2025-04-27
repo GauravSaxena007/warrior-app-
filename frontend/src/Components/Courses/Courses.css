@@ -1,59 +1,147 @@
 .courses-section {
-    padding: 0.3rem 1rem;
-    background-color: #f8f9fa;
-    border-radius: 1.5rem;
+  padding: 0.3rem 1rem;
+  background-color: #f8f9fa;
+  border-radius: 1.5rem;
+}
+
+.courses-title {
+  font-size: 1.75rem;
+  font-weight: bold;
+  color: #2c2c2c;
+}
+
+.course-card {
+  min-height: 260px;
+  border-radius: 12px;
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  font-size: 0.92rem;
+  width: 500px; /* Something noticeable */
+
+}
+
+.course-title {
+  font-size: 1.05rem;
+  margin-bottom: 0.75rem;
+  color: #343a40;
+}
+
+.course-details {
+  max-height: 120px;
+  overflow-y: auto;
+  font-size: 0.88rem;
+  padding-left: 1rem;
+  margin-bottom: 0.75rem;
+}
+
+.course-details li {
+  margin-bottom: 4px;
+}
+
+.course-footer {
+  font-size: 0.85rem;
+  background-color: #f1f1f1;
+  border-top: 1px solid #ddd;
+  padding: 0.6rem 1rem;
+  color: #444;
+}
+
+.explore-btn {
+  padding: 10px 25px;
+  font-size: 1rem;
+  border-radius: 25px;
+}
+
+
+@media (max-width: 768px) {
+  .courses-section {
+    margin-top: 80px !important; /* This will push it down visibly */
   }
-  
-  .courses-title {
-    font-size: 1.75rem;
-    font-weight: bold;
-    color: #2c2c2c;
-  }
-  
-  .course-card {
-    min-height: 260px;
-    border-radius: 12px;
-    padding: 1rem;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    font-size: 0.92rem;
-  }
-  
-  .course-title {
-    font-size: 1.05rem;
-    margin-bottom: 0.75rem;
-    color: #343a40;
-  }
-  
-  .course-details {
-    max-height: 120px;
-    overflow-y: auto;
-    font-size: 0.88rem;
-    padding-left: 1rem;
-    margin-bottom: 0.75rem;
-  }
-  
-  .course-details li {
-    margin-bottom: 4px;
-  }
-  
-  .course-footer {
-    font-size: 0.85rem;
-    background-color: #f1f1f1;
-    border-top: 1px solid #ddd;
-    padding: 0.6rem 1rem;
-    color: #444;
-  }
-  
-  .explore-btn {
-    padding: 10px 25px;
-    font-size: 1rem;
-    border-radius: 25px;
-  }
-  @media (max-width: 768px) {
-    .courses-section {
-      margin-top: 80px !important; /* This will push it down visibly */
-    }
-  }
-  
+}
+/* 🔸 Responsive Styles */
+@media (max-width: 1024px) {
+.course-card {
+  max-width: 420px;
+  font-size: 0.9rem;
+}
+
+.explore-btn {
+  font-size: 0.95rem;
+}
+}
+
+@media (max-width: 768px) {
+.courses-section {
+  margin-top: 80px !important;
+  padding: 0.5rem;
+}
+
+.courses-title {
+  font-size: 1.5rem;
+}
+
+.course-card {
+  width: 100%;
+  max-width: 100%;
+}
+}
+
+@media (max-width: 480px) {
+.courses-title {
+  font-size: 1.3rem;
+}
+
+.course-title {
+  font-size: 1rem;
+}
+
+.course-details {
+  font-size: 0.85rem;
+}
+
+.course-footer {
+  font-size: 0.8rem;
+}
+
+}
+/* 🔹 Filter Tabs Buttons */
+.filter-tabs button {
+min-width: 100px;
+margin: 0.25rem;
+border-radius: 20px;
+font-size: 1rem;
+transition: all 0.3s ease-in-out;
+}
+
+/* Highlight selected duration (optional, if you track active) */
+.filter-tabs button.active,
+.filter-tabs button:focus {
+background-color: #007bff;
+color: #fff;
+border-color: #007bff;
+}
+
+/* 🔸 Responsive Buttons */
+@media (max-width: 768px) {
+.filter-tabs {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.filter-tabs button {
+  min-width: auto;
+  padding: 8px 16px;
+  font-size: 0.95rem;
+}
+}
+
+@media (max-width: 480px) {
+.filter-tabs button {
+  padding: 6px 12px;
+  font-size: 0.88rem;
+  border-radius: 15px;
+}
+}

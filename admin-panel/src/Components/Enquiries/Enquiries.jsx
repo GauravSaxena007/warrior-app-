@@ -1,33 +1,19 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
+import axios from "axios";
 
 const Enquiries = () => {
-  const [enquiries, setEnquiries] = useState([
-    {
-      name: "John Doe",
-      mobile: "9876543210",
-      email: "john@example.com",
-      state: "Maharashtra",
-      city: "Mumbai",
-      area: "Andheri",
-    },
-    {
-      name: "Priya Sharma",
-      mobile: "9123456780",
-      email: "priya@example.com",
-      state: "Delhi",
-      city: "New Delhi",
-      area: "Saket",
-    },
-  ]);
+  const [enquiries, setEnquiries] = useState([]);
 
-  const handleDelete = (index) => {
-    const updated = enquiries.filter((_, i) => i !== index);
-    setEnquiries(updated);
-  };
+  useEffect(() => {
+    axios.get("http://localhost:5000/api/enquiries")
+      .then(res => setEnquiries(res.data))
+      .catch(err => console.error(err));
+  }, []);
 
-  const handleSave = (index) => {
-    alert(`Enquiry from ${enquiries[index].name} saved!`);
-    // Later you can call API here
+  const handleDelete = (id) => {
+    axios.delete(`http://localhost:5000/api/enquiries/${id}`)
+      .then(() => setEnquiries(enquiries.filter((e) => e._id !== id)))
+      .catch(err => console.error(err));
   };
 
   return (
@@ -49,8 +35,8 @@ const Enquiries = () => {
             </tr>
           </thead>
           <tbody>
-            {enquiries.map((entry, index) => (
-              <tr key={index}>
+            {enquiries.map((entry) => (
+              <tr key={entry._id}>
                 <td>{entry.name}</td>
                 <td>{entry.mobile}</td>
                 <td>{entry.email}</td>
@@ -58,8 +44,7 @@ const Enquiries = () => {
                 <td>{entry.city}</td>
                 <td>{entry.area}</td>
                 <td>
-                  <button onClick={() => handleSave(index)} style={{ background: "green", color: "white" , marginRight: "8px" }}>Save</button>
-                  <button onClick={() => handleDelete(index)} style={{ background: "red", color: "white" }}>Delete</button>
+                  <button style={{ background: "red", color: "white" }} onClick={() => handleDelete(entry._id)}>Delete</button>
                 </td>
               </tr>
             ))}

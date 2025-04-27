@@ -1,0 +1,55 @@
+.transac-container {
+    padding: 20px;
+  }
+  
+  .transac-title {
+    font-size: 24px;
+    margin-bottom: 20px;
+  }
+  
+  .transac-form {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: 30px;
+  }
+  
+  .transac-form input,
+  .transac-form select {
+    padding: 8px;
+    font-size: 14px;
+    flex: 1 1 200px;
+  }
+  
+  .transac-form button {
+    padding: 8px 16px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    cursor: pointer;
+  }
+  
+  .transac-form button:hover {
+    background-color: #45a049;
+  }
+  
+  .table-wrapper {
+    overflow-x: auto;
+  }
+  
+  .transac-table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  
+  .transac-table th,
+  .transac-table td {
+    border: 1px solid #ddd;
+    padding: 10px;
+    text-align: center;
+  }
+  
+  .transac-table th {
+    background-color: #f2f2f2;
+  }
+  

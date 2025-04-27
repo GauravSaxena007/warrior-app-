@@ -1,141 +1,140 @@
 .pro-h{
-    background-color: #4CAF50;
-    color: white;
-    font-size: 20px;
-    font-weight: bold;
-    padding: 12px;
-    text-align: left;
-}
-  
-  /* Form Container */
-  .registration-container {
-    width: 100%;
-    max-width: 80%; /* Use more space to reduce height */
-    margin: 20px auto;
-    padding: 15px;  /* Reduced padding */
-    background-color: white;
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    box-sizing: border-box;
-  }
-  
-  /* Form Title */
-  .form-title {
-    text-align: center;
-    margin-bottom: 15px; /* Reduced margin */
-    color: #333;
-    font-size: 24px;
-  }
-  
-  /* Form Layout (Two Columns) */
-  .form-row {
-    display: flex;
-    justify-content: space-between;
-    flex-wrap: wrap;
-    gap: 10px;  /* Reduced gap between columns */
-    width: 100%;
-  }
-  
-  .form-column {
-    flex: 1;
-    min-width: 48%; /* Maintain side-by-side layout */
-    display: flex;
-    flex-direction: column;
-  }
-  
-  /* Form Groups (Divs with Input) */
-  .form-group {
-    margin-bottom: 12px; /* Reduced bottom margin */
-  }
-  
-  /* Labels */
-  .form-label {
-    font-size: 14px;  /* Slightly smaller font size */
-    color: #555;
-    margin-bottom: 6px;  /* Reduced margin */
-    display: block;
-    font-weight: bold;  /* Make the label text bold */
+  background-color: #4CAF50;
+  color: white;
+  font-size: 20px;
+  font-weight: bold;
+  padding: 12px;
+  text-align: left;
 }
 
-  
-  /* Input Fields */
-  .form-input {
-    width: 100%;
-    padding: 8px;  /* Reduced padding */
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    box-sizing: border-box;
-    font-size: 14px;
+/* Form Container */
+.registration-container {
+  width: 100%;
+  max-width: 80%; /* Use more space to reduce height */
+  margin: 20px auto;
+  padding: 15px;  /* Reduced padding */
+  background-color: white;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  box-sizing: border-box;
+}
+
+/* Form Title */
+.form-title {
+  text-align: center;
+  margin-bottom: 15px; /* Reduced margin */
+  color: #333;
+  font-size: 24px;
+}
+
+/* Form Layout (Two Columns) */
+.form-row {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 10px;  /* Reduced gap between columns */
+  width: 100%;
+}
+
+.form-column {
+  flex: 1;
+  min-width: 48%; /* Maintain side-by-side layout */
+  display: flex;
+  flex-direction: column;
+}
+
+/* Form Groups (Divs with Input) */
+.form-group {
+  margin-bottom: 12px; /* Reduced bottom margin */
+}
+
+/* Labels */
+.form-label {
+  font-size: 14px;  /* Slightly smaller font size */
+  color: #555;
+  margin-bottom: 6px;  /* Reduced margin */
+  display: block;
+  font-weight: bold;  /* Make the label text bold */
+}
+
+
+/* Input Fields */
+.form-input {
+  width: 100%;
+  padding: 8px;  /* Reduced padding */
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+  font-size: 14px;
+}
+
+/* Textarea Specific Styles */
+textarea.form-input {
+  width: 100%;
+  height: 100px;  /* Reduced height */
+}
+
+/* File Input */
+input[type="file"].form-input {
+  padding: 5px;
+}
+
+/* Select Fields */
+select.form-input {
+  width: 100%;
+}
+
+/* Button Styles */
+.submit-button,
+.reset-button {
+  padding: 8px 16px;  /* Reduced button padding */
+  margin-top: 10px;
+  background-color: #4caf50;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 14px;  /* Reduced font size */
+  transition: background-color 0.3s ease;
+  width: 48%;  /* Ensure buttons take 48% of width */
+  margin-right: 4%; /* Gap between buttons */
+}
+
+/* Hover effects for buttons */
+.submit-button:hover {
+  background-color: #45a049;
+}
+
+.reset-button {
+  background-color: #f44336;
+}
+
+.reset-button:hover {
+  background-color: #e53935;
+}
+
+/* Form Button Group */
+.form-buttons {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 20px;
+}
+
+/* Ensure responsiveness */
+@media (max-width: 768px) {
+  /* On smaller screens, stack form fields vertically */
+  .form-column {
+    min-width: 100%; /* Ensure each column takes full width */
   }
-  
-  /* Textarea Specific Styles */
-  textarea.form-input {
-    width: 100%;
-    height: 100px;  /* Reduced height */
+
+  .form-buttons {
+    flex-direction: column; /* Stack buttons vertically */
   }
-  
-  /* File Input */
-  input[type="file"].form-input {
-    padding: 5px;
-  }
-  
-  /* Select Fields */
-  select.form-input {
-    width: 100%;
-  }
-  
-  /* Button Styles */
+
   .submit-button,
   .reset-button {
-    padding: 8px 16px;  /* Reduced button padding */
+    width: 100%; /* Ensure buttons are full width on small screens */
+    margin-right: 0; /* Remove right margin for stacked buttons */
     margin-top: 10px;
-    background-color: #4caf50;
-    color: white;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    font-size: 14px;  /* Reduced font size */
-    transition: background-color 0.3s ease;
-    width: 48%;  /* Ensure buttons take 48% of width */
-    margin-right: 4%; /* Gap between buttons */
   }
-  
-  /* Hover effects for buttons */
-  .submit-button:hover {
-    background-color: #45a049;
-  }
-  
-  .reset-button {
-    background-color: #f44336;
-  }
-  
-  .reset-button:hover {
-    background-color: #e53935;
-  }
-  
-  /* Form Button Group */
-  .form-buttons {
-    display: flex;
-    justify-content: space-between;
-    margin-top: 20px;
-  }
-  
-  /* Ensure responsiveness */
-  @media (max-width: 768px) {
-    /* On smaller screens, stack form fields vertically */
-    .form-column {
-      min-width: 100%; /* Ensure each column takes full width */
-    }
-  
-    .form-buttons {
-      flex-direction: column; /* Stack buttons vertically */
-    }
-  
-    .submit-button,
-    .reset-button {
-      width: 100%; /* Ensure buttons are full width on small screens */
-      margin-right: 0; /* Remove right margin for stacked buttons */
-      margin-top: 10px;
-    }
-  }
-  
+}

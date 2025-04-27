@@ -5,7 +5,8 @@ import Applycertificate from "../Apply-certificate/Applycertificate";
 import Transaction from "../Transaction/Transaction";
 import Issuedcertificate from "../Issued-certificate/Issuedcertificate";
 import Franchiseecerti from "../Franchisee-certificate/Franchiseecerti";
-import FranchProfile from "../Profile/franchprofile";
+import FranchProfile from "../Profile/Franchprofile";
+import Courierdetail from "../Courier-detail/Courierdetail";
 
 const FranchiseeNavbar = () => {
   // Set default active tab to "Student Registration"
@@ -48,6 +49,7 @@ const FranchiseeNavbar = () => {
       {activeTab === "Issued Certificates" && <Issuedcertificate />}
       {activeTab === "Franchisee Certificate" && <Franchiseecerti />}
       {activeTab === "Profile" && <FranchProfile/>}
+      {activeTab === "Courier Details" && <Courierdetail/>}
     </div>
   );
 };

@@ -1,0 +1,65 @@
+.fra-cer-container {
+    padding: 20px;
+    max-width: 700px;
+    margin: 20px auto 0 auto; /* Adds top margin of 20px */
+    position: relative;
+    top: -50px; /* Shifts it slightly upward */
+  }
+  
+  
+  .form-group {
+    margin-bottom: 15px;
+  }
+  
+  .form-group select,
+  .form-group input[type="file"] {
+    width: 100%;
+    padding: 8px;
+  }
+  
+  .submit-btn {
+    background-color: #28a745;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  .submit-btn:hover {
+    background-color: #218838;
+  }
+  
+  .divider {
+    margin: 40px 0;
+  }
+  
+  .certificate-table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  
+  .certificate-table th,
+  .certificate-table td {
+    border: 1px solid #ccc;
+    padding: 8px;
+    text-align: left;
+  }
+  
+  .certificate-table th {
+    background-color: #f5f5f5;
+  }
+  
+  .delete-btn {
+    background-color: #dc3545;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  .delete-btn:hover {
+    background-color: #c82333;
+  }
+  

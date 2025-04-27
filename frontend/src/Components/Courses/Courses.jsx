@@ -1,87 +1,71 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import axios from "axios";
+import { useLocation } from "react-router-dom"; // Import useLocation to read query params
 import "./Courses.css";
 
-export const courses = [
-  {
-    id: 1,
-    title: "Advanced Diploma in Hardware & Networking",
-    details: [
-      "Basic Electronics",
-      "Micro Processor",
-      "Mother Board",
-      "Diagnostics Software Used in Computer",
-      "Peripherals (HDD, RAM, CD-ROM, FDD etc)",
-      "Introduction & Installation of OS & Software",
-      "Digital Electronics & B Electronic Circuit",
-      "Different Cards Used in Computer",
-      "Introduction to SMB Techniques & Antivirus",
-      "Power Supply (SMPS)",
-      "Assembling & Trouble Shooting of PC",
-      "Introduction to Networking",
-      "Making new Internet Connection",
-      "Network Operating System"
-    ],
-    duration: "1 year",
-    code: "003"
-  },
-  {
-    id: 2,
-    title: "Diploma in Computer Application",
-    details: [
-      "Computer Fundamentals",
-      "Windows",
-      "Microsoft Office (word, excel, power point)",
-      "Accounting Package",
-      "Basic concept of Hardware Maintenance",
-      "C Programming",
-      "D.T.P. (Page Maker, Corel Draw) (Multiple languages)",
-      "Internet (Outlook Express)"
-    ],
-    duration: "6 Months",
-    code: "005"
-  },
-  {
-    id: 3,
-    title: "Advance Diploma in Computer Programming & Designing",
-    details: [
-      "Computer Fundamentals",
-      "Windows",
-      "Microsoft Office (word, excel, power point)",
-      "D.T.P. (Page Maker, Corel Draw, Photoshop)",
-      "C Programming / Visual Basic / C++",
-      "Basic concept of Hardware Maintenance",
-      "Project work",
-      "Introduction to Internet & Multimedia"
-    ],
-    duration: "6 Months",
-    code: "006"
-  },
-  {
-    id: 4,
-    title: "Advance Diploma in Information Technology",
-    details: [
-      "Computer Fundamentals",
-      "Windows",
-      "Microsoft Office",
-      "D.T.P Course",
-      "Accounting Package",
-      "Basic concept of Hardware Maintenance",
-      "Introduction to Internet & Multimedia",
-      "Seminar",
-      "Project"
-    ],
-    duration: "6 Months",
-    code: "007"
-  }
-];
-
 const Courses = () => {
+  const [courses, setCourses] = useState([]);
+  const [filteredDuration, setFilteredDuration] = useState("All");
+  const location = useLocation(); // Get the current location object
+
+  useEffect(() => {
+    axios
+      .get(`${import.meta.env.VITE_API_URL}/api/courses`)
+      .then((res) => {
+        setCourses(res.data);
+      })
+      .catch((err) => console.error("Failed to fetch courses:", err));
+  }, []);
+
+  useEffect(() => {
+    // Read the `duration` query param from the URL
+    const params = new URLSearchParams(location.search);
+    const duration = params.get("duration");
+    if (duration) {
+      setFilteredDuration(duration);
+    } else {
+      setFilteredDuration("All");
+    }
+  }, [location.search]); // Trigger the effect when URL changes
+
+  // Normalize duration for comparison
+  const normalizeDuration = (value) =>
+    value.trim().toLowerCase().replace("months", "").replace("month", "").trim();
+
+  const filteredCourses =
+    filteredDuration === "All"
+      ? courses
+      : courses.filter(
+          (course) =>
+            normalizeDuration(course.duration) === normalizeDuration(filteredDuration)
+        );
+
   return (
     <section className="courses-section container my-5">
       <h2 className="text-center mb-4">Our Courses</h2>
+
+      {/* Filter Tabs */}
+      <div className="filter-tabs mb-4 text-center">
+        <button
+          className="btn btn-outline-primary mx-1"
+          onClick={() => setFilteredDuration("All")}
+        >
+          All
+        </button>
+        {["1 Month", "2 Months", "3 Months", "6 Months", "1 Year"].map((label) => (
+          <button
+            key={label}
+            className="btn btn-outline-primary mx-1"
+            onClick={() => setFilteredDuration(label)}
+          >
+            {label}
+          </button>
+        ))}
+      </div>
+
       <div className="row">
-        {courses.map((course) => (
-          <div className="col-md-6 mb-4" key={course.id}>
+        {filteredCourses.map((course) => (
+          <div className="col-md-6 mb-4" key={course._id}>
             <div className="course-card card shadow-sm h-100">
               <div className="card-body">
                 <h5 className="card-title">{course.title}</h5>
@@ -92,8 +76,12 @@ const Courses = () => {
                 </ul>
               </div>
               <div className="card-footer course-footer d-flex justify-content-between">
-                <span><strong>Duration:</strong> {course.duration}</span>
-                <span><strong>Code:</strong> {course.code}</span>
+                <span>
+                  <strong>Duration:</strong> {course.duration}
+                </span>
+                <span>
+                  <strong>Code:</strong> {course.code}
+                </span>
               </div>
             </div>
           </div>

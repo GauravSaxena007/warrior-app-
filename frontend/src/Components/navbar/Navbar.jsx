@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import "./Navbar.css";
-import logo from "../../assets/warrior img.jpg";
+import axios from "axios";
 import Dropdowncourses from "../Courses/dropdowncourses";
 import Profile from "../Profile/Profile";
 
@@ -8,6 +8,8 @@ const Navbar = () => {
   const [scrollPos, setScrollPos] = useState(window.scrollY);
   const [visible, setVisible] = useState(true);
   const [menuOpen, setMenuOpen] = useState(false);
+  const [franchiseNumber, setFranchiseNumber] = useState("9422123456");
+  const [photo, setPhoto] = useState(null);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -20,11 +22,22 @@ const Navbar = () => {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
+  useEffect(() => {
+    axios.get(`${import.meta.env.VITE_API_URL}/api/settings`)
+      .then((response) => {
+        const data = response.data;
+        console.log("Navbar data fetched:", data); // Debug log
+        setFranchiseNumber(data.franchiseNumber || "9422123456");
+        setPhoto(data.photo ? `${import.meta.env.VITE_API_URL}/${data.photo}` : null);
+      })
+      .catch((error) => console.error("Error fetching navbar data:", error));
+  }, []);
+
   return (
     <>
       <div className={`top-line ${visible ? "" : "hidden-nav"}`}></div>
       <div className={`logo-container ${visible ? "" : "hidden-nav"}`}>
-        <img src={logo} alt="Logo" className="logo" />
+        <img src={photo || "https://via.placeholder.com/50"} alt="Logo" className="logo" onError={(e) => { e.target.src = "https://via.placeholder.com/50"; console.log("Image load failed for:", e.target.src, "using fallback"); }} />
       </div>
 
       {/* Desktop Navbar */}
@@ -61,7 +74,7 @@ const Navbar = () => {
       </div>
 
       <div className={`contact-info-1 ${visible ? "" : "hidden-nav"}`}>
-        Franchisee Enquiry : 📞 9422123456
+        Franchisee Enquiry : 📞 {franchiseNumber}
       </div>
     </>
   );

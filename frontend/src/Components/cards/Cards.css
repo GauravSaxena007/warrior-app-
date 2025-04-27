@@ -1,0 +1,54 @@
+.card {
+    height: 570px;
+    border-radius: 12px;
+    overflow: hidden;
+    transition: transform 0.3s ease;
+    width: 360px;
+    
+  }
+  
+  .card:hover {
+    transform: scale(1.02);
+  }
+  
+  .card-img-top {
+    height: 210px;
+    object-fit: cover;
+   margin-bottom: 25px;
+  }
+  
+  .card-body {
+    padding: 1px;
+    font-size: 14px;
+  }
+  
+  .card-title {
+    font-size: 18px;
+    margin-bottom: 8px;
+  }
+  
+  /* Scrollable details section */
+  ul.card-text {
+    padding-left: 16px;
+    margin-bottom: 0;
+    max-height: 190px;
+    overflow-y: auto;
+    scrollbar-width: thin;
+  }
+  
+  ul.card-text::-webkit-scrollbar {
+    width: 6px;
+  }
+  
+  ul.card-text::-webkit-scrollbar-thumb {
+    background-color: #ccc;
+    border-radius: 10px;
+  }
+  
+  .card-footer {
+    font-size: 13px;
+    padding: 8px 10px;
+    margin-top: 11px;
+    
+  }
+  

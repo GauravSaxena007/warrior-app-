@@ -1,57 +1,180 @@
-import React, { useState } from "react";
-import html2canvas from "html2canvas";
-import jsPDF from "jspdf";
+import React, { useEffect, useState, useRef } from "react";
+import axios from "axios";
+import { jsPDF } from "jspdf"; // Import jsPDF
 import "./Franchiseecerti.css";
 
 const Franchiseecerti = () => {
-  const [name, setName] = useState("Your Name");
-  const [membershipNo, setMembershipNo] = useState("0000");
-  const [validUpto, setValidUpto] = useState("DD-MM-YYYY");
-  const [photo, setPhoto] = useState(null);
+  const [certificates, setCertificates] = useState([]);
+  const [franchisees, setFranchisees] = useState([]);
+  const [centerHead, setCenterHead] = useState("");
+  const [loading, setLoading] = useState(true);
+  const printRefs = useRef({}); // to store refs for each cert
 
-  const handlePhotoUpload = (event) => {
-    const file = event.target.files[0];
-    if (file) {
-      const reader = new FileReader();
-      reader.onloadend = () => {
-        setPhoto(reader.result);
-      };
-      reader.readAsDataURL(file);
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const certRes = await axios.get(`${import.meta.env.VITE_API_URL}/api/fra-certificates`);
+        const franRes = await axios.get(`${import.meta.env.VITE_API_URL}/api/franchisee`);
+
+        setCertificates(certRes.data);
+        setFranchisees(franRes.data);
+      } catch (err) {
+        console.error("Error loading data:", err);
+      }
+    };
+
+    const fetchFranchiseeHead = async () => {
+      try {
+        const token = localStorage.getItem("token");
+        const res = await axios.get(`${import.meta.env.VITE_API_URL}/api/franchisee/profile`, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
+        setCenterHead(res.data.centerHead);
+      } catch (err) {
+        console.error("Failed to load franchisee head:", err);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchData();
+    fetchFranchiseeHead();
+  }, []);
+
+  const handlePrint = (id) => {
+    const content = printRefs.current[id];
+    if (content) {
+      const imgElement = content.querySelector("img"); // Select the img element
+      if (imgElement) {
+        const img = new Image();
+        img.crossOrigin = "Anonymous"; // Handle CORS
+        img.src = imgElement.src;
+        img.onload = () => {
+          try {
+            const pdf = new jsPDF({
+              orientation: "portrait",
+              unit: "mm",
+              format: "a4",
+            });
+            const imgWidth = 190; // Fit within A4 width (210mm - margins)
+            const imgHeight = (img.height * imgWidth) / img.width; // Maintain aspect ratio
+            pdf.addImage(img, "JPEG", 10, 10, imgWidth, imgHeight);
+            pdf.save(`certificate_${id}.pdf`);
+          } catch (err) {
+            console.error("Failed to generate PDF:", err);
+            // Fallback to original print behavior
+            const printWindow = window.open("", "_blank");
+            printWindow.document.write(`
+              <html>
+                <head>
+                  <title>Print Certificate</title>
+                  <style>
+                    body { margin: 0; padding: 0; text-align: center; }
+                    img { max-width: 100%; height: auto; }
+                  </style>
+                </head>
+                <body>
+                  ${imgElement.outerHTML}
+                </body>
+              </html>
+            `);
+            printWindow.document.close();
+            printWindow.focus();
+            printWindow.print();
+          }
+        };
+        img.onerror = () => {
+          console.error("Failed to load image for PDF");
+          // Fallback to original print behavior
+          const printWindow = window.open("", "_blank");
+          printWindow.document.write(`
+            <html>
+              <head>
+                <title>Print Certificate</title>
+                <style>
+                  body { margin: 0; padding: 0; text-align: center; }
+                  img { max-width: 100%; height: auto; }
+                </style>
+              </head>
+              <body>
+                ${imgElement.outerHTML}
+              </body>
+            </html>
+          `);
+          printWindow.document.close();
+          printWindow.focus();
+          printWindow.print();
+        };
+      } else {
+        // Fallback to original print behavior if no img
+        const printWindow = window.open("", "_blank");
+        printWindow.document.write(`
+          <html>
+            <head>
+              <title>Print Certificate</title>
+              <style>
+                body { margin: 0; padding: 0; text-align: center; }
+                img { max-width: 100%; height: auto; }
+              </style>
+            </head>
+            <body>
+              ${content.outerHTML}
+            </body>
+          </html>
+        `);
+        printWindow.document.close();
+        printWindow.focus();
+        printWindow.print();
+      }
     }
   };
 
-  const downloadCertificate = () => {
-    const certificateElement = document.getElementById("certificate");
-    html2canvas(certificateElement).then((canvas) => {
-      const imgData = canvas.toDataURL("image/png");
-      const pdf = new jsPDF("l", "mm", "a4");
-      pdf.addImage(imgData, "PNG", 10, 10, 280, 200);
-      pdf.save("certificate.pdf");
-    });
-  };
+  if (loading) {
+    return <p>Loading certificates...</p>;
+  }
 
   return (
-    <div>
-       <h4 className="pro-h p-2.5 mx-auto text-left m-5" style={{ width: "65%" }}>
-  Franchisee Certificate
-</h4>
-    
-    <div className="certificate-container">
-      <div className="input-section">
-        <input type="text" placeholder="Enter Name" value={name} onChange={(e) => setName(e.target.value)} />
-        <input type="text" placeholder="Membership No" value={membershipNo} onChange={(e) => setMembershipNo(e.target.value)} />
-        <input type="date" onChange={(e) => setValidUpto(e.target.value)} />
-        <input type="file" accept="image/*" onChange={handlePhotoUpload} />
-        <button onClick={downloadCertificate}>Download PDF</button>
-      </div>
+    <div className="fran-cert-container">
+      <h4 className="pro-h p-2.5 mx-auto text-left " style={{ width: "90%" , marginTop: '-5px' }}>
+        Franchisee Certificates
+      </h4>
 
-      <div id="certificate" className="certificate">
-        <h2>FRANCHISEE CERTIFICATE</h2>
-        <p>M/s. <strong>{name}</strong> is an authorized center.</p>
-        <p>Membership No: <strong>{membershipNo}</strong> is valid upto <strong>{validUpto}</strong></p>
-        {photo && <img src={photo} alt="Uploaded" className="certificate-photo" />}
+      <div style={{ width: "80%", margin: "auto" }}>
+        {certificates
+          .filter((cert) => {
+            const fran = franchisees.find((f) => f._id === cert.franchisee);
+            return centerHead
+              ? fran?.centerHead?.trim().toLowerCase() === centerHead?.trim().toLowerCase()
+              : false;
+          })
+          .map((cert, index) => {
+            const fran = franchisees.find((f) => f._id === cert.franchisee);
+            return (
+              <div key={cert._id} className="certificate-card">
+                <div className="fran-head-print">
+                  <p><strong>Franchisee Head:</strong> {fran?.centerHead || "Unknown"}</p>
+                  <button onClick={() => handlePrint(cert._id)} className="print-btn">
+                    Print Certificate
+                  </button>
+                </div>
+                <div
+                  className="certificate-image"
+                  ref={(el) => (printRefs.current[cert._id] = el)}
+                >
+                  <img
+                    src={`${import.meta.env.VITE_API_URL}/uploads/${cert.photo}`}
+                    alt="Franchisee Certificate"
+                    style={{ width: "100%", maxWidth: "700px", marginBottom: "10px" }}
+                  />
+                </div>
+
+                <hr />
+              </div>
+            );
+          })}
       </div>
-    </div>
     </div>
   );
 };

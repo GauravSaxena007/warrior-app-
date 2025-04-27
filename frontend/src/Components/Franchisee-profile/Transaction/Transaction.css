@@ -1,3 +1,13 @@
+/* Container for the transaction list */
+.container-transaction {
+    width: 100%;
+    margin-top: 1px;
+    padding: 20px;
+    background: #f9f9f9; /* Light background color */
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+}
+
 /* Table Container */
 .table-container {
     width: 100%;
@@ -94,7 +104,7 @@
     }
 }
 
-/* Responsive Design */
+/* Responsive Design for small screens */
 @media (max-width: 768px) {
     .transaction-table thead {
         display: none;
@@ -109,11 +119,7 @@
     }
 
     .transaction-table tr {
-        margin-bottom: 10px;
-        border: 1px solid #ddd;
-        padding: 10px;
-        background: white;
-        box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+        margin-bottom: 1px;      
     }
 
     .transaction-table td {

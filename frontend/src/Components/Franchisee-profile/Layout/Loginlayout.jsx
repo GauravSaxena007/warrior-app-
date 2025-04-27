@@ -1,11 +1,13 @@
 import { useState, useEffect } from "react";
 import "./Loginlayout.css";
-import logo from "../../../assets/warrior img.jpg";
+import logo from "../../../assets/warrior img.png";
+import { useNavigate } from "react-router-dom"; // ✅ NEW
 
 const Loginlayout = () => {
   const [scrollPos, setScrollPos] = useState(window.scrollY);
   const [visible, setVisible] = useState(true);
   const [menuOpen, setMenuOpen] = useState(false);
+  const [renewalDate, setRenewalDate] = useState(""); // ✅ Added
 
   useEffect(() => {
     const handleScroll = () => {
@@ -17,6 +19,35 @@ const Loginlayout = () => {
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
+
+  useEffect(() => {
+    const fetchRenewalDate = async () => {
+      try {
+        const token = localStorage.getItem("token");
+        const res = await fetch(`${import.meta.env.VITE_API_URL}/api/franchisee/profile`, {
+          headers: { Authorization: `Bearer ${token}` },
+        });
+        const data = await res.json();
+        if (data.renewalDate) {
+          const dateObj = new Date(data.renewalDate);
+          const formattedDate = dateObj.toLocaleDateString("en-GB").replace(/\//g, "-"); // dd-mm-yyyy
+          setRenewalDate(formattedDate);
+        }
+      } catch (err) {
+        console.error("Error fetching renewal date:", err);
+      }
+    };
+
+    fetchRenewalDate();
+  }, []); // ✅ Added
+
+  const navigate = useNavigate(); // ✅ NEW
+
+  const handleLogout = (e) => {
+    e.preventDefault();
+    localStorage.removeItem("token");
+    window.location.href = "/login"; // or use navigate("/login") if using useNavigate
+  };
 
   return (
     <>
@@ -34,8 +65,10 @@ const Loginlayout = () => {
             <li><a href="#" className="nav-link-2">PROFILE</a></li>
             <li><a href="#" className="nav-link-2">COURSE FEE</a></li>
             <li><a href="#" className="nav-link-2">TRANSACTION LEDGERS</a></li>
-            <li><a href="#" className="nav-link-2">FRANCHASEE AGREEMENT</a></li>
-            <li><a href="/contact" className="nav-link-2">LOGOUT</a></li>
+            <li><a href="/testing" className="nav-link-2">FRANCHASEE AGREEMENT</a></li>
+            <li>
+  <a href="#" onClick={handleLogout} className="nav-link-2">LOGOUT</a>
+</li>
           </ul>
         </div>
       </nav>
@@ -53,13 +86,15 @@ const Loginlayout = () => {
           <li><a href="#">COURSE FEE</a></li>
           <li><a href="#">TRANSACTION LEDGERS</a></li>
           <li><a href="#">FRANCHASEE AGREEMENT</a></li>
-          <li><a href="/contact">LOGOUT</a></li>
+          <li>
+  <a href="#" onClick={handleLogout}>LOGOUT</a>
+</li>
         </ul>
       </div>
 
       {/* Contact Info */}
       <div className={`contact-info-1 ${visible ? "" : "hidden-nav-2"}`}>
-        Renewal Date : 04-03-2025
+        Renewal Date : {renewalDate || "Loading..."} {/* ✅ Updated this line */}
       </div>
     </>
   );

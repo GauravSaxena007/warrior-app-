@@ -99,9 +99,13 @@
 
     .pagination {
         flex-wrap: wrap;
+        
     }
     .pro-h {
         width: 95% !important;
       }
-
-
+      .isscer{
+        height: 35px;
+        margin-left: 15px;
+      }
+    }
