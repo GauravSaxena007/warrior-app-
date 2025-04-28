@@ -23,7 +23,7 @@ const Certiverify = () => {
       }
     } catch (err) {
       console.error('Failed to fetch certificate:', err);
-      setError('Failed to fetch certificate. Please try again.');
+      setError('Wrong Certificate Number. Please Check Certificate Number Again.');
     } finally {
       setLoading(false);
     }

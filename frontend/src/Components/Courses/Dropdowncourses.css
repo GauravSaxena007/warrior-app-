@@ -1,20 +1,121 @@
+/* Container for the dropdown */
+.dropdown-container {
+    position: relative;
+    display: inline-block;
+    font-family: 'Inter', sans-serif;
+}
+
+/* Dropdown button */
+.dropdown-btn {
+    color: white;
+    cursor: pointer;
+   padding-top: 5.5px;
+}
+
+.dropdown-btn:focus {
+    outline: 2px solid #93c5fd;
+    outline-offset: 2px;
+}
+
+/* Dropdown menu */
+.dropdown-menu {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    min-width: 200px;
+    background: #fdfdfd;
+    border-radius: 8px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-10px);
+    transition: opacity 0.3s ease, visibility 0.3s ease, transform 0.3s ease;
+    z-index: 20;
+    padding: 5px;
+    margin: 1px 0 0 0;
+}
+
+.dropdown-container:hover .dropdown-menu {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+/* Dropdown items */
+.dropdown-item {
+    position: relative;
+    list-style: none;
+    }
+    
+
 /* Show submenu when hovering over the parent item */
 .dropdown-item:hover .submenu {
     display: block;
     left: 101%; /* Ensures submenu opens to the right */
+    opacity: 1;
+    visibility: visible;
+    transition: opacity 0.2s ease, visibility 0.2s ease;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    z-index: 10;
 }
-  
+
+.dropdown-item .submenu {
+    opacity: 0;
+    visibility: hidden;
+    position: absolute;
+    top: 0;
+    background: #ffffff;
+    border-radius: 4px;
+    min-width: 180px;
+}
+
+/* Submenu list items */
 .submenu li {
     padding: 0.5rem;
+    list-style: none;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
 }
-  
+
+.submenu li:last-child {
+    border-bottom: none;
+}
+
+/* Submenu links */
 .submenu a {
     color: white;
     text-decoration: none;
     padding: 10px;
     display: block;
+    transition: background 0.2s ease, transform 0.2s ease;
 }
-  
+
 .submenu a:hover {
     background: rgba(255, 255, 255, 0.2);
+    transform: translateX(5px);
+}
+
+.submenu a:focus {
+    outline: 2px solid #93c5fd;
+    outline-offset: -2px;
+    background: rgba(255, 255, 255, 0.2);
+}
+
+/* Main menu links */
+.dropdown-item > a {
+    color: white;
+    text-decoration: none;
+    padding: 12px 16px;
+    display: block;
+    transition: background 0.2s ease, transform 0.2s ease;
+}
+
+.dropdown-item > a:hover {
+    background: rgba(255, 255, 255, 0.1);
+    transform: translateX(3px);
+}
+
+.dropdown-item > a:focus {
+    outline: 2px solid #93c5fd;
+    outline-offset: -2px;
+    background: rgba(255, 255, 255, 0.1);
 }

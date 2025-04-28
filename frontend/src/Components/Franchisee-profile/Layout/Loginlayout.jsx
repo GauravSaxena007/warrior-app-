@@ -2,12 +2,15 @@ import { useState, useEffect } from "react";
 import "./Loginlayout.css";
 import logo from "../../../assets/warrior img.png";
 import { useNavigate } from "react-router-dom"; // ✅ NEW
+import axios from "axios"; 
 
 const Loginlayout = () => {
   const [scrollPos, setScrollPos] = useState(window.scrollY);
   const [visible, setVisible] = useState(true);
   const [menuOpen, setMenuOpen] = useState(false);
   const [renewalDate, setRenewalDate] = useState(""); // ✅ Added
+  const [logo, setLogo] = useState(null); // ✅ Add this line to define state for logo
+
 
   useEffect(() => {
     const handleScroll = () => {
@@ -49,12 +52,37 @@ const Loginlayout = () => {
     window.location.href = "/login"; // or use navigate("/login") if using useNavigate
   };
 
+  useEffect(() => {
+    axios.get(`${import.meta.env.VITE_API_URL}/api/settings`)
+      .then((response) => {
+        const data = response.data;
+        console.log("Logo fetched:", data); // Debug log
+        if (data.photo) {
+          const logoUrl = `${import.meta.env.VITE_API_URL}/${data.photo}`;
+          console.log("Logo URL:", logoUrl); // Debug log
+          setLogo(logoUrl);
+        } else {
+          console.log("No logo found in the response.");
+          setLogo(null); // Set to null if no logo is found
+        }
+      })
+      .catch((error) => console.error("Error fetching logo:", error));
+  }, []);
+
   return (
     <>
       <div className={`top-line-2 ${visible ? "" : "hidden-nav-2"}`}></div>
 
       <div className={`logo-container-2 ${visible ? "" : "hidden-nav-2"}`}>
-        <img src={logo} alt="Logo" className="logo-2" />
+        <img
+          src={logo || "https://via.placeholder.com/150"} // Fallback if no logo is fetched
+          alt="Logo"
+          className="logo-2"
+          onError={(e) => { 
+            e.target.src = "https://via.placeholder.com/150"; 
+            console.log("Image load failed for:", e.target.src, "using fallback"); 
+          }}
+        />
       </div>
 
       {/* Desktop Navbar */}
@@ -65,7 +93,7 @@ const Loginlayout = () => {
             <li><a href="#" className="nav-link-2">PROFILE</a></li>
             <li><a href="#" className="nav-link-2">COURSE FEE</a></li>
             <li><a href="#" className="nav-link-2">TRANSACTION LEDGERS</a></li>
-            <li><a href="/testing" className="nav-link-2">FRANCHASEE AGREEMENT</a></li>
+            <li><a href="/agreement" className="nav-link-2">FRANCHASEE AGREEMENT</a></li>
             <li>
   <a href="#" onClick={handleLogout} className="nav-link-2">LOGOUT</a>
 </li>

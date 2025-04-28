@@ -41,7 +41,7 @@ const Courses = () => {
         );
 
   return (
-    <section className="courses-section container my-5">
+    <section className="courses-section-front container">
       <h2 className="text-center mb-4">Our Courses</h2>
 
       {/* Filter Tabs */}

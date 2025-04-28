@@ -20,6 +20,8 @@ import Courierdetail from "./Components/Franchisee-profile/Courier-detail/Courie
 import ReelComp from "./Components/ReelComp/ReelComp";
 import PrivateRoute from "./Components/PrivateRoute";
 import AdminLogin from "./Components/Profile/AdminLogin";
+import Dev from "./Components/Dev/Dev";
+import Agreement from "./Components/Franchisee-profile/Agreement/Agreement";
 
 function Layout() {
   const location = useLocation();
@@ -28,7 +30,7 @@ function Layout() {
   const isAdminLoginPage = location.pathname === "/adminlogin"; // Add this line for admin login
 
   // ✅ NEW: Add this to control navbar visibility
-  const hideNavbarPaths = ["/login", "/adminlogin"];
+  const hideNavbarPaths = ["/login", "/adminlogin" , "/agreement"];
   const shouldHideNavbar = hideNavbarPaths.includes(location.pathname);
 
   return (
@@ -50,6 +52,11 @@ function Layout() {
         <Route path="/contact" element={<Contact />} />
         <Route path="/login" element={<Login />} />
         <Route path="/adminlogin" element={<AdminLogin/>} />
+        <Route path="/agreement" element={
+        <PrivateRoute>
+          <Agreement />
+        </PrivateRoute>
+      } />
         <Route
   path="/franchprofile"
   element={
@@ -61,6 +68,7 @@ function Layout() {
         <Route path="/verify" element={<Certiverify />} />
         <Route path="/testing" element={<Testing />} />
         <Route path="/courses" element={<Courses />} />
+        <Route path="/developer" element={<Dev/>} />
         <Route path="/reelcomp" element={<ReelComp/>} />
       </Routes>
 

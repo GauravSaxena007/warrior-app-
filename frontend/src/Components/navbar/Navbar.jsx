@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import "./Navbar.css";
 import axios from "axios";
-import Dropdowncourses from "../Courses/dropdowncourses";
+import Dropdowncourses from "../Courses/Dropdowncourses";
 import Profile from "../Profile/Profile";
 
 const Navbar = () => {

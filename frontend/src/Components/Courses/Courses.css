@@ -1,7 +1,8 @@
-.courses-section {
+.courses-section-front {
   padding: 0.3rem 1rem;
   background-color: #f8f9fa;
   border-radius: 1.5rem;
+  margin-top: 7rem;
 }
 
 .courses-title {
@@ -143,5 +144,8 @@ border-color: #007bff;
   padding: 6px 12px;
   font-size: 0.88rem;
   border-radius: 15px;
+}
+.courses-section-front {
+  margin-top: 11rem;
 }
 }

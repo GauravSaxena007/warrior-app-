@@ -1,0 +1,98 @@
+/* Dev.css */
+
+.dev {
+    text-align: center;
+    font-size: 30px;
+    font-weight: bold;
+    color: #333;
+    margin-top: 50px;
+    margin-bottom: 1rem;  /* Space between h1 and marquee */
+  }
+  
+  .reel-comp-container-dev {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    margin-top: 2rem; /* Added some margin to avoid overlap with header */
+    padding-bottom: 200px;
+    height: 300px;
+  }
+  
+  .text-strip-container-dev {
+    width: 100%;
+    overflow: hidden;
+    padding: 1px 0;
+    position: relative;
+    background-color: black;
+    color: aqua;
+  }
+  
+  .text-strip-track-dev {
+    display: inline-flex;
+    white-space: nowrap;
+    will-change: transform;
+    animation: scroll-marquee-dev 25s linear infinite;
+  }
+  
+  .text-strip-dev {
+    display: inline-flex;
+    white-space: nowrap;
+    font-weight: 900; /* Extremely bold font */
+  }
+  
+  .text-strip-dev span {
+    margin: 0 50px;
+    font-size: 18px;
+    white-space: nowrap;
+  }
+  
+  @keyframes scroll-marquee-dev {
+    0% {
+      transform: translateX(0);
+    }
+    100% {
+      transform: translateX(-50%);
+    }
+  }
+  
+  @media (max-width: 992px) {
+    .text-strip-dev span {
+      font-size: 16px;
+      margin: 0 40px;
+    }
+  }
+  
+  @media (max-width: 768px) {
+    .text-strip-dev span {
+      font-size: 15px;
+      margin: 0 30px;
+    }
+  }
+  
+  @media (max-width: 576px) {
+    .text-strip-dev span {
+      font-size: 14px;
+      margin: 0 20px;
+    }
+    .reel-comp-container-dev {
+      margin-top: 4.5rem;
+    }
+  }
+  
+  @media (max-width: 400px) {
+    .text-strip-dev span {
+      font-size: 13px;
+      margin: 0 15px;
+    }
+    .reel-comp-container-dev {
+      margin-top: 7.5rem;
+      padding-bottom: 50px;
+      height: 150px;
+    }
+    .dev {
+      font-size: 24px;
+      margin-top: 150px;
+      margin-bottom: -70px; /* Space between h1 and marquee */
+    }
+  }
+  

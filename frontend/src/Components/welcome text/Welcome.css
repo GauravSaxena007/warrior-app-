@@ -1,6 +1,6 @@
 /* Center the entire container */
 .welcome-container {
-    margin-top: 30px; /* Adjust as needed */
+    margin-top: 10px; /* Adjust as needed */
     padding-top: 20px;
     display: flex;
     flex-direction: column;
