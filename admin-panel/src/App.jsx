@@ -5,17 +5,18 @@ import Settings from './Components/Settings/Settings';
 import Addcourses from './Components/Add-courses/Addcourses';
 import Slider from './Components/Slider/Slider';
 import Enquiries from './Components/Enquiries/Enquiries';
-import Contactus from './Components/Contact-Us/contactus';
+import Contactus from './Components/Contact-Us/Contactus';
 import FranchiseeManagement from './Components/Fra-Managment/FranchiseeManagement';
 import Issuecerti from './Components/Issued-Certificate/Issuecerti';
-import Transac from './Components/Transaction/transac';
+import Transac from './Components/Transaction/Transac';
 import CertificatesV3 from './Components/Certificates/CertificatesV3';
 import CourierDet from './Components/CourierDet/CourierDet';
 import FraCer from './Components/FraCer/FraCer';
 import Dashboard from './Components/Dashboard/Dashboard';
-import Reeladmin from './Components/Reeladmin/Reeladmin';
+import Reeladmin from './Components/ReelAdmin/ReelAdmin';
 import CardsAdmin from './Components/CardsAdmin/CardsAdmin';
 import PrivateRouteadminpanel from './Components/PrivateRouteadminpanel';
+import AgreementAdmin from './Components/AgreementAdmin/AgreementAdmin';
 
 function App() {
   return (
@@ -125,6 +126,14 @@ function App() {
               element={
                 <PrivateRouteadminpanel>
                   <Reeladmin />
+                </PrivateRouteadminpanel>
+              }
+            />
+            <Route
+              path="/agreementadmin"
+              element={
+                <PrivateRouteadminpanel>
+                  <AgreementAdmin/>
                 </PrivateRouteadminpanel>
               }
             />

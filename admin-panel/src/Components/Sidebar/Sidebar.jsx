@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import {
   FaTachometerAlt, FaSlidersH, FaBookOpen, FaImages, FaUsers, FaEnvelopeOpenText,
   FaAddressBook, FaCertificate, FaMoneyCheckAlt, FaTrophy, FaShippingFast,
-  FaAward, FaFilm, FaLayerGroup
+  FaAward, FaFilm, FaLayerGroup , FaHandshake
 } from "react-icons/fa";
 import "./Sidebar.css"; 
 
@@ -26,6 +26,7 @@ const Sidebar = () => {
 <li><Link to="/fracer" className="menu-link"><FaAward className="icon" /> Franchisee Certificate</Link></li>
 <li><Link to="/reel" className="menu-link"><FaFilm className="icon" /> Reel</Link></li>
 <li><Link to="/cardsadmin" className="menu-link"><FaLayerGroup className="icon" /> Course Cards</Link></li>
+<li><Link to="/agreementadmin" className="menu-link"><FaHandshake className="icon" /> Agreement</Link></li>
       </ul>
     </aside>
   );

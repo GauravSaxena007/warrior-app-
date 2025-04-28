@@ -1,0 +1,101 @@
+.agreement-admin-container {
+    max-width: 1200px;
+    margin: 30px auto;
+    padding: 40px;
+    background: #ffffff;
+    border-radius: 16px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+    font-family: 'Segoe UI', sans-serif;
+    transition: box-shadow 0.3s ease;
+  }
+  
+  .agreement-admin-container:hover {
+    box-shadow: 0 12px 25px rgba(0, 0, 0, 0.12);
+  }
+  
+  .agreement-admin-container h1 {
+    text-align: center;
+    margin-bottom: 40px;
+    color: #2c3e50;
+    font-size: 32px;
+    letter-spacing: 1px;
+  }
+  
+  .form-group {
+    margin-bottom: 25px;
+  }
+  
+  .form-group label {
+    display: block;
+    margin-bottom: 10px;
+    font-weight: 600;
+    color: #34495e;
+    font-size: 16px;
+  }
+  
+  .form-group input, 
+  .form-group textarea {
+    width: 100%;
+    padding: 12px 15px;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    resize: vertical;
+    font-size: 16px;
+    background-color: #fafafa;
+    transition: border-color 0.3s, background-color 0.3s;
+  }
+  
+  .form-group input:focus, 
+  .form-group textarea:focus {
+    border-color: #3498db;
+    background-color: #fff;
+    outline: none;
+  }
+  .course-table-admin {
+    margin-top: 40px;
+    overflow-x: auto; /* Responsive on smaller screens */
+  }
+  
+  .course-table-admin table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0;
+    background: #ffffff;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  }
+  
+  .course-table-admin th, 
+  .course-table-admin td {
+    padding: 14px 18px;
+    text-align: center;
+    font-size: 15px;
+    color: #555;
+    border-bottom: 1px solid #e0e0e0;
+  }
+  
+  .course-table-admin th {
+    background-color: #f8f9fa;
+    color: #2c3e50;
+    font-weight: 600;
+    font-size: 16px;
+  }
+  
+  .course-table-admin tbody tr:hover {
+    background-color: #f1f7ff;
+  }
+  
+  .course-table-admin tbody tr:last-child td {
+    border-bottom: none;
+  }
+  .save-btn-agreement{
+background-color: green;
+color: white;
+width: 500px;
+
+  }
+  .add-course-btn-aggrement{
+background-color: orange;
+margin-bottom: 5px;
+  }

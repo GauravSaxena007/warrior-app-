@@ -1,58 +1,116 @@
 import React, { useState, useEffect } from "react";
-import img1 from "../../assets/warrior caro5.jpg";
-import img2 from "../../assets/warrior caro4.jpg";
-import img3 from "../../assets/warrior caro1.jpg";
 import "./Slider.css";
 
 const Slider = () => {
-  // Initial hardcoded carousel images (from Hero)
-  const existingCarousel = [img1, img2, img3];
-
   const [images, setImages] = useState([]);
   const [selectedImages, setSelectedImages] = useState([]);
+  const [isLoading, setIsLoading] = useState(false); // To handle loading state
 
+  // Fetch images from backend
   useEffect(() => {
-    const stored = localStorage.getItem("carouselImages");
-    if (stored) {
-      setImages(JSON.parse(stored));
-    }
+    const fetchImages = async () => {
+      try {
+        const response = await fetch("http://localhost:5000/api/carousel");
+        const data = await response.json();
+        setImages(data); // Dynamically set images fetched from the backend
+      } catch (err) {
+        console.error("Error fetching carousel images:", err);
+      }
+    };
+    fetchImages();
   }, []);
-
-  useEffect(() => {
-    localStorage.setItem("carouselImages", JSON.stringify(images));
-  }, [images]);
 
   const handleImageChange = (e) => {
     const files = Array.from(e.target.files);
-    const urls = files.map((file) => URL.createObjectURL(file));
-    setSelectedImages(urls.slice(0, 7 - images.length));
+    setSelectedImages(files.slice(0, 7 - images.length)); // Make sure not to exceed max images
   };
 
-  const handleAddImages = () => {
+  const handleAddImages = async () => {
     if (selectedImages.length + images.length > 7) {
       alert("Max 7 images allowed.");
       return;
     }
-    setImages([...images, ...selectedImages]);
-    setSelectedImages([]);
+
+    setIsLoading(true); // Set loading state to true while adding images
+
+    const formData = new FormData();
+    selectedImages.forEach((file) => formData.append("images", file));
+
+    try {
+      const response = await fetch("http://localhost:5000/api/carousel", {
+        method: "POST",
+        body: formData,
+      });
+      if (response.ok) {
+        const updatedImages = await response.json();
+        setImages(updatedImages);
+        setSelectedImages([]);
+      } else {
+        const error = await response.json();
+        alert(error.message);
+      }
+    } catch (err) {
+      console.error("Error adding images:", err);
+      alert("Failed to add images.");
+    } finally {
+      setIsLoading(false); // Reset loading state
+    }
   };
 
-  const handleDeleteImage = (index) => {
-    const updated = [...images];
-    updated.splice(index, 1);
-    setImages(updated);
+  const handleDeleteImage = async (index) => {
+    try {
+      const response = await fetch(
+        `http://localhost:5000/api/carousel/${index}`,
+        {
+          method: "DELETE",
+        }
+      );
+      if (response.ok) {
+        const updatedImages = await response.json();
+        setImages(updatedImages);
+      } else {
+        const error = await response.json();
+        alert(error.message);
+      }
+    } catch (err) {
+      console.error("Error deleting image:", err);
+      alert("Failed to delete image.");
+    }
+  };
+
+  const handleDeleteAll = async () => {
+    if (!window.confirm("Are you sure you want to delete all images?")) return;
+
+    try {
+      const response = await fetch("http://localhost:5000/api/carousel", {
+        method: "DELETE",
+      });
+      if (response.ok) {
+        setImages([]);
+      } else {
+        const error = await response.json();
+        alert(error.message);
+      }
+    } catch (err) {
+      console.error("Error deleting all images:", err);
+      alert("Failed to delete all images.");
+    }
   };
 
   return (
     <div className="carousel-manager">
       <h2>Carousel Image Manager</h2>
 
-      {/* Show currently used images from Hero.jsx */}
+      {/* Show currently used images from the backend */}
       <div className="current-carousel">
-        <h4>Images Currently Used in Carousel :</h4>
+        <h4>Images Currently Used in Carousel:</h4>
         <div className="carousel-gallery">
-          {existingCarousel.map((img, i) => (
-            <img key={i} src={img} alt={`Current ${i + 1}`} />
+          {images.map((img, i) => (
+            <img
+              key={i}
+              src={`http://localhost:5000${img.url}`}
+              alt={`Current ${i + 1}`}
+            />
           ))}
         </div>
       </div>
@@ -62,35 +120,51 @@ const Slider = () => {
         <div className="preview-image">
           <h4>Preview Selected Images:</h4>
           <div className="carousel-gallery">
-            {selectedImages.map((img, i) => (
-              <img key={i} src={img} alt={`Preview ${i}`} />
+            {selectedImages.map((file, i) => (
+              <img
+                key={i}
+                src={URL.createObjectURL(file)}
+                alt={`Preview ${i}`}
+              />
             ))}
           </div>
-          <button onClick={handleAddImages} className="btn-add">
-            Add to Carousel
+          <button
+            onClick={handleAddImages}
+            className="btn-add"
+            disabled={isLoading} // Disable button while loading
+          >
+            {isLoading ? "Adding..." : "Add to Carousel"}
           </button>
         </div>
       )}
 
+      {/* Image upload input */}
       <div className="upload-section">
-        <label>Upload Images:</label>
+        <label>Upload Images: (800*400 pixels) </label>
         <input
           type="file"
           accept="image/*"
           multiple
           onChange={handleImageChange}
-          disabled={images.length >= 7}
+          disabled={images.length >= 7 || isLoading} // Disable when max images are reached or loading
         />
       </div>
 
-      {/* Custom images added via admin panel */}
+      {/* Show images added by admin */}
       <div className="current-carousel">
         <h4>Admin Added Images ({images.length}/7)</h4>
         <div className="carousel-gallery">
           {images.map((img, index) => (
             <div className="carousel-item-box" key={index}>
-              <img src={img} alt={`Slide ${index + 1}`} />
-              <button onClick={() => handleDeleteImage(index)} className="btn-delete">
+              <img
+                src={`http://localhost:5000${img.url}`}
+                alt={`Slide ${index + 1}`}
+              />
+              <button
+                onClick={() => handleDeleteImage(index)}
+                className="btn-delete"
+                disabled={isLoading} // Disable delete while loading
+              >
                 Delete
               </button>
             </div>
@@ -102,21 +176,15 @@ const Slider = () => {
       <div style={{ marginTop: "20px", display: "flex", gap: "10px" }}>
         <button
           className="btn-save"
-          onClick={() => {
-            localStorage.setItem("carouselImages", JSON.stringify(images));
-            alert("Images saved to localStorage!");
-          }}
+          onClick={handleAddImages}
+          disabled={isLoading} // Disable while loading
         >
           Save
         </button>
         <button
           className="btn-delete-all"
-          onClick={() => {
-            if (window.confirm("Are you sure you want to delete all images?")) {
-              setImages([]);
-              localStorage.removeItem("carouselImages");
-            }
-          }}
+          onClick={handleDeleteAll}
+          disabled={isLoading} // Disable while loading
         >
           Delete All
         </button>

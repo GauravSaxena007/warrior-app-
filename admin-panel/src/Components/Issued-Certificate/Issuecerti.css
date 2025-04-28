@@ -4,3 +4,64 @@
 .form-control-isa{
     width: 190px;
 }
+.container-iss-certi-adm{
+    margin-left: -75px;
+}
+/* Issuecerti.css */
+
+/* Adjust the width of the table columns */
+.container-iss-certi-adm table {
+    width: 100%;
+  }
+  
+  /* Reducing the width of the 'Sr. No.' column */
+  .container-iss-certi-adm table th:nth-child(1),
+  .container-iss-certi-adm table td:nth-child(1) {
+    width: 5%;
+  }
+  
+  .container-iss-certi-adm table th:nth-child(7),
+  .container-iss-certi-adm table td:nth-child(7) {
+    width: 13%;
+  }
+  .container-iss-certi-adm table th:nth-child(3),
+  .container-iss-certi-adm table td:nth-child(3) {
+    width: 9%;
+  }
+
+  .container-iss-certi-adm table th:nth-child(2),
+  .container-iss-certi-adm table td:nth-child(2) {
+    width: 9%;
+  }
+
+  .container-iss-certi-adm table th:nth-child(5),
+  .container-iss-certi-adm table td:nth-child(5) {
+    width: 9%;
+  }
+
+  /* Increasing the width of the 'Assign Certificate Number' column */
+  .container-iss-certi-adm table th:nth-child(6),
+  .container-iss-certi-adm table td:nth-child(6) {
+    width: 15%;
+  }
+  
+  /* Optional: Adding some padding for better readability */
+  .container-iss-certi-adm table td,
+  .container-iss-certi-adm table th {
+    padding: 10px;
+    text-align: center;
+  }
+  
+  /* Adjusting file input width */
+  .container-iss-certi-adm table td input[type="file"] {
+    width: 100%;
+  }
+  
+  /* Add a little space between the 'Send' and 'Delete' buttons */
+  .container-iss-certi-adm table td button {
+    margin: 0 5px;
+  }
+
+  .form-control-isa{
+  padding: 3px;
+  }

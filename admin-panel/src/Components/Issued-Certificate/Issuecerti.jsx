@@ -77,7 +77,7 @@ const Issuecerti = () => {
   };
 
   return (
-    <div className="container mt-3">
+    <div className="container-iss-certi-adm">
       <h4 className="mb-3">Issue Certificates</h4>
 
       {requests.length === 0 ? (
