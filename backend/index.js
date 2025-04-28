@@ -62,6 +62,8 @@ const marqueeRoutes = require('./routes/marqueeRoutes'); // Correct the path to 
 const cardRoutes = require('./routes/cardRoutes');
 const contactRoutes = require('./routes/contactRoutes');
 const resetRoute = require('./routes/reset');
+const carouselRoute = require('./routes/carouselRoutes'); 
+const agreementRoutes = require('./routes/agreement');
 
 // API Endpoints
 app.use("/api/franchisee", franchiseeRoutes);
@@ -80,6 +82,8 @@ app.use('/api/marquee', marqueeRoutes);
 app.use('/api/cards', cardRoutes);
 app.use('/api/contact', contactRoutes);
 app.use('/api/reset', resetRoute);
+app.use('/api/carousel', carouselRoute);
+app.use('/api/agreement', agreementRoutes);
 
 // Serve static files (e.g. uploaded certificate images)
 app.use("/uploads", express.static(path.join(__dirname, "Uploads")));
