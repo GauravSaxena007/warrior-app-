@@ -10,8 +10,11 @@
 }
 
 .my-5 {
-  margin-top: 3rem;
+  margin-top: -5rem;
   margin-bottom: 3rem;
+  padding: 50px;
+  border-radius: 9px;
+  margin-left: -50px;
 }
 
 .courses-section h2 {

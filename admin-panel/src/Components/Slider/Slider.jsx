@@ -11,7 +11,10 @@ const Slider = () => {
     const fetchImages = async () => {
       try {
         const response = await fetch("http://localhost:5000/api/carousel");
-        const data = await response.json();
+        if (!response.ok) {
+          throw new Error("Failed to fetch carousel data");
+        }
+        const data = await response.json();        
         setImages(data); // Dynamically set images fetched from the backend
       } catch (err) {
         console.error("Error fetching carousel images:", err);

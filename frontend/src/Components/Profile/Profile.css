@@ -15,7 +15,7 @@
 /* Dropdown Menu (Hidden by Default) */
 .dropdown-menu-1 {
   position: absolute;
-  top: 100%;
+  top: 105%;
   left: 0;
   background: white;
   box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
@@ -25,19 +25,24 @@
   margin: 0;
   width: 150px;
   display: none; /* Hidden initially */
+  opacity: 0; /* Start with 0 opacity */
+  transform: translateY(10px); /* Start from a slightly lower position */
+  transition: opacity 0.3s ease, transform 0.3s ease; /* Smooth animation for both opacity and position */
   z-index: 1000;
 }
 
 /* Show Dropdown on Hover */
 .dropdown-container-1:hover .dropdown-menu-1 {
   display: block;
+  opacity: 1; /* Fade in */
+  transform: translateY(0); /* Slide to original position */
 }
 
 /* Dropdown Items */
 .dropdown-menu-1 li {
   padding: 3px;
   text-align: left;
-
+  transition: background 0.3s ease; /* Smooth background transition */
 }
 
 /* Dropdown Links */
@@ -50,4 +55,5 @@
 /* Hover Effect */
 .dropdown-menu-1 li:hover {
   background: rgba(0, 0, 0, 0.1);
+  transition: background 0.2s ease; /* Smooth hover effect */
 }

@@ -1,5 +1,5 @@
 /* Container */
-.profile-container {
+.profile-container-franch-fro{
   width: 95%; /* Increased width */
   max-width: 1100px; /* Made it wider */
   margin: 5px auto;
@@ -17,7 +17,7 @@
 }
 
 /* Table Styling */
-.profile-table {
+.profile-table-franch-fro {
   display: flex;
   justify-content: space-between;
   border: 1px solid #ddd;
@@ -45,7 +45,7 @@ strong {
 }
 
 /* Profile Section */
-.profile-section {
+.profile-section-franch-fro {
   text-align: center;
   width: 220px; /* Increased width */
   padding: 20px;
@@ -54,14 +54,14 @@ strong {
   border-radius: 5px;
 }
 
-.profile-img {
+.profile-img-franch-fro{
   width: 100%;
   height: auto;
   border: 2px solid #ccc;
   border-radius: 8px;
 }
 
-.profile-text {
+.profile-text-franch-fro {
   font-size: 15px;
   color: #666;
   margin-top: 8px;
@@ -85,7 +85,7 @@ strong {
 }
 
 /* Note Section */
-.profile-note {
+.profile-note-franch-fro {
   font-size: 14px;
   color: red;
   text-align: center;
@@ -93,7 +93,7 @@ strong {
 }
 
 @media (max-width: 992px) {
-  .profile-container {
+  .profile-container-franch-fro {
     padding: 0 15px;
   }
 
@@ -102,14 +102,14 @@ strong {
     text-align: center;
   }
 
-  .profile-table {
+  .profile-table-franch-fro {
     flex-direction: column;
     padding: 0;
     box-shadow: none;
     overflow-x: auto; /* Allow horizontal scroll if needed */
   }
 
-  .profile-section {
+  .profile-section-franch-fro {
     width: 100%;
     border-left: none;
     border-top: 1px solid #ddd;

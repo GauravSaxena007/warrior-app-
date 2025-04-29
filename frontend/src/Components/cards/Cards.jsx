@@ -54,7 +54,7 @@ const Cards = () => {
       {/* Explore Cards Button */}
       <div className="text-center mt-4">
         <Link to="/courses" className="btn btn-primary px-4 py-2">
-          Explore Cards
+          Explore Courses
         </Link>
       </div>
     </section>

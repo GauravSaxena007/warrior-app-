@@ -34,10 +34,10 @@ const FranchProfile = () => {
   }
 
   return (
-    <div className="profile-container">
+    <div className="profile-container-franch-fro">
       <div className="profile-header pro-h mx-auto text-left" style={{ width: '100%', marginTop: '20px' }}>Franchisee Profile</div>
 
-      <div className="profile-table">
+      <div className="profile-table-franch-fro">
         <table>
           <tbody>
             <tr>
@@ -66,18 +66,17 @@ const FranchProfile = () => {
         </table>
 
         {/* Profile Image Section */}
-        <div className="profile-section">
+        <div className="profile-section-franch-fro">
           <img
             src={`${import.meta.env.VITE_API_URL}/uploads/${franchisee.photo}`}
             alt="Profile"
-            className="profile-img"
+            className="profile-img-franch-fro"
           />
-          <p className="profile-text">Profile Small <br /> 200px X 200px</p>
-          <button className="profile-button">CHANGE PROFILE</button>
+          <p className="profile-text-franch-fro">Profile Small <br /> 200px X 200px</p>
         </div>
       </div>
 
-      <p className="profile-note">
+      <p className="profile-note-franch-fro">
         Note: Profile Image size Exact 200px By 200px. (Only JPG, JPEG, PNG Format Supported)
       </p>
     </div>
