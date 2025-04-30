@@ -54,7 +54,7 @@ body {
 
 .nav-links a {
   text-decoration: none;
-  color: white;
+  color: rgb(255, 255, 255);
   font-weight: bold;
   font-size: 14px;
   padding: 1px 1px;
@@ -83,7 +83,7 @@ body {
   position: absolute;
   top: 100%;
   left: 0;
-  background: white;
+  background: rgb(255, 255, 255);
   border-radius: 5px;
   min-width: 15px;
   box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
@@ -96,7 +96,7 @@ body {
 }
 
 .dropdown-menu li a {
-  color: black;
+  color: rgb(0, 0, 0);
   text-decoration: none;
   padding: 1px 1px;
   display: block;
@@ -219,6 +219,13 @@ body {
     font-size: 12.9px; /* Adjust text size for better fit */
 
       /* Blue glow effect */
+}
+.dropdown{
+ margin-left: 1px;
+}
+.dropdown-btn{
+  margin-left: 63px;
+  font-size: 15px;
 }
 
 /* 🔻 Hide Navbar on Scroll */

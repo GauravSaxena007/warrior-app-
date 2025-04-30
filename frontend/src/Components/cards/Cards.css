@@ -51,4 +51,73 @@
     margin-top: 11px;
     
   }
-  
+  /* Medium devices (tablets, 768px and down) */
+@media (max-width: 768px) {
+  .card {
+    height: 570px;
+    border-radius: 12px;
+    overflow: hidden;
+    transition: transform 0.3s ease;
+    width: 360px;
+    
+  }
+
+  .card-img-top {
+    height: 210px;
+    object-fit: cover;
+   margin-bottom: 25px;
+  }
+
+  ul.card-text {
+    padding-left: 16px;
+    margin-bottom: 0;
+    max-height: 190px;
+    overflow-y: auto;
+    scrollbar-width: thin;
+  }
+
+  .card-body {
+    padding: 1px;
+    font-size: 14px;
+  }
+
+  .card-title {
+    font-size: 18px;
+    margin-bottom: 8px;
+  }
+
+  .card-footer {
+    font-size: 12px;
+  }
+}
+
+/* Small devices (phones, 480px and down) */
+@media (max-width: 480px) {
+  .card {
+    height: 570px;
+    border-radius: 12px;
+    overflow: hidden;
+    transition: transform 0.3s ease;
+    width: 360px;
+    margin-left: 15px;
+  }
+
+  .card-img-top {
+    height: 210px;
+    object-fit: cover;
+   margin-bottom: 25px;
+  }
+
+  ul.card-text {
+    padding-left: 16px;
+    margin-bottom: 0;
+    max-height: 190px;
+    overflow-y: auto;
+    scrollbar-width: thin;
+  }
+
+  .card-title {
+    font-size: 18px;
+    margin-bottom: 8px;
+  }
+}

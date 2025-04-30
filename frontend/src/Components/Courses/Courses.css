@@ -2,7 +2,7 @@
   padding: 0.3rem 1rem;
   background-color: #f8f9fa;
   border-radius: 1.5rem;
-  margin-top: 7rem;
+  margin-top: 2.5rem;
 }
 
 .courses-title {
@@ -146,6 +146,11 @@ border-color: #007bff;
   border-radius: 15px;
 }
 .courses-section-front {
-  margin-top: 11rem;
+  margin-top: 5rem;
+}
+.course-card {
+  width: 100%;
+  max-width: 100%;
+  margin-left: 1px;
 }
 }

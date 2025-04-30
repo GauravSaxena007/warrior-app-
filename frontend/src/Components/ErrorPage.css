@@ -1,0 +1,116 @@
+@import url('https://fonts.googleapis.com/css2?family=Permanent+Marker&family=Fira+Mono:wght@500&display=swap');
+
+.error-page {
+    position: fixed;
+    top: 0; /* Start from the very top of the screen */
+    left: 0;
+    width: 100%; /* Take up full width of the screen */
+    height: 100vh; /* Full height of the viewport */
+    background: #000000;
+    text-align: center;
+    color: #E0E0E0;
+    font-family: 'Fira Mono', monospace;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    z-index: 999; /* Makes sure the error page is below the navbar */
+  }
+
+.error-page h1 {
+  font-size: 2.5rem;
+  font-family: 'Fira Mono', monospace;
+  margin-top: -55px;
+}
+
+.error-page div {
+  transform-style: preserve-3d;
+}
+
+.error-page svg {
+  width: clamp(300px, 70%, 600px);
+  height: 500px;
+margin-top: -110px;
+}
+
+#rocket {
+  transform: translateY(750px);
+  animation: launch 2s ease-out forwards;
+}
+
+@keyframes launch {
+  from {
+    transform: translateY(750px);
+  }
+  to {
+    perspective: 500px;
+    transform: translateY(0px);
+  }
+}
+
+#stars {
+  animation: twinkling 2s linear infinite;
+}
+
+@keyframes twinkling {
+  from {
+    transform: scale(0);
+  }
+  to {
+    transform: scale(1);
+  }
+}
+
+.text {
+  opacity: 0;
+  animation: appear 1s ease-in forwards;
+  animation-delay: 1.8s;
+}
+
+@keyframes appear {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.error-page a {
+  color: #ffffff;
+  text-decoration: none;
+}
+.back-button-error {
+    display: inline-block;
+    background-color: #007BFF; /* Bootstrap blue */
+    color: rgb(255, 255, 255);
+    padding: 3px 15px;
+    margin-left: 10px;
+    border-radius: 5px;
+    text-decoration: none;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+  }
+  
+  .back-button-error:hover {
+    background-color: #0056b3; /* Darker blue on hover */
+  }
+  
+@media (max-width: 600px) {
+    .text h1 {
+      font-size: 2rem;
+    }
+  
+    .text h3 {
+      font-size: 1.2rem;
+      flex-direction: column;
+      text-align: center;
+    }
+  
+    .back-button-error {
+      display: block;
+      margin: 11px auto 0 auto;
+      font-size: 1rem;
+      padding: 11px;
+    }
+  }

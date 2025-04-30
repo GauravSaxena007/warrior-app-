@@ -32,6 +32,7 @@ const Navbar = () => {
       })
       .catch((error) => console.error("Error fetching navbar data:", error));
   }, []);
+  
 
   return (
     <>
@@ -45,13 +46,13 @@ const Navbar = () => {
         <div className="nav-container">
           <ul className="nav-links">
             <li><a href="/">HOME</a></li>
-            <li><a href="#">ABOUT US</a></li>
+            <li><a href="/error">ABOUT US</a></li>
             <li className="dropdown"><Dropdowncourses /></li>
-            <li><a href="#">ONLINE EXAM</a></li>
-            <li><a href="#">ONLINE REGISTRATION</a></li>
+            <li><a href="/error">ONLINE EXAM</a></li>
+            <li><a href="/error">ONLINE REGISTRATION</a></li>
             <li><a href="/verify">CERTIFICATE VERIFY</a></li>
             <li><a href="/contact">CONTACT US</a></li>
-            <li><a href="#"><Profile /></a></li>
+            <li><a href=""><Profile /></a></li>
           </ul>
         </div>
       </nav>
@@ -64,12 +65,13 @@ const Navbar = () => {
       <div className={`mobile-menu ${menuOpen ? "open" : ""}`}>
         <ul className="mobile-nav-links">
           <li><a href="/">HOME</a></li>
-          <li><a href="#">ABOUT US</a></li>
-          <li><a href="#">ONLINE EXAM</a></li>
-          <li><a href="#">ONLINE REGISTRATION</a></li>
+          <li><a href="/error">ABOUT US</a></li>
+          <li className="dropdown"><Dropdowncourses /></li>
+          <li><a href="/error">ONLINE EXAM</a></li>
+          <li><a href="/error">ONLINE REGISTRATION</a></li>
           <li><a href="/verify">CERTIFICATE VERIFY</a></li>
           <li><a href="/contact">CONTACT US</a></li>
-          <li><a href="#"><Profile /></a></li>
+          <li><a href=""><Profile /></a></li>
         </ul>
       </div>
 

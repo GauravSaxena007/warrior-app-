@@ -40,7 +40,7 @@ const Cards = () => {
               </div>
               <div className="card-footer d-flex justify-content-between">
                 <span>
-                  <strong>Card Duration:</strong> {card.duration}
+                  <strong>Duration:</strong> {card.duration}
                 </span>
                 <span>
                   <strong>Code:</strong> {card.code}

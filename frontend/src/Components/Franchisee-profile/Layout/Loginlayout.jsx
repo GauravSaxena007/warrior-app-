@@ -90,12 +90,12 @@ const Loginlayout = () => {
         <div className="nav-container-2">
           <ul className="nav-links-2">
             <li><a href="/" className="nav-link-2">HOME</a></li>
-            <li><a href="#" className="nav-link-2">PROFILE</a></li>
-            <li><a href="#" className="nav-link-2">COURSE FEE</a></li>
-            <li><a href="#" className="nav-link-2">TRANSACTION LEDGERS</a></li>
-            <li><a href="/agreement" className="nav-link-2">FRANCHASEE AGREEMENT</a></li>
+            <li><a href="/error" className="nav-link-2">PROFILE</a></li>
+            <li><a href="/error" className="nav-link-2">COURSE FEE</a></li>
+            <li><a href="/error" className="nav-link-2">TRANSACTION LEDGERS</a></li>
+            <li><a href="/agreement" className="nav-link-2">FRANCHISEE AGREEMENT</a></li>
             <li>
-  <a href="#" onClick={handleLogout} className="nav-link-2">LOGOUT</a>
+  <a href="" onClick={handleLogout} className="nav-link-2">LOGOUT</a>
 </li>
           </ul>
         </div>
@@ -110,12 +110,12 @@ const Loginlayout = () => {
       <div className={`mobile-menu-2 ${menuOpen ? "open" : ""}`}>
         <ul className="mobile-nav-links-2">
           <li><a href="/">HOME</a></li>
-          <li><a href="#">PROFILE</a></li>
-          <li><a href="#">COURSE FEE</a></li>
-          <li><a href="#">TRANSACTION LEDGERS</a></li>
-          <li><a href="#">FRANCHASEE AGREEMENT</a></li>
+          <li><a href="/error">PROFILE</a></li>
+          <li><a href="/error">COURSE FEE</a></li>
+          <li><a href="/error">TRANSACTION LEDGERS</a></li>
+          <li><a href="/agreement">FRANCHISEE AGREEMENT</a></li>
           <li>
-  <a href="#" onClick={handleLogout}>LOGOUT</a>
+  <a href="" onClick={handleLogout}>LOGOUT</a>
 </li>
         </ul>
       </div>

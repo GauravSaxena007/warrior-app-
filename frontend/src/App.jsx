@@ -22,6 +22,7 @@ import PrivateRoute from "./Components/PrivateRoute";
 import AdminLogin from "./Components/Profile/AdminLogin";
 import Dev from "./Components/Dev/Dev";
 import Agreement from "./Components/Franchisee-profile/Agreement/Agreement";
+import ErrorPage from "./Components/ErrorPage";
 
 function Layout() {
   const location = useLocation();
@@ -30,8 +31,15 @@ function Layout() {
   const isAdminLoginPage = location.pathname === "/adminlogin"; // Add this line for admin login
 
   // ✅ NEW: Add this to control navbar visibility
-  const hideNavbarPaths = ["/login", "/adminlogin" , "/agreement"];
-  const shouldHideNavbar = hideNavbarPaths.includes(location.pathname);
+  const hideNavbarPaths = ["/login", "/adminlogin", "/agreement"];
+const isErrorPage = ![
+  "/", "/card", "/welcome", "/dropdowncourses", "/contact",
+  "/login", "/adminlogin", "/agreement", "/verify", "/testing",
+  "/courses", "/developer", "/reelcomp", "/franchprofile"
+].includes(location.pathname);
+
+const shouldHideNavbar = hideNavbarPaths.includes(location.pathname) || isErrorPage;
+
 
   return (
     <div className={isLoginPage ? "login-page" : ""}>
@@ -52,6 +60,8 @@ function Layout() {
         <Route path="/contact" element={<Contact />} />
         <Route path="/login" element={<Login />} />
         <Route path="/adminlogin" element={<AdminLogin/>} />
+        <Route path="/error" element={<ErrorPage/>} />
+        <Route path='*' element={<ErrorPage/>} />
         <Route path="/agreement" element={
         <PrivateRoute>
           <Agreement />
@@ -72,8 +82,9 @@ function Layout() {
         <Route path="/reelcomp" element={<ReelComp/>} />
       </Routes>
 
-      {/* Show Footer on all pages except login */}
-      {!isLoginPage && <Footer />}
+     {/* Show Footer on all pages except login, adminlogin, agreement, error */}
+{!hideNavbarPaths.includes(location.pathname) && <Footer />}
+
     </div>
   );
 }
