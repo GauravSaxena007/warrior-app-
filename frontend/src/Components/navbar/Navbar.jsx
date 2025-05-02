@@ -58,9 +58,12 @@ const Navbar = () => {
       </nav>
 
       {/* Mobile Hamburger Menu */}
-      <button className="hamburger" onClick={() => setMenuOpen(!menuOpen)}>
-        ☰
-      </button>
+      <button
+  className={`hamburger ${visible ? "" : "hidden-nav"}`}
+  onClick={() => setMenuOpen(!menuOpen)}
+>
+  ☰
+</button>
 
       <div className={`mobile-menu ${menuOpen ? "open" : ""}`}>
         <ul className="mobile-nav-links">

@@ -17,7 +17,7 @@ function Addcourses() {
   const [selectedCategory, setSelectedCategory] = useState("All Categories");
 
   useEffect(() => {
-    axios.get("http://localhost:5000/api/courses")
+    axios.get(`${import.meta.env.VITE_API_URL}/api/courses`)
       .then(res => setCourses(res.data))
       .catch(err => console.error("Error fetching courses:", err));
   }, []);

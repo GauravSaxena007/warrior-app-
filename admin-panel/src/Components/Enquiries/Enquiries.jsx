@@ -5,13 +5,13 @@ const Enquiries = () => {
   const [enquiries, setEnquiries] = useState([]);
 
   useEffect(() => {
-    axios.get("http://localhost:5000/api/enquiries")
+    axios.get(`${import.meta.env.VITE_API_URL}/api/enquiries`)
       .then(res => setEnquiries(res.data))
       .catch(err => console.error(err));
   }, []);
 
   const handleDelete = (id) => {
-    axios.delete(`http://localhost:5000/api/enquiries/${id}`)
+    axios.delete(`${import.meta.env.VITE_API_URL}/api/enquiries/${id}`)
       .then(() => setEnquiries(enquiries.filter((e) => e._id !== id)))
       .catch(err => console.error(err));
   };

@@ -11,7 +11,7 @@ const FraCer = () => {
   useEffect(() => {
     const fetchFranchisees = async () => {
       try {
-        const res = await axios.get('http://localhost:5000/api/franchisee');
+        const res = await axios.get(`${import.meta.env.VITE_API_URL}/api/franchisee`);
         setFranchisees(res.data);
       } catch (err) {
         console.error('Error fetching franchisees:', err);
@@ -22,7 +22,7 @@ const FraCer = () => {
 
   const fetchCertificates = async () => {
     try {
-      const res = await axios.get('http://localhost:5000/api/fra-certificates');
+      const res = await axios.get(`${import.meta.env.VITE_API_URL}/api/fra-certificates`);
       setCertificates(res.data);
     } catch (err) {
       console.error('Error fetching certificates:', err);
@@ -44,7 +44,7 @@ const FraCer = () => {
     formData.append('franchisee', selectedFranchisee);
 
     try {
-      await axios.post('http://localhost:5000/api/fra-certificates', formData);
+      await axios.post(`${import.meta.env.VITE_API_URL}/api/fra-certificates`, formData);
       alert("Uploaded successfully!");
       setPhoto(null);
       setSelectedFranchisee('');
@@ -58,7 +58,7 @@ const FraCer = () => {
   const handleDelete = async (id) => {
     if (window.confirm("Are you sure you want to delete this certificate?")) {
       try {
-        await axios.delete(`http://localhost:5000/api/fra-certificates/${id}`);
+        await axios.delete(`${import.meta.env.VITE_API_URL}/api/fra-certificates/${id}`);
         fetchCertificates();
       } catch (err) {
         console.error("Delete failed:", err);
@@ -118,7 +118,7 @@ const FraCer = () => {
                 <td>{franchisee?.centerHead || "Unknown"}</td>
                 <td>
                   <a
-                    href={`http://localhost:5000/uploads/${cert.photo}`}
+                    href={`${import.meta.env.VITE_API_URL}/uploads/${cert.photo}`}
                     target="_blank"
                     rel="noopener noreferrer"
                   >

@@ -19,7 +19,7 @@ const CourierDet = () => {
 
   const fetchFranchisees = async () => {
     try {
-      const res = await axios.get('http://localhost:5000/api/franchisee');
+      const res = await axios.get(`${import.meta.env.VITE_API_URL}/api/franchisee`);
       console.log('Franchisees:', res.data);
       setFranchisees(res.data);
     } catch (err) {
@@ -30,7 +30,7 @@ const CourierDet = () => {
 
   const fetchCouriers = async () => {
     try {
-      const res = await axios.get('http://localhost:5000/api/courier');
+      const res = await axios.get(`${import.meta.env.VITE_API_URL}/api/courier`);
       console.log('Couriers:', res.data);
       setCouriers(res.data);
     } catch (err) {
@@ -47,7 +47,7 @@ const CourierDet = () => {
     e.preventDefault();
     try {
       console.log('Submitting form:', form);
-      const res = await axios.post('http://localhost:5000/api/courier', form);
+      const res = await axios.post(`${import.meta.env.VITE_API_URL}/api/courier`, form);
       console.log('POST response:', res.data);
       setCouriers([...couriers, res.data]);
       setForm({
@@ -64,7 +64,7 @@ const CourierDet = () => {
 
   const handleDelete = async (id) => {
     try {
-      const res = await axios.delete(`http://localhost:5000/api/courier/${id}`);
+      const res = await axios.delete(`${import.meta.env.VITE_API_URL}/api/courier/${id}`);
       console.log('DELETE response:', res.data);
       setCouriers(couriers.filter(courier => courier._id !== id));
     } catch (err) {

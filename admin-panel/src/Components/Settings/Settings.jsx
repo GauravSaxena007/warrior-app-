@@ -16,15 +16,15 @@ const Settings = () => {
 
   useEffect(() => {
     // Fetch initial settings from backend
-    axios.get("http://localhost:5000/api/settings")
+    axios.get(`${import.meta.env.VITE_API_URL}/api/settings`)
       .then((response) => {
         const data = response.data;
         console.log("Fetched settings:", data); // Debug log
-        setPhoto(data.photo ? `http://localhost:5000/${data.photo}` : null);
+        setPhoto(data.photo ? `${import.meta.env.VITE_API_URL}/${data.photo}` : null);
         setFranchiseNumber(data.franchiseNumber || "9422123456");
         setWelcomeTitle(data.welcomeTitle || "WELCOME TO RCSAS COMPUTER EDUCATION FRANCHISE");
         setWelcomeText(data.welcomeText || "RCSAS Education provides the best computer education franchise business opportunity in India...");
-        setFooterLogo(data.footerLogo ? `http://localhost:5000/${data.footerLogo}` : null);
+        setFooterLogo(data.footerLogo ? `${import.meta.env.VITE_API_URL}/${data.footerLogo}` : null);
         setEmail(data.email || "rcsasedu@gmail.com");
         setPhone1(data.phone1 || "07122702727");
         setPhone2(data.phone2 || "9422123456");
@@ -75,19 +75,19 @@ const Settings = () => {
     formData.append("phone2", phone2);
     formData.append("socialLinks", JSON.stringify(socialLinks));
 
-    axios.post("http://localhost:5000/api/settings", formData, {
+    axios.post(`${import.meta.env.VITE_API_URL}/api/settings`, formData, {
       headers: { "Content-Type": "multipart/form-data" },
     })
       .then((response) => {
         console.log("Save response data:", response.data); // Debug log
         alert("Changes saved successfully!");
         // Refresh settings to update logo URLs
-        axios.get("http://localhost:5000/api/settings")
+        axios.get(`${import.meta.env.VITE_API_URL}/api/settings`)
           .then((res) => {
             const data = res.data;
             console.log("Refreshed settings:", data); // Debug log
-            setPhoto(data.photo ? `http://localhost:5000/${data.photo}` : null);
-            setFooterLogo(data.footerLogo ? `http://localhost:5000/${data.footerLogo}` : null);
+            setPhoto(data.photo ? `${import.meta.env.VITE_API_URL}/${data.photo}` : null);
+            setFooterLogo(data.footerLogo ? `${import.meta.env.VITE_API_URL}/${data.footerLogo}` : null);
           });
       })
       .catch((error) => {

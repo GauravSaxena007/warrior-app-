@@ -98,8 +98,8 @@
     border-radius: 12px;
     overflow: hidden;
     transition: transform 0.3s ease;
-    width: 360px;
-    margin-left: 15px;
+    width: 330px;
+    margin-left: 11px;
   }
 
   .card-img-top {

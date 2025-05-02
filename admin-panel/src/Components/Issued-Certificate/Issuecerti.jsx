@@ -12,7 +12,7 @@ const Issuecerti = () => {
 
   const fetchRequests = async () => {
     try {
-      const res = await axios.get('http://localhost:5000/api/admin-certi/certificateRequests');
+      const res = await axios.get(`${import.meta.env.VITE_API_URL}/api/admin-certi/certificateRequests`);
       setRequests(res.data);
       setCertData(res.data.map(() => ({ certNo: '', file: null })));
     } catch (err) {
@@ -43,7 +43,7 @@ const Issuecerti = () => {
       formData.append('studentId', request.studentId._id);
 
       await axios.put(
-        `http://localhost:5000/api/admin-certi/certificateRequests/${request._id}`,
+        `${import.meta.env.VITE_API_URL}/api/admin-certi/certificateRequests/${request._id}`,
         formData,
         { headers: { 'Content-Type': 'multipart/form-data' } }
       );
@@ -67,7 +67,7 @@ const Issuecerti = () => {
     if (!confirm) return;
 
     try {
-      await axios.delete(`http://localhost:5000/api/admin-certi/certificateRequests/${id}`);
+      await axios.delete(`${import.meta.env.VITE_API_URL}/api/admin-certi/certificateRequests/${id}`);
       alert('Certificate request deleted.');
       fetchRequests();
     } catch (err) {

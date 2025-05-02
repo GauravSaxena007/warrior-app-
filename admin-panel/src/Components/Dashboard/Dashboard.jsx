@@ -20,7 +20,7 @@ const Dashboard = () => {
     if (!confirm) return;
 
     try {
-      const res = await axios.delete('http://localhost:5000/api/reset');
+      const res = await axios.delete(`${import.meta.env.VITE_API_URL}/api/reset`);
       alert(res.data.message || '✅ RESET successful.');
     } catch (err) {
       console.error(err);
@@ -33,27 +33,27 @@ const Dashboard = () => {
     localStorage.removeItem('token');
 
     // Redirect to login page
-    window.location.href = "http://localhost:5173/";
+    window.location.href = `${import.meta.env.VITE_FRONTEND_URL}/`;
   };
 
   useEffect(() => {
     const fetchCounts = async () => {
       setLoading(true);
       try {
-        const franchiseeRes = await axios.get('http://localhost:5000/api/franchisee/count');
+        const franchiseeRes = await axios.get(`${import.meta.env.VITE_API_URL}/api/franchisee/count`);
         setFranchiseeCount(Number(franchiseeRes.data.count || 0));
 
-        const pendingRes = await axios.get('http://localhost:5000/api/admin-certi/status/pending');
+        const pendingRes = await axios.get(`${import.meta.env.VITE_API_URL}/api/admin-certi/status/pending`);
         setPendingCertificates(Number(pendingRes.data.count || pendingRes.data.total || 0));
 
-        const issuedRes = await axios.get('http://localhost:5000/api/admin-certi/status/issued');
+        const issuedRes = await axios.get(`${import.meta.env.VITE_API_URL}/api/admin-certi/status/issued`);
         setIssuedCertificates(Number(issuedRes.data.count || issuedRes.data.total || 0));
 
-        const transactionRes = await axios.get('http://localhost:5000/api/transactions/all');
+        const transactionRes = await axios.get(`${import.meta.env.VITE_API_URL}/api/transactions/all`);
         const totalAmount = transactionRes.data.reduce((sum, t) => sum + Number(t.amount || 0), 0);
         setTotalTransactionAmount(totalAmount);
 
-        const coursesRes = await axios.get('http://localhost:5000/api/courses');
+        const coursesRes = await axios.get(`${import.meta.env.VITE_API_URL}/api/courses`);
         setTotalCourses(coursesRes.data.length || 0);
 
         setError(null);

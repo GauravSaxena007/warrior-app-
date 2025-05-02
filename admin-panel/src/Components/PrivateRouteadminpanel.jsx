@@ -28,7 +28,7 @@ const PrivateRouteadminpanel = ({ children }) => {
   
       try {
         // Validate token with backend
-        await axios.get('http://localhost:5000/api/auth/validate', {
+        await axios.get(`${import.meta.env.VITE_API_URL}/api/auth/validate`, {
           headers: { Authorization: `Bearer ${token}` },
         });
         setIsAuthenticated(true);
@@ -50,7 +50,7 @@ const PrivateRouteadminpanel = ({ children }) => {
 
   // If authenticated, render children; otherwise, redirect to login
   if (!isAuthenticated) {
-    window.location.href = 'http://localhost:5173/adminlogin';
+    window.location.href = `${import.meta.env.VITE_FRONTEND_URL}/adminlogin`;
     return null;
   }
 

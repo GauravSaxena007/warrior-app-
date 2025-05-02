@@ -19,7 +19,7 @@ const CardsAdmin = () => {
 
   const fetchCards = async () => {
     try {
-      const response = await fetch('http://localhost:5000/api/cards');
+      const response = await fetch(`${import.meta.env.VITE_API_URL}/api/cards`);
       if (!response.ok) throw new Error(`Failed to fetch cards: ${response.status}`);
       const data = await response.json();
       setCards(data);
@@ -57,7 +57,7 @@ const CardsAdmin = () => {
     try {
       if (editId !== null) {
         // Update card
-        const response = await fetch(`http://localhost:5000/api/cards/${editId}`, {
+        const response = await fetch(`${import.meta.env.VITE_API_URL}/api/cards/${editId}`, {
           method: 'PUT',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify(newCard),
@@ -72,7 +72,7 @@ const CardsAdmin = () => {
           alert('Only 3 cards are allowed.');
           return;
         }
-        const response = await fetch('http://localhost:5000/api/cards', {
+        const response = await fetch(`${import.meta.env.VITE_API_URL}/api/cards`, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify(newCard),
@@ -102,7 +102,7 @@ const CardsAdmin = () => {
   const handleDelete = async (id) => {
     if (!window.confirm('Are you sure you want to delete this card?')) return;
     try {
-      const response = await fetch(`http://localhost:5000/api/cards/${id}`, {
+      const response = await fetch(`${import.meta.env.VITE_API_URL}/api/cards/${id}`, {
         method: 'DELETE',
       });
       if (!response.ok) {

@@ -26,7 +26,7 @@ const FranchiseeManagement = () => {
   useEffect(() => {
     const fetchFranchisees = async () => {
       try {
-        const res = await fetch("http://localhost:5000/api/franchisee");
+        const res = await fetch(`${import.meta.env.VITE_API_URL}/api/franchisee`);
   
         // Step 4: Handle HTML error responses
         if (!res.ok) {
@@ -97,8 +97,8 @@ const FranchiseeManagement = () => {
     }
 
     const url = editingIndex !== null
-      ? `http://localhost:5000/api/franchisee/${franchisees[editingIndex]._id}`
-      : "http://localhost:5000/api/franchisee";
+      ? `${import.meta.env.VITE_API_URL}/api/franchisee/${franchisees[editingIndex]._id}`
+      : `${import.meta.env.VITE_API_URL}/api/franchisee`;
 
     const method = editingIndex !== null ? "PUT" : "POST";
 
@@ -166,7 +166,7 @@ const FranchiseeManagement = () => {
     if (!window.confirm(`Are you sure you want to delete ${toDelete.name}?`)) return;
 
     try {
-      const response = await fetch(`http://localhost:5000/api/franchisee/${toDelete._id}`, {
+      const response = await fetch(`${import.meta.env.VITE_API_URL}/api/franchisee/${toDelete._id}`, {
         method: "DELETE",
       });
 
@@ -229,7 +229,7 @@ const FranchiseeManagement = () => {
               <td>{franchisee.password}</td>
               <td>
                 {franchisee.photo && (
-                  <a href={`http://localhost:5000/uploads/${franchisee.photo}`} target="_blank" rel="noreferrer">
+                  <a href={`${import.meta.env.VITE_API_URL}/uploads/${franchisee.photo}`} target="_blank" rel="noreferrer">
                     View
                   </a>
                 )}

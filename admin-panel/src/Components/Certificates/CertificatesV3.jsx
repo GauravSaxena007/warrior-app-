@@ -10,7 +10,7 @@ const CertificatesV3 = () => {
 
   const fetchCertificates = async () => {
     try {
-      const res = await axios.get('http://localhost:5000/api/admin-certi/issuedCertificates');
+      const res = await axios.get(`${import.meta.env.VITE_API_URL}/api/admin-certi/issuedCertificates`);
       setCertificates(res.data);
     } catch (err) {
       console.error('Failed to fetch issued certificates:', err);
@@ -45,7 +45,7 @@ const CertificatesV3 = () => {
                 <td>{cert.certificateNumber}</td>
                 <td>
                   <a
-                    href={`http://localhost:5000/${cert.filePath.replace(/\\/g, '/')}`}
+                    href={`${import.meta.env.VITE_API_URL}/${cert.filePath.replace(/\\/g, '/')}`}
                     target="_blank"
                     rel="noopener noreferrer"
                     className="btn btn-outline-primary btn-sm"

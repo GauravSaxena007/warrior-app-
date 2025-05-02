@@ -10,7 +10,7 @@ const Slider = () => {
   useEffect(() => {
     const fetchImages = async () => {
       try {
-        const response = await fetch("http://localhost:5000/api/carousel");
+        const response = await fetch(`${import.meta.env.VITE_API_URL}/api/carousel`);
         if (!response.ok) {
           throw new Error("Failed to fetch carousel data");
         }
@@ -40,7 +40,7 @@ const Slider = () => {
     selectedImages.forEach((file) => formData.append("images", file));
 
     try {
-      const response = await fetch("http://localhost:5000/api/carousel", {
+      const response = await fetch(`${import.meta.env.VITE_API_URL}/api/carousel`, {
         method: "POST",
         body: formData,
       });
@@ -63,7 +63,7 @@ const Slider = () => {
   const handleDeleteImage = async (index) => {
     try {
       const response = await fetch(
-        `http://localhost:5000/api/carousel/${index}`,
+        `${import.meta.env.VITE_API_URL}/api/carousel/${index}`,
         {
           method: "DELETE",
         }
@@ -85,7 +85,7 @@ const Slider = () => {
     if (!window.confirm("Are you sure you want to delete all images?")) return;
 
     try {
-      const response = await fetch("http://localhost:5000/api/carousel", {
+      const response = await fetch(`${import.meta.env.VITE_API_URL}/api/carousel`, {
         method: "DELETE",
       });
       if (response.ok) {
@@ -111,7 +111,7 @@ const Slider = () => {
           {images.map((img, i) => (
             <img
               key={i}
-              src={`http://localhost:5000${img.url}`}
+              src={`${import.meta.env.VITE_API_URL}${img.url}`}
               alt={`Current ${i + 1}`}
             />
           ))}
@@ -160,7 +160,7 @@ const Slider = () => {
           {images.map((img, index) => (
             <div className="carousel-item-box" key={index}>
               <img
-                src={`http://localhost:5000${img.url}`}
+                src={`${import.meta.env.VITE_API_URL}${img.url}`}
                 alt={`Slide ${index + 1}`}
               />
               <button
