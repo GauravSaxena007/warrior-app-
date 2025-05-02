@@ -121,3 +121,11 @@
     margin-bottom: 8px;
   }
 }
+@media (min-width: 413px) and (max-width: 1198px) {
+
+  .card {
+    height: 700px;
+    width: 560px;  
+  }
+
+}

@@ -1,51 +1,56 @@
-/* Profile Dropdown Container */
+/* Container */
 .dropdown-container-1 {
   position: relative;
   display: inline-block;
   cursor: pointer;
+ 
 }
 
-/* Dropdown Label */
+/* Label */
 .dropdown-label-1 {
-  color: rgb(255, 255, 255);
-  padding: 3px;
-  display: inline-block;
+  background: none;
+  border: none;
+  color: white;
+  cursor: pointer;
+  padding-top: 3px;
+  font-size: 14.5px;
+  font-weight: 700;
 }
 
-/* Dropdown Menu (Hidden by Default) */
+
+/* Dropdown (default hidden) */
 .dropdown-menu-1 {
   position: absolute;
   top: 105%;
   left: 0;
-  background: rgb(255, 255, 255);
+  background: #fff;
   box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
   border-radius: 5px;
   list-style: none;
   padding: 0;
   margin: 0;
   width: 150px;
-  display: none; /* Hidden initially */
-  opacity: 0; /* Start with 0 opacity */
-  transform: translateY(10px); /* Start from a slightly lower position */
-  transition: opacity 0.3s ease, transform 0.3s ease; /* Smooth animation for both opacity and position */
+  opacity: 0;
+  transform: translateY(10px);
+  pointer-events: none;
+  transition: opacity 0.3s ease, transform 0.3s ease;
   z-index: 1000;
 }
 
-/* Show Dropdown on Hover */
-.dropdown-container-1:hover .dropdown-menu-1 {
-  display: block;
-  opacity: 1; /* Fade in */
-  transform: translateY(0); /* Slide to original position */
+/* Show when .open is added */
+.dropdown-menu-1.open {
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: auto;
 }
 
-/* Dropdown Items */
+/* Items */
 .dropdown-menu-1 li {
   padding: 3px;
   text-align: left;
-  transition: background 0.3s ease; /* Smooth background transition */
+  transition: background 0.3s ease;
 }
 
-/* Dropdown Links */
 .dropdown-menu-1 li a {
   text-decoration: none;
   color: black;
@@ -55,14 +60,20 @@
 /* Hover Effect */
 .dropdown-menu-1 li:hover {
   background: rgba(0, 0, 0, 0.1);
-  transition: background 0.2s ease; /* Smooth hover effect */
 }
+
+/* Responsive */
 @media (max-width: 412px) {
   .dropdown-label-1 {
     margin-left: 40px;
-    
   }
   .dropdown-container-1 {
     margin-right: 40px;
+  }
+}
+@media (min-width: 413px) and (max-width: 1198px) {
+
+  .dropdown-menu-1 {
+   margin-left: -30px;
   }
 }

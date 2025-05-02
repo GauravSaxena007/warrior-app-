@@ -23,7 +23,7 @@
     top: 100%;
     left: 0;
     min-width: 200px;
-    background: #fdfdfd;
+    background: #ffffff;
     border-radius: 8px;
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
     opacity: 0;
@@ -49,15 +49,24 @@
     
 
 /* Show submenu when hovering over the parent item */
-.dropdown-item:hover .submenu {
-    display: block;
-    left: 101%; /* Ensures submenu opens to the right */
+.dropdown-item .submenu {
+    opacity: 0;
+    visibility: hidden;
+    position: absolute;
+    top: 0;
+    left: 101%;
+    background: #ffffff;
+    border-radius: 4px;
+    min-width: 180px;
+    transition: opacity 0.2s ease, visibility 0.2s ease;
+    z-index: 10;
+  }
+  
+  .dropdown-item.show-submenu .submenu {
     opacity: 1;
     visibility: visible;
-    transition: opacity 0.2s ease, visibility 0.2s ease;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-    z-index: 10;
-}
+  }
+  
 
 .dropdown-item .submenu {
     opacity: 0;
@@ -119,3 +128,26 @@
     outline-offset: -2px;
     background: rgba(255, 255, 255, 0.1);
 }
+
+@media (max-width: 412px) {
+    .dropdown-item:hover .submenu {
+      left: auto;
+      right: 100%; /* Open submenu to the left */
+    }
+  }
+
+@media (min-width: 413px) and (max-width: 1198px) {
+    .dropdown-item.show-submenu .submenu  {
+      left: auto;
+      right: 100%; /* Open submenu to the left */
+    }
+    .dropdown-menu {
+        display: none; /* Hidden by default */
+        position: absolute;
+        /* Add other styles like background, padding, etc., as needed */
+      }
+    
+      .dropdown-menu.show {
+        display: block; /* Show when the 'show' class is added */
+      }
+  }
