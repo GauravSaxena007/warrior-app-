@@ -224,6 +224,7 @@ body {
   z-index: 1000;
   font-weight: bold;
   color: white;
+  animation: glowPulse 1.7s ease-in-out infinite;
 }
 
 /* 📱 Mobile Contact Info - Adjust for width 412px */
@@ -279,17 +280,7 @@ body {
 }
 
 /* Glow animation */
-@keyframes glowPulse {
-  0% {
-      box-shadow: 0 0 5px #00c3ff;
-  }
-  50% {
-      box-shadow: 0 0 5px #00c3ff, 0 0 30px #00c3ff;
-  }
-  100% {
-      box-shadow: 0 0 5px #00c3ff;
-  }
-}
+
 }
 
 /* 📱 Hide Desktop Navbar & Show Hamburger in Mobile + Tablet */
@@ -313,3 +304,14 @@ body {
 }
 
 
+@keyframes glowPulse {
+  0% {
+      box-shadow: 0 0 5px #002fff;
+  }
+  50% {
+      box-shadow: 0 0 5px #002fff, 0 0 30px #002fff;
+  }
+  100% {
+      box-shadow: 0 0 5px #002fff;
+  }
+}

@@ -45,9 +45,9 @@ const Dashboard = () => {
 
         const pendingRes = await axios.get(`${import.meta.env.VITE_API_URL}/api/admin-certi/status/pending`);
         setPendingCertificates(Number(pendingRes.data.count || pendingRes.data.total || 0));
-
-        const issuedRes = await axios.get(`${import.meta.env.VITE_API_URL}/api/admin-certi/status/issued`);
-        setIssuedCertificates(Number(issuedRes.data.count || issuedRes.data.total || 0));
+        
+        const issuedRes = await axios.get(`${import.meta.env.VITE_API_URL}/api/admin-certi/issuedCertificates`);
+        setIssuedCertificates(issuedRes.data.length);
 
         const transactionRes = await axios.get(`${import.meta.env.VITE_API_URL}/api/transactions/all`);
         const totalAmount = transactionRes.data.reduce((sum, t) => sum + Number(t.amount || 0), 0);

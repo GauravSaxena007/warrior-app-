@@ -74,7 +74,7 @@ const Login = () => {
             onChange={(e) => setPassword(e.target.value)}
             required
           />
-          <button type="submit" className="login-btn">🔒 Submit</button>
+          <button type="submit" className="login-btn">✅ Submit</button>
           <button onClick={() => window.location.href = '/'} className="login-home-btn">
           🏠 Back To Homepage
 </button>

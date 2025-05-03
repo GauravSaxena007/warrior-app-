@@ -13,7 +13,7 @@ const port = process.env.PORT || 5000;
 const allowedOrigins = [
   'http://localhost:5173',
   'http://localhost:3001',
-  'http://192.168.29.156:5173', // Replace with your actual PC's IP
+  'http://192.168.29.156:5173', 
   'http://192.168.29.156:3001'
 ];
 

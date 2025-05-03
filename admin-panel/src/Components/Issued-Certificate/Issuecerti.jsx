@@ -30,34 +30,37 @@ const Issuecerti = () => {
   const handleSend = async (index) => {
     const request = requests[index];
     const certInfo = certData[index];
-
+  
     if (!certInfo.certNo || !certInfo.file || !request?.studentId?._id || !request._id) {
       alert('Missing required data: certificate number, file, student ID, or request ID.');
       return;
     }
-
+  
     try {
       const formData = new FormData();
       formData.append('certificateNumber', certInfo.certNo);
       formData.append('file', certInfo.file);
       formData.append('studentId', request.studentId._id);
-
+  
+      // Send certificate
       await axios.put(
         `${import.meta.env.VITE_API_URL}/api/admin-certi/certificateRequests/${request._id}`,
         formData,
         { headers: { 'Content-Type': 'multipart/form-data' } }
       );
-
-      alert(`Certificate sent for ${request.studentId.name || 'Unknown Student'}`);
-      // Remove the sent request from the local state
+  
+      // Delete the request after sending
+      await axios.delete(`${import.meta.env.VITE_API_URL}/api/admin-certi/certificateRequests/${request._id}`);
+  
+      alert(`Certificate sent and request deleted for ${request.studentId.name || 'Unknown Student'}`);
+      // Update local state
       setRequests(requests.filter((_, i) => i !== index));
       setCertData(certData.filter((_, i) => i !== index));
-      // fetchRequests(); // Commented out to avoid refetching all requests
     } catch (err) {
-      console.error('Error sending certificate:', err.response?.data, err.message);
+      console.error('Error processing certificate:', err.response?.data, err.message);
       alert(
         err.response?.data?.message ||
-        'An error occurred while sending the certificate. Please check server logs.'
+        'An error occurred while processing the certificate. Please check server logs.'
       );
     }
   };

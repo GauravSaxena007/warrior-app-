@@ -164,5 +164,227 @@
 .admin-log-out:focus {
   outline: none; /* Remove the focus outline */
 }
+/* Dashboard Container for min-width 413px to max-width 1198px */
+@media (min-width: 413px) and (max-width: 1198px) {
+  .dashboard-container {
+    padding: 15px;
+    margin-left: 0;
+  }
+
+  .row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px; /* Standard gap for medium screens */
+  }
+
+  .col {
+    flex: 1 1 calc(33.33% - 20px); /* Three columns layout */
+    min-width: 250px;
+  }
+
+  .card {
+    border-radius: 8px;
+    padding: 20px;
+    color: #fff;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.15);
+    font-size: 16px; /* Standard font size for medium screens */
+  }
+
+  .card-block {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .bg-c-blue {
+    background: #4099ff;
+  }
+
+  .bg-c-green {
+    background: #2ed8b6;
+  }
+
+  .bg-c-yellow {
+    background: #FFB64D;
+  }
+
+  .bg-c-pink {
+    background: #FF5370;
+  }
+
+  .bg-c-teal {
+    background: teal;
+  }
+
+  .bg-c-darkgreen {
+    background: darkgreen;
+  }
+
+  .text-right {
+    display: flex;
+    justify-content: space-between;
+    font-size: 22px;
+  }
+
+  .f-left {
+    margin-right: 10px;
+  }
+
+  .f-right {
+    float: right;
+    font-weight: bold;
+  }
+
+  .m-b-20 {
+    margin-bottom: 20px;
+    font-size: 16px;
+  }
+
+  .m-b-0 {
+    margin-bottom: 0;
+  }
+
+  .pending-count {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 100px; /* Adjust spacing for medium screens */
+  }
+
+  .small-text {
+    font-size: 14px;
+    opacity: 0.8;
+  }
+
+  .count-text {
+    font-size: 28px;
+    font-weight: bold;
+  }
+
+  .tall-card {
+    height: 175px; /* Adjusted height */
+    min-height: 175px;
+  }
+
+  /* Admin logout button */
+  .admin-log-out {
+    padding: 10px 20px;
+    font-size: 16px;
+  }
+
+  .logout-icon {
+    width: 20px;
+    height: 20px;
+    margin-right: 8px;
+  }
+}
+/* Dashboard Container for max-width 412px */
+@media (max-width: 412px) {
+  .dashboard-container {
+    padding: 10px;
+    margin-left: 0;
+  }
+
+  .row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px; /* Reduced gap for smaller screens */
+  }
+
+  .col {
+    flex: 1 1 100%; /* Full width for mobile */
+    min-width: 100%;
+  }
+
+  .card {
+    border-radius: 8px;
+    padding: 15px;
+    color: #fff;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    font-size: 14px; /* Smaller font for mobile */
+  }
+
+  .card-block {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .bg-c-blue {
+    background: #4099ff;
+  }
+
+  .bg-c-green {
+    background: #2ed8b6;
+  }
+
+  .bg-c-yellow {
+    background: #FFB64D;
+  }
+
+  .bg-c-pink {
+    background: #FF5370;
+  }
+
+  .bg-c-teal {
+    background: teal;
+  }
+
+  .bg-c-darkgreen {
+    background: darkgreen;
+  }
+
+  .text-right {
+    display: block; /* Stack the content vertically on mobile */
+    text-align: center;
+    font-size: 20px;
+  }
+
+  .f-left, .f-right {
+    float: none; /* Remove floats for mobile */
+    margin: 0;
+  }
+
+  .m-b-20 {
+    margin-bottom: 10px;
+    font-size: 14px;
+  }
+
+  .m-b-0 {
+    margin-bottom: 0;
+  }
+
+  .pending-count {
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Center items for small screens */
+    gap: 5px;
+  }
+
+  .small-text {
+    font-size: 12px; /* Smaller font size for mobile */
+    opacity: 0.8;
+  }
+
+  .count-text {
+    font-size: 24px;
+    font-weight: bold;
+  }
+
+  .tall-card {
+    height: auto; /* Adjust height to content */
+    min-height: auto;
+  }
+
+  /* Admin logout button */
+  .admin-log-out {
+    padding: 8px 15px;
+    font-size: 14px; /* Smaller font for mobile */
+  }
+
+  .logout-icon {
+    width: 18px;
+    height: 18px;
+    margin-right: 5px; /* Adjust margin for mobile */
+  }
+}
 
 

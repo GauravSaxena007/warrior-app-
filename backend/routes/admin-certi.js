@@ -143,6 +143,10 @@ router.get('/admin-certi/issuedCertificates', async (req, res) => {
     res.status(500).json({ message: 'Server error' });
   }
 });
+router.get('/status/issued', async (req, res) => {
+  const count = await CertificateRequest.countDocuments({ status: 'issued' });
+  res.json({ count });
+});
 
 
 // Route to get count of issued certificates

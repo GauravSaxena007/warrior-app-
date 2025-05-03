@@ -5,7 +5,7 @@ const jwt = require('jsonwebtoken');
 const authMiddleware = require('../middleware/authMiddleware');
 const Franchisee = require('../models/Franchisee'); // Adjust path accordingly
 
-// Dummy admin user (plain password)
+// admin user 
 const adminUser = {
   email: 'admin@example.com',
   password: '123456', // plain password

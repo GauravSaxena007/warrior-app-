@@ -10,7 +10,7 @@ const AdminLogin = () => {
   const handleLogin = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post('http://localhost:5000/api/auth/adminlogin', {
+      const response = await axios.post(`${import.meta.env.VITE_API_URL}/api/auth/adminlogin`,{
         email,
         password,
       });
@@ -22,7 +22,7 @@ const AdminLogin = () => {
 
       alert('Login successful!');
       // Redirect to admin panel with token in URL
-      window.location.href = `http://localhost:3001/dashboard?token=${encodeURIComponent(token)}`;
+      window.location.href = `${import.meta.env.VITE_ADMIN_URL}/dashboard?token=${encodeURIComponent(token)}`;
     } catch (error) {
       console.error('Login failed:', error);
       alert('Invalid email or password');
@@ -51,9 +51,9 @@ const AdminLogin = () => {
             onChange={(e) => setPassword(e.target.value)}
             required
           />
-          <button type="submit" className="login-btn">Submit</button>
+          <button type="submit" className="login-btn">🔐 Submit</button>
           <button onClick={() => navigate('/')} className="login-home-btn">
-            Back To Homepage
+          🏠 Back To Homepage
           </button>
         </form>
       </div>
