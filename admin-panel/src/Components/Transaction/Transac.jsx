@@ -127,7 +127,7 @@ const Transac = () => {
         <input type="text" name="receiptNo" placeholder="Receipt No." value={formData.receiptNo} onChange={handleChange} required />
         <input type="number" name="studentCount" placeholder="No. of Students" value={formData.studentCount} onChange={handleChange} required />
         <input type="number" name="amount" placeholder="Amount" value={formData.amount} onChange={handleChange} required />
-        <input type="date" name="paymentDate" value={formData.paymentDate} onChange={handleChange} required />
+        <span style={{ paddingTop: "9px" }}>Payment Date:</span> <input type="date" name="paymentDate" value={formData.paymentDate} onChange={handleChange} required />
         
         <select name="paymentMethod" value={formData.paymentMethod} onChange={handleChange} required>
           <option value="">Select Payment Method</option>

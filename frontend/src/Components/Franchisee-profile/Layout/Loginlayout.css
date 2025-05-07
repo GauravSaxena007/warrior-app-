@@ -268,4 +268,30 @@ body {
       display: block;
     }
   }
+  @media (min-width: 413px) and (max-width: 1198px) {
+    .navbar-2 {
+      display: none;
+    }
+  
+    .hamburger-2 {
+      display: block;
+    }
+  
+    .contact-info-1-2 {
+      margin-left: 90px;
+    }
+  
+    .dropdown-2 {
+      margin-left: 1px;
+    }
+  
+    .dropdown-btn-2 {
+      margin-left: 63px;
+      font-size: 15px;
+    }
+  
+    .hidden-nav-2 + .hamburger-2 {
+      top: -90px; /* Move hamburger up when navbar hides */
+    }
+  }
   

@@ -56,6 +56,11 @@ router.post('/login', async (req, res) => {
       return res.status(401).json({ message: 'Invalid password' });
     }
 
+    const today = new Date();
+    if (user.renewalDate && today > new Date(user.renewalDate)) {
+      return res.status(403).json({ message: 'Renewal date expired. Please contact admin.' });
+    }
+
     const token = jwt.sign(
       { id: user._id, email: user.email, role: 'franchisee' },
       process.env.JWT_SECRET,
@@ -63,13 +68,15 @@ router.post('/login', async (req, res) => {
     );
 
     res.json({
+      message: 'Login successful',
       token,
       user: {
         id: user._id,
         email: user.email,
         role: 'franchisee',
         centerName: user.centerName,
-        centerHead: user.centerHead
+        centerHead: user.centerHead,
+        renewalDate: user.renewalDate
       }
     });
   } catch (err) {

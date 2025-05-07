@@ -212,14 +212,15 @@ const StudentRegistration = () => {
                   Form No:
                 </label>
                 <input
-                  type="text"
-                  name="formNumber"
-                  id="formNumber"
-                  value={formData.formNumber}
-                  onChange={handleChange}
-                  className="form-input"
-                  required
-                />
+  type="text"
+  name="formNumber"
+  id="formNumber"
+  value={formData.formNumber}
+  onChange={handleChange}
+  className="form-input"
+  required
+  disabled
+/>
               </div>
 
               <div className="form-group">
@@ -276,7 +277,8 @@ const StudentRegistration = () => {
                   id="franchiseeHead"
                   value={formData.franchiseeHead}
                   className="form-input"
-                  readOnly // Make the field read-only
+                  required
+  disabled
                 />
               </div>
             </div>

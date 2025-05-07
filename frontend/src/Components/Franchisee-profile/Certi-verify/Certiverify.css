@@ -62,3 +62,59 @@
 .submit-btn:hover {
   background-color: darkorange;
 }
+.certificate-result {
+  border: 1px solid #ddd;
+  padding: 20px;
+  border-radius: 12px;
+  background-color: #f9f9f9;
+  max-width: 500px;
+  margin: 20px auto;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.certificate-result h4 {
+  margin-bottom: 16px;
+  font-size: 20px;
+  color: #333;
+  border-bottom: 1px solid #ccc;
+  padding-bottom: 8px;
+}
+
+.certificate-result p {
+  margin: 8px 0;
+  font-size: 16px;
+  color: #444;
+}
+
+.certificate-result strong {
+  color: #222;
+}
+
+.certificate-view {
+  margin-top: 20px;
+  text-align: center;
+}
+
+.view-link {
+  display: inline-block;
+  padding: 10px 20px;
+  background-color: #0077cc;
+  color: white;
+  text-decoration: none;
+  border-radius: 6px;
+  transition: background-color 0.3s ease;
+}
+
+.view-link:hover {
+  background-color: #005fa3;
+}
+.error-message {
+  color: #d8000c;
+  background-color: #ffbaba;
+  padding: 10px 15px;
+  border: 1px solid #d8000c;
+  border-radius: 6px;
+  margin: 10px 0;
+  font-weight: 500;
+  text-align: center;
+}

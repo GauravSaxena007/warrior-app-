@@ -340,3 +340,74 @@
     font-size: 0.875rem;
   }
 }
+@media (min-width: 413px) and (max-width: 1198px) {
+  .container-fra-ma {
+    padding: 20px;
+    margin: 0 auto;
+    margin-top: -100px;
+    margin-left: -30px;
+  }
+
+  .title {
+    font-size: 1.6rem;
+    margin-bottom: 20px;
+  }
+
+  .button {
+    font-size: 0.9375rem;
+    padding: 10px 20px;
+    margin-bottom: 20px;
+  }
+
+  .table th,
+  .table td {
+    padding: 8px;
+    font-size: 0.75rem;
+  }
+
+  .action-button {
+    font-size: 0.75rem;
+    padding: 6px 8px;
+    width: 45px;
+  }
+
+  .modal-content {
+    padding: 20px;
+    width: 90vw;
+  }
+
+  .modal-content h3 {
+    font-size: 1.4rem;
+  }
+
+  .input {
+    font-size: 0.875rem;
+    padding: 10px;
+  }
+
+  .save-button,
+  .cancel-button {
+    font-size: 0.875rem;
+    padding: 10px 16px;
+  }
+
+  .duration-buttons {
+    flex-direction: row;
+    gap: 10px;
+  }
+
+  .modal-content form {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .modal-content h3,
+  .duration-buttons,
+  .modal-actions {
+    grid-column: span 2;
+  }
+}
+
+.small-text-1 {
+  font-size: 7.5px;
+  color: rgb(128, 128, 128);
+}

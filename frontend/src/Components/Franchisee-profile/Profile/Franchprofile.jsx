@@ -48,7 +48,7 @@ const FranchProfile = () => {
             </tr>
             <tr>
               <td><strong>Center Validity:</strong></td>
-              <td>{franchisee.renewalDate}</td>
+              <td>{new Date(franchisee.renewalDate).toLocaleDateString('en-GB')}</td>
               <td><strong>Email:</strong></td>
               <td>{franchisee.email}</td>
             </tr>
@@ -75,10 +75,6 @@ const FranchProfile = () => {
           <p className="profile-text-franch-fro">Profile Small <br /> 200px X 200px</p>
         </div>
       </div>
-
-      <p className="profile-note-franch-fro">
-        Note: Profile Image size Exact 200px By 200px. (Only JPG, JPEG, PNG Format Supported)
-      </p>
     </div>
   );
 };

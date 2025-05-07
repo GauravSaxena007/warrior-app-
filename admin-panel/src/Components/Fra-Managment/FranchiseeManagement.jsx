@@ -183,6 +183,12 @@ const FranchiseeManagement = () => {
       alert("Error while deleting franchisee: " + error.message);
     }
   };
+  const formatDate = (isoDate) => {
+    if (!isoDate) return "";
+    const [year, month, day] = isoDate.split("-");
+    return `${day}/${month}/${year}`;
+  };
+  
 
   return (
     <div className="container-fra-ma">
@@ -204,8 +210,12 @@ const FranchiseeManagement = () => {
             <th>Area</th>
             <th>Pincode</th>
             <th>Reg. Number</th>
-            <th>Start Date</th>
-            <th>Renewal Date</th>
+            <th>
+  Start Date <span className="small-text-1">(dd/mm/yyyy)</span>
+</th>
+<th>
+  Renewal Date <span className="small-text-1">(dd/mm/yyyy)</span>
+</th>
             <th>Password</th>
             <th>Photo</th>
             <th>Actions</th>
@@ -224,8 +234,8 @@ const FranchiseeManagement = () => {
               <td>{franchisee.area}</td>
               <td>{franchisee.pincode}</td>
               <td>{franchisee.registrationNumber}</td>
-              <td>{franchisee.startingDate}</td>
-              <td>{franchisee.renewalDate}</td>
+              <td>{formatDate(franchisee.startingDate)}</td>
+<td>{formatDate(franchisee.renewalDate)}</td>
               <td>{franchisee.password}</td>
               <td>
                 {franchisee.photo && (
@@ -280,10 +290,6 @@ const FranchiseeManagement = () => {
                 <input className="input" type="file" name="photo" accept="image/*" onChange={handleInputChange} />
               </label>
 
-              <label>
-                Upload Certificate:
-                <input className="input" type="file" name="certificate" accept=".pdf,.jpg,.png" onChange={handleInputChange} />
-              </label>
 
               <input className="input" type="email" name="email" placeholder="Email" value={formData.email} onChange={handleInputChange} />
 <input className="input" type="text" name="password" placeholder="Password" value={formData.password} onChange={handleInputChange} />

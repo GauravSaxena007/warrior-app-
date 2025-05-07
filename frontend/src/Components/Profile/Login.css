@@ -57,7 +57,7 @@
 .login-btn {
     width: 100%;
     padding: 10px;
-    background: red;
+    background: rgb(0, 126, 0);
     color: white;
     font-size: 16px;
     border: none;
@@ -84,8 +84,8 @@ body, html {
 .login-home-btn {
     width: 100%;
     padding: 10px;
-    background: rgb(5, 134, 5);
-    color: white;
+    background: rgb(226, 230, 8);
+    color: rgb(0, 0, 0);
     font-size: 16px;
     border: none;
     border-radius: 5px;
@@ -94,5 +94,5 @@ body, html {
 }
 
 .login-home-btn:hover {
-    background: rgb(156, 104, 104);
+    background: rgb(61, 31, 31);
 }
