@@ -11,15 +11,15 @@
 
 /* Logo container (sticks to the top-left) */
 .logo-container-2 {
-    position: fixed;
-    top: 10px; /* Slightly upward */
-    left: 30px;
-    z-index: 1001;
-    padding: 5px;
+     position: fixed;
+  top: 11px; /* Slightly upward */
+  left: 35px;
+  z-index: 1001;
+  padding: -3px;
 }
 
 .logo-2 {
-    height: 75px; /* Adjusted for better proportions */
+    height: 95px; /* Adjusted for better proportions */
 }
 
 /* Navbar Styling */

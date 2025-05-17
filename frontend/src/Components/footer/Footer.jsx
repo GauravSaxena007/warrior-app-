@@ -44,7 +44,7 @@ const Footer = () => {
         {/* Left Section - Logo */}
         <div className="footer-logo">
           <img src={footerData.footerLogo || "https://via.placeholder.com/100"} alt="RCSAS Education Logo" onError={(e) => { e.target.src = "https://via.placeholder.com/100"; console.log("Image load failed for:", e.target.src, "using fallback"); }} />
-          <h4>RCSAS EDUCATIONS</h4>
+          <h4>WARRIOR EDUCATION</h4>
         </div>
 
         {/* Middle Section - Contact Details */}

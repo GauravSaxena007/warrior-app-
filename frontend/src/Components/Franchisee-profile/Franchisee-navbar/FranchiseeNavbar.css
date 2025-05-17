@@ -1,12 +1,24 @@
 /* Tricolor Banner */
 .franch-tricolor-banner {
-  background: linear-gradient(to right, #ff9933, white, #138808);
+    background: linear-gradient(
+    to right,
+    #ff9933 0%,
+    #ff9933 30%,
+    #f3f0f0 50%,
+    #f3f0f0 40%,
+    #138808 70%,
+    #138808 100%
+  );
   padding: 12px;
   text-align: center;
   font-size: 20px;
   font-weight: bold;
   color: #333;
   margin-top: 35px;
+}
+ 
+.franch-welcome-text{
+color: #0a0888;
 }
 
 /* Navigation Bar */

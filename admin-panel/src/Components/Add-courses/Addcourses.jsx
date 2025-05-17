@@ -37,7 +37,7 @@ function Addcourses() {
       code: newCourse.code
     };
 
-    axios.post("http://localhost:5000/api/courses", newCourseObj)
+    axios.post(`${import.meta.env.VITE_API_URL}/api/courses`, newCourseObj)
       .then(res => {
         setCourses([...courses, res.data]);
         setNewCourse({
@@ -57,7 +57,7 @@ function Addcourses() {
   };
 
   const handleDeleteCourse = (id) => {
-    axios.delete(`http://localhost:5000/api/courses/${id}`)
+    axios.delete(`${import.meta.env.VITE_API_URL}/api/courses/${id}`)
       .then(() => setCourses(courses.filter(course => course._id !== id)))
       .catch(err => console.error("Error deleting course:", err));
   };

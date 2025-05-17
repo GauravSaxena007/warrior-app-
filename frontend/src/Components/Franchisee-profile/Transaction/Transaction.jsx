@@ -70,7 +70,7 @@ const Transaction = () => {
 
   return (
     <div className="container-transaction" style={{ boxShadow: 'none', background: 'transparent' }}>
-      <h4 className="pro-h p-2 w-80 text-left" style={{ width: "100%" }}>
+      <h4 className="profile-header pro-h mx-auto text-left" style={{ width: '100%', marginTop: '-15px' }}>
         Transaction List
       </h4>
       <div className="d-flex justify-content-between p-2 bg-light" style={{ width: "100%" }}>

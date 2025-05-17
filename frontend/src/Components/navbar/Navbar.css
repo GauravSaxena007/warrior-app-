@@ -12,14 +12,14 @@
 /* 🔷 Logo Container */
 .logo-container {
   position: fixed;
-  top: -10px; /* Slightly upward */
-  left: 10px;
+  top: -14px; /* Slightly upward */
+  left: 15px;
   z-index: 1001;
-  padding: 5px;
+  padding: -3px;
 }
 
 .logo {
-  height: 120px; /* Adjusted for better proportions */
+  height: 135px; /* Adjusted for better proportions */
 }
 
 /* 🟠 Desktop Navbar */

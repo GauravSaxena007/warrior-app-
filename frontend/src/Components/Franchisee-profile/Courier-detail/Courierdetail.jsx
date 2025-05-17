@@ -45,7 +45,7 @@ const Courierdetail = () => {
 
   return (
       <div className="container-courier-detail" style={{ boxShadow: 'none', background: 'transparent' }}>
-      <h4 className="pro-h p-2 w-80 text-left" style={{ width: "101%" }}>
+      <h4 className="profile-header pro-h mx-auto text-left" style={{ width: '100%', marginTop: '-2px' }}>
         Courier Detail
       </h4>
       <div className="center-head-display">
