@@ -6,7 +6,7 @@ const path = require("path");
 dotenv.config();
 
 const app = express();
-const port = process.env.PORT || 80;
+const port = process.env.PORT || 5000;
 
 // CORS Middleware with origin whitelist and logging
 const allowedOrigins = [
@@ -15,10 +15,7 @@ const allowedOrigins = [
   'http://192.168.29.156:5173',
   'http://192.168.29.156:3001',
   'http://localhost:5000',
-  'http://192.168.29.156:5000',
-  'http://147.93.28.36:5000',
-  'http://5pixel.in',
-  'https://5pixel.in'  
+  'http://192.168.29.156:5000'
 ];
 
 app.use(
