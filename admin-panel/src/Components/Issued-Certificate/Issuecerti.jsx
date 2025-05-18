@@ -12,7 +12,7 @@ const Issuecerti = () => {
 
   const fetchRequests = async () => {
     try {
-      const res = await axios.get(`${import.meta.env.VITE_API_URL}/api/admin-certi/certificateRequests`);
+      const res = await axios.get(`${import.meta.env.VITE_API_URL}/admin-certi/certificateRequests`);
       setRequests(res.data);
       setCertData(res.data.map(() => ({ certNo: '', file: null })));
     } catch (err) {
@@ -44,13 +44,13 @@ const Issuecerti = () => {
   
       // Send certificate
       await axios.put(
-        `${import.meta.env.VITE_API_URL}/api/admin-certi/certificateRequests/${request._id}`,
+        `${import.meta.env.VITE_API_URL}/admin-certi/certificateRequests/${request._id}`,
         formData,
         { headers: { 'Content-Type': 'multipart/form-data' } }
       );
   
       // Delete the request after sending
-      await axios.delete(`${import.meta.env.VITE_API_URL}/api/admin-certi/certificateRequests/${request._id}`);
+      await axios.delete(`${import.meta.env.VITE_API_URL}/admin-certi/certificateRequests/${request._id}`);
   
       alert(`Certificate sent and request deleted for ${request.studentId.name || 'Unknown Student'}`);
       // Update local state
@@ -70,7 +70,7 @@ const Issuecerti = () => {
     if (!confirm) return;
 
     try {
-      await axios.delete(`${import.meta.env.VITE_API_URL}/api/admin-certi/certificateRequests/${id}`);
+      await axios.delete(`${import.meta.env.VITE_API_URL}/admin-certi/certificateRequests/${id}`);
       alert('Certificate request deleted.');
       fetchRequests();
     } catch (err) {

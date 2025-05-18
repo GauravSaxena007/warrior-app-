@@ -15,7 +15,7 @@ const Certiverify = () => {
     setLoading(true);
 
     try {
-      const res = await axios.get(`${import.meta.env.VITE_API_URL}/api/admin-certi/certificate/${certificateNumber}`);
+      const res = await axios.get(`${import.meta.env.VITE_API_URL}/admin-certi/certificate/${certificateNumber}`);
       if (res.data) {
         setCertificate(res.data);
       } else {

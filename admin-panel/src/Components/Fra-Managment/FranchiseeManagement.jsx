@@ -26,7 +26,7 @@ const FranchiseeManagement = () => {
   useEffect(() => {
     const fetchFranchisees = async () => {
       try {
-        const res = await fetch(`${import.meta.env.VITE_API_URL}/api/franchisee`);
+        const res = await fetch(`${import.meta.env.VITE_API_URL}/franchisee`);
   
         // Step 4: Handle HTML error responses
         if (!res.ok) {
@@ -97,8 +97,8 @@ const FranchiseeManagement = () => {
     }
 
     const url = editingIndex !== null
-      ? `${import.meta.env.VITE_API_URL}/api/franchisee/${franchisees[editingIndex]._id}`
-      : `${import.meta.env.VITE_API_URL}/api/franchisee`;
+      ? `${import.meta.env.VITE_API_URL}/franchisee/${franchisees[editingIndex]._id}`
+      : `${import.meta.env.VITE_API_URL}/franchisee`;
 
     const method = editingIndex !== null ? "PUT" : "POST";
 
@@ -166,7 +166,7 @@ const FranchiseeManagement = () => {
     if (!window.confirm(`Are you sure you want to delete ${toDelete.name}?`)) return;
 
     try {
-      const response = await fetch(`${import.meta.env.VITE_API_URL}/api/franchisee/${toDelete._id}`, {
+      const response = await fetch(`${import.meta.env.VITE_API_URL}/franchisee/${toDelete._id}`, {
         method: "DELETE",
       });
 

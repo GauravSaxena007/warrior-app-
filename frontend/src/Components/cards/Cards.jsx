@@ -9,7 +9,7 @@ const Cards = () => {
   useEffect(() => {
     const fetchCards = async () => {
       try {
-        const response = await fetch(`${import.meta.env.VITE_API_URL}/api/cards`);
+        const response = await fetch(`${import.meta.env.VITE_API_URL}/cards`);
         const data = await response.json();
         setCards(data);
       } catch (err) {

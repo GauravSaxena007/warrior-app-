@@ -17,7 +17,7 @@ const Transaction = () => {
           throw new Error('Please log in to view transactions');
         }
 
-        const res = await axios.get(`${import.meta.env.VITE_API_URL}/api/transactions`, {
+        const res = await axios.get(`${import.meta.env.VITE_API_URL}/transactions`, {
           headers: { Authorization: `Bearer ${token}` },
         });
         console.log('Transactions API response:', res.data);
@@ -122,7 +122,7 @@ const Transaction = () => {
                 <td>
                   {transaction.receiptUpload ? (
                     <a
-                      href={`${import.meta.env.VITE_API_URL}/api/transactions/uploads/${transaction.receiptUpload}`}
+                      href={`${import.meta.env.VITE_API_URL}/transactions/uploads/${transaction.receiptUpload}`}
                       target="_blank"
                       rel="noopener noreferrer"
                       className="btn btn-info btn-sm"

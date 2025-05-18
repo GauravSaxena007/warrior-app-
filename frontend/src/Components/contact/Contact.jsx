@@ -21,7 +21,7 @@ const Contact = () => {
   });
 
   useEffect(() => {
-    axios.get(`${import.meta.env.VITE_API_URL}/api/contact/info`)
+    axios.get(`${import.meta.env.VITE_API_URL}/contact/info`)
       .then(response => {
         console.log("Contact Info Response:", response.data);
         setContactInfo(response.data);
@@ -36,7 +36,7 @@ const Contact = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    axios.post(`${import.meta.env.VITE_API_URL}/api/contact/submissions`, {
+    axios.post(`${import.meta.env.VITE_API_URL}/contact/submissions`, {
       name: formData.contactPerson,
       state: formData.state,
       city: formData.city,

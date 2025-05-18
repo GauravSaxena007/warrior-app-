@@ -16,7 +16,7 @@ const ReelComp = () => {
   const [showMarquee, setShowMarquee] = useState(true);
 
   useEffect(() => {
-    fetch(`${import.meta.env.VITE_API_URL}/api/marquee`)
+    fetch(`${import.meta.env.VITE_API_URL}/marquee`)
       .then(res => {
         if (!res.ok) throw new Error('Failed to fetch marquee settings');
         return res.json();
@@ -34,7 +34,7 @@ const ReelComp = () => {
   /*
   useEffect(() => {
     const interval = setInterval(() => {
-      fetch('http://localhost:5000/api/marquee')
+      fetch('http://localhost:5000/marquee')
         .then(res => {
           if (!res.ok) throw new Error('Failed to fetch marquee settings');
           return res.json();

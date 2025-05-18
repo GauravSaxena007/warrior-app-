@@ -15,7 +15,7 @@ const Agreement = () => {
   useEffect(() => {
     const fetchAgreement = async () => {
       try {
-        const res = await axios.get(`${import.meta.env.VITE_API_URL}/api/agreement`);
+        const res = await axios.get(`${import.meta.env.VITE_API_URL}/agreement`);
         setAgreementData(res.data);
       } catch (err) {
         console.error('Error fetching agreement:', err);

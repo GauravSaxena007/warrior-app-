@@ -9,7 +9,7 @@ const Welcome = () => {
   });
 
   useEffect(() => {
-    axios.get(`${import.meta.env.VITE_API_URL}/api/settings`)
+    axios.get(`${import.meta.env.VITE_API_URL}/settings`)
       .then((response) => {
         const data = response.data;
         setWelcomeData({

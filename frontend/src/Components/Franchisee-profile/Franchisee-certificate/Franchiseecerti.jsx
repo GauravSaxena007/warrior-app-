@@ -13,8 +13,8 @@ const Franchiseecerti = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const certRes = await axios.get(`${import.meta.env.VITE_API_URL}/api/fra-certificates`);
-        const franRes = await axios.get(`${import.meta.env.VITE_API_URL}/api/franchisee`);
+        const certRes = await axios.get(`${import.meta.env.VITE_API_URL}/fra-certificates`);
+        const franRes = await axios.get(`${import.meta.env.VITE_API_URL}/franchisee`);
 
         setCertificates(certRes.data);
         setFranchisees(franRes.data);
@@ -26,7 +26,7 @@ const Franchiseecerti = () => {
     const fetchFranchiseeHead = async () => {
       try {
         const token = localStorage.getItem("token");
-        const res = await axios.get(`${import.meta.env.VITE_API_URL}/api/franchisee/profile`, {
+        const res = await axios.get(`${import.meta.env.VITE_API_URL}/franchisee/profile`, {
           headers: {
             Authorization: `Bearer ${token}`,
           },

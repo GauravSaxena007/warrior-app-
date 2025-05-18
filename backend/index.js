@@ -15,7 +15,9 @@ const allowedOrigins = [
   'http://192.168.29.156:5173',
   'http://192.168.29.156:3001',
   'http://localhost:5000',
-  'http://192.168.29.156:5000'
+  'http://192.168.29.156:5000',
+  'http://147.93.28.36',
+  'http://srv830649.hstgr.cloud'
 ];
 
 app.use(

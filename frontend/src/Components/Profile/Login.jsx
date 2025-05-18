@@ -12,7 +12,7 @@ const Login = () => {
 
     try {
       // Try admin login first
-      let res = await fetch(`${import.meta.env.VITE_API_URL}/api/auth/login`, {
+      let res = await fetch(`${import.meta.env.VITE_API_URL}/auth/login`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -29,7 +29,7 @@ const Login = () => {
       }
 
       // If admin login fails, try franchisee login
-      res = await fetch(`${import.meta.env.VITE_API_URL}/api/auth/franchisee-login`, {
+      res = await fetch(`${import.meta.env.VITE_API_URL}/auth/franchisee-login`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
