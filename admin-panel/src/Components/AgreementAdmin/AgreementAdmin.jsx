@@ -34,7 +34,7 @@ const AgreementAdmin = () => {
   // Function to save the agreement by sending a POST request to the backend
   const saveAgreement = async () => {
     try {
-      const response = await axios.post(`${import.meta.env.VITE_API_URL}/agreement/save`, {
+      const response = await axios.post(`${import.meta.env.VITE_API_URL}/api/agreement/save`, {
         welcomeTitle,
         agreementTitle,
         content,

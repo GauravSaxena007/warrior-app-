@@ -16,7 +16,7 @@ const Settings = () => {
 
   useEffect(() => {
     // Fetch initial settings from backend
-    axios.get(`${import.meta.env.VITE_API_URL}/settings`)
+    axios.get(`${import.meta.env.VITE_API_URL}/api/settings`)
       .then((response) => {
         const data = response.data;
         console.log("Fetched settings:", data); // Debug log
@@ -75,14 +75,14 @@ const Settings = () => {
     formData.append("phone2", phone2);
     formData.append("socialLinks", JSON.stringify(socialLinks));
 
-    axios.post(`${import.meta.env.VITE_API_URL}/settings`, formData, {
+    axios.post(`${import.meta.env.VITE_API_URL}/api/settings`, formData, {
       headers: { "Content-Type": "multipart/form-data" },
     })
       .then((response) => {
         console.log("Save response data:", response.data); // Debug log
         alert("Changes saved successfully!");
         // Refresh settings to update logo URLs
-        axios.get(`${import.meta.env.VITE_API_URL}/settings`)
+        axios.get(`${import.meta.env.VITE_API_URL}/api/settings`)
           .then((res) => {
             const data = res.data;
             console.log("Refreshed settings:", data); // Debug log

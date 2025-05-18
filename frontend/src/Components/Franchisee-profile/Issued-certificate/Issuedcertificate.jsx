@@ -17,7 +17,7 @@ const Issuedcertificate = () => {
   const fetchFranchiseeProfile = async () => {
     try {
       const token = localStorage.getItem("token");
-      const res = await axios.get(`${import.meta.env.VITE_API_URL}/franchisee/profile`, {
+      const res = await axios.get(`${import.meta.env.VITE_API_URL}/api/franchisee/profile`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -31,7 +31,7 @@ const Issuedcertificate = () => {
 
   const fetchCertificates = () => {
     axios
-      .get(`${import.meta.env.VITE_API_URL}/admin-certi/issuedCertificates`)
+      .get(`${import.meta.env.VITE_API_URL}/api/admin-certi/issuedCertificates`)
       .then((res) => {
         console.log("Certificates fetched (raw):", JSON.stringify(res.data, null, 2));
         setCertificates(res.data);

@@ -14,11 +14,11 @@ const Contactus = () => {
   const [editFormData, setEditFormData] = useState(null);
 
   useEffect(() => {
-    axios.get(`${import.meta.env.VITE_API_URL}/contact/info`)
+    axios.get(`${import.meta.env.VITE_API_URL}/api/contact/info`)
       .then(response => setContactData(response.data))
       .catch(error => console.error("Error fetching contact info:", error));
 
-    axios.get(`${import.meta.env.VITE_API_URL}/contact/submissions`)
+    axios.get(`${import.meta.env.VITE_API_URL}/api/contact/submissions`)
       .then(response => setFormSubmissions(response.data))
       .catch(error => console.error("Error fetching submissions:", error));
   }, []);
@@ -33,7 +33,7 @@ const Contactus = () => {
       alert('Please enter a valid Google Maps embed URL');
       return;
     }
-    axios.put(`${import.meta.env.VITE_API_URL}/contact/info`, contactData)
+    axios.put(`${import.meta.env.VITE_API_URL}/api/contact/info`, contactData)
       .then(() => alert("Contact info updated!"))
       .catch(error => console.error("Error updating contact info:", error));
   };
@@ -50,7 +50,7 @@ const Contactus = () => {
 
   const saveEdit = (e) => {
     e.preventDefault();
-    axios.put(`${import.meta.env.VITE_API_URL}/contact/submissions/${editingId}`, editFormData)
+    axios.put(`${import.meta.env.VITE_API_URL}/api/contact/submissions/${editingId}`, editFormData)
       .then(() => {
         setFormSubmissions(formSubmissions.map(sub => sub._id === editingId ? editFormData : sub));
         setEditingId(null);
@@ -66,7 +66,7 @@ const Contactus = () => {
   };
 
   const deleteSubmission = (id) => {
-    axios.delete(`${import.meta.env.VITE_API_URL}/contact/submissions/${id}`)
+    axios.delete(`${import.meta.env.VITE_API_URL}/api/contact/submissions/${id}`)
       .then(() => {
         setFormSubmissions(formSubmissions.filter(sub => sub._id !== id));
         alert("Submission deleted!");

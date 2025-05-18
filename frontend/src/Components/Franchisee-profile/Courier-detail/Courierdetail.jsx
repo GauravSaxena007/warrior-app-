@@ -12,7 +12,7 @@ const Courierdetail = () => {
     const fetchFranchiseeHead = async () => {
       try {
         const token = localStorage.getItem("token");
-        const res = await axios.get(`${import.meta.env.VITE_API_URL}/franchisee/profile`, {
+        const res = await axios.get(`${import.meta.env.VITE_API_URL}/api/franchisee/profile`, {
           headers: { Authorization: `Bearer ${token}` },
         });
         const headName = res.data.centerHead;
@@ -31,7 +31,7 @@ const Courierdetail = () => {
 
     const fetchCourierData = async () => {
       try {
-        const res = await axios.get(`${import.meta.env.VITE_API_URL}/courier/getCouriers/${encodeURIComponent(centerHead)}`);
+        const res = await axios.get(`${import.meta.env.VITE_API_URL}/api/courier/getCouriers/${encodeURIComponent(centerHead)}`);
         setCourierData(res.data);
       } catch (err) {
         console.error('Failed to fetch courier data:', err);

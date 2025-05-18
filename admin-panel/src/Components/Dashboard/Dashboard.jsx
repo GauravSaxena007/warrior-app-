@@ -20,7 +20,7 @@ const Dashboard = () => {
     if (!confirm) return;
 
     try {
-      const res = await axios.delete(`${import.meta.env.VITE_API_URL}/reset`);
+      const res = await axios.delete(`${import.meta.env.VITE_API_URL}/api/reset`);
       alert(res.data.message || '✅ RESET successful.');
     } catch (err) {
       console.error(err);
@@ -40,20 +40,20 @@ const Dashboard = () => {
     const fetchCounts = async () => {
       setLoading(true);
       try {
-        const franchiseeRes = await axios.get(`${import.meta.env.VITE_API_URL}/franchisee/count`);
+        const franchiseeRes = await axios.get(`${import.meta.env.VITE_API_URL}/api/franchisee/count`);
         setFranchiseeCount(Number(franchiseeRes.data.count || 0));
 
-        const pendingRes = await axios.get(`${import.meta.env.VITE_API_URL}/admin-certi/status/pending`);
+        const pendingRes = await axios.get(`${import.meta.env.VITE_API_URL}/api/admin-certi/status/pending`);
         setPendingCertificates(Number(pendingRes.data.count || pendingRes.data.total || 0));
         
-        const issuedRes = await axios.get(`${import.meta.env.VITE_API_URL}/admin-certi/issuedCertificates`);
+        const issuedRes = await axios.get(`${import.meta.env.VITE_API_URL}/api/admin-certi/issuedCertificates`);
         setIssuedCertificates(issuedRes.data.length);
 
-        const transactionRes = await axios.get(`${import.meta.env.VITE_API_URL}/transactions/all`);
+        const transactionRes = await axios.get(`${import.meta.env.VITE_API_URL}/api/transactions/all`);
         const totalAmount = transactionRes.data.reduce((sum, t) => sum + Number(t.amount || 0), 0);
         setTotalTransactionAmount(totalAmount);
 
-        const coursesRes = await axios.get(`${import.meta.env.VITE_API_URL}/courses`);
+        const coursesRes = await axios.get(`${import.meta.env.VITE_API_URL}/api/courses`);
         setTotalCourses(coursesRes.data.length || 0);
 
         setError(null);

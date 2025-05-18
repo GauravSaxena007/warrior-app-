@@ -23,7 +23,7 @@ const Navbar = () => {
   }, []);
 
   useEffect(() => {
-    axios.get(`${import.meta.env.VITE_API_URL}/settings`)
+    axios.get(`${import.meta.env.VITE_API_URL}/api/settings`)
       .then((response) => {
         const data = response.data;
         console.log("Navbar data fetched:", data); // Debug log

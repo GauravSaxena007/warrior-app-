@@ -9,7 +9,7 @@ const FranchProfile = () => {
       try {
         const token = localStorage.getItem("token");
 
-        const res = await fetch(`${import.meta.env.VITE_API_URL}/franchisee/profile`, {
+        const res = await fetch(`${import.meta.env.VITE_API_URL}/api/franchisee/profile`, {
           headers: {
             Authorization: `Bearer ${token}`,
           },

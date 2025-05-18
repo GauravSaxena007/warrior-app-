@@ -17,7 +17,7 @@ function Addcourses() {
   const [selectedCategory, setSelectedCategory] = useState("All Categories");
 
   useEffect(() => {
-    axios.get(`${import.meta.env.VITE_API_URL}/courses`)
+    axios.get(`${import.meta.env.VITE_API_URL}/api/courses`)
       .then(res => setCourses(res.data))
       .catch(err => console.error("Error fetching courses:", err));
   }, []);
@@ -37,7 +37,7 @@ function Addcourses() {
       code: newCourse.code
     };
 
-    axios.post(`${import.meta.env.VITE_API_URL}/courses`, newCourseObj)
+    axios.post(`${import.meta.env.VITE_API_URL}/api/courses`, newCourseObj)
       .then(res => {
         setCourses([...courses, res.data]);
         setNewCourse({
@@ -57,7 +57,7 @@ function Addcourses() {
   };
 
   const handleDeleteCourse = (id) => {
-    axios.delete(`${import.meta.env.VITE_API_URL}/courses/${id}`)
+    axios.delete(`${import.meta.env.VITE_API_URL}/api/courses/${id}`)
       .then(() => setCourses(courses.filter(course => course._id !== id)))
       .catch(err => console.error("Error deleting course:", err));
   };

@@ -17,7 +17,7 @@ const Reeladmin = () => {
 
   // Fetch marquee settings on mount
   useEffect(() => {
-    fetch(`${import.meta.env.VITE_API_URL}/marquee`)
+    fetch(`${import.meta.env.VITE_API_URL}/api/marquee`)
       .then(res => {
         if (!res.ok) throw new Error('Failed to fetch marquee settings');
         return res.json();
@@ -35,7 +35,7 @@ const Reeladmin = () => {
 
   // Update marquee settings
   const saveSettings = () => {
-    fetch(`${import.meta.env.VITE_API_URL}/marquee`, {
+    fetch(`${import.meta.env.VITE_API_URL}/api/marquee`, {
       method: 'PUT',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ texts, backgroundColor: bgColor, font, showMarquee })

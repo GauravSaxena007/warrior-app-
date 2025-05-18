@@ -27,7 +27,7 @@ const Loginlayout = () => {
     const fetchRenewalDate = async () => {
       try {
         const token = localStorage.getItem("token");
-        const res = await fetch(`${import.meta.env.VITE_API_URL}/franchisee/profile`, {
+        const res = await fetch(`${import.meta.env.VITE_API_URL}/api/franchisee/profile`, {
           headers: { Authorization: `Bearer ${token}` },
         });
         const data = await res.json();
@@ -53,7 +53,7 @@ const Loginlayout = () => {
   };
 
   useEffect(() => {
-    axios.get(`${import.meta.env.VITE_API_URL}/settings`)
+    axios.get(`${import.meta.env.VITE_API_URL}/api/settings`)
       .then((response) => {
         const data = response.data;
         console.log("Logo fetched:", data); // Debug log

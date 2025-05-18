@@ -14,7 +14,7 @@ const Applycertificate = () => {
     const fetchFranchiseeProfile = async () => {
       try {
         const token = localStorage.getItem("token");
-        const res = await axios.get(`${import.meta.env.VITE_API_URL}/franchisee/profile`, {
+        const res = await axios.get(`${import.meta.env.VITE_API_URL}/api/franchisee/profile`, {
           headers: {
             Authorization: `Bearer ${token}`,
           },
@@ -29,7 +29,7 @@ const Applycertificate = () => {
     // Fetch students data
     const fetchStudents = async () => {
       try {
-        const res = await axios.get(`${import.meta.env.VITE_API_URL}/students`);
+        const res = await axios.get(`${import.meta.env.VITE_API_URL}/api/students`);
         console.log("Student data fetched (raw):", JSON.stringify(res.data, null, 2));
         setData(res.data);
       } catch (err) {
@@ -40,7 +40,7 @@ const Applycertificate = () => {
     // Pre-fetch all franchisee data to cache
     const fetchFranchiseeCache = async () => {
       try {
-        const res = await axios.get(`${import.meta.env.VITE_API_URL}/franchisee`);
+        const res = await axios.get(`${import.meta.env.VITE_API_URL}/api/franchisee`);
         console.log("Franchisee data fetched (raw):", JSON.stringify(res.data, null, 2));
         const franchiseeMap = {};
         res.data.forEach((franchisee) => {
@@ -60,7 +60,7 @@ const Applycertificate = () => {
 
   const getCenterHeadFromId = async (id) => {
     try {
-      const res = await axios.get(`${import.meta.env.VITE_API_URL}/franchisee/${id}`);
+      const res = await axios.get(`${import.meta.env.VITE_API_URL}/api/franchisee/${id}`);
       return res.data.centerHead || "Unknown";
     } catch (err) {
       console.error("Error fetching individual franchisee:", err);
@@ -88,7 +88,7 @@ const Applycertificate = () => {
       );
 
       const response = await axios.post(
-        `${import.meta.env.VITE_API_URL}/certificateRequests`,
+        `${import.meta.env.VITE_API_URL}/api/certificateRequests`,
         { students: studentsData }
       );
 
@@ -102,7 +102,7 @@ const Applycertificate = () => {
 
   const handleDelete = async (id) => {
     try {
-      await axios.delete(`${import.meta.env.VITE_API_URL}/students/${id}`);
+      await axios.delete(`${import.meta.env.VITE_API_URL}/api/students/${id}`);
       setData((prev) => prev.filter((item) => item._id !== id));
     } catch (err) {
       console.error("Error deleting student:", err);

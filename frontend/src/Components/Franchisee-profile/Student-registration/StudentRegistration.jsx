@@ -23,7 +23,7 @@ const StudentRegistration = () => {
   // Fetch courses
   useEffect(() => {
     axios
-      .get(`${import.meta.env.VITE_API_URL}/courses`)
+      .get(`${import.meta.env.VITE_API_URL}/api/courses`)
       .then((res) => setCourses(res.data))
       .catch((err) => console.error('Error fetching courses:', err));
   }, []);
@@ -33,7 +33,7 @@ const StudentRegistration = () => {
     const fetchFranchisee = async () => {
       try {
         const token = localStorage.getItem('token');
-        const res = await axios.get(`${import.meta.env.VITE_API_URL}/franchisee/profile`, {
+        const res = await axios.get(`${import.meta.env.VITE_API_URL}/api/franchisee/profile`, {
           headers: {
             Authorization: `Bearer ${token}`,
           },
@@ -83,7 +83,7 @@ const StudentRegistration = () => {
         data.append(key, formData[key]);
       }
 
-      const response = await axios.post(`${import.meta.env.VITE_API_URL}/students`, data, {
+      const response = await axios.post(`${import.meta.env.VITE_API_URL}/api/students`, data, {
         headers: {
           'Content-Type': 'multipart/form-data',
         },

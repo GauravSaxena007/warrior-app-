@@ -23,7 +23,7 @@ const Hero = () => {
   useEffect(() => {
     const fetchImages = async () => {
       try {
-        const response = await fetch(`${import.meta.env.VITE_API_URL}/carousel`);
+        const response = await fetch(`${import.meta.env.VITE_API_URL}/api/carousel`);
         const data = await response.json();
         setCarouselImages(data);
       } catch (err) {
@@ -40,7 +40,7 @@ const Hero = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      await axios.post(`${import.meta.env.VITE_API_URL}/enquiries`, formData);
+      await axios.post(`${import.meta.env.VITE_API_URL}/api/enquiries`, formData);
       alert("Enquiry submitted successfully!");
       setFormData({
         name: "",

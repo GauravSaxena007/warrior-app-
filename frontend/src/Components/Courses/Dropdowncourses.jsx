@@ -12,7 +12,7 @@ function Dropdowncourses() {
 
   useEffect(() => {
     axios
-      .get(`${import.meta.env.VITE_API_URL}/courses`)
+      .get(`${import.meta.env.VITE_API_URL}/api/courses`)
       .then((res) => {
         setCourses(res.data);
 

@@ -20,7 +20,7 @@ const Transac = () => {
   useEffect(() => {
     const fetchFranchisees = async () => {
       try {
-        const res = await axios.get(`${import.meta.env.VITE_API_URL}/franchisee`);
+        const res = await axios.get(`${import.meta.env.VITE_API_URL}/api/franchisee`);
         setFranchisees(res.data);
       } catch (err) {
         console.error("Error fetching franchisees:", err);
@@ -30,7 +30,7 @@ const Transac = () => {
 
     const fetchTransactions = async () => {
       try {
-        const res = await axios.get(`${import.meta.env.VITE_API_URL}/transactions/all`);
+        const res = await axios.get(`${import.meta.env.VITE_API_URL}/api/transactions/all`);
         setTransactions(res.data);
       } catch (err) {
         console.error("Error fetching transactions:", err);
@@ -74,7 +74,7 @@ const Transac = () => {
     }
 
     try {
-      const res = await axios.post(`${import.meta.env.VITE_API_URL}/transactions`, data);
+      const res = await axios.post(`${import.meta.env.VITE_API_URL}/api/transactions`, data);
       alert("Transaction submitted!");
       setTransactions([...transactions, res.data]);
       setFormData({
@@ -99,7 +99,7 @@ const Transac = () => {
     if (!window.confirm(`Are you sure you want to delete transaction ${transaction.receiptNo}?`)) return;
 
     try {
-      await axios.delete(`${import.meta.env.VITE_API_URL}/transactions/${transaction._id}`);
+      await axios.delete(`${import.meta.env.VITE_API_URL}/api/transactions/${transaction._id}`);
       const updated = transactions.filter((_, i) => i !== index);
       setTransactions(updated);
       alert("Transaction deleted!");
@@ -172,7 +172,7 @@ const Transac = () => {
                   <td>{t.paymentMethod}</td>
                   <td>
                     {t.receiptUpload ? (
-                      <a href={`${import.meta.env.VITE_API_URL}/transactions/uploads/${t.receiptUpload}`} target="_blank" rel="noopener noreferrer">View</a>
+                      <a href={`${import.meta.env.VITE_API_URL}/api/transactions/uploads/${t.receiptUpload}`} target="_blank" rel="noopener noreferrer">View</a>
                     ) : 'N/A'}
                   </td>
                   <td><button onClick={() => handleDelete(index)}>Delete</button></td>
