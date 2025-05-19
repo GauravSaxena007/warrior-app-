@@ -20,7 +20,7 @@ import AgreementAdmin from './Components/AgreementAdmin/AgreementAdmin';
 
 function App() {
   return (
-    <Router>
+    <Router basename="/dashboard">
       <div style={{ display: 'flex' }}>
         <Sidebar />
         <div className="content" style={{ marginLeft: '350px', padding: '20px', width: '100%' }}>

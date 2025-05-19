@@ -3,6 +3,7 @@ import react from "@vitejs/plugin-react";
 import path from "path"; // 👈 make sure to import this
 
 export default defineConfig({
+  base: '/dashboard/', 
   plugins: [react()],
   resolve: {
     alias: {

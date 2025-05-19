@@ -15,6 +15,9 @@ const allowedOrigins = [
   'http://192.168.29.156:5173',
   'http://192.168.29.156:3001',
   'http://localhost:5000',
+  'http://147.93.28.36:5000',
+  'http://147.93.28.36:5173',
+  'http://147.93.28.36:3001',
   'http://192.168.29.156:5000'
 ];
 
@@ -96,17 +99,21 @@ app.use('/api/agreement', agreementRoutes);
 
 // Serve Frontend Build
 app.use('/', express.static(path.join(__dirname, 'dist-frontend')));
-app.get('/', (req, res) => {
+app.get(/^(?!\/api|\/uploads|\/dashboard).*/, (req, res) => {
   res.sendFile(path.join(__dirname, 'dist-frontend', 'index.html'));
 });
-
 // Serve Admin Panel Build
-app.use('/', express.static(path.join(__dirname, 'dist-adminpanel')));
-app.get('/dashboard', (req, res) => {
+app.use('/dashboard', express.static(path.join(__dirname, 'dist-adminpanel')));
+app.get(/^\/dashboard(\/.*)?$/, (req, res) => {
   res.sendFile(path.join(__dirname, 'dist-adminpanel', 'index.html'));
 });
 
 app.get('/error', (req, res) => {
+  if (req.originalUrl.startsWith('/dashboard')) {
+    // Do nothing – skip sending error page
+    return res.end(); // or just silently end the response
+  }
+
   const filePath = path.join(__dirname, 'dist-frontend', 'index.html');
   res.sendFile(filePath, (err) => {
     if (err) {
@@ -116,18 +123,11 @@ app.get('/error', (req, res) => {
   });
 });
 
-app.get(/^(?!\/api|\/uploads|\/dashboard).*/, (req, res) => {
-  const filePath = path.join(__dirname, 'dist-frontend', 'index.html');
-  res.sendFile(filePath, (err) => {
-    if (err) {
-      console.error(`Error serving ${filePath}:`, err);
-      res.status(500).send('Server Error');
-    }
-  });
-});
+// Catch-all route for frontend SPA (excluding API, uploads, dashboard)
+
 
 // Serve static files (uploads)
-app.use("/uploads", express.static(path.join(__dirname, "Uploads")));
+app.use("/uploads", express.static(path.join(__dirname, "uploads")));
 
 // Start Server
 app.listen(port, '0.0.0.0', () => {

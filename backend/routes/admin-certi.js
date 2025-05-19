@@ -7,7 +7,7 @@ const multer = require('multer');
 const path = require('path');
 
 const storage = multer.diskStorage({
-  destination: './Uploads/certificates/',
+  destination: './uploads/certificates/',
   filename: (req, file, cb) => {
     cb(null, `${Date.now()}-${file.originalname}`);
   },
