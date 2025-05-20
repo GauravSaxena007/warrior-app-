@@ -7,7 +7,7 @@ const Franchisee = require('../models/Franchisee'); // Adjust path accordingly
 
 // admin user 
 const adminUser = {
-  email: 'admin@example.com',
+  email: 'admin@login.com',
   password: '123456', // plain password
   role: 'admin',
 };
