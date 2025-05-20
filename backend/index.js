@@ -21,6 +21,7 @@ const allowedOrigins = [
   'http://5pixel.in:5000', // Add this
   'http://5pixel.in:5173',
   'http://5pixel.in:3001', // Add this
+  'https://147.93.28.36:5000',
   'http://5pixel.in',
   'https://5pixel.in',
   'http://147.93.28.36',
