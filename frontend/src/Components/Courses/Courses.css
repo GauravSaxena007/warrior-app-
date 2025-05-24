@@ -20,7 +20,7 @@
   justify-content: space-between;
   font-size: 0.92rem;
   width: 500px; /* Something noticeable */
-
+ margin-left: 15px;
 }
 
 .course-title {
@@ -153,4 +153,16 @@ border-color: #007bff;
   max-width: 100%;
   margin-left: 1px;
 }
+}
+
+@media (min-width: 768px) and (max-width: 1199px) {
+  .row > .col-md-4 {
+    display: none; /* Hide all cards */
+  }
+
+  
+  .card {
+    width: 100%;
+    margin: 0 auto;
+  }
 }

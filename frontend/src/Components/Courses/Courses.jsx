@@ -82,7 +82,11 @@ const Courses = () => {
                 <span>
                   <strong>Code:</strong> {course.code}
                 </span>
+                <span>
+    <strong>Semester:</strong> {course.semester}
+  </span>
               </div>
+               
             </div>
           </div>
         ))}

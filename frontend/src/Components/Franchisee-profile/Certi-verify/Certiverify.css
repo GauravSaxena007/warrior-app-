@@ -1,5 +1,5 @@
 /* Container to center the content */
-.container {
+.container-verify {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -16,6 +16,11 @@
 
 .current {
   color: gray;
+}
+
+thead.table-light th {
+  text-align: center;
+  vertical-align: middle; /* optional, to vertically center text */
 }
 
 /* Certificate Verification Box */
@@ -117,4 +122,177 @@
   margin: 10px 0;
   font-weight: 500;
   text-align: center;
+}
+.container-verify {
+  padding: 2rem;
+  max-width: 800px;
+  margin: auto;
+}
+
+.verification-box {
+  background: #f9f9f9;
+  border: 1px solid #ddd;
+  padding: 2rem;
+  border-radius: 8px;
+  box-shadow: 0 0 8px rgba(0, 0, 0, 0.05);
+}
+
+.title {
+  font-size: 1.2rem;
+  margin-bottom: 1rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  color: #333;
+}
+
+.input-box {
+  width: 100%;
+  padding: 0.5rem 1rem;
+  font-size: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  margin-bottom: 1rem;
+}
+
+.submit-btn {
+  background-color: #007bff;
+  color: white;
+  border: none;
+  padding: 0.6rem 1.5rem;
+  font-size: 1rem;
+  border-radius: 6px;
+  cursor: pointer;
+  margin-right: 0.5rem;
+  transition: background 0.3s ease;
+}
+
+.submit-btn:hover {
+  background-color: #0056b3;
+}
+
+.error-message {
+  color: red;
+  margin-top: 1rem;
+}
+
+.certificate-result {
+  margin-top: 1.5rem;
+  padding: 1rem;
+  background: #e9f7ef;
+  border: 1px solid #d4edda;
+  border-radius: 6px;
+}
+
+.view-link {
+  display: inline-block;
+  margin-top: 0.5rem;
+  background-color: #28a745;
+  color: white;
+  padding: 0.4rem 1rem;
+  border-radius: 4px;
+  text-decoration: none;
+}
+
+.view-link:hover {
+  background-color: #218838;
+}
+
+/* Table Styling for Issued Certificates & Marksheet List */
+.issued-certificates {
+  margin-top: 2rem;
+}
+
+.issued-certificates h4 {
+  margin-bottom: 1rem;
+  font-weight: 600;
+  color: #333;
+}
+
+.table {
+  width: 100%;
+  margin-bottom: 1rem;
+  background-color: white;
+  border-collapse: collapse;
+  border-radius: 6px;
+  overflow: hidden;
+}
+
+.table th,
+.table td {
+  padding: 0.75rem;
+  text-align: left;
+  border: 1px solid #dee2e6;
+}
+
+.table thead {
+  background-color: #f1f1f1;
+}
+
+.btn-sm {
+  padding: 0.3rem 0.7rem;
+  font-size: 0.85rem;
+}
+@media (max-width: 412px) {
+
+.container-verify {
+  margin-top: 35px;
+}
+
+
+  .issued-certificates table {
+    width: 111%;
+    border-collapse: collapse;
+    margin-left: -0.5rem;
+  }
+
+  .issued-certificates table thead, 
+  .issued-certificates table tbody, 
+  .issued-certificates table tr, 
+  .issued-certificates table th, 
+  .issued-certificates table td {
+    display: table-cell;
+    text-align: left;
+    border: 1px solid #ddd;
+  }
+
+  .issued-certificates table tr {
+    display: block;
+    margin-bottom: 0rem;
+    border-radius: 8px;
+    background: #f9f9f9;
+  }
+
+  .issued-certificates table thead tr {
+    display: table-row;
+  }
+
+  .issued-certificates table thead th {
+    background-color: #f1f1f1;
+  }
+
+  .issued-certificates table td {
+    display: block;
+    padding: 0.51rem;
+  }
+
+  .issued-certificates table th {
+    display: block;
+    padding: 0.455rem;
+  }
+  th:nth-child(3) {
+  height: 60px; /* or any height you want */
+  vertical-align: middle; /* optional, to center text vertically */
+}
+ th:nth-child(5) {
+  height: 55px; /* or any height you want */
+  vertical-align: middle; /* optional, to center text vertically */
+}
+ td:nth-child(5) {
+  height: 55px; /* or any height you want */
+  vertical-align: middle; /* optional, to center text vertically */
+}
+td:nth-child(6) {
+  height: 61px; /* or any height you want */
+  vertical-align: middle; /* optional, to center text vertically */
+}
 }

@@ -78,7 +78,7 @@ const Dashboard = () => {
     {
       color: 'green',
       icon: 'fa-certificate',
-      title: 'Issued Certificates',
+      title: 'Issued Certificates & Marksheets',
       count: issuedCertificates,
     },
     {

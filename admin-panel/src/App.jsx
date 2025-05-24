@@ -17,6 +17,11 @@ import Reeladmin from './Components/ReelAdmin/ReelAdmin';
 import CardsAdmin from './Components/CardsAdmin/CardsAdmin';
 import PrivateRouteadminpanel from './Components/PrivateRouteadminpanel';
 import AgreementAdmin from './Components/AgreementAdmin/AgreementAdmin';
+import Subjects from './Components/Subjects/Subjects';
+import Generatemar from './Components/Generate/Generatemar';
+import Generatecer from './Components/Generate/Generatecer';
+import Format from './Components/Generate/Format';
+import Reset from './Components/Reset/reset';
 
 function App() {
   return (
@@ -34,10 +39,50 @@ function App() {
               }
             />
             <Route
+              path="/subjects"
+              element={
+                <PrivateRouteadminpanel>
+                  <Subjects/>
+                </PrivateRouteadminpanel>
+              }
+            />
+            <Route
               path="/settings"
               element={
                 <PrivateRouteadminpanel>
                   <Settings />
+                </PrivateRouteadminpanel>
+              }
+            />
+             <Route
+              path="/generatecertificate"
+              element={
+                <PrivateRouteadminpanel>
+                 <Generatecer/>
+                </PrivateRouteadminpanel>
+              }
+            />
+             <Route
+              path="/generatemarksheet"
+              element={
+                <PrivateRouteadminpanel>
+                  <Generatemar/>
+                </PrivateRouteadminpanel>
+              }
+            />
+            <Route
+              path="/format"
+              element={
+                <PrivateRouteadminpanel>
+                  <Format/>
+                </PrivateRouteadminpanel>
+              }
+            />
+            <Route
+              path="/reset"
+              element={
+                <PrivateRouteadminpanel>
+                  <Reset/>
                 </PrivateRouteadminpanel>
               }
             />

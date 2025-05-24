@@ -206,7 +206,7 @@ const Hero = () => {
             required
           />
           <button type="submit" className="enquiry-btn">
-            Enquiry Now
+            ENQUIRY NOW
           </button>
         </form>
       </div>

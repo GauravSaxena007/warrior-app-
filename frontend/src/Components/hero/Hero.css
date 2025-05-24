@@ -87,13 +87,14 @@
 
 /* Submit Button */
 .enquiry-btn {
-  background: green;
+  background: #09a45a;
   color: white;
   padding: 10px; /* Reduce button padding */
   border: none;
   border-radius: 5px;
   font-size: 14px; /* Slightly smaller */
   cursor: pointer;
+  font-weight: bolder;
 }
 
 .enquiry-btn:hover {

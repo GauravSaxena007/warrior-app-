@@ -138,11 +138,11 @@ const Applycertificate = () => {
       <h4
   className="pro-h text-left "
   style={{ width: '100%', marginTop: '-65px' }}>
-  Apply For Certificates
+  Apply For Certificates 
 </h4>
 <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
       <button className="request-btn-certi" onClick={handleRequest}>
-        REQUEST FOR CERTIFICATE
+        REQUEST FOR CERTIFICATE & MARKSHEET
       </button> 
       {/* Added Refresh button */} 
       <button className="refresh-btn-certi" onClick={fetchAllData} >
@@ -163,8 +163,10 @@ const Applycertificate = () => {
             <th>Certificate Status</th>
             <th>Course Completion Date</th>
             <th>Action</th>
+            <th>Marks</th> 
           </tr>
         </thead>
+        
         <tbody>
           {filteredData.map((row, index) => (
             <tr key={row._id}>
@@ -232,7 +234,7 @@ const Applycertificate = () => {
                     : "pending"
                 }`}
               >
-                {/* Original status rendering commented out */}
+                
                 {/* {row.certificateStatus || "Pending"} */}
                 {row.certificateStatus || "Pending"}
               </td>
@@ -244,7 +246,21 @@ const Applycertificate = () => {
                 >
                   Delete
                 </button>
+                
               </td>
+               <td data-label="Marks">
+        {row.obtainMarks && row.obtainMarks.length > 0 ? (
+          <ul style={{ listStyle: "none", paddingLeft: 0, margin: 0 }}>
+            {row.obtainMarks.map((mark, idx) => (
+              <li key={idx}>
+                {mark.subject || "N/A"}: {mark.obtained ?? "N/A"} / {mark.maxMarks ?? "N/A"}
+              </li>
+            ))}
+          </ul>
+        ) : (
+          <span>No marks</span>
+        )}
+      </td>
             </tr>
           ))}
         </tbody>

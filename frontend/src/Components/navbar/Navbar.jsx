@@ -50,7 +50,7 @@ const Navbar = () => {
             <li className="dropdown"><Dropdowncourses /></li>
             <li><a href="/error">ONLINE EXAM</a></li>
             <li><a href="/error">ONLINE REGISTRATION</a></li>
-            <li><a href="/verify">CERTIFICATE VERIFY</a></li>
+            <li><a href="/verify">RESULT VERIFY</a></li>
             <li><a href="/contact">CONTACT US</a></li>
             <li><a href=""><Profile /></a></li>
           </ul>
@@ -72,7 +72,7 @@ const Navbar = () => {
           <li className="dropdown"><Dropdowncourses /></li>
           <li><a href="/error">ONLINE EXAM</a></li>
           <li><a href="/error">ONLINE REGISTRATION</a></li>
-          <li><a href="/verify">CERTIFICATE VERIFY</a></li>
+          <li><a href="/verify">RESULT VERIFY</a></li>
           <li><a href="/contact">CONTACT US</a></li>
           <li><a href=""><Profile /></a></li>
         </ul>

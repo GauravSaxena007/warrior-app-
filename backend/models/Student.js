@@ -26,6 +26,14 @@ const studentSchema = new mongoose.Schema({
     type: mongoose.Schema.Types.ObjectId,
     ref: 'Franchisee'
   },
+  obtainMarks: [
+  {
+    subject: String,
+    maxMarks: Number,
+    passingMarks: Number,
+    obtained: Number, // 👈 input field for "Obtain Marks"
+  },
+],
 }, { timestamps: true });
 
 module.exports = mongoose.model('Student', studentSchema);

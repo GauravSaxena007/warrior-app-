@@ -14,7 +14,7 @@ const storage = multer.diskStorage({
 });
 const upload = multer({
   storage,
-  limits: { fileSize: 5 * 1024 * 1024 }, // 5MB limit
+  limits: { fileSize: 75 * 1024 * 1024 }, // 5MB limit
 });
 
 // Get all certificate requests
@@ -28,50 +28,65 @@ router.get('/certificateRequests', async (req, res) => {
 });
 
 // Issue a certificate
-router.put('/certificateRequests/:id', upload.single('file'), async (req, res) => {
-  try {
-    const { certificateNumber, studentId } = req.body;
-    const filePath = req.file ? req.file.path : null;
+router.put(
+  '/certificateRequests/:id',
+  upload.fields([
+    { name: 'file', maxCount: 1 },       // certificate
+    { name: 'marksheet', maxCount: 1 },  // marksheet
+  ]),
+  async (req, res) => {
+    try {
+      const { certificateNumber, studentId } = req.body;
 
-    if (!certificateNumber || !filePath || !studentId) {
-      return res.status(400).json({ message: 'Certificate number, file, and student ID are required' });
+      const certificateFilePath = req.files?.file?.[0]?.path || null;
+      const marksheetFilePath = req.files?.marksheet?.[0]?.path || null;
+
+      if (!certificateNumber || !certificateFilePath || !marksheetFilePath || !studentId) {
+        return res.status(400).json({
+          message:
+            'Certificate number, certificate file, marksheet file, and student ID are required',
+        });
+      }
+
+      // Find and update certificate request status to issued
+      const updatedRequest = await CertificateRequest.findByIdAndUpdate(
+        req.params.id,
+        { status: 'issued' },
+        { new: true }
+      ).populate('studentId');
+
+      if (!updatedRequest) {
+        return res.status(404).json({ message: 'Certificate request not found' });
+      }
+
+      if (!updatedRequest.studentId?.course) {
+        return res.status(400).json({ message: 'Student course not found' });
+      }
+
+      // Create new certificate record
+      const certificate = new AdminCerti({
+        studentId,
+        certificateNumber,
+        filePath: certificateFilePath,
+        marksheetPath: marksheetFilePath,
+        course: updatedRequest.studentId.course,
+      });
+
+      await certificate.save();
+
+      // Update student's certificateStatus to 'Issued'
+      await Student.findByIdAndUpdate(studentId, { certificateStatus: 'Issued' });
+
+      res.json({ message: 'Certificate issued successfully', certificate });
+    } catch (err) {
+      if (err.code === 11000) {
+        return res.status(400).json({ message: 'Duplicate certificate number' });
+      }
+      res.status(500).json({ message: 'Error issuing certificate', error: err.message });
     }
-
-    const updatedRequest = await CertificateRequest.findByIdAndUpdate(
-      req.params.id,
-      { status: 'issued' },
-      { new: true }
-    ).populate('studentId');
-
-    if (!updatedRequest) {
-      return res.status(404).json({ message: 'Certificate request not found' });
-    }
-
-    if (!updatedRequest.studentId?.course) {
-      return res.status(400).json({ message: 'Student course not found' });
-    }
-
-    const certificate = new AdminCerti({
-      studentId,
-      certificateNumber,
-      filePath,
-      course: updatedRequest.studentId.course,
-    });
-    await certificate.save();
-
-    // Update the student's certificateStatus to "Issued"
-    await Student.findByIdAndUpdate(studentId, {
-      certificateStatus: 'Issued',
-    });
-
-    res.json({ message: 'Certificate issued successfully', certificate });
-  } catch (err) {
-    if (err.code === 11000) {
-      return res.status(400).json({ message: 'Duplicate certificate number' });
-    }
-    res.status(500).json({ message: 'Error issuing certificate', error: err.message });
   }
-});
+);
+
 
 // Get all issued certificates
 router.get('/issuedCertificates', async (req, res) => {

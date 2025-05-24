@@ -197,7 +197,7 @@ const FranchiseeManagement = () => {
         Add Franchisee
       </button>
 
-      <table className="table">
+      <table className="table-fra-management">
         <thead>
           <tr>
             <th>Name</th>

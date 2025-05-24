@@ -1,10 +1,9 @@
-// models/admin-certi.js
 const mongoose = require('mongoose');
 
 const adminCertiSchema = new mongoose.Schema({
   studentId: {
     type: mongoose.Schema.Types.ObjectId,
-    ref: 'Student', // Assumes a Student model exists
+    ref: 'Student',
     required: true,
   },
   certificateNumber: {
@@ -12,8 +11,12 @@ const adminCertiSchema = new mongoose.Schema({
     required: true,
     unique: true,
   },
-  filePath: {
-    type: String, // Path or URL of the uploaded certificate file
+  filePath: {          // certificate file path
+    type: String,
+    required: true,
+  },
+  marksheetPath: {     // marksheet file path
+    type: String,
     required: true,
   },
   course: {

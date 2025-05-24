@@ -32,7 +32,8 @@ const CertificatesV3 = () => {
               <th>Mobile</th>
               <th>Course</th>
               <th>Certificate No</th>
-              <th>View PDF</th>
+              <th>View Certificate</th>
+              <th>View Marksheet</th> {/* New column */}
             </tr>
           </thead>
           <tbody>
@@ -52,6 +53,20 @@ const CertificatesV3 = () => {
                   >
                     View
                   </a>
+                </td>
+                <td>
+                  {cert.marksheetPath ? (
+                    <a
+                      href={`${import.meta.env.VITE_API_URL}/${cert.marksheetPath.replace(/\\/g, '/')}`}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="btn btn-outline-secondary btn-sm"
+                    >
+                      View
+                    </a>
+                  ) : (
+                    <span className="text-muted">N/A</span>
+                  )}
                 </td>
               </tr>
             ))}

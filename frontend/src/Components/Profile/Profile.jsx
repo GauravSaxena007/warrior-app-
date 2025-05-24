@@ -27,7 +27,7 @@ const Profile = () => {
   return (
     <div className="dropdown-container-1" ref={dropdownRef}>
       <button className="dropdown-label-1" onClick={toggleDropdown}>
-        LOGIN
+        LOGIN ▾
       </button>
       <ul className={`dropdown-menu-1 ${isOpen ? 'open' : ''}`}>
         <li>

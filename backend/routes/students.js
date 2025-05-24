@@ -2,10 +2,10 @@ const express = require('express');
 const router = express.Router();
 const Student = require('../models/Student');
 const multer = require('multer');
-const mongoose = require('mongoose'); // ✅ Needed for ObjectId validation
+const mongoose = require('mongoose');
 
-// Basic multer setup to store in memory or temp folder
-const storage = multer.memoryStorage(); // or use diskStorage for local
+// Multer setup - memory storage (change to diskStorage if you want to save files physically)
+const storage = multer.memoryStorage();
 const upload = multer({ storage });
 
 // POST new student
@@ -17,23 +17,34 @@ router.post('/', upload.single('photo'), async (req, res) => {
       email,
       mobile,
       address,
+      obtainMarks,
       course,
       registrationDate,
       courseCompletionDate,
       courseAmount,
-      franchiseeHead, // Added to accept franchiseeHead
+      franchiseeHead,
     } = req.body;
 
-    // Debug log to inspect received franchiseeHead
     console.log('Received franchiseeHead:', franchiseeHead);
 
+    // Validate franchiseeHead: if valid ObjectId convert, else keep string
     let validatedFranchiseeHead = null;
     if (franchiseeHead) {
-      if (!mongoose.Types.ObjectId.isValid(franchiseeHead)) {
-        // Modified: Accept string instead of rejecting as invalid ObjectId
-        validatedFranchiseeHead = franchiseeHead; // Use string directly
+      if (mongoose.Types.ObjectId.isValid(franchiseeHead)) {
+        validatedFranchiseeHead = mongoose.Types.ObjectId(franchiseeHead);
       } else {
-        validatedFranchiseeHead = mongoose.Types.ObjectId(franchiseeHead); // For backward compatibility
+        validatedFranchiseeHead = franchiseeHead; // keep string as is
+      }
+    }
+
+    // Parse obtainMarks safely
+    let parsedObtainMarks = [];
+    if (obtainMarks) {
+      try {
+        parsedObtainMarks = JSON.parse(obtainMarks);
+      } catch (err) {
+        console.error("Failed to parse obtainMarks:", err);
+        return res.status(400).json({ error: "Invalid obtainMarks format" });
       }
     }
 
@@ -47,24 +58,26 @@ router.post('/', upload.single('photo'), async (req, res) => {
       registrationDate: new Date(registrationDate),
       courseCompletionDate: new Date(courseCompletionDate),
       courseAmount,
-      franchiseeHead, // Include franchiseeHead as string
-      franchiseeHeadRef: validatedFranchiseeHead && mongoose.Types.ObjectId.isValid(validatedFranchiseeHead) ? validatedFranchiseeHead : null, // Preserve ObjectId reference
+      franchiseeHead, // string or original value
+      franchiseeHeadRef: mongoose.Types.ObjectId.isValid(validatedFranchiseeHead) ? validatedFranchiseeHead : null,
       certificateStatus: "Pending",
+      obtainMarks: parsedObtainMarks,
+      // photo handling can be added here if needed (req.file)
     });
 
     await student.save();
+
     res.status(201).json(student);
   } catch (error) {
     console.error(error);
-    res.status(400).json({ error: error.message });
+    res.status(500).json({ error: error.message });
   }
 });
 
-// GET all students
+// GET all students with franchiseeHeadRef populated
 router.get('/', async (req, res) => {
   try {
-    const students = await Student.find().populate('franchiseeHeadRef', 'centerHead _id'); // Modified to populate franchiseeHeadRef
-    // Debug log to inspect sent students
+    const students = await Student.find().populate('franchiseeHeadRef', 'centerHead _id');
     console.log('Students sent:', JSON.stringify(students, null, 2));
     res.json(students);
   } catch (error) {
@@ -73,16 +86,16 @@ router.get('/', async (req, res) => {
   }
 });
 
-// DELETE a student
+// DELETE student by ID
 router.delete('/:id', async (req, res) => {
   try {
     const { id } = req.params;
     await Student.findByIdAndDelete(id);
     res.status(200).json({ message: "Student deleted successfully" });
   } catch (error) {
+    console.error("Error deleting student:", error);
     res.status(500).json({ error: "Error deleting student" });
   }
 });
-
 
 module.exports = router;
