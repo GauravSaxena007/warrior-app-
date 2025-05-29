@@ -84,7 +84,8 @@ const contactRoutes = require('./routes/contactRoutes');
 const resetRoute = require('./routes/reset');
 const carouselRoute = require('./routes/carouselRoutes');
 const agreementRoutes = require('./routes/agreement');
-
+const manualCertiRoute = require('./routes/manualcerti');
+const paymentsRoutes = require('./routes/payments');
 
 // API Endpoints
 app.use("/api/franchisee", franchiseeRoutes);
@@ -105,7 +106,8 @@ app.use('/api/contact', contactRoutes);
 app.use('/api/reset', resetRoute);
 app.use('/api/carousel', carouselRoute);
 app.use('/api/agreement', agreementRoutes);
-
+app.use('/api/manualcerti', manualCertiRoute);
+app.use('/api/payments', paymentsRoutes);
 
 // Serve Frontend Build
 app.use('/', express.static(path.join(__dirname, 'dist-frontend')));

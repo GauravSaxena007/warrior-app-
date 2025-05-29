@@ -66,7 +66,7 @@
 
 /* Table */
 .table-fra-management {
-  width: 100%;
+  width: 103%;
   border-collapse: collapse;
   margin-top: 16px;
   table-layout: fixed; /* Important: forces columns to be equal and stay inside */
@@ -83,6 +83,7 @@
   overflow-wrap: break-word;
   word-break: break-word;
   box-sizing: border-box;
+  
 }
 
 .table-fra-management th {

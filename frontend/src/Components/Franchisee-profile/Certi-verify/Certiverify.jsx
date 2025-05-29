@@ -7,29 +7,69 @@ const Certiverify = () => {
   const [matchedCertificate, setMatchedCertificate] = useState(null);
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
+  const [isManual, setIsManual] = useState(false); // Flag: manual vs issued
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    const trimmedCertNo = certificateNumber.trim().toUpperCase();
+    if (!trimmedCertNo) {
+      setError('Please enter an Enrollment Number.');
+      return;
+    }
+
     setError('');
     setMatchedCertificate(null);
+    setIsManual(false);
     setLoading(true);
 
     try {
-      const res = await axios.get(`${import.meta.env.VITE_API_URL}/api/admin-certi/issuedCertificates`);
-      const allCertificates = res.data;
+      // Fetch issued certificates first
+      const { data: issuedCertificates } = await axios.get(
+        `${import.meta.env.VITE_API_URL}/api/admin-certi/issuedCertificates`
+      );
 
-      const match = allCertificates.find(cert => cert.certificateNumber === certificateNumber.trim());
+      const issuedMatch = issuedCertificates.find(
+        (cert) => cert.certificateNumber.toUpperCase() === trimmedCertNo
+      );
 
-      if (match) {
-        setMatchedCertificate(match);
+      if (issuedMatch) {
+        setMatchedCertificate(issuedMatch);
+        setIsManual(false);
       } else {
-        setError('Wrong Enrollment Number. Please Check Enrollment Number Again.');
+        // If no issued match, check manual certificates
+        const { data: manualCertificates } = await axios.get(
+          `${import.meta.env.VITE_API_URL}/api/manualcerti`
+        );
+
+        const manualMatch = manualCertificates.find(
+          (cert) => cert.certificateNumber.toUpperCase() === trimmedCertNo
+        );
+
+        if (manualMatch) {
+          setMatchedCertificate(manualMatch);
+          setIsManual(true);
+        } else {
+          setError('No certificate found for the given Enrollment Number. Please check and try again.');
+        }
       }
     } catch (err) {
       console.error('Error verifying certificate:', err);
-      setError('Failed to fetch data. Please try again.');
+      setError('Failed to verify the certificate. Please try again later.');
     } finally {
       setLoading(false);
+    }
+  };
+
+  // Build full URL for certificate or marksheet file
+  const buildFileUrl = (filePath) => {
+    if (!filePath) return null;
+    // Normalize slashes and handle relative paths
+    const normalizedPath = filePath.replace(/\\/g, '/');
+    if (normalizedPath.startsWith('uploads/')) {
+      return `${import.meta.env.VITE_API_URL}/${normalizedPath}`;
+    } else {
+      // Default to /uploads/certificates folder for manual certificates or others
+      return `${import.meta.env.VITE_API_URL}/uploads/certificates/${normalizedPath}`;
     }
   };
 
@@ -44,13 +84,10 @@ const Certiverify = () => {
             className="input-box"
             value={certificateNumber}
             onChange={(e) => setCertificateNumber(e.target.value)}
+            disabled={loading}
             required
           />
-          <button
-            type="submit"
-            className="submit-btn mt-2"
-            disabled={loading}
-          >
+          <button type="submit" className="submit-btn mt-2" disabled={loading}>
             {loading ? 'VERIFYING...' : 'GET RESULT'}
           </button>
         </form>
@@ -73,27 +110,61 @@ const Certiverify = () => {
               </thead>
               <tbody>
                 <tr>
-                  <td>{matchedCertificate.studentId?.name || 'N/A'}</td>
-                  <td>{matchedCertificate.studentId?.mobile || 'N/A'}</td>
-                  <td>{matchedCertificate.course || 'N/A'}</td>
-                  <td>{matchedCertificate.certificateNumber}</td>
                   <td>
-                    <a
-                      href={`${import.meta.env.VITE_API_URL}/${matchedCertificate.filePath.replace(/\\/g, '/')}`}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="btn btn-outline-primary btn-sm"
-                    >
-                      View
-                    </a>
+                    {isManual
+                      ? matchedCertificate.studentName || 'N/A'
+                      : matchedCertificate.studentId?.name || 'N/A'}
                   </td>
                   <td>
-                    {matchedCertificate.marksheetPath ? (
+                    {isManual
+                      ? matchedCertificate.mobile || 'N/A'
+                      : matchedCertificate.studentId?.mobile || 'N/A'}
+                  </td>
+                  <td>
+                    {isManual
+                      ? matchedCertificate.courseName || 'N/A'
+                      : matchedCertificate.course || 'N/A'}
+                  </td>
+                  <td>{matchedCertificate.certificateNumber || 'N/A'}</td>
+                  <td>
+                    {buildFileUrl(
+                      isManual
+                        ? matchedCertificate.certificateFile || matchedCertificate.certificatePath
+                        : matchedCertificate.filePath
+                    ) ? (
                       <a
-                        href={`${import.meta.env.VITE_API_URL}/${matchedCertificate.marksheetPath.replace(/\\/g, '/')}`}
+                        href={buildFileUrl(
+                          isManual
+                            ? matchedCertificate.certificateFile || matchedCertificate.certificatePath
+                            : matchedCertificate.filePath
+                        )}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="btn btn-outline-primary btn-sm"
+                        aria-label="View Certificate"
+                      >
+                        View
+                      </a>
+                    ) : (
+                      <span className="text-muted">N/A</span>
+                    )}
+                  </td>
+                  <td>
+                    {buildFileUrl(
+                      isManual
+                        ? matchedCertificate.marksheetFile || matchedCertificate.marksheetPath
+                        : matchedCertificate.marksheetPath
+                    ) ? (
+                      <a
+                        href={buildFileUrl(
+                          isManual
+                            ? matchedCertificate.marksheetFile || matchedCertificate.marksheetPath
+                            : matchedCertificate.marksheetPath
+                        )}
                         target="_blank"
                         rel="noopener noreferrer"
                         className="btn btn-outline-secondary btn-sm"
+                        aria-label="View Marksheet"
                       >
                         View
                       </a>

@@ -7,55 +7,72 @@ const Applycertificate = () => {
   const [data, setData] = useState([]);
   const [selectedStudents, setSelectedStudents] = useState([]);
   const [franchiseeCache, setFranchiseeCache] = useState({});
-  const [centerHead, setCenterHead] = useState(null); // State to store logged-in franchisee's centerHead
+  const [centerHead, setCenterHead] = useState(null);
+  const [topupAmount, setTopupAmount] = useState(0);
+  const [chargePerApply, setChargePerApply] = useState(0);
+
+  const isDisabled = topupAmount === 0;
 
   useEffect(() => {
-    // Fetch logged-in franchisee's profile to get centerHead
+    const fetchTopupData = async () => {
+      try {
+        const token = localStorage.getItem("token");
+        if (!token) {
+          console.warn("No token found");
+          return;
+        }
+        const res = await axios.get(`${import.meta.env.VITE_API_URL}/api/payments/franchisee/balance`, {
+          headers: { Authorization: `Bearer ${token}` },
+        });
+        setTopupAmount(res.data.topupAmount || 0);
+        setChargePerApply(res.data.chargePerApply || 0);
+      } catch (err) {
+        console.error("Error fetching topup data:", err);
+      }
+    };
+
     const fetchFranchiseeProfile = async () => {
       try {
         const token = localStorage.getItem("token");
         const res = await axios.get(`${import.meta.env.VITE_API_URL}/api/franchisee/profile`, {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
+          headers: { Authorization: `Bearer ${token}` },
         });
-        console.log("Franchisee profile fetched:", res.data);
-        setCenterHead(res.data.centerHead); // Store the centerHead
+        setCenterHead(res.data.centerHead);
       } catch (err) {
         console.error("Error fetching franchisee profile:", err);
       }
     };
 
-    // Fetch students data
     const fetchStudents = async () => {
       try {
         const res = await axios.get(`${import.meta.env.VITE_API_URL}/api/students`);
-        console.log("Student data fetched (raw):", JSON.stringify(res.data, null, 2));
         setData(res.data);
       } catch (err) {
         console.error("Error fetching student data:", err);
       }
     };
 
-    // Pre-fetch all franchisee data to cache
     const fetchFranchiseeCache = async () => {
       try {
         const res = await axios.get(`${import.meta.env.VITE_API_URL}/api/franchisee`);
-        console.log("Franchisee data fetched (raw):", JSON.stringify(res.data, null, 2));
         const franchiseeMap = {};
         res.data.forEach((franchisee) => {
           franchiseeMap[franchisee._id] = franchisee.centerHead || "Unknown";
         });
-        console.log("Franchisee cache created:", franchiseeMap);
         setFranchiseeCache(franchiseeMap);
       } catch (err) {
         console.error("Error fetching franchisee data:", err);
       }
     };
 
+    fetchTopupData();
     fetchFranchiseeProfile();
     fetchStudents();
     fetchFranchiseeCache();
+
+    const handleTopupChanged = () => fetchTopupData();
+    window.addEventListener("topupChanged", handleTopupChanged);
+    return () => window.removeEventListener("topupChanged", handleTopupChanged);
   }, []);
 
   const getCenterHeadFromId = async (id) => {
@@ -83,19 +100,35 @@ const Applycertificate = () => {
         return;
       }
 
-      const studentsData = data.filter((student) =>
-        selectedStudents.includes(student._id)
-      );
+      const totalDeduction = selectedStudents.length * chargePerApply;
+      if (totalDeduction > topupAmount) {
+        alert("Insufficient top-up amount for this request.");
+        return;
+      }
 
-      const response = await axios.post(
-        `${import.meta.env.VITE_API_URL}/api/certificateRequests`,
-        { students: studentsData }
-      );
+      const studentsData = data.filter((student) => selectedStudents.includes(student._id));
+      const certificateResponse = await axios.post(`${import.meta.env.VITE_API_URL}/api/certificateRequests`, {
+        students: studentsData,
+      }, {
+        headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
+      });
 
-      alert(response.data.message);
+      alert(certificateResponse.data.message);
+
+      if (certificateResponse.data.message !== "All selected students already have pending requests") {
+        const deductResponse = await axios.post(`${import.meta.env.VITE_API_URL}/api/payments/deduct`, {
+          deductionAmount: totalDeduction,
+        }, {
+          headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
+        });
+
+        setTopupAmount(deductResponse.data.topupAmount);
+      }
+
       setSelectedStudents([]);
+      window.dispatchEvent(new Event("topupChanged"));
     } catch (err) {
-      console.error("Error requesting certificates:", err);
+      console.error("Error processing certificate request:", err);
       alert("An error occurred while requesting certificates.");
     }
   };
@@ -109,18 +142,6 @@ const Applycertificate = () => {
     }
   };
 
-  // Filter students based on centerHead
-  const filteredData = data.filter((row) => {
-    if (!centerHead) return false; // If centerHead is not yet fetched, show nothing
-    const franchiseeId = row.franchiseeHead?._id || row.franchiseeHead;
-    const franchiseeCenterHead =
-      typeof row.franchiseeHead === "string"
-        ? row.franchiseeHead
-        : franchiseeCache[franchiseeId] || "Unknown";
-    return franchiseeCenterHead === centerHead;
-  });
-
-  // Added function to fetch all data (for refresh)
   const fetchAllData = async () => {
     try {
       await Promise.all([
@@ -132,22 +153,29 @@ const Applycertificate = () => {
       console.error("Error refreshing data:", err);
     }
   };
-  
+
   return (
     <div className="container-app-certi">
-      <h4
-  className="pro-h text-left "
-  style={{ width: '100%', marginTop: '-65px' }}>
-  Apply For Certificates 
-</h4>
-<div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
-      <button className="request-btn-certi" onClick={handleRequest}>
-        REQUEST FOR CERTIFICATE & MARKSHEET
-      </button> 
-      {/* Added Refresh button */} 
-      <button className="refresh-btn-certi" onClick={fetchAllData} >
-        Refresh
-      </button> </div>
+      <h4 className="pro-h text-left" style={{ width: "100%", marginTop: "-65px" }}>
+        Apply For Certificates
+      </h4>
+      <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between" }}>
+        <button
+          className="request-btn-certi"
+          onClick={handleRequest}
+          disabled={isDisabled}
+        >
+          REQUEST FOR CERTIFICATE & MARKSHEET
+        </button>
+        <button className="refresh-btn-certi" onClick={fetchAllData}>
+          Refresh
+        </button>
+      </div>
+      {isDisabled && (
+        <p className="text-red-500 mt-2">
+          Top-up amount is 0. Please add funds to proceed.
+        </p>
+      )}
       <table className="styled-table">
         <thead>
           <tr>
@@ -163,18 +191,26 @@ const Applycertificate = () => {
             <th>Certificate Status</th>
             <th>Course Completion Date</th>
             <th>Action</th>
-            <th>Marks</th> 
+            <th>Marks</th>
           </tr>
         </thead>
-        
         <tbody>
-          {filteredData.map((row, index) => (
+          {data.filter((row) => {
+            if (!centerHead) return false;
+            const franchiseeId = row.franchiseeHead?._id || row.franchiseeHead;
+            const franchiseeCenterHead =
+              typeof row.franchiseeHead === "string"
+                ? row.franchiseeHead
+                : franchiseeCache[franchiseeId] || "Unknown";
+            return franchiseeCenterHead === centerHead;
+          }).map((row, index) => (
             <tr key={row._id}>
               <td data-label="Sr. No.">{index + 1}</td>
               <td data-label="Select">
                 <input
                   type="checkbox"
                   onChange={(e) => handleSelect(e, row._id)}
+                  disabled={isDisabled}
                 />
               </td>
               <td data-label="Student Name">{row.name}</td>
@@ -188,36 +224,14 @@ const Applycertificate = () => {
                   typeof row.franchiseeHead === "string" ? (
                     <span>{row.franchiseeHead}</span>
                   ) : (
-                    <Link
-                      to={`/franchisee/${
-                        row.franchiseeHead._id || row.franchiseeHead
-                      }`}
-                    >
+                    <Link to={`/franchisee/${row.franchiseeHead._id || row.franchiseeHead}`}>
                       {(() => {
                         const franchiseeId =
-                          row.franchiseeHead._id ||
-                          (row.franchiseeHead &&
-                            row.franchiseeHead.toString());
-                        console.log(
-                          `Row ${index + 1} franchiseeHead:`,
-                          JSON.stringify(row.franchiseeHead, null, 2),
-                          "ID used:",
-                          franchiseeId,
-                          "Cache lookup:",
-                          franchiseeCache[franchiseeId]
-                        );
-                        if (
-                          row.franchiseeHead &&
-                          typeof row.franchiseeHead === "object" &&
-                          row.franchiseeHead.centerHead
-                        ) {
+                          row.franchiseeHead._id || (row.franchiseeHead && row.franchiseeHead.toString());
+                        if (row.franchiseeHead && typeof row.franchiseeHead === "object" && row.franchiseeHead.centerHead) {
                           return row.franchiseeHead.centerHead;
                         }
-                        return (
-                          franchiseeCache[franchiseeId] ||
-                          getCenterHeadFromId(franchiseeId) ||
-                          "Unknown"
-                        );
+                        return franchiseeCache[franchiseeId] || getCenterHeadFromId(franchiseeId) || "Unknown";
                       })()}
                     </Link>
                   )
@@ -225,7 +239,8 @@ const Applycertificate = () => {
                   <span>Unknown</span>
                 )}
               </td>
-              <td data-label="Status"
+              <td
+                data-label="Status"
                 className={`status ${
                   row.certificateStatus === "Issued"
                     ? "issued"
@@ -234,8 +249,6 @@ const Applycertificate = () => {
                     : "pending"
                 }`}
               >
-                
-                {/* {row.certificateStatus || "Pending"} */}
                 {row.certificateStatus || "Pending"}
               </td>
               <td data-label="Course Completion Date">{new Date(row.courseCompletionDate).toLocaleDateString()}</td>
@@ -246,21 +259,20 @@ const Applycertificate = () => {
                 >
                   Delete
                 </button>
-                
               </td>
-               <td data-label="Marks">
-        {row.obtainMarks && row.obtainMarks.length > 0 ? (
-          <ul style={{ listStyle: "none", paddingLeft: 0, margin: 0 }}>
-            {row.obtainMarks.map((mark, idx) => (
-              <li key={idx}>
-                {mark.subject || "N/A"}: {mark.obtained ?? "N/A"} / {mark.maxMarks ?? "N/A"}
-              </li>
-            ))}
-          </ul>
-        ) : (
-          <span>No marks</span>
-        )}
-      </td>
+              <td data-label="Marks">
+                {row.obtainMarks && row.obtainMarks.length > 0 ? (
+                  <ul style={{ listStyle: "none", paddingLeft: 0, margin: 0 }}>
+                    {row.obtainMarks.map((mark, idx) => (
+                      <li key={idx}>
+                        {mark.subject || "N/A"}: {mark.obtained ?? "N/A"} / {mark.maxMarks ?? "N/A"}
+                      </li>
+                    ))}
+                  </ul>
+                ) : (
+                  <span>No marks</span>
+                )}
+              </td>
             </tr>
           ))}
         </tbody>

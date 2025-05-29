@@ -65,3 +65,19 @@
   .form-control-isa{
   padding: 3px;
   }
+  /* Target the Action column buttons/inputs */
+.stack-buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;       /* space between buttons */
+  align-items: flex-start; /* align buttons left, change if needed */
+}
+
+.stack-buttons button {
+  width: 100px;    /* fixed width for buttons */
+  height: 36px;    /* increase height */
+  padding: 6px 12px;
+  font-size: 14px;
+}
+
+

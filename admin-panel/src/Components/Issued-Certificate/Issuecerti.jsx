@@ -113,7 +113,7 @@ const Issuecerti = () => {
               <th>Franchisee Head</th>
               <th>Semester</th>
               <th>Subjects & Marks</th>
-              <th>Assign Certificate Number</th>
+              <th>Assign Enrollment Number</th>
               <th>Upload Certificate</th>
               <th>Upload Marksheet</th>
               <th>Action</th>
@@ -173,7 +173,7 @@ const Issuecerti = () => {
                     <input
                       type="text"
                       className="form-control"
-                      placeholder="Enter cert. no."
+                      placeholder="Enter Enroll. no."
                       value={cert.certNo}
                       onChange={(e) => handleCertChange(index, 'certNo', e.target.value)}
                     />
@@ -194,7 +194,7 @@ const Issuecerti = () => {
                       onChange={(e) => handleCertChange(index, 'marksheet', e.target.files[0])}
                     />
                   </td>
-                  <td className="d-flex gap-2 flex-column flex-md-row">
+                  <td className="stack-buttons">
                     <button className="btn btn-success btn-sm" onClick={() => handleSend(index)}>
                       Send
                     </button>

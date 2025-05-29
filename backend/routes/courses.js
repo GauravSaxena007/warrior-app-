@@ -60,4 +60,18 @@ router.delete("/:id", async (req, res) => {
   }
 });
 
+// GET single course by ID
+router.get("/:id", async (req, res) => {
+  try {
+    const course = await Course.findById(req.params.id);
+    if (!course) {
+      return res.status(404).json({ message: "Course not found" });
+    }
+    res.json(course);
+  } catch (err) {
+    console.error("Error fetching course by ID:", err);
+    res.status(500).json({ message: "Server error" });
+  }
+});
+
 module.exports = router;

@@ -52,4 +52,22 @@
   .transac-table th {
     background-color: #f2f2f2;
   }
-  
+  .transac-topup-btn {
+  background-color: #28a745; /* Bootstrap green */
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 8px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.transac-topup-btn:hover {
+  background-color: #218838;
+  transform: scale(1.05);
+}
+
+.transac-topup-btn:active {
+  transform: scale(0.97);
+}

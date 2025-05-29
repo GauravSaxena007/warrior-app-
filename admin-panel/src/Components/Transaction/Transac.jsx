@@ -111,7 +111,13 @@ const Transac = () => {
 
   return (
     <div className="transac-container">
-      <h2 className="transac-title">Franchisee Transactions</h2>
+      <button
+        className="transac-topup-btn"
+        onClick={() => (window.location.href = '/dashboard/payments')}
+      >
+        ₹ : TopUp Franchisee
+      </button>
+      <h2 className="transac-title">Franchisee Transactions Receipt</h2>
 
       {error && (
         <p style={{ color: 'red', textAlign: 'center' }}>{error}</p>
@@ -128,7 +134,7 @@ const Transac = () => {
         <input type="number" name="studentCount" placeholder="No. of Students" value={formData.studentCount} onChange={handleChange} required />
         <input type="number" name="amount" placeholder="Amount" value={formData.amount} onChange={handleChange} required />
         <span style={{ paddingTop: "9px" }}>Payment Date:</span> <input type="date" name="paymentDate" value={formData.paymentDate} onChange={handleChange} required />
-        
+
         <select name="paymentMethod" value={formData.paymentMethod} onChange={handleChange} required>
           <option value="">Select Payment Method</option>
           <option value="Cash">Cash</option>

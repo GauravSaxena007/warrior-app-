@@ -177,17 +177,29 @@ body {
     font-weight: bold;
     color: rgb(255, 255, 255);
 }
-
+.contact-info-7 {
+    position: fixed;
+    top: 65px;
+    left: 21%;
+    transform: translateX(-50%);
+    background: green;
+    padding: 3px 3px;
+    border-radius: 20px;
+    box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.1);
+    z-index: 1000; /* Lower than dropdown to avoid overlap */
+    font-weight: bold;
+    color: rgb(255, 255, 255);
+}
 /* Ensure navbar remains fixed at the top while scrolling */
 .navbar-2 {
     position: fixed;
     top: 0;
     width: 75%;
-    transition: top 0.5s;
+    transition: top 0.01s;
 }
 
 .top-line-2 {
-    transition: top 0.3s ease-in-out;
+    transition: top 0.01s ease-in-out;
 }
 
 .hidden-nav-2 {

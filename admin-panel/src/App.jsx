@@ -22,6 +22,8 @@ import Generatemar from './Components/Generate/Generatemar';
 import Generatecer from './Components/Generate/Generatecer';
 import Format from './Components/Generate/Format';
 import Reset from './Components/Reset/reset';
+import Manualcerti from './Components/Manual-Certi/Manualcerti';
+import Payments from './Components/Payments/Payments';
 
 function App() {
   return (
@@ -75,6 +77,22 @@ function App() {
               element={
                 <PrivateRouteadminpanel>
                   <Format/>
+                </PrivateRouteadminpanel>
+              }
+            />
+            <Route
+              path="/manualcertificate"
+              element={
+                <PrivateRouteadminpanel>
+                 <Manualcerti/>
+                </PrivateRouteadminpanel>
+              }
+            />
+            <Route
+              path="/payments"
+              element={
+                <PrivateRouteadminpanel>
+                 <Payments/>
                 </PrivateRouteadminpanel>
               }
             />

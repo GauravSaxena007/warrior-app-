@@ -1,0 +1,139 @@
+/* admin-panel/src/components/Manualcerti.css */
+
+
+
+/* Text inputs should take full cell width */
+
+table select,
+form select {
+  width: 89%;
+  padding: 5px;
+  font-size: 14px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+
+input[type="text"] {
+  width: 95%;
+  padding: 6px;
+  font-size: 14px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+/* File inputs styled to fit cell width */
+input[type="file"] {
+  width: 95%;
+  font-size: 13px;
+  box-sizing: border-box;
+}
+
+/* Buttons don't wrap and stay within their cell */
+button {
+  white-space: nowrap;
+  font-size: 13px;
+  
+}
+/* Manualcerti.css */
+
+table {
+  border-collapse: collapse;
+  width: 100%;
+  margin-top: 16px;
+  background-color: #fff;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 0 8px rgba(0, 0, 0, 0.1);
+}
+
+th, td {
+  border: 1px solid #ddd;
+  padding: 10px;
+  font-size: 14px;
+}
+
+thead {
+  background-color: #f3f4f6;
+  font-weight: bold;
+}
+
+input[type="text"], input[type="file"] {
+  width: 100%;
+  padding: 6px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 13px;
+}
+
+input[type="file"] {
+  padding: 3px;
+}
+
+button {
+  transition: background-color 0.3s ease;
+  
+}
+
+.bg-green-500 {
+  background-color: #28a745;
+  border-radius: 4px;
+  margin: 5%;
+  width: 73%;
+}
+
+.bg-green-500:hover {
+  background-color: #218838;
+}
+
+.bg-red-500 {
+  background-color: #dc3545;
+  border-radius: 4px;
+}
+
+.bg-red-500:hover {
+  background-color: #c82333;
+}
+
+.bg-blue-500 {
+  background-color: #007bff;
+  border-radius: 6px;
+}
+
+.bg-blue-500:hover {
+  background-color: #0069d9;
+}
+
+.mt-4 {
+  margin-top: 1rem;
+}
+
+.p-3 {
+  padding: 1rem;
+}
+
+.text-xl {
+  font-size: 1.25rem;
+}
+
+.font-bold {
+  font-weight: 600;
+}
+
+.mb-4 {
+  margin-bottom: 1rem;
+}
+
+.text-white {
+  color: #fff;
+}
+
+.mr-1 {
+  margin-right: 0.25rem;
+}
+
+.text-center {
+  text-align: center;
+}

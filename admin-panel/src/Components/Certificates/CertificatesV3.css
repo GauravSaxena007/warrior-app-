@@ -1,0 +1,78 @@
+.button-group-cer {
+  display: flex;
+  gap: 43.5%;
+}
+
+.btn-success-cer {
+  background-color: #28a745; /* Bootstrap green */
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 4px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.btn-success-cer:hover {
+  background-color: #218838; /* Darker green on hover */
+}
+.manualcerti-table {
+  table-layout: fixed;
+  width: 100%;
+  border-collapse: collapse;
+  
+}
+
+.manualcerti-table th,
+.manualcerti-table td {
+  padding: 8px;
+  text-align: center;
+  border: 1px solid #ccc;
+  vertical-align: middle;
+  overflow: hidden; /* prevent overflow */
+  text-overflow: ellipsis; /* truncate if too long */
+  white-space: nowrap;
+}
+
+.manualcerti-table th{
+   background-color: green;
+   color: white;
+}
+/* Set column widths */
+
+.manualcerti-table th:nth-child(1),
+.manualcerti-table td:nth-child(1) {
+  width: 7%;   /* Sr. No. */
+}
+
+.manualcerti-table th:nth-child(2),
+.manualcerti-table td:nth-child(2) {
+  width: 18%;  /* Student Name */
+}
+
+.manualcerti-table th:nth-child(3),
+.manualcerti-table td:nth-child(3) {
+  width: 15%;  /* Mobile */
+}
+
+.manualcerti-table th:nth-child(4),
+.manualcerti-table td:nth-child(4) {
+  width: 31%;  /* Course */
+}
+
+.manualcerti-table th:nth-child(5),
+.manualcerti-table td:nth-child(5) {
+  width: 21%;  /* Enrollment No. */
+}
+
+.manualcerti-table th:nth-child(6),
+.manualcerti-table td:nth-child(6) {
+  width: 21%;  /* View Certificate */
+}
+
+.manualcerti-table th:nth-child(7),
+.manualcerti-table td:nth-child(7) {
+  width: 18%;  /* View Marksheet */
+}
+
