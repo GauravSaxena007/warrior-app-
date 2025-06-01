@@ -1,0 +1,109 @@
+.Format-container {
+  max-width: 800px;
+  margin: 30px auto;
+  padding: 30px;
+  border: 2px solid #000;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-color: #fff;
+  color: #000;
+}
+
+.Format-header {
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.Format-logo {
+  width: 100px;
+  height: auto;
+  margin-bottom: 10px;
+}
+
+.Format-header h2 {
+  margin: 5px 0;
+  font-size: 20px;
+}
+
+.Format-header h3 {
+  margin: 5px 0;
+  font-size: 16px;
+  font-weight: normal;
+  color: #444;
+}
+
+.Format-title {
+  margin-top: 20px;
+  font-size: 24px;
+  text-decoration: underline;
+  font-weight: bold;
+}
+
+.Format-info {
+  margin-bottom: 20px;
+  font-size: 16px;
+  line-height: 1.6;
+}
+
+.Format-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 20px;
+  font-size: 15px;
+}
+
+.Format-table th,
+.Format-table td {
+  border: 1px solid #000;
+  padding: 8px 10px;
+  text-align: center;
+}
+
+.total-row {
+  font-weight: bold;
+  background-color: #f0f0f0;
+}
+
+.Format-summary {
+  font-size: 16px;
+  margin-bottom: 20px;
+}
+
+.Format-summary p {
+  margin: 4px 0;
+}
+
+.Format-footer {
+  text-align: center;
+  font-size: 14px;
+  color: #333;
+  margin-top: 30px;
+}
+
+.Format-footer p {
+  margin: 5px 0;
+}
+
+.Format-footer button {
+  margin-top: 15px;
+  padding: 8px 16px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.Format-footer button:hover {
+  background-color: #0056b3;
+}
+
+/* Print optimization */
+@media print {
+  .Format-footer button {
+    display: none;
+  }
+
+  body {
+    -webkit-print-color-adjust: exact;
+  }
+}

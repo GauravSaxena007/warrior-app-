@@ -61,7 +61,7 @@ const Issuecerti = () => {
 
       // Send certificate
       await axios.put(
-        `${import.meta.env.VITE_API_URL}/api/admin-certi/certificateRequests/${request._id}`,
+        `${import.meta.env.VITE_API_URL}/api/Admiadmin-certin-certi/certificateRequests/${request._id}`,
         formData,
         { headers: { 'Content-Type': 'multipart/form-data' } }
       );
@@ -126,6 +126,8 @@ const Issuecerti = () => {
               const course = courses.find((c) => c.title === student.course);
               const semester = course?.semester || 'Not Assigned';
               const obtainMarks = student.obtainMarks || [];
+              const logoUrl = window.location.origin + '/main-logo.png';
+
 
               return (
                 <tr key={req._id}>
@@ -143,19 +145,186 @@ const Issuecerti = () => {
                           e.preventDefault();
                           const newTab = window.open();
                           const htmlContent = `
+                            <!DOCTYPE html>
                             <html>
-                              <head><title>Subjects & Marks</title></head>
-                              <body>
-                                <h2>Subjects & Marks for ${student.name}</h2>
-                                <ul>
-                                  ${obtainMarks
-                                    .map(
-                                      (mark) =>
-                                        `<li>${mark.subject}: ${mark.obtained}/${mark.maxMarks} (Pass: ${mark.passingMarks})</li>`
-                                    )
-                                    .join('')}
-                                </ul>
-                              </body>
+                            <head>
+                              <title>Subjects & Marks</title>
+                              <style>
+                                .Format-container {
+                                  max-width: 800px;
+                                  margin: 30px auto;
+                                  padding: 30px;
+                                  border: 2px solid #000;
+                                  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+                                  background-color: #fff;
+                                  color: #000;
+                                }
+                                .Format-header {
+                                  text-align: center;
+                                  margin-bottom: 30px;
+                                }
+                                .Format-logo {
+                                  width: 100px;
+                                  height: auto;
+                                  margin-bottom: 10px;
+                                }
+                                .Format-header h2 {
+                                  margin: 5px 0;
+                                  font-size: 20px;
+                                }
+                                .Format-header h3 {
+                                  margin: 5px 0;
+                                  font-size: 16px;
+                                  font-weight: normal;
+                                  color: #444;
+                                }
+                                .Format-title {
+                                  margin-top: 20px;
+                                  font-size: 24px;
+                                  text-decoration: underline;
+                                  font-weight: bold;
+                                }
+                                .Format-info {
+                                  margin-bottom: 20px;
+                                  font-size: 16px;
+                                  line-height: 1.6;
+                                }
+                                .Format-table {
+                                  width: 100%;
+                                  border-collapse: collapse;
+                                  margin-bottom: 20px;
+                                  font-size: 15px;
+                                }
+                                .Format-table th,
+                                .Format-table td {
+                                  border: 1px solid #000;
+                                  padding: 8px 10px;
+                                  text-align: center;
+                                }
+                                .total-row {
+                                  font-weight: bold;
+                                  background-color: #f0f0f0;
+                                }
+                                .Format-summary {
+                                  font-size: 16px;
+                                  margin-bottom: 20px;
+                                }
+                                .Format-summary p {
+                                  margin: 4px 0;
+                                }
+                                .Format-footer {
+                                  text-align: center;
+                                  font-size: 14px;
+                                  color: #333;
+                                  margin-top: 30px;
+                                }
+                                .Format-footer p {
+                                  margin: 5px 0;
+                                }
+                                .Format-footer button {
+                                  margin-top: 15px;
+                                  padding: 8px 16px;
+                                  background-color: #007bff;
+                                  color: white;
+                                  border: none;
+                                  border-radius: 4px;
+                                  cursor: pointer;
+                                }
+                                .Format-footer button:hover {
+                                  background-color: #0056b3;
+                                }
+                                @media print {
+                                  .Format-footer button {
+                                    display: none;
+                                  }
+                                  body {
+                                    -webkit-print-color-adjust: exact;
+                                  }
+                                }
+                              </style>
+                            </head>
+                            <body>
+                              <div class="Format-container">
+                                <div class="Format-header">
+                                  <h2>राष्ट्रीय वाणिज्य एवं तकनीकी प्रशिक्षण संस्थान</h2>
+                                  <h3>National Institute of Commerce and Technical Training</h3>
+                                  <h2 class="Format-title">Marksheet</h2>
+                                </div>
+
+                                <div class="Format-info">
+                                  <div><strong>Student Name:</strong> ${student.name || 'N/A'}</div>
+                                  <div><strong>Enrollment No:</strong> ${cert.certNo || 'CHRETD/23YN04/71583'}</div>
+                                  <div><strong>Course Name:</strong> ${student.course || 'DIPLOMA IN YOGA'}</div>
+                                  
+                                </div>
+
+                                
+
+                                <table class="Format-table">
+                                  <thead>
+                                    <tr>
+                                      <th>Sl.No</th>
+                                      <th>Subject</th>
+                                      <th>Total Marks</th>
+                                      <th>Passing Marks</th>
+                                      <th>Obtain Marks</th>
+                                    </tr>
+                                  </thead>
+                                  <tbody>
+                                    ${obtainMarks
+                                      .map(
+                                        (mark, idx) =>
+                                          `<tr>
+                                            <td>${idx + 1}</td>
+                                            <td>${mark.subject}</td>
+                                            <td>${mark.maxMarks}</td>
+                                            <td>${mark.passingMarks}</td>
+                                            <td>${mark.obtained}</td>
+                                          </tr>`
+                                      )
+                                      .join('')}
+                                    <tr class="total-row">
+                                      <td colspan="2">Total</td>
+                                      <td>${obtainMarks.reduce((sum, mark) => sum + mark.maxMarks, 0)}</td>
+                                      <td>${obtainMarks.reduce((sum, mark) => sum + mark.passingMarks, 0)}</td>
+                                      <td>${obtainMarks.reduce((sum, mark) => sum + mark.obtained, 0)}</td>
+                                    </tr>
+                                  </tbody>
+                                </table>
+
+                                <div class="Format-summary">
+                                  <p><strong>Percentage:</strong> ${(
+                                    (obtainMarks.reduce((sum, mark) => sum + mark.obtained, 0) /
+                                      obtainMarks.reduce((sum, mark) => sum + mark.maxMarks, 0)) *
+                                    100
+                                  ).toFixed(2)}%</p>
+                                  <p><strong>Result:</strong> ${
+                                    obtainMarks.every((mark) => mark.obtained >= mark.passingMarks)
+                                      ? 'Pass'
+                                      : 'Fail'
+                                  }</p>
+                                  <p><strong>Grade:</strong> ${
+                                    ((obtainMarks.reduce((sum, mark) => sum + mark.obtained, 0) /
+                                      obtainMarks.reduce((sum, mark) => sum + mark.maxMarks, 0)) *
+                                      100) >= 80
+                                      ? 'A'
+                                      : ((obtainMarks.reduce((sum, mark) => sum + mark.obtained, 0) /
+                                          obtainMarks.reduce((sum, mark) => sum + mark.maxMarks, 0)) *
+                                          100) >= 70
+                                      ? 'B+'
+                                      : 'B'
+                                  }</p>
+                                  
+                                </div>
+
+                                <div class="Format-footer">
+                                  <p>🌐 RVTPS</p>
+                                  <p>📧 email.com</p>
+                                  <p>📞 +91 9999999999</p>
+                                  <button onclick="window.print()">Print Format</button>
+                                </div>
+                              </div>
+                            </body>
                             </html>
                           `;
                           newTab.document.write(htmlContent);

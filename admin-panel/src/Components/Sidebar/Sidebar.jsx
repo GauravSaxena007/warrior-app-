@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import {
   FaTachometerAlt, FaSlidersH, FaBookOpen, FaImages, FaUsers, FaEnvelopeOpenText,
   FaAddressBook, FaCertificate, FaMoneyCheckAlt, FaTrophy, FaShippingFast,
-  FaAward, FaFilm, FaLayerGroup , FaHandshake
+  FaAward, FaFilm, FaLayerGroup , FaHandshake , FaClipboardList , FaFileAlt
 } from "react-icons/fa";
 import "./Sidebar.css"; 
 
@@ -24,15 +24,27 @@ const Sidebar = () => {
 <li><Link to="/addcourses" className="menu-link"><FaBookOpen className="icon" /> Add Courses</Link></li>
 <li><Link to="/management" className="menu-link"><FaUsers className="icon" /> Franchisee Management</Link></li>
 <li><Link to="/issuecerti" className="menu-link"><FaCertificate className="icon" /> Issue Certificate</Link></li>
-<li><Link to="/transac" className="menu-link"><FaMoneyCheckAlt className="icon" /> Transaction</Link></li>
+<li><Link to="/transac" className="menu-link"><FaMoneyCheckAlt className="icon" /> Transaction / Recharge</Link></li>
 <li><Link to="/certificatesv3" className="menu-link"><FaTrophy className="icon" /> Certificates</Link></li>
 <li><Link to="/courdetail" className="menu-link"><FaShippingFast className="icon" /> Courier Detail</Link></li>
 <li><Link to="/fracer" className="menu-link"><FaAward className="icon" /> Franchisee Certificate</Link></li>
 <li><Link to="/agreementadmin" className="menu-link"><FaHandshake className="icon" /> Agreement</Link></li>
 <li className="menu-section-title">----- Student Section ----</li>
-
-<li><Link to="/generatecertificate" className="menu-link"><FaAward className="icon" /> Generate Certificate</Link></li>
-<li><Link to="/generatemarksheet" className="menu-link"><FaHandshake className="icon" /> Generate Marksheet</Link></li>
+<li>
+  <Link to="/generatecertificate" className="menu-link">
+    <FaFileAlt className="icon" /> Generate Certificate
+  </Link>
+</li>
+<li>
+  <Link to="/generatemarksheet" className="menu-link">
+    <FaClipboardList className="icon" /> Generate Marksheet
+  </Link>
+</li>
+<li>
+  <Link to="/format" className="menu-link">
+    <FaClipboardList className="icon" /> Format
+  </Link>
+</li>
 <br/>
 <br/>
       </ul>

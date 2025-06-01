@@ -11,7 +11,11 @@ const paymentSchema = new mongoose.Schema(
       type: Number,
       required: true,
     },
-    chargePerApply: {            // <-- Add this field
+    topupAdded: {
+      type: Number,
+      required: true,
+    },
+    chargePerApply: {
       type: Number,
       required: true,
     },

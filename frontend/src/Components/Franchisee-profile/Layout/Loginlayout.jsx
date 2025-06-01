@@ -163,7 +163,7 @@ const Loginlayout = ({ children, topupAmount: externalTopupAmount, setTopupAmoun
         className={`contact-info-7 ${visible ? "" : "hidden-nav-2"}`}
         style={{ marginLeft: "49rem" }}
       >
-        💰 TopUp Amount : ₹{topupAmount}
+        💰 Top-Up Balance : ₹{topupAmount}
       </div>
       <main>
         {children}

@@ -1,0 +1,10 @@
+canvas {
+  max-width: 100%;
+  border: 1px solid #ccc;
+  display: block;
+  margin: auto;
+}
+
+button {
+  cursor: pointer;
+}

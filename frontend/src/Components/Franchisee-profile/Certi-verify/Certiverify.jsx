@@ -103,7 +103,7 @@ const Certiverify = () => {
                   <th>Student Name</th>
                   <th>Mobile</th>
                   <th>Course</th>
-                  <th>Enrollment No</th>
+                  <th>Enrollment No.</th>
                   <th>View Certificate</th>
                   <th>View Marksheet</th>
                 </tr>

@@ -81,7 +81,7 @@ const Payments = () => {
           </select>
         </div>
         <div>
-          <label className="block mb-1">Top-Up Amount</label>
+          <label className="block mb-1">Top-Up Amount (&#8377;)</label>
           <input
             type="number"
             className="w-full border rounded p-2"
@@ -92,7 +92,7 @@ const Payments = () => {
           />
         </div>
         <div>
-          <label className="block mb-1">Per Apply Charge</label>
+          <label className="block mb-1">Per Apply Charge (&#8377;)</label>
           <input
             type="number"
             className="w-full border rounded p-2"
@@ -104,7 +104,7 @@ const Payments = () => {
         </div>
         <button
           type="submit"
-          className="payment-submit-btn" 
+          className="payment-submit-btn"
           disabled={!franchiseeId || !topupAmount || !chargePerApply}
         >
           Submit
@@ -123,24 +123,27 @@ const Payments = () => {
             </tr>
           </thead>
           <tbody>
-            {payments.map((p) => (
-              <tr key={p._id}>
-                <td className="border p-2">{p.franchisee?.centerName}</td>
-                <td className="border p-2">₹{p.topupAmount}</td>
-                <td className="border p-2">₹{p.chargePerApply}</td>
-                <td className="border p-2">
-                  {new Date(p.createdAt).toLocaleString()}
-                </td>
-                <td className="border p-2">
-                  <button
-                    onClick={() => handleDelete(p._id)}
-                    className="bg-red-500 text-white px-2 py-1 rounded"
-                  >
-                    Delete
-                  </button>
-                </td>
-              </tr>
-            ))}
+            {payments
+              .filter((p) => p.topupAdded > 0)
+              .map((p) => (
+                <tr key={p._id}>
+
+                  <td className="border p-2">{p.franchisee?.centerName}</td>
+                  <td className="border p-2">₹{p.topupAdded}</td>
+                  <td className="border p-2">₹{p.chargePerApply}</td>
+                  <td className="border p-2">
+                    {new Date(p.createdAt).toLocaleString()}
+                  </td>
+                  <td className="border p-2">
+                    <button
+                      onClick={() => handleDelete(p._id)}
+                      className="bg-red-500 text-white px-2 py-1 rounded"
+                    >
+                      Delete
+                    </button>
+                  </td>
+                </tr>
+              ))}
             {payments.length === 0 && (
               <tr>
                 <td colSpan="5" className="text-center p-4 text-gray-500">
