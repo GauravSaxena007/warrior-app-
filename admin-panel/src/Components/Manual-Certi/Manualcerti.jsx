@@ -80,7 +80,7 @@ const Manualcerti = () => {
             <th className="manualcerti-th border px-2 py-1">Student Name</th>
             <th className="manualcerti-th border px-2 py-1">Mobile</th>
             <th className="manualcerti-th border px-2 py-1">Course Name</th>
-            <th className="manualcerti-th border px-2 py-1">Certificate No.</th>
+            <th className="manualcerti-th border px-2 py-1">Enrollment No.</th>
             <th className="manualcerti-th border px-2 py-1">Upload Certificate</th>
             <th className="manualcerti-th border px-2 py-1">Upload Marksheet</th>
             <th className="manualcerti-th border px-2 py-1">Actions</th>
@@ -122,6 +122,14 @@ const Manualcerti = () => {
         </tbody>
       </table>
       <button className="manualcerti-add mt-4 bg-blue-500 text-white px-4 py-2 rounded" onClick={addRow}>Add Row</button>
+      <button
+  className="manual-certi-btn-send bg-green-500 text-white px-4 py-2 mt-4 ml-2 rounded"
+  onClick={() => rows.forEach((_, idx) => sendData(idx))}
+>
+  Send All Rows
+</button>
+
+
     </div>
   );
 };
