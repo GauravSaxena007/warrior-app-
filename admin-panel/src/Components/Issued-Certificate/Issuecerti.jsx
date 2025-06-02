@@ -272,17 +272,17 @@ const Issuecerti = () => {
                                   </thead>
                                   <tbody>
                                     ${obtainMarks
-                                      .map(
-                                        (mark, idx) =>
-                                          `<tr>
+                              .map(
+                                (mark, idx) =>
+                                  `<tr>
                                             <td>${idx + 1}</td>
                                             <td>${mark.subject}</td>
                                             <td>${mark.maxMarks}</td>
                                             <td>${mark.passingMarks}</td>
                                             <td>${mark.obtained}</td>
                                           </tr>`
-                                      )
-                                      .join('')}
+                              )
+                              .join('')}
                                     <tr class="total-row">
                                       <td colspan="2">Total</td>
                                       <td>${obtainMarks.reduce((sum, mark) => sum + mark.maxMarks, 0)}</td>
@@ -294,26 +294,40 @@ const Issuecerti = () => {
 
                                 <div class="Format-summary">
                                   <p><strong>Percentage:</strong> ${(
+                              (obtainMarks.reduce((sum, mark) => sum + mark.obtained, 0) /
+                                obtainMarks.reduce((sum, mark) => sum + mark.maxMarks, 0)) *
+                              100
+                            ).toFixed(2)}%</p>
+                                  <p><strong>Result:</strong> ${obtainMarks.every((mark) => mark.obtained >= mark.passingMarks)
+                              ? 'Pass'
+                              : 'Fail'
+                            }</p>
+                                 <p><strong>Grade:</strong> ${(
+                              (obtainMarks.reduce((sum, mark) => sum + mark.obtained, 0) /
+                                obtainMarks.reduce((sum, mark) => sum + mark.maxMarks, 0)) * 100
+                            ) >= 80 ? 'A' :
+                              (
+                                (obtainMarks.reduce((sum, mark) => sum + mark.obtained, 0) /
+                                  obtainMarks.reduce((sum, mark) => sum + mark.maxMarks, 0)) * 100
+                              ) >= 70 ? 'B+' :
+                                (
+                                  (obtainMarks.reduce((sum, mark) => sum + mark.obtained, 0) /
+                                    obtainMarks.reduce((sum, mark) => sum + mark.maxMarks, 0)) * 100
+                                ) >= 60 ? 'B' :
+                                  (
                                     (obtainMarks.reduce((sum, mark) => sum + mark.obtained, 0) /
-                                      obtainMarks.reduce((sum, mark) => sum + mark.maxMarks, 0)) *
-                                    100
-                                  ).toFixed(2)}%</p>
-                                  <p><strong>Result:</strong> ${
-                                    obtainMarks.every((mark) => mark.obtained >= mark.passingMarks)
-                                      ? 'Pass'
-                                      : 'Fail'
-                                  }</p>
-                                  <p><strong>Grade:</strong> ${
-                                    ((obtainMarks.reduce((sum, mark) => sum + mark.obtained, 0) /
-                                      obtainMarks.reduce((sum, mark) => sum + mark.maxMarks, 0)) *
-                                      100) >= 80
-                                      ? 'A'
-                                      : ((obtainMarks.reduce((sum, mark) => sum + mark.obtained, 0) /
-                                          obtainMarks.reduce((sum, mark) => sum + mark.maxMarks, 0)) *
-                                          100) >= 70
-                                      ? 'B+'
-                                      : 'B'
-                                  }</p>
+                                      obtainMarks.reduce((sum, mark) => sum + mark.maxMarks, 0)) * 100
+                                  ) >= 50 ? 'C' :
+                                    (
+                                      (obtainMarks.reduce((sum, mark) => sum + mark.obtained, 0) /
+                                        obtainMarks.reduce((sum, mark) => sum + mark.maxMarks, 0)) * 100
+                                    ) >= 40 ? 'D' :
+                                      (
+                                        (obtainMarks.reduce((sum, mark) => sum + mark.obtained, 0) /
+                                          obtainMarks.reduce((sum, mark) => sum + mark.maxMarks, 0)) * 100
+                                      ) >= 33 ? 'E' : 'F'
+                            }</p>
+
                                   
                                 </div>
 
