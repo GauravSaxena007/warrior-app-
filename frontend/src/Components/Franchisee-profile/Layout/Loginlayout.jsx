@@ -47,7 +47,7 @@ const Loginlayout = ({ children, topupAmount: externalTopupAmount, setTopupAmoun
   useEffect(() => {
     const handleScroll = () => {
       const currentScrollPos = window.scrollY;
-      setVisible(currentScrollPos < 100); // Increased threshold for visibility
+      setVisible(currentScrollPos < 10); // Increased threshold for visibility
       setScrollPos(currentScrollPos);
     };
 
@@ -161,7 +161,7 @@ const Loginlayout = ({ children, topupAmount: externalTopupAmount, setTopupAmoun
       </div>
       <div
         className={`contact-info-7 ${visible ? "" : "hidden-nav-2"}`}
-        style={{ marginLeft: "49rem" }}
+        
       >
         💰 Top-Up Balance : ₹{topupAmount}
       </div>

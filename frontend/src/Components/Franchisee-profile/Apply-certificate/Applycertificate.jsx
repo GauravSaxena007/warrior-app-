@@ -156,7 +156,7 @@ const Applycertificate = () => {
 
   return (
     <div className="container-app-certi">
-      <h4 className="pro-h text-left" style={{ width: "100%", marginTop: "-65px" }}>
+      <h4 className="pro-h text-left" style={{ width: "100%", marginTop: "-45px" }}>
         Apply For Certificates
       </h4>
       <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between" }}>

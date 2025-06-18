@@ -32,9 +32,13 @@ const AdminLogin = () => {
   return (
     <div className="login-page">
       <div className="login-box">
-        <h2 className="login-title">⚙️ Admin Login</h2>
+        <img
+  src="../../../public/logo-name.png"
+  alt="Logo"
+  style={{ width: '300px'}}
+/> 
         <form className="login-form" onSubmit={handleLogin}>
-          <h3 className="login-header">Login to Admin Dashboard</h3>
+          <h3 className="login-header">Login to Admin Dashboard ⚙️</h3>
           <input
             type="email"
             placeholder="E-mail"

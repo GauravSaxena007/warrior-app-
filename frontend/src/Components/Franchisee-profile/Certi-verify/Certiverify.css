@@ -7,11 +7,13 @@
   min-height: 90vh;
   background-color: white;
   margin-top: 1px;
+  
 }
   
 .home {
   color: blue;
   cursor: pointer;
+  
 }
 
 .current {
@@ -32,6 +34,7 @@ thead.table-light th {
   border: 2px solid rgb(197, 152, 70);
   border-radius: 8px;
   text-align: center;
+  
 }
 
 /* Title */

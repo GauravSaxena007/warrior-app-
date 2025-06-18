@@ -130,12 +130,12 @@ body {
   top: -120px; /* Move navbar & logo out of view */
   transition: top ;
 }
-.contact-info-1 {
+.contact-info-1x {
   top: 65px; /* your original position */
   transition: top ;
 }
 
-.contact-info-1.hidden-nav {
+.contact-info-1x.hidden-nav {
   top: -120px; /* hidden position */
 }
 
@@ -213,7 +213,7 @@ body {
 }
 /* 🟢 Contact Info */
 /* 🟢 Desktop Contact Info */
-.contact-info-1 {
+.contact-info-1x {
   position: fixed;
   top: 65px;
   left: 19%;
@@ -230,7 +230,7 @@ body {
 
 /* 📱 Mobile Contact Info - Adjust for width 412px */
 @media (max-width: 412px) {
-  .contact-info-1 {
+  .contact-info-1x {
     top: 110px;  /* Adjust position for mobile */
     left: 35%;
     transform: translateX(-50%);
@@ -267,7 +267,7 @@ body {
   }
 
 
-.contact-info-1 {
+.contact-info-1x {
   color: white;
   box-shadow: 0 0 10px #00c3ff;
   animation: glowPulse 3s ease-in-out infinite;
@@ -292,7 +292,7 @@ body {
   .hamburger {
     display: block;
   }
-  .contact-info-1 {
+  .contact-info-1x {
    margin-left: 90px;
 }
 .dropdown{

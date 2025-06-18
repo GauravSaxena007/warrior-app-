@@ -78,7 +78,7 @@ const Navbar = () => {
         </ul>
       </div>
 
-      <div className={`contact-info-1 ${visible ? "" : "hidden-nav"}`}>
+      <div className={`contact-info-1x ${visible ? "" : "hidden-nav"}`}>
         Franchisee Enquiry : 📞 {franchiseNumber}
       </div>
     </>

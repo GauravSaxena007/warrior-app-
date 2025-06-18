@@ -1,23 +1,28 @@
 /* Ensure full-page background ONLY for the login page */
 .login-page {
-    background-color: #2f475a !important;
-    min-height: 100vh; /* Ensures it covers the full viewport height */
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin: 0;
-    padding: 0;
+  background-image: url('/tic-tac-toe.png');
+  background-repeat: repeat;
+  background-size: auto; /* or try 'contain' or 'cover' if you want scaling */
+  background-color: #2f475a; /* fallback dark blue */
+  min-height: 100vh;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0;
+  padding: 0;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 1;
 }
 
 /* Login Box */
 .login-box {
     text-align: center;
-    background: #2f475a;
     padding: 20px;
     border-radius: 8px;
     width: 350px;
-    box-shadow: 0 0 10px rgba(182, 167, 167, 0.2);
 }
 
 /* Login Title */
@@ -26,32 +31,32 @@
     font-weight: bold;
     color: rgb(201, 80, 80);
     margin-bottom: 20px;
-   width: -500px;
 }
 
 /* Login Form */
 .login-form {
-    background: #d60000; /* Red Background */
+    background: #ffffff; /* Red Background */
     padding: 20px;
     border-radius: 5px;
+    border: 1px solid #443361;
 }
 
 /* Login Header */
 .login-header {
     font-size: 18px;
-    font-weight: bold;
-    color: rgb(255, 255, 255);
-    margin-bottom: 15px;
+    color: rgb(32, 56, 161);
 }
 
 /* Input Fields */
 .login-input {
     width: 100%;
-    padding: 10px;
-    margin: 10px 0;
-    border: none;
-    border-radius: 5px;
-    font-size: 16px;
+  padding: 10px;
+  margin: 10px 0;
+  border: 1px solid #000000; /* light border */
+  border-radius: 5px;
+  font-size: 16px;
+  outline: none;
+  background-color: #fff; /* ensure white background */
 }
 
 /* Submit Button */

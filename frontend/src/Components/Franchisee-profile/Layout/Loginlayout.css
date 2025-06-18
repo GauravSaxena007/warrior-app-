@@ -164,31 +164,38 @@ body {
 }
 
 /* Contact Section (Centered) */
-.contact-info-1-2 {
+.contact-info-1 {
     position: fixed;
-    top: 65px;
-    left: 21%;
+    top: 11%;
+    left: 21.5%;
     transform: translateX(-50%);
     background: green;
-    padding: 3px 3px;
+    padding: 7px 7px;
     border-radius: 20px;
     box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.1);
     z-index: 1000; /* Lower than dropdown to avoid overlap */
     font-weight: bold;
     color: rgb(255, 255, 255);
+    font-size: 83%;
+    animation: glowPulse 1.7s ease-in-out infinite;
 }
 .contact-info-7 {
     position: fixed;
-    top: 65px;
-    left: 21%;
+    top: 10.5%;
+    left: 75%;
+    width: 13%;
     transform: translateX(-50%);
     background: green;
-    padding: 3px 3px;
+    padding: 7px 7px;
     border-radius: 20px;
     box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.1);
     z-index: 1000; /* Lower than dropdown to avoid overlap */
     font-weight: bold;
     color: rgb(255, 255, 255);
+    white-space: nowrap;
+text-overflow: ellipsis;
+font-size: 83%;
+
 }
 /* Ensure navbar remains fixed at the top while scrolling */
 .navbar-2 {
@@ -219,6 +226,7 @@ body {
 
 /* 🔻 Hamburger Button for Smaller Screens */
 .hamburger-2 {
+  position: fixed !important;
     display: none;
     font-size: 30px;
     background: red;
@@ -226,11 +234,12 @@ body {
     color: white;
     cursor: pointer;
     position: fixed;
-    top: 19px;
+    top: 19px !important; 
     right: 20px;
     z-index: 3000;
     padding: 10px;
     border-radius: 5px;
+  transition: none !important; /* prevent transition shifting */
   }
   
   /* 📱 Mobile Menu */
@@ -307,3 +316,95 @@ body {
     }
   }
   
+
+/* Prevent hamburger from moving when navbar hides */
+.hamburger-2 {
+  position: fixed !important;
+  top: 19px !important;  /* fixed top position */
+  right: 20px;
+  z-index: 3000;
+  transition: none !important; /* prevent transition shifting */
+}
+
+/* Prevent hamburger from moving when navbar hides */
+.hidden-nav-2 + .hamburger-2 {
+  top: -100px !important; /* keep it fixed at top */
+}
+
+@keyframes glowPulse {
+  0% {
+      box-shadow: 0 0 5px #002fff;
+  }
+  50% {
+      box-shadow: 0 0 5px #002fff, 0 0 30px #002fff;
+  }
+  100% {
+      box-shadow: 0 0 5px #002fff;
+  }
+}
+/* Mobile view: side-by-side */
+@media (max-width: 412px) {
+  .contact-info-1,
+  .contact-info-7 {
+    position: fixed;
+    top: 95px;
+    width: 45%;
+    font-size: 70%;
+    padding: 6px 5px;
+    border-radius: 10px;
+    white-space: nowrap;
+    text-align: center;
+    z-index: 1000;
+    transition: top 0.3s ease-in-out, opacity 0.3s ease-in-out;
+  }
+
+  .contact-info-1 {
+    left: 5%;
+  }
+
+  .contact-info-7 {
+    right: 5%;
+    left: auto;
+  }
+
+  /* 👇 Hide both when wrapper/body has .hidden-nav-2 */
+  .hidden-nav-2 .contact-info-1,
+  .hidden-nav-2 .contact-info-7 {
+    top: -100px;
+    opacity: 0;
+    pointer-events: none;
+  }
+}
+@media (max-width: 412px) {
+  .contact-info-1,
+  .contact-info-7 {
+    position: fixed;
+    top: 95px;
+    width: 45%;
+    font-size: 70%;
+    padding: 6px 5px;
+    border-radius: 10px;
+    white-space: nowrap;
+    text-align: center;
+    z-index: 1000;
+    transition: top 0.1s ease-in-out, opacity 0.1s ease-in-out;
+  }
+
+  .contact-info-1 {
+    top: 17%;
+    left: 27%;
+  }
+
+  .contact-info-7 {
+    top: 17%;
+    left: 75%;
+  }
+
+  /* 👇 Directly targeting the element when it has .hidden-nav-2 */
+  .contact-info-1.hidden-nav-2,
+  .contact-info-7.hidden-nav-2 {
+    top: -100px;
+    opacity: 0;
+    pointer-events: none;
+  }
+}

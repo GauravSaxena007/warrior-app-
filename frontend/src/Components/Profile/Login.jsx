@@ -1,17 +1,26 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import "./Login.css";
 
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [rememberMe, setRememberMe] = useState(false);
   const navigate = useNavigate();
+
+  // ✅ Load remembered email on mount
+  useEffect(() => {
+    const remembered = localStorage.getItem("rememberMe") === "true";
+    const storedEmail = remembered ? localStorage.getItem("rememberedEmail") : "";
+    setEmail(storedEmail || "");
+    setRememberMe(remembered);
+  }, []);
 
   const handleLogin = async (e) => {
     e.preventDefault();
 
     try {
-      // Try admin login first
+      // Try admin login
       let res = await fetch(`${import.meta.env.VITE_API_URL}/api/auth/login`, {
         method: "POST",
         headers: {
@@ -23,12 +32,20 @@ const Login = () => {
       let data = await res.json();
 
       if (res.ok) {
-        localStorage.setItem("token", data.token);
-        navigate("/franchprofile"); // Redirect to admin dashboard
+        if (rememberMe) {
+          localStorage.setItem("token", data.token);
+          localStorage.setItem("rememberedEmail", email);
+          localStorage.setItem("rememberMe", "true");
+        } else {
+          sessionStorage.setItem("token", data.token);
+          localStorage.removeItem("rememberedEmail");
+          localStorage.setItem("rememberMe", "false");
+        }
+        navigate("/franchprofile");
         return;
       }
 
-      // If admin login fails, try franchisee login
+      // Try franchisee login
       res = await fetch(`${import.meta.env.VITE_API_URL}/api/auth/franchisee-login`, {
         method: "POST",
         headers: {
@@ -40,8 +57,16 @@ const Login = () => {
       data = await res.json();
 
       if (res.ok) {
-        localStorage.setItem("token", data.token);
-        navigate("/franchprofile"); // Redirect to franchisee profile
+        if (rememberMe) {
+          localStorage.setItem("token", data.token);
+          localStorage.setItem("rememberedEmail", email);
+          localStorage.setItem("rememberMe", "true");
+        } else {
+          sessionStorage.setItem("token", data.token);
+          localStorage.removeItem("rememberedEmail");
+          localStorage.setItem("rememberMe", "false");
+        }
+        navigate("/franchprofile");
       } else {
         alert(data.message || "Login failed");
       }
@@ -53,13 +78,18 @@ const Login = () => {
 
   return (
     <div className="login-page">
-      
       <div className="login-box">
-        <h2 className="login-title">⚙️ Login</h2>
-        <form className="login-form" onSubmit={handleLogin}>
+        <img
+          src="../../../public/logo-name.png"
+          alt="Logo"
+          style={{ width: '300px' }}
+        />
+        <form className="login-form" onSubmit={handleLogin} autoComplete="on">
           <h3 className="login-header">Login!</h3>
           <input
             type="email"
+            name="email"
+            autoComplete="email"
             placeholder="E-mail"
             className="login-input"
             value={email}
@@ -68,16 +98,28 @@ const Login = () => {
           />
           <input
             type="password"
+            name="password"
+            autoComplete="current-password"
             placeholder="Password"
             className="login-input"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             required
           />
+          <label style={{ color: 'black', display: 'flex', alignItems: 'center', marginTop: '10px' }}>
+            <input
+              type="checkbox"
+              checked={rememberMe}
+              onChange={(e) => setRememberMe(e.target.checked)}
+              style={{ marginRight: '8px' }}
+            />
+            Remember Me
+          </label>
+
           <button type="submit" className="login-btn">✅ Submit</button>
           <button onClick={() => window.location.href = '/'} className="login-home-btn">
-          🏠 Back To Homepage
-</button>
+            🏠 Back To Homepage
+          </button>
         </form>
       </div>
     </div>
