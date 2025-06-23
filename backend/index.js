@@ -18,12 +18,12 @@ const allowedOrigins = [
   'http://168.231.102.114:5000',
   'http://168.231.102.114:5173',
   'http://168.231.102.114:3001',
-  'http://5pixel.in:5000', // Add this
-  'http://5pixel.in:5173',
-  'http://5pixel.in:3001', // Add this
+  'http://rvtps.com:5000', 
+  'http://rvtps.com:5173',
+  'http://rvtps.com:3001', 
   'https://147.93.28.36:5000',
-  'http://5pixel.in',
-  'https://5pixel.in',
+  'http://rvtps.com',
+  'https://rvtps.com',
   'http://168.231.102.114',
   'https://168.231.102.114',
   'http://192.168.29.156:5000'
