@@ -80,8 +80,8 @@ const Login = () => {
     <div className="login-page">
       <div className="login-box">
         <img
-          src="../../../public/logo-name.png"
-          alt="Logo"
+          src="/logo-name.png"
+          alt="Logo-login"
           style={{ width: '300px' }}
         />
         <form className="login-form" onSubmit={handleLogin} autoComplete="on">
