@@ -63,7 +63,7 @@
 .login-btn {
     width: 100%;
     padding: 10px;
-    background: rgb(0, 126, 0);
+    background: #2563eb;
     color: white;
     font-size: 16px;
     border: none;
@@ -72,7 +72,7 @@
 }
 
 .login-btn:hover {
-    background: darkred;
+    background: rgb(4, 0, 243);
 }
 
 /* Ensure body & html remain normal for other pages */
@@ -90,7 +90,7 @@ body, html {
 .login-home-btn {
     width: 100%;
     padding: 10px;
-    background: rgb(226, 230, 8);
+    background: #e2e8f0;
     color: rgb(0, 0, 0);
     font-size: 16px;
     border: none;
@@ -100,5 +100,5 @@ body, html {
 }
 
 .login-home-btn:hover {
-    background: rgb(61, 31, 31);
+    background: #c2cad4;
 }

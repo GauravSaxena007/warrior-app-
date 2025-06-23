@@ -106,7 +106,7 @@ const Login = () => {
             onChange={(e) => setPassword(e.target.value)}
             required
           />
-          <label style={{ color: 'black', display: 'flex', alignItems: 'center', marginTop: '10px' }}>
+          <label style={{ color: 'black', display: 'flex', alignItems: 'center', marginTop: '3px' , marginBottom: '7px' }}>
             <input
               type="checkbox"
               checked={rememberMe}
@@ -115,7 +115,6 @@ const Login = () => {
             />
             Remember Me
           </label>
-
           <button type="submit" className="login-btn">✅ Submit</button>
           <button onClick={() => window.location.href = '/'} className="login-home-btn">
             🏠 Back To Homepage

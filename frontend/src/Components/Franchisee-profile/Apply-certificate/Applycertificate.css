@@ -84,13 +84,13 @@
   overflow: hidden;
   margin-bottom: 32px; /* reduced */
   background-color: var(--background-light);
-  font-size: 0.9rem; /* reduced */
+  font-size: 0.8rem; /* reduced */
 }
 
 .styled-table th,
 .styled-table td {
   border: 1px solid #e5e7eb;
-  padding: 6px 10px; /* reduced */
+  padding: 3px 5px; /* reduced */
   text-align: center;
   color: var(--text-light);
   white-space: normal;

@@ -91,6 +91,16 @@ const Reeladmin = () => {
             <option value="'Roboto', sans-serif">Roboto</option>
             <option value="'Poppins', sans-serif">Poppins</option>
             <option value="Math Sans Bold Italic">Math Sans</option>
+            {/* Popular Indian government fonts */}
+            <option value="'Noto Sans', sans-serif">Noto Sans</option>
+            <option value="'Noto Serif', serif">Noto Serif</option>
+            <option value="'Hind', sans-serif">Hind</option>
+            <option value="'Open Sans', sans-serif">Open Sans</option>
+            <option value="'Lato', sans-serif">Lato</option>
+            <option value="'Mukta', sans-serif">Mukta</option>
+            <option value="'Tiro Devanagari Hindi', serif">Tiro Devanagari Hindi</option>
+            <option value="'Baloo 2', cursive">Baloo 2</option>
+            <option value="'Karma', serif">Karma</option>
           </select>
         </div>
       </div>

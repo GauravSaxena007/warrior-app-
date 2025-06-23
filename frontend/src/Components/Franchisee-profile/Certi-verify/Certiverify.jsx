@@ -49,7 +49,7 @@ const Certiverify = () => {
           setMatchedCertificate(manualMatch);
           setIsManual(true);
         } else {
-          setError('No certificate found for the given Enrollment Number. Please check and try again.');
+          setError('No Marksheet/Certificate found for the given Enrollment Number. Please check and try again.');
         }
       }
     } catch (err) {

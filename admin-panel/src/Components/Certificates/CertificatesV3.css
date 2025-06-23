@@ -75,4 +75,12 @@
 .manualcerti-table td:nth-child(7) {
   width: 18%;  /* View Marksheet */
 }
-
+.btn-blue-cer {
+  background-color: #007bff; /* Blue */
+  border-color: #007bff;
+  color: white;
+}
+.btn-blue-cer:hover {
+  background-color: #0056b3;
+  border-color: #0056b3;
+}

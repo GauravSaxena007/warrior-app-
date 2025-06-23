@@ -46,7 +46,7 @@
 
 /* Items */
 .dropdown-menu-1 li {
-  padding: 3px;
+  padding: 5px;
   text-align: left;
   transition: background 0.3s ease;
 }
@@ -55,6 +55,7 @@
   text-decoration: none;
   color: black;
   display: block;
+  font-weight: 600;
 }
 
 /* Hover Effect */

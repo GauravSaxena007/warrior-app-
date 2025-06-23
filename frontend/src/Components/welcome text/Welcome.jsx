@@ -31,6 +31,7 @@ const Welcome = () => {
           </React.Fragment>
         ))}
       </p>
+       <h1 className="welcome-title-1">OUR POPULAR COURSES</h1>
     </div>
   );
 }

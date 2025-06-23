@@ -41,3 +41,23 @@
     line-height: 1.6; /* Improves readability */
     color: #333; /* Adjust color for better contrast */
 }
+.welcome-title-1 {
+    color: orange;
+    font-family: Helvetica, sans-serif;
+    font-weight: bold;
+    font-size: 24px; /* Adjust size as needed */
+    position: relative;
+    display: inline-block; /* Ensures the underline doesn't stretch full width */
+    text-align: center; /* Centers text */
+}
+
+/* Add underline below the heading */
+.welcome-title-1::after {
+    content: "";
+    display: block;
+    width: 90px; /* Adjust the width of the underline */
+    height: 3px; /* Adjust thickness */
+    background-color: orange; /* Matches heading color */
+    margin: 5px auto 0; /* Centers the underline */
+    margin-bottom: -19px;
+}

@@ -143,7 +143,7 @@ const CertificatesV3 = () => {
       </button>
       <button
   onClick={() => (window.location.href = '/dashboard/manualcertificate')}
-  className="btn btn-success-cer mb-3"
+  className="btn btn-blue-cer mb-3"
 >
  Assign Certificate & Marksheet - Manually &#10149;
 </button>
