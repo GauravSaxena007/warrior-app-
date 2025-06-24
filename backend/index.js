@@ -22,6 +22,8 @@ const allowedOrigins = [
   'http://rvtps.com:5173',
   'http://rvtps.com:3001', 
   'https://147.93.28.36:5000',
+  'http://www.rvtps.com',
+  'https://www.rvtps.com', 
   'http://rvtps.com',
   'https://rvtps.com',
   'http://168.231.102.114',
