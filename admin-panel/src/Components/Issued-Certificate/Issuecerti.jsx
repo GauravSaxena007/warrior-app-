@@ -61,7 +61,7 @@ const Issuecerti = () => {
 
       // Send certificate
       await axios.put(
-        `${import.meta.env.VITE_API_URL}/api/Admiadmin-certin-certi/certificateRequests/${request._id}`,
+        `${import.meta.env.VITE_API_URL}/api/admin-certi/certificateRequests/${request._id}`,
         formData,
         { headers: { 'Content-Type': 'multipart/form-data' } }
       );
