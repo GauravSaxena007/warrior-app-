@@ -217,7 +217,7 @@ const FranchiseeManagement = () => {
   Renewal Date <span className="small-text-1">(dd/mm/yyyy)</span>
 </th>
             <th>Password</th>
-            <th>Photo</th>
+            <th>Photo </th>
             <th>Actions</th>
           </tr>
         </thead>
@@ -287,6 +287,10 @@ const FranchiseeManagement = () => {
 
               <label>
                 Upload Photo:
+                <br/>
+                (Max Size : 500 kb) 
+                <br/>
+                (No Special Character "-")
                 <input className="input" type="file" name="photo" accept=".jpg,.jpeg,.png" onChange={handleInputChange} />
               </label>
 
