@@ -287,7 +287,7 @@ const FranchiseeManagement = () => {
 
               <label>
                 Upload Photo:
-                <input className="input" type="file" name="photo" accept="image/*" onChange={handleInputChange} />
+                <input className="input" type="file" name="photo" accept=".jpg,.jpeg,.png" onChange={handleInputChange} />
               </label>
 
 

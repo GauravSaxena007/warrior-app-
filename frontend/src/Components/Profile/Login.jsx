@@ -8,12 +8,13 @@ const Login = () => {
   const [rememberMe, setRememberMe] = useState(false);
   const navigate = useNavigate();
 
-  // ✅ Load remembered email on mount
+  // ✅ Load remembered email on mount (for autofill only)
   useEffect(() => {
-    const remembered = localStorage.getItem("rememberMe") === "true";
-    const storedEmail = remembered ? localStorage.getItem("rememberedEmail") : "";
-    setEmail(storedEmail || "");
-    setRememberMe(remembered);
+    const storedEmail = localStorage.getItem("rememberedEmail");
+    if (storedEmail) {
+      setEmail(storedEmail);
+      setRememberMe(true);
+    }
   }, []);
 
   const handleLogin = async (e) => {
@@ -32,15 +33,15 @@ const Login = () => {
       let data = await res.json();
 
       if (res.ok) {
+        // ✅ Save email only if "Remember Me" is checked
         if (rememberMe) {
-          localStorage.setItem("token", data.token);
           localStorage.setItem("rememberedEmail", email);
-          localStorage.setItem("rememberMe", "true");
         } else {
-          sessionStorage.setItem("token", data.token);
           localStorage.removeItem("rememberedEmail");
-          localStorage.setItem("rememberMe", "false");
         }
+
+        // ✅ Always store token in localStorage/sessionStorage (your logic here)
+        localStorage.setItem("token", data.token); // or sessionStorage.setItem("token", ...)
         navigate("/franchprofile");
         return;
       }
@@ -58,14 +59,12 @@ const Login = () => {
 
       if (res.ok) {
         if (rememberMe) {
-          localStorage.setItem("token", data.token);
           localStorage.setItem("rememberedEmail", email);
-          localStorage.setItem("rememberMe", "true");
         } else {
-          sessionStorage.setItem("token", data.token);
           localStorage.removeItem("rememberedEmail");
-          localStorage.setItem("rememberMe", "false");
         }
+
+        localStorage.setItem("token", data.token); // or sessionStorage.setItem("token", ...)
         navigate("/franchprofile");
       } else {
         alert(data.message || "Login failed");
@@ -106,7 +105,7 @@ const Login = () => {
             onChange={(e) => setPassword(e.target.value)}
             required
           />
-          <label style={{ color: 'black', display: 'flex', alignItems: 'center', marginTop: '3px' , marginBottom: '7px' }}>
+          <label style={{ color: 'black', display: 'flex', alignItems: 'center', marginTop: '3px', marginBottom: '7px' }}>
             <input
               type="checkbox"
               checked={rememberMe}
