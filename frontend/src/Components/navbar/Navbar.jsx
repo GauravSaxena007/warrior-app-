@@ -79,8 +79,11 @@ const Navbar = () => {
       </div>
 
       <div className={`contact-info-1x ${visible ? "" : "hidden-nav"}`}>
-        Franchisee Enquiry : 📞 {franchiseNumber}
-      </div>
+  Franchisee Enquiry : 📞{" "}
+  <a href={`tel:${franchiseNumber}`} style={{ color: "inherit", textDecoration: "none" }}>
+    {franchiseNumber}
+  </a>
+</div>
     </>
   );
 };

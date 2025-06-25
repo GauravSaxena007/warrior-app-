@@ -29,7 +29,7 @@
   list-style: none;
   padding: 0;
   margin: 0;
-  width: 150px;
+  width: 230px;
   opacity: 0;
   transform: translateY(10px);
   pointer-events: none;
@@ -66,10 +66,10 @@
 /* Responsive */
 @media (max-width: 412px) {
   .dropdown-label-1 {
-    margin-left: 40px;
+    margin-left: 70px;
   }
   .dropdown-container-1 {
-    margin-right: 40px;
+    margin-right: 70px;
   }
 }
 @media (min-width: 413px) and (max-width: 1198px) {

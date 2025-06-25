@@ -1,6 +1,7 @@
 import { useState, useRef, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { FaUserTie, FaUserShield } from 'react-icons/fa';
+import { HiOutlineUserGroup } from 'react-icons/hi';
 import "./Profile.css";
 
 const Profile = () => {
@@ -34,6 +35,12 @@ const Profile = () => {
           <Link to="/login" style={{ display: 'flex', alignItems: 'center' }}>
             <FaUserTie style={{ marginRight: '5px' }} />
             Franchisee Login
+          </Link>
+        </li>
+         <li>
+          <Link to="" style={{ display: 'flex', alignItems: 'center' }}>
+            <HiOutlineUserGroup style={{ marginRight: '5px' }} />
+            District Coordinator Login
           </Link>
         </li>
         <li>
