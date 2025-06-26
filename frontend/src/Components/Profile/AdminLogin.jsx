@@ -22,7 +22,7 @@ const AdminLogin = () => {
 
       alert('Login successful!');
       // Redirect to admin panel with token in URL
-      window.location.href = `${import.meta.env.VITE_ADMIN_URL}/dashboard/dashboard?token=${encodeURIComponent(token)}`;
+      navigate('/dashboard');
     } catch (error) {
       console.error('Login failed:', error);
       alert('Invalid email or password');
