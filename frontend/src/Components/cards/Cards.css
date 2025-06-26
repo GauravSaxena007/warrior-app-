@@ -150,3 +150,14 @@
     margin: 0 auto;
   }
 }
+@media (min-width: 412px) and (max-width: 767px) {
+  .card {
+      width: calc(100% - 1px);            /* Make card responsive */
+    max-width: 1960px;      /* Prevent stretching too far */
+    height: auto;          /* Allow height to adjust to content */
+    margin: 0 auto 0;   /* Center card and add bottom spacing */
+    margin-right: 190px;
+    border-radius: 10px;
+    transition: transform 0.3s ease;
+  }
+}

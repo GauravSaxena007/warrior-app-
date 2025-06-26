@@ -346,3 +346,41 @@ body {
   
 }
 }
+@media (min-width: 413px) and (max-width: 443px) {
+  .contact-info-1x {
+    font-size: 13px;
+    text-align: center;
+    margin-top: 11%;
+    margin-left: 21%;
+    /* Add any additional responsive styles here */
+  }
+}
+
+@media (min-width: 443px) and (max-width: 576px) {
+  .contact-info-1x {
+    font-size: 13px;
+    text-align: center;
+    margin-top: 5%;
+    margin-left: 25%;
+    /* Add any additional responsive styles here */
+  }
+}
+@media (min-width: 577px) and (max-width: 767px) {
+  .contact-info-1x {
+    font-size: 13px;
+    text-align: center;
+    margin-top: 0%;
+    margin-left: 21%;
+    /* Add any additional responsive styles here */
+  }
+}
+@media (min-width: 529px) and (max-width: 743px) {
+  .hamburger {
+    right: 30px; /* Adds a 20px extra gap compared to default */
+  }
+}
+@media (min-width: 743px) and (max-width: 1198px) {
+  .hamburger {
+    right: 50px; /* Adds a 20px extra gap compared to default */
+  }
+}

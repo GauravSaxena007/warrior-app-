@@ -10,6 +10,7 @@ const Applycertificate = () => {
   const [centerHead, setCenterHead] = useState(null);
   const [topupAmount, setTopupAmount] = useState(0);
   const [chargePerApply, setChargePerApply] = useState(0);
+  const [processedStudents, setProcessedStudents] = useState([]);
 
   const isDisabled = topupAmount === 0;
 
@@ -94,6 +95,10 @@ const Applycertificate = () => {
   };
 
   const handleRequest = async () => {
+
+    setProcessedStudents((prev) => [...prev, ...selectedStudents]);
+    setSelectedStudents([]);
+
     try {
       if (selectedStudents.length === 0) {
         alert("Please select at least one student.");
@@ -207,11 +212,17 @@ const Applycertificate = () => {
             <tr key={row._id}>
               <td data-label="Sr. No.">{index + 1}</td>
               <td data-label="Select">
-                <input
-                  type="checkbox"
-                  onChange={(e) => handleSelect(e, row._id)}
-                  disabled={isDisabled}
-                />
+                {processedStudents.includes(row._id) ? (
+                  <span>✓</span> // Or leave empty or show a tick icon
+                ) : (
+                  <input
+                    type="checkbox"
+                    checked={selectedStudents.includes(row._id)}
+                    onChange={(e) => handleSelect(e, row._id)}
+                    disabled={isDisabled}
+                  />
+                )}
+
               </td>
               <td data-label="Student Name">{row.name}</td>
               <td data-label="Mobile">{row.mobile}</td>
@@ -241,13 +252,12 @@ const Applycertificate = () => {
               </td>
               <td
                 data-label="Status"
-                className={`status ${
-                  row.certificateStatus === "Issued"
-                    ? "issued"
-                    : row.certificateStatus === "Approved"
+                className={`status ${row.certificateStatus === "Issued"
+                  ? "issued"
+                  : row.certificateStatus === "Approved"
                     ? "approved"
                     : "pending"
-                }`}
+                  }`}
               >
                 {row.certificateStatus || "Pending"}
               </td>
