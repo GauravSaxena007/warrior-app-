@@ -29,13 +29,14 @@ function App() {
   return (
     <Router basename="/dashboard">
       <div style={{ display: 'flex' }}>
-        <Sidebar />
+        
         <div className="content" style={{ marginLeft: '350px', padding: '20px', width: '100%' }}>
           <Routes>
             <Route
               path="/dashboard"
               element={
                 <PrivateRouteadminpanel>
+                  <Sidebar />
                   <Dashboard />
                 </PrivateRouteadminpanel>
               }
