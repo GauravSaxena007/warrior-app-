@@ -132,7 +132,7 @@ app.get(/^\/dashboard(\/.*)?$/, (req, res) => {
 }); */}
 
 app.get('/error', (req, res) => {
-  if (req.originalUrl.startsWith('/dashboard/')) {
+  if (req.originalUrl.startsWith('/dashboard')) {
     // Do nothing – skip sending error page
     return res.end(); // or just silently end the response
   }

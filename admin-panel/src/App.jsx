@@ -29,15 +29,19 @@ function App() {
   return (
     <Router basename="/dashboard">
       <div style={{ display: 'flex' }}>
-        
+
         <div className="content" style={{ marginLeft: '350px', padding: '20px', width: '100%' }}>
           <Routes>
             <Route
               path="/dashboard"
               element={
                 <PrivateRouteadminpanel>
-                  <Sidebar />
-                  <Dashboard />
+                  <div>
+                    <Sidebar />
+                    <div>
+                      <Dashboard />
+                    </div>
+                  </div>
                 </PrivateRouteadminpanel>
               }
             />
@@ -45,7 +49,12 @@ function App() {
               path="/subjects"
               element={
                 <PrivateRouteadminpanel>
-                  <Subjects/>
+                  <div>
+                    <Sidebar />
+                  <div>
+                  <Subjects />
+                  </div>
+                  </div>
                 </PrivateRouteadminpanel>
               }
             />
@@ -53,23 +62,38 @@ function App() {
               path="/settings"
               element={
                 <PrivateRouteadminpanel>
+                  <div>
+                    <Sidebar />
+                  <div>
                   <Settings />
+                  </div>
+                  </div>
                 </PrivateRouteadminpanel>
               }
             />
-             <Route
+            <Route
               path="/generatecertificate"
               element={
                 <PrivateRouteadminpanel>
-                 <Generatecer/>
+                  <div>
+                    <Sidebar />
+                  <div>
+                  <Generatecer />
+                  </div>
+                  </div>
                 </PrivateRouteadminpanel>
               }
             />
-             <Route
+            <Route
               path="/generatemarksheet"
               element={
                 <PrivateRouteadminpanel>
-                  <Generatemar/>
+                  <div>
+                    <Sidebar />
+                  <div>
+                  <Generatemar />
+                  </div>
+                  </div>
                 </PrivateRouteadminpanel>
               }
             />
@@ -77,7 +101,12 @@ function App() {
               path="/format"
               element={
                 <PrivateRouteadminpanel>
-                  <Format/>
+                  <div>
+                    <Sidebar />
+                  <div>
+                  <Format />
+                  </div>
+                  </div>
                 </PrivateRouteadminpanel>
               }
             />
@@ -85,7 +114,12 @@ function App() {
               path="/manualcertificate"
               element={
                 <PrivateRouteadminpanel>
-                 <Manualcerti/>
+                  <div>
+                    <Sidebar />
+                  <div>
+                  <Manualcerti />
+                  </div>
+                  </div>
                 </PrivateRouteadminpanel>
               }
             />
@@ -93,7 +127,12 @@ function App() {
               path="/payments"
               element={
                 <PrivateRouteadminpanel>
-                 <Payments/>
+                  <div>
+                    <Sidebar />
+                  <div>
+                  <Payments />
+                  </div>
+                  </div>
                 </PrivateRouteadminpanel>
               }
             />
@@ -101,7 +140,12 @@ function App() {
               path="/reset"
               element={
                 <PrivateRouteadminpanel>
-                  <Reset/>
+                  <div>
+                    <Sidebar />
+                  <div>
+                  <Reset />
+                  </div>
+                  </div>
                 </PrivateRouteadminpanel>
               }
             />
@@ -109,7 +153,12 @@ function App() {
               path="/addcourses"
               element={
                 <PrivateRouteadminpanel>
+                  <div>
+                    <Sidebar />
+                  <div>
                   <Addcourses />
+                  </div>
+                  </div>
                 </PrivateRouteadminpanel>
               }
             />
@@ -117,7 +166,12 @@ function App() {
               path="/slider"
               element={
                 <PrivateRouteadminpanel>
+                  <div>
+                    <Sidebar />
+                  <div>
                   <Slider />
+                  </div>
+                  </div>
                 </PrivateRouteadminpanel>
               }
             />
@@ -125,7 +179,12 @@ function App() {
               path="/enquiry"
               element={
                 <PrivateRouteadminpanel>
+                  <div>
+                    <Sidebar/>
+                  <div>
                   <Enquiries />
+                  </div>
+                  </div>
                 </PrivateRouteadminpanel>
               }
             />
@@ -133,7 +192,12 @@ function App() {
               path="/contactuss"
               element={
                 <PrivateRouteadminpanel>
+                  <div>
+                    <Sidebar />
+                  <div>
                   <Contactus />
+                  </div>
+                  </div>
                 </PrivateRouteadminpanel>
               }
             />
@@ -141,7 +205,12 @@ function App() {
               path="/management"
               element={
                 <PrivateRouteadminpanel>
+                  <div>
+                    <Sidebar />
+                  <div>
                   <FranchiseeManagement />
+                  </div>
+                  </div>
                 </PrivateRouteadminpanel>
               }
             />
@@ -149,7 +218,12 @@ function App() {
               path="/issuecerti"
               element={
                 <PrivateRouteadminpanel>
+                  <div>
+                    <Sidebar />
+                  <div>
                   <Issuecerti />
+                  </div>
+                  </div>
                 </PrivateRouteadminpanel>
               }
             />
@@ -157,7 +231,12 @@ function App() {
               path="/transac"
               element={
                 <PrivateRouteadminpanel>
+                  <div>
+                    <Sidebar />
+                  <div>
                   <Transac />
+                  </div>
+                  </div>
                 </PrivateRouteadminpanel>
               }
             />
@@ -165,7 +244,12 @@ function App() {
               path="/certificatesv3"
               element={
                 <PrivateRouteadminpanel>
+                  <div>
+                    <Sidebar />
+                  <div>
                   <CertificatesV3 />
+                  </div>
+                  </div>
                 </PrivateRouteadminpanel>
               }
             />
@@ -173,7 +257,12 @@ function App() {
               path="/courdetail"
               element={
                 <PrivateRouteadminpanel>
+                  <div>
+                    <Sidebar />
+                  <div>
                   <CourierDet />
+                  </div>
+                  </div>
                 </PrivateRouteadminpanel>
               }
             />
@@ -181,7 +270,12 @@ function App() {
               path="/fracer"
               element={
                 <PrivateRouteadminpanel>
+                  <div>
+                    <Sidebar />
+                  <div>
                   <FraCer />
+                  </div>
+                  </div>
                 </PrivateRouteadminpanel>
               }
             />
@@ -189,7 +283,12 @@ function App() {
               path="/reel"
               element={
                 <PrivateRouteadminpanel>
+                  <div>
+                    <Sidebar />
+                  <div>
                   <Reeladmin />
+                  </div>
+                  </div>
                 </PrivateRouteadminpanel>
               }
             />
@@ -197,7 +296,12 @@ function App() {
               path="/agreementadmin"
               element={
                 <PrivateRouteadminpanel>
-                  <AgreementAdmin/>
+                  <div>
+                    <Sidebar />
+                  <div>
+                  <AgreementAdmin />
+                  </div>
+                  </div>
                 </PrivateRouteadminpanel>
               }
             />
@@ -205,7 +309,12 @@ function App() {
               path="/cardsadmin"
               element={
                 <PrivateRouteadminpanel>
+                  <div>
+                    <Sidebar />
+                  <div>
                   <CardsAdmin />
+                  </div>
+                  </div>
                 </PrivateRouteadminpanel>
               }
             />
