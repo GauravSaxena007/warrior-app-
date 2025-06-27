@@ -3,6 +3,7 @@ const cors = require("cors");
 const dotenv = require("dotenv");
 const mongoose = require("mongoose");
 const path = require("path");
+const authMiddleware = require('./middleware/authMiddleware');
 dotenv.config();
 
 const app = express();
@@ -116,11 +117,19 @@ app.use('/', express.static(path.join(__dirname, 'dist-frontend')));
 app.get(/^(?!\/api|\/uploads|\/dashboard).*/, (req, res) => {
   res.sendFile(path.join(__dirname, 'dist-frontend', 'index.html'));
 });
-// Serve Admin Panel Build
+
+// ✅ Protect admin panel assets
+const adminPanelPath = path.join(__dirname, 'dist-adminpanel');
+app.use('/dashboard', authMiddleware, express.static(adminPanelPath));
+// ✅ Protect dashboard routes (SPA fallback)
+app.get(/^\/dashboard(\/.*)?$/, authMiddleware, (req, res) => {
+  res.sendFile(path.join(adminPanelPath, 'index.html'));
+});
+{/*// Serve Admin Panel Build
 app.use('/dashboard', express.static(path.join(__dirname, 'dist-adminpanel')));
 app.get(/^\/dashboard(\/.*)?$/, (req, res) => {
   res.sendFile(path.join(__dirname, 'dist-adminpanel', 'index.html'));
-});
+}); */}
 
 app.get('/error', (req, res) => {
   if (req.originalUrl.startsWith('/dashboard')) {
