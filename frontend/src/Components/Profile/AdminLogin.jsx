@@ -10,18 +10,19 @@ const AdminLogin = () => {
   const handleLogin = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post(`${import.meta.env.VITE_API_URL}/api/auth/adminlogin`, {
+      const response = await axios.post(`${import.meta.env.VITE_API_URL}/api/auth/adminlogin`,{
         email,
         password,
       });
 
       const { token, user } = response.data;
       localStorage.setItem('token', token);
+      console.log('Token stored in localStorage:', token);       // Store token in localStorage (port 5173)
       localStorage.setItem('user', JSON.stringify(user));
-      console.log('Token stored in localStorage:', token);
 
       alert('Login successful!');
-      navigate('/dashboard/dashboard'); // Use navigate, no query param
+      // Redirect to admin panel with token in URL
+      window.location.href = `${import.meta.env.VITE_ADMIN_URL}/dashboard/dashboard?token=${token}`;
     } catch (error) {
       console.error('Login failed:', error);
       alert('Invalid email or password');
@@ -31,7 +32,11 @@ const AdminLogin = () => {
   return (
     <div className="login-page">
       <div className="login-box">
-        <img src="/logo-name.png" alt="Logo-login" style={{ width: '300px' }} />
+        <img
+  src="/logo-name.png"
+  alt="Logo-login"
+  style={{ width: '300px'}}
+/> 
         <form className="login-form" onSubmit={handleLogin}>
           <h3 className="login-header">Login to Admin Dashboard ⚙️</h3>
           <input
@@ -52,7 +57,7 @@ const AdminLogin = () => {
           />
           <button type="submit" className="login-btn">🔐 Submit</button>
           <button onClick={() => navigate('/')} className="login-home-btn">
-            🏠 Back To Homepage
+          🏠 Back To Homepage
           </button>
         </form>
       </div>
@@ -60,4 +65,4 @@ const AdminLogin = () => {
   );
 };
 
-export default AdminLogin; 
+export default AdminLogin;
