@@ -171,7 +171,9 @@ const Certiverify = () => {
                   <th>Mobile</th>
                   <th>Course</th>
                   <th>Enrollment No.</th>
-                  <th>Result</th>
+                  <th>Certificate</th>
+                  <th>Marksheet</th>
+                  <th>Marksheet HTML</th>
                 </tr>
               </thead>
               <tbody>
@@ -193,19 +195,34 @@ const Certiverify = () => {
                   </td>
                   <td>{matchedCertificate.certificateNumber || 'N/A'}</td>
                   <td>
-                    {isManual && matchedCertificate.marksheetHTML ? (
-                      <button
+                    {buildFileUrl(
+                      isManual
+                        ? matchedCertificate.certificateFile || matchedCertificate.file
+                        : matchedCertificate.certificatePath
+                    ) ? (
+                      <a
+                        href={buildFileUrl(
+                          isManual
+                            ? matchedCertificate.certificateFile || matchedCertificate.file
+                            : matchedCertificate.certificatePath
+                        )}
+                        target="_blank"
+                        rel="noopener noreferrer"
                         className="btn btn-outline-secondary btn-sm"
-                        onClick={() => openMarksheet(matchedCertificate.marksheetHTML)}
-                        aria-label="View HTML Marksheet"
+                        aria-label="View Certificate"
                       >
                         View
-                      </button>
-                    ) : buildFileUrl(
-                        isManual
-                          ? matchedCertificate.marksheetFile || matchedCertificate.marksheetPath
-                          : matchedCertificate.marksheetPath
-                      ) ? (
+                      </a>
+                    ) : (
+                      <span className="text-muted">Certificate Unavailable</span>
+                    )}
+                  </td>
+                  <td>
+                    {buildFileUrl(
+                      isManual
+                        ? matchedCertificate.marksheetFile || matchedCertificate.marksheetPath
+                        : matchedCertificate.marksheetPath
+                    ) ? (
                       <a
                         href={buildFileUrl(
                           isManual
@@ -215,12 +232,25 @@ const Certiverify = () => {
                         target="_blank"
                         rel="noopener noreferrer"
                         className="btn btn-outline-secondary btn-sm"
-                        aria-label="View File Marksheet"
+                        aria-label="View Marksheet"
                       >
                         View
                       </a>
                     ) : (
                       <span className="text-muted">Marksheet Unavailable</span>
+                    )}
+                  </td>
+                  <td>
+                    {isManual && matchedCertificate.marksheetHTML ? (
+                      <button
+                        className="btn btn-outline-secondary btn-sm"
+                        onClick={() => openMarksheet(matchedCertificate.marksheetHTML)}
+                        aria-label="View HTML Marksheet"
+                      >
+                        View
+                      </button>
+                    ) : (
+                      <span className="text-muted">Marksheet HTML Unavailable</span>
                     )}
                   </td>
                 </tr>
