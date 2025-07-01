@@ -120,9 +120,9 @@ app.get(/^(?!\/api|\/uploads|\/dashboard).*/, (req, res) => {
 
 // ✅ Protect admin panel assets
 const adminPanelPath = path.join(__dirname, 'dist-adminpanel');
-app.use('/dashboard', authMiddleware, express.static(adminPanelPath));
+app.use('/dashboard', express.static(adminPanelPath));
 // ✅ Protect dashboard routes (SPA fallback)
-app.get(/^\/dashboard(\/.*)?$/, authMiddleware, (req, res) => {
+app.get(/^\/dashboard(\/.*)?$/, (req, res) => {
   res.sendFile(path.join(adminPanelPath, 'index.html'));
 });
 {/*// Serve Admin Panel Build
