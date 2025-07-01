@@ -31,6 +31,8 @@ const PrivateRouteadminpanel = ({ children }) => {
         await axios.get(`${import.meta.env.VITE_API_URL}/api/auth/validate`, {
           headers: { Authorization: `Bearer ${token}` },
         });
+
+        axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
         setIsAuthenticated(true);
       } catch (error) {
         console.error('Token validation failed:', error);
