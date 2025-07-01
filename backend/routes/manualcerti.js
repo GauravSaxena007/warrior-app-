@@ -7,7 +7,7 @@ const ManualCerti = require('../models/ManualCerti');
 // Multer storage config
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
-    cb(null, 'uploads/certificates'); // ensure this directory exists
+    cb(null, 'Uploads/certificates'); // ensure this directory exists
   },
   filename: (req, file, cb) => {
     cb(null, Date.now() + '-' + file.originalname);
@@ -30,8 +30,10 @@ router.post('/', upload.fields([
       mobile: req.body.mobile,
       courseName: req.body.courseName,
       certificateNumber: req.body.certificateNumber,
-      certificateFile: certificateFile ? `uploads/certificates/${certificateFile.filename}` : null,
-      marksheetFile: marksheetFile ? `uploads/certificates/${marksheetFile.filename}` : null,
+      obtainMarks: JSON.parse(req.body.obtainMarks || '[]'),
+      marksheetHTML: req.body.marksheetHTML,
+      certificateFile: certificateFile ? `Uploads/certificates/${certificateFile.filename}` : null,
+      marksheetFile: marksheetFile ? `Uploads/certificates/${marksheetFile.filename}` : null,
     });
 
     await newCerti.save();

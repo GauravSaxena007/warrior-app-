@@ -63,7 +63,7 @@
 
 .manualcerti-table th:nth-child(5),
 .manualcerti-table td:nth-child(5) {
-  width: 21%;  /* Enrollment No. */
+  width: 29%;  /* Enrollment No. */
 }
 
 .manualcerti-table th:nth-child(6),
