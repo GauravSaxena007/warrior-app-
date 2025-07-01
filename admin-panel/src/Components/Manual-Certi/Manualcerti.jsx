@@ -143,13 +143,13 @@ const Manualcerti = () => {
     for (let pair of formData.entries()) {
       console.log(`${pair[0]}:`, typeof pair[1] === 'string' ? pair[1].slice(0, 50) + (pair[1].length > 50 ? '...' : '') : pair[1].name || pair[1]);
     }
-    console.log('Full marksheetHTML length:', marksheetHTML.length);
+    console.log('Full marksheetHTML:', marksheetHTML); // Log full HTML content
 
     try {
       const response = await axios.post(`${import.meta.env.VITE_API_URL}/api/manualcerti`, formData, {
         headers: { 'Content-Type': 'multipart/form-data' },
       });
-      console.log('Backend response:', response.data);
+      console.log('Backend response:', response.data); // Log full response
       alert('Certificate sent successfully!');
       const newRows = [...rows];
       usedNumbers.delete(row.certificateNumber);
@@ -173,7 +173,7 @@ const Manualcerti = () => {
   const generateMarksheetHTML = (index) => {
     const row = rows[index];
     const selectedCourse = courses.find((c) => c.title === row.courseName);
-    const logoUrl = window.location.origin + '/main-logo.png';
+    const logoUrl = window.location.origin + '/main-logo.png'; // Use absolute path
 
     if (!selectedCourse || !selectedCourse.semesters?.length) {
       console.warn('No course or subjects available for:', row.courseName);
@@ -187,7 +187,7 @@ const Manualcerti = () => {
       <div class="Format-container">
         <div class="Format-section">
           <div class="Format-header">
-            <img src="main-logo.png" alt="Institute Logo" class="Format-logo" />
+            <img src="${logoUrl}" alt="Institute Logo" class="Format-logo" />
             <h2>राष्ट्रीय वाणिज्य एवं तकनीकी प्रशिक्षण संस्थान</h2>
             <h3>National Institute of Commerce and Technical Training</h3>
             <h2 class="Format-title">Marksheet</h2>
@@ -348,6 +348,7 @@ const Manualcerti = () => {
                         e.preventDefault();
                         const newTab = window.open();
                         console.log('Opening marks editor for course:', row.courseName);
+                        const logoUrl = window.location.origin + '/main-logo.png'; // Consistent absolute path
                         const htmlContent = `
                           <!DOCTYPE html>
                           <html>
@@ -379,7 +380,7 @@ const Manualcerti = () => {
                             <div class="Format-container">
                               <div class="Format-section">
                                 <div class="Format-header">
-                                  <img src="main-logo.png" alt="Institute Logo" style="height: 80px; margin-bottom: 10px;" />
+                                  <img src="${logoUrl}" alt="Institute Logo" style="height: 80px; margin-bottom: 10px;" />
                                   <h2>राष्ट्रीय वाणिज्य एवं तकनीकी प्रशिक्षण संस्थान</h2>
                                   <h3>National Institute of Commerce and Technical Training</h3>
                                   <h2 class="Format-title">Marksheet</h2>
