@@ -17,19 +17,11 @@ const AdminLogin = () => {
 
       const { token, user } = response.data;
       localStorage.setItem('token', token);
-      console.log('Token stored in localStorage:', token);       // Store token in localStorage (port 5173)
       localStorage.setItem('user', JSON.stringify(user));
+      console.log('Token stored in localStorage:', token);
 
       alert('Login successful!');
-
-      console.log('Login successful!');
-      console.log('Token:', token);
-      console.log('VITE_ADMIN_URL:', import.meta.env.VITE_ADMIN_URL);
-      const redirectUrl = `${import.meta.env.VITE_ADMIN_URL}/dashboard/dashboard?token=${token}`;
-      console.log('Redirect URL:', redirectUrl);
-
-      // Redirect to admin panel with token in URL
-      window.location.href = `${import.meta.env.VITE_ADMIN_URL}/dashboard/dashboard?token=${token}`;
+      navigate('/dashboard/dashboard'); // Use navigate, no query param
     } catch (error) {
       console.error('Login failed:', error);
       alert('Invalid email or password');
@@ -39,11 +31,7 @@ const AdminLogin = () => {
   return (
     <div className="login-page">
       <div className="login-box">
-        <img
-          src="/logo-name.png"
-          alt="Logo-login"
-          style={{ width: '300px' }}
-        />
+        <img src="/logo-name.png" alt="Logo-login" style={{ width: '300px' }} />
         <form className="login-form" onSubmit={handleLogin}>
           <h3 className="login-header">Login to Admin Dashboard ⚙️</h3>
           <input
@@ -72,4 +60,4 @@ const AdminLogin = () => {
   );
 };
 
-export default AdminLogin;
+export default AdminLogin; 
