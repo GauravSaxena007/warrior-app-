@@ -15,7 +15,7 @@ const PrivateRouteadminpanel = ({ children }) => {
       if (urlToken) {
         localStorage.setItem('token', urlToken); // Store token in localStorage
         token = urlToken;
-        await new Promise(resolve => setTimeout(resolve, 500));// Clear token from URL for security
+        window.history.replaceState({}, document.title, location.pathname); // Clear token from URL for security
       }
   
       if (!token) {
