@@ -12,6 +12,7 @@ const Manualcerti = () => {
       obtainMarks: {},
       certificateFile: null,
       marksheetFile: null,
+      marksheetHTML: '', // Added marksheetHTML field
     },
   ]);
   const [courses, setCourses] = useState([]);
@@ -92,6 +93,7 @@ const Manualcerti = () => {
         obtainMarks: {},
         certificateFile: null,
         marksheetFile: null,
+        marksheetHTML: '', // Added marksheetHTML field
       },
     ]);
   };
@@ -130,26 +132,24 @@ const Manualcerti = () => {
     formData.append('courseName', row.courseName);
     formData.append('certificateNumber', row.certificateNumber);
     formData.append('obtainMarks', JSON.stringify(obtainMarksArray));
+    formData.append('marksheetHTML', row.marksheetHTML || generateMarksheetHTML(index)); // Use saved marksheetHTML or generate
     if (row.certificateFile) {
       formData.append('file', row.certificateFile);
     }
     if (row.marksheetFile) {
       formData.append('marksheet', row.marksheetFile);
     }
-    const marksheetHTML = generateMarksheetHTML(index);
-    formData.append('marksheetHTML', marksheetHTML);
 
     console.log('FormData contents before send:');
     for (let pair of formData.entries()) {
       console.log(`${pair[0]}:`, typeof pair[1] === 'string' ? pair[1].slice(0, 50) + (pair[1].length > 50 ? '...' : '') : pair[1].name || pair[1]);
     }
-    console.log('Full marksheetHTML:', marksheetHTML); // Log full HTML content
 
     try {
       const response = await axios.post(`${import.meta.env.VITE_API_URL}/api/manualcerti`, formData, {
         headers: { 'Content-Type': 'multipart/form-data' },
       });
-      console.log('Backend response:', response.data); // Log full response
+      console.log('Backend response:', response.data);
       alert('Certificate sent successfully!');
       const newRows = [...rows];
       usedNumbers.delete(row.certificateNumber);
@@ -173,7 +173,7 @@ const Manualcerti = () => {
   const generateMarksheetHTML = (index) => {
     const row = rows[index];
     const selectedCourse = courses.find((c) => c.title === row.courseName);
-    const logoUrl = window.location.origin + '/main-logo.png'; // Use absolute path
+    const logoUrl = window.location.origin + '/main-logo.png';
 
     if (!selectedCourse || !selectedCourse.semesters?.length) {
       console.warn('No course or subjects available for:', row.courseName);
@@ -276,11 +276,13 @@ const Manualcerti = () => {
 
   useEffect(() => {
     const handleMessage = (e) => {
-      const { index, marks } = e.data;
+      const { index, marks, marksheetHTML } = e.data;
       if (index !== undefined && marks) {
         console.log('Received marks for index', index, ':', marks);
+        console.log('Received marksheetHTML:', marksheetHTML);
         const newRows = [...rows];
         newRows[index].obtainMarks = { ...newRows[index].obtainMarks, ...marks };
+        newRows[index].marksheetHTML = marksheetHTML; // Save marksheetHTML
         setRows(newRows);
         console.log('Updated rows after marks:', newRows);
       }
@@ -348,7 +350,7 @@ const Manualcerti = () => {
                         e.preventDefault();
                         const newTab = window.open();
                         console.log('Opening marks editor for course:', row.courseName);
-                        const logoUrl = window.location.origin + '/main-logo.png'; // Consistent absolute path
+                        const logoUrl = window.location.origin + '/main-logo.png';
                         const htmlContent = `
                           <!DOCTYPE html>
                           <html>
@@ -537,7 +539,7 @@ const Manualcerti = () => {
                                   }
                                 });
                                 console.log('Sending marks to parent:', marks);
-                                window.opener.postMessage({ index: ${index}, marks }, '*');
+                                window.opener.postMessage({ index: ${index}, marks, marksheetHTML: document.documentElement.outerHTML }, '*');
                                 const subjects = ${JSON.stringify(selectedCourse.semesters.flatMap((sem) => sem.subjects))};
                                 subjects.forEach(subj => {
                                   document.getElementById('mark-' + subj.subject).textContent = marks[subj.subject] || 0;
