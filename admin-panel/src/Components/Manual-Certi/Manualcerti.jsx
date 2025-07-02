@@ -56,7 +56,7 @@ const Manualcerti = () => {
       } while (usedNumbers.has(enrollNo) && attempts < maxAttempts);
 
       if (attempts >= maxAttempts) {
-        console.error('Could not generate a unique enrollment number after maximum attempts');
+        console.error('Could not generate a unique enrollment number');
         return 'RVTPS/ERROR/00000';
       }
 
@@ -132,7 +132,7 @@ const Manualcerti = () => {
     formData.append('courseName', row.courseName);
     formData.append('certificateNumber', row.certificateNumber);
     formData.append('obtainMarks', JSON.stringify(obtainMarksArray));
-    formData.append('marksheetHTML', row.marksheetHTML || generateMarksheetHTML(index));
+    formData.append('marksheetHTML', encodeURIComponent(row.marksheetHTML || generateMarksheetHTML(index)));
     if (row.certificateFile) {
       formData.append('file', row.certificateFile);
     }
@@ -142,7 +142,7 @@ const Manualcerti = () => {
 
     console.log('FormData contents before send:');
     for (let pair of formData.entries()) {
-      console.log(`${pair[0]}:`, typeof pair[1] === 'string' ? pair[1].slice(0, 50) + (pair[1].length > 50 ? '...' : '') : pair[1].name || pair[1]);
+      console.log(`${pair[0]}:`, typeof pair[1] === 'string' ? pair[1].slice(0, 50) + '...' : pair[1].name || pair[1]);
     }
 
     try {
@@ -173,7 +173,7 @@ const Manualcerti = () => {
   const generateMarksheetHTML = (index) => {
     const row = rows[index];
     const selectedCourse = courses.find((c) => c.title === row.courseName);
-    const logoUrl = window.location.origin + '/main-logo.png';
+    const logoUrl = `${import.meta.env.VITE_PUBLIC_URL}/main-logo.png`;
 
     if (!selectedCourse || !selectedCourse.semesters?.length) {
       console.warn('No course or subjects available for:', row.courseName);
@@ -187,7 +187,7 @@ const Manualcerti = () => {
       <div class="Format-container">
         <div class="Format-section">
           <div class="Format-header">
-            <img src="main-logo.png" alt="Institute Logo" class="Format-logo" />
+            <img src="${logoUrl}" alt="Institute Logo" class="Format-logo" />
             <h2>राष्ट्रीय वाणिज्य एवं तकनीकी प्रशिक्षण संस्थान</h2>
             <h3>National Institute of Commerce and Technical Training</h3>
             <h2 class="Format-title">Marksheet</h2>
@@ -217,7 +217,8 @@ const Manualcerti = () => {
                     <td>${subj.passingMarks}</td>
                     <td id="mark-${subj.subject}">${row.obtainMarks[subj.subject] || 0}</td>
                   </tr>
-                `).join('')}
+                `)
+                .join('')}
               <tr class="total-row">
                 <td colspan="2">Total</td>
                 <td>${subjects.reduce((sum, subj) => sum + Number(subj.maxMarks || 0), 0)}</td>
@@ -282,14 +283,9 @@ const Manualcerti = () => {
         console.log('Received marksheetHTML:', marksheetHTML.slice(0, 50) + '...');
         const newRows = [...rows];
         newRows[index].obtainMarks = { ...newRows[index].obtainMarks, ...marks };
-        // Clean up marksheetHTML to exclude editable section
-        const parser = new DOMParser();
-        const doc = parser.parseFromString(marksheetHTML, 'text/html');
-        const editableSection = doc.querySelector('.editable-section');
-        if (editableSection) editableSection.remove();
-        newRows[index].marksheetHTML = doc.documentElement.outerHTML;
+        newRows[index].marksheetHTML = marksheetHTML; // Store cleaned marksheetHTML
         setRows(newRows);
-        console.log('Updated rows after marks:', newRows);
+        console.log('Updated rows:', newRows);
       }
     };
     window.addEventListener('message', handleMessage);
@@ -354,13 +350,18 @@ const Manualcerti = () => {
                       onClick={(e) => {
                         e.preventDefault();
                         const newTab = window.open('', '_blank');
+                        if (!newTab) {
+                          alert('Please allow pop-ups to view the marks editor.');
+                          return;
+                        }
                         console.log('Opening marks editor for course:', row.courseName);
-                        const logoUrl = window.location.origin + '/main-logo.png';
+                        const logoUrl = `${import.meta.env.VITE_PUBLIC_URL}/main-logo.png`;
                         const htmlContent = `
                           <!DOCTYPE html>
                           <html>
                           <head>
                             <title>Subjects & Marks</title>
+                            <meta http-equiv="Content-Security-Policy" content="default-src 'self'; img-src 'self' ${import.meta.env.VITE_PUBLIC_URL}; script-src 'self' 'unsafe-inline';">
                             <style>
                               .Format-container { max-width: 1200px; margin: 30px auto; padding: 30px; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: #fff; color: #000; display: flex; flex-wrap: wrap; gap: 20px; }
                               .Format-section { flex: 1; min-width: 500px; border: 2px solid #333; border-radius: 8px; padding: 20px; background-color: #f9f9f9; box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); }
@@ -387,7 +388,7 @@ const Manualcerti = () => {
                             <div class="Format-container">
                               <div class="Format-section">
                                 <div class="Format-header">
-                                  <img src="main-logo.png" alt="Institute Logo" style="height: 80px; margin-bottom: 10px;" />
+                                  <img src="${logoUrl}" alt="Institute Logo" style="height: 80px; margin-bottom: 10px;" />
                                   <h2>राष्ट्रीय वाणिज्य एवं तकनीकी प्रशिक्षण संस्थान</h2>
                                   <h3>National Institute of Commerce and Technical Training</h3>
                                   <h2 class="Format-title">Marksheet</h2>
@@ -418,7 +419,8 @@ const Manualcerti = () => {
                                           <td>${subj.passingMarks}</td>
                                           <td id="mark-${subj.subject}">${row.obtainMarks[subj.subject] || 0}</td>
                                         </tr>
-                                      `).join('')}
+                                      `)
+                                      .join('')}
                                     <tr class="total-row">
                                       <td colspan="2">Total</td>
                                       <td>${selectedCourse.semesters
@@ -543,12 +545,12 @@ const Manualcerti = () => {
                                     delete marks[subject];
                                   }
                                 });
-                                console.log('Sending marks to parent:', marks);
                                 const marksheetSection = document.querySelector('.Format-section:not(.editable-section)').outerHTML;
                                 const marksheetHTML = \`
                                   <!DOCTYPE html>
                                   <html>
                                   <head>
+                                    <title>Marksheet</title>
                                     <style>
                                       ${document.querySelector('style').innerText}
                                     </style>
@@ -560,6 +562,8 @@ const Manualcerti = () => {
                                   </body>
                                   </html>
                                 \`;
+                                console.log('Sending marks:', marks);
+                                console.log('Sending marksheetHTML:', marksheetHTML.slice(0, 50) + '...');
                                 window.opener.postMessage({ index: ${index}, marks, marksheetHTML }, '*');
                                 const subjects = ${JSON.stringify(selectedCourse.semesters.flatMap((sem) => sem.subjects))};
                                 subjects.forEach(subj => {
@@ -590,6 +594,7 @@ const Manualcerti = () => {
                         `;
                         newTab.document.write(htmlContent);
                         newTab.document.close();
+                        newTab.onerror = (e) => console.error('Error in new tab:', e);
                       }}
                       style={{ color: 'blue', textDecoration: 'underline', cursor: 'pointer' }}
                     >
