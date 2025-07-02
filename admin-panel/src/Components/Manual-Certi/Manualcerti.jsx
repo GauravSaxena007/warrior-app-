@@ -12,7 +12,6 @@ const Manualcerti = () => {
       obtainMarks: {},
       certificateFile: null,
       marksheetFile: null,
-      marksheetHTML: '',
     },
   ]);
   const [courses, setCourses] = useState([]);
@@ -56,7 +55,7 @@ const Manualcerti = () => {
       } while (usedNumbers.has(enrollNo) && attempts < maxAttempts);
 
       if (attempts >= maxAttempts) {
-        console.error('Could not generate a unique enrollment number');
+        console.error('Could not generate a unique enrollment number after maximum attempts');
         return 'RVTPS/ERROR/00000';
       }
 
@@ -93,7 +92,6 @@ const Manualcerti = () => {
         obtainMarks: {},
         certificateFile: null,
         marksheetFile: null,
-        marksheetHTML: '',
       },
     ]);
   };
@@ -105,8 +103,8 @@ const Manualcerti = () => {
       return;
     }
 
-    if (Object.keys(row.obtainMarks).length === 0) {
-      alert('Please enter marks in the marks editing window.');
+    if ((!row.certificateFile && !row.marksheetFile) && Object.keys(row.obtainMarks).length === 0) {
+      alert('Please upload at least one file or enter marks.');
       return;
     }
 
@@ -132,24 +130,26 @@ const Manualcerti = () => {
     formData.append('courseName', row.courseName);
     formData.append('certificateNumber', row.certificateNumber);
     formData.append('obtainMarks', JSON.stringify(obtainMarksArray));
-    formData.append('marksheetHTML', encodeURIComponent(row.marksheetHTML || generateMarksheetHTML(index)));
     if (row.certificateFile) {
       formData.append('file', row.certificateFile);
     }
     if (row.marksheetFile) {
       formData.append('marksheet', row.marksheetFile);
     }
+    const marksheetHTML = generateMarksheetHTML(index);
+    formData.append('marksheetHTML', marksheetHTML);
 
     console.log('FormData contents before send:');
     for (let pair of formData.entries()) {
-      console.log(`${pair[0]}:`, typeof pair[1] === 'string' ? pair[1].slice(0, 50) + '...' : pair[1].name || pair[1]);
+      console.log(`${pair[0]}:`, typeof pair[1] === 'string' ? pair[1].slice(0, 50) + (pair[1].length > 50 ? '...' : '') : pair[1].name || pair[1]);
     }
+    console.log('Full marksheetHTML:', marksheetHTML); // Log full HTML content
 
     try {
       const response = await axios.post(`${import.meta.env.VITE_API_URL}/api/manualcerti`, formData, {
         headers: { 'Content-Type': 'multipart/form-data' },
       });
-      console.log('Backend response:', response.data);
+      console.log('Backend response:', response.data); // Log full response
       alert('Certificate sent successfully!');
       const newRows = [...rows];
       usedNumbers.delete(row.certificateNumber);
@@ -173,7 +173,7 @@ const Manualcerti = () => {
   const generateMarksheetHTML = (index) => {
     const row = rows[index];
     const selectedCourse = courses.find((c) => c.title === row.courseName);
-    const logoUrl = `${import.meta.env.VITE_PUBLIC_URL}/main-logo.png`;
+    const logoUrl = window.location.origin + '/main-logo.png'; // Use absolute path
 
     if (!selectedCourse || !selectedCourse.semesters?.length) {
       console.warn('No course or subjects available for:', row.courseName);
@@ -209,7 +209,7 @@ const Manualcerti = () => {
             </thead>
             <tbody id="marksheet-body">
               ${subjects
-                .map((subj, idx) => `
+        .map((subj, idx) => `
                   <tr>
                     <td>${idx + 1}</td>
                     <td>${subj.subject}</td>
@@ -217,8 +217,7 @@ const Manualcerti = () => {
                     <td>${subj.passingMarks}</td>
                     <td id="mark-${subj.subject}">${row.obtainMarks[subj.subject] || 0}</td>
                   </tr>
-                `)
-                .join('')}
+                `).join('')}
               <tr class="total-row">
                 <td colspan="2">Total</td>
                 <td>${subjects.reduce((sum, subj) => sum + Number(subj.maxMarks || 0), 0)}</td>
@@ -229,40 +228,40 @@ const Manualcerti = () => {
           </table>
           <div class="Format-summary">
             <p><strong>Percentage:</strong> <span id="percentage">${(() => {
-              const totalObtained = Object.values(row.obtainMarks).reduce(
-                (sum, mark) => sum + (Number(mark) || 0),
-                0
-              );
-              const totalMax = subjects.reduce((sum, subj) => sum + Number(subj.maxMarks || 0), 0);
-              return totalMax > 0 ? ((totalObtained / totalMax) * 100).toFixed(2) : '0.00';
-            })()}%</span></p>
+        const totalObtained = Object.values(row.obtainMarks).reduce(
+          (sum, mark) => sum + (Number(mark) || 0),
+          0
+        );
+        const totalMax = subjects.reduce((sum, subj) => sum + Number(subj.maxMarks || 0), 0);
+        return totalMax > 0 ? ((totalObtained / totalMax) * 100).toFixed(2) : '0.00';
+      })()}%</span></p>
             <p><strong>Result:</strong> <span id="result">${(() => {
-              return Object.entries(row.obtainMarks).every(([subj, mark]) => {
-                const subject = subjects.find((s) => s.subject === subj);
-                return subject && Number(mark) >= subject.passingMarks;
-              }) ? 'Pass' : 'Fail';
-            })()}</span></p>
+        return Object.entries(row.obtainMarks).every(([subj, mark]) => {
+          const subject = subjects.find((s) => s.subject === subj);
+          return subject && Number(mark) >= subject.passingMarks;
+        }) ? 'Pass' : 'Fail';
+      })()}</span></p>
             <p><strong>Grade:</strong> <span id="grade">${(() => {
-              const totalObtained = Object.values(row.obtainMarks).reduce(
-                (sum, mark) => sum + (Number(mark) || 0),
-                0
-              );
-              const totalMax = subjects.reduce((sum, subj) => sum + Number(subj.maxMarks || 0), 0);
-              const percentage = totalMax > 0 ? (totalObtained / totalMax) * 100 : 0;
-              return percentage >= 80
-                ? 'A'
-                : percentage >= 70
-                  ? 'B+'
-                  : percentage >= 60
-                    ? 'B'
-                    : percentage >= 50
-                      ? 'C'
-                      : percentage >= 40
-                        ? 'D'
-                        : percentage >= 33
-                          ? 'E'
-                          : 'F';
-            })()}</span></p>
+        const totalObtained = Object.values(row.obtainMarks).reduce(
+          (sum, mark) => sum + (Number(mark) || 0),
+          0
+        );
+        const totalMax = subjects.reduce((sum, subj) => sum + Number(subj.maxMarks || 0), 0);
+        const percentage = totalMax > 0 ? (totalObtained / totalMax) * 100 : 0;
+        return percentage >= 80
+          ? 'A'
+          : percentage >= 70
+            ? 'B+'
+            : percentage >= 60
+              ? 'B'
+              : percentage >= 50
+                ? 'C'
+                : percentage >= 40
+                  ? 'D'
+                  : percentage >= 33
+                    ? 'E'
+                    : 'F';
+      })()}</span></p>
           </div>
           <div class="Format-footer">
             <p>🌐 RVTPS</p>
@@ -277,15 +276,13 @@ const Manualcerti = () => {
 
   useEffect(() => {
     const handleMessage = (e) => {
-      const { index, marks, marksheetHTML } = e.data;
-      if (index !== undefined && marks && marksheetHTML) {
+      const { index, marks } = e.data;
+      if (index !== undefined && marks) {
         console.log('Received marks for index', index, ':', marks);
-        console.log('Received marksheetHTML:', marksheetHTML.slice(0, 50) + '...');
         const newRows = [...rows];
         newRows[index].obtainMarks = { ...newRows[index].obtainMarks, ...marks };
-        newRows[index].marksheetHTML = marksheetHTML; // Store cleaned marksheetHTML
         setRows(newRows);
-        console.log('Updated rows:', newRows);
+        console.log('Updated rows after marks:', newRows);
       }
     };
     window.addEventListener('message', handleMessage);
@@ -349,19 +346,14 @@ const Manualcerti = () => {
                       href=""
                       onClick={(e) => {
                         e.preventDefault();
-                        const newTab = window.open('', '_blank');
-                        if (!newTab) {
-                          alert('Please allow pop-ups to view the marks editor.');
-                          return;
-                        }
+                        const newTab = window.open();
                         console.log('Opening marks editor for course:', row.courseName);
-                        const logoUrl = `${import.meta.env.VITE_PUBLIC_URL}/main-logo.png`;
+                        const logoUrl = window.location.origin + '/main-logo.png'; // Consistent absolute path
                         const htmlContent = `
                           <!DOCTYPE html>
                           <html>
                           <head>
                             <title>Subjects & Marks</title>
-                            <meta http-equiv="Content-Security-Policy" content="default-src 'self'; img-src 'self' ${import.meta.env.VITE_PUBLIC_URL}; script-src 'self' 'unsafe-inline';">
                             <style>
                               .Format-container { max-width: 1200px; margin: 30px auto; padding: 30px; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: #fff; color: #000; display: flex; flex-wrap: wrap; gap: 20px; }
                               .Format-section { flex: 1; min-width: 500px; border: 2px solid #333; border-radius: 8px; padding: 20px; background-color: #f9f9f9; box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); }
@@ -410,8 +402,8 @@ const Manualcerti = () => {
                                   </thead>
                                   <tbody id="marksheet-body">
                                     ${selectedCourse.semesters
-                                      .flatMap((sem) => sem.subjects)
-                                      .map((subj, idx) => `
+                            .flatMap((sem) => sem.subjects)
+                            .map((subj, idx) => `
                                         <tr>
                                           <td>${idx + 1}</td>
                                           <td>${subj.subject}</td>
@@ -419,63 +411,62 @@ const Manualcerti = () => {
                                           <td>${subj.passingMarks}</td>
                                           <td id="mark-${subj.subject}">${row.obtainMarks[subj.subject] || 0}</td>
                                         </tr>
-                                      `)
-                                      .join('')}
+                                      `).join('')}
                                     <tr class="total-row">
                                       <td colspan="2">Total</td>
                                       <td>${selectedCourse.semesters
-                                        .flatMap((sem) => sem.subjects)
-                                        .reduce((sum, subj) => sum + Number(subj.maxMarks || 0), 0)}</td>
+                            .flatMap((sem) => sem.subjects)
+                            .reduce((sum, subj) => sum + Number(subj.maxMarks || 0), 0)}</td>
                                       <td>${selectedCourse.semesters
-                                        .flatMap((sem) => sem.subjects)
-                                        .reduce((sum, subj) => sum + Number(subj.passingMarks || 0), 0)}</td>
+                            .flatMap((sem) => sem.subjects)
+                            .reduce((sum, subj) => sum + Number(subj.passingMarks || 0), 0)}</td>
                                       <td id="total-marks">${Object.values(row.obtainMarks)
-                                        .reduce((sum, mark) => sum + (Number(mark) || 0), 0)}</td>
+                            .reduce((sum, mark) => sum + (Number(mark) || 0), 0)}</td>
                                     </tr>
                                   </tbody>
                                 </table>
                                 <div class="Format-summary" id="summary">
                                   <p><strong>Percentage:</strong> <span id="percentage">${(() => {
-                                    const totalObtained = Object.values(row.obtainMarks).reduce(
-                                      (sum, mark) => sum + (Number(mark) || 0),
-                                      0
-                                    );
-                                    const totalMax = selectedCourse.semesters
-                                      .flatMap((sem) => sem.subjects)
-                                      .reduce((sum, subj) => sum + Number(subj.maxMarks || 0), 0);
-                                    return totalMax > 0 ? ((totalObtained / totalMax) * 100).toFixed(2) : '0.00';
-                                  })()}%</span></p>
+                            const totalObtained = Object.values(row.obtainMarks).reduce(
+                              (sum, mark) => sum + (Number(mark) || 0),
+                              0
+                            );
+                            const totalMax = selectedCourse.semesters
+                              .flatMap((sem) => sem.subjects)
+                              .reduce((sum, subj) => sum + Number(subj.maxMarks || 0), 0);
+                            return totalMax > 0 ? ((totalObtained / totalMax) * 100).toFixed(2) : '0.00';
+                          })()}%</span></p>
                                   <p><strong>Result:</strong> <span id="result">${(() => {
-                                    return Object.entries(row.obtainMarks).every(([subj, mark]) => {
-                                      const subject = selectedCourse.semesters
-                                        .flatMap((sem) => sem.subjects)
-                                        .find((s) => s.subject === subj);
-                                      return subject && Number(mark) >= subject.passingMarks;
-                                    }) ? 'Pass' : 'Fail';
-                                  })()}</span></p>
+                            return Object.entries(row.obtainMarks).every(([subj, mark]) => {
+                              const subject = selectedCourse.semesters
+                                .flatMap((sem) => sem.subjects)
+                                .find((s) => s.subject === subj);
+                              return subject && Number(mark) >= subject.passingMarks;
+                            }) ? 'Pass' : 'Fail';
+                          })()}</span></p>
                                   <p><strong>Grade:</strong> <span id="grade">${(() => {
-                                    const totalObtained = Object.values(row.obtainMarks).reduce(
-                                      (sum, mark) => sum + (Number(mark) || 0),
-                                      0
-                                    );
-                                    const totalMax = selectedCourse.semesters
-                                      .flatMap((sem) => sem.subjects)
-                                      .reduce((sum, subj) => sum + Number(subj.maxMarks || 0), 0);
-                                    const percentage = totalMax > 0 ? (totalObtained / totalMax) * 100 : 0;
-                                    return percentage >= 80
-                                      ? 'A'
-                                      : percentage >= 70
-                                        ? 'B+'
-                                        : percentage >= 60
-                                          ? 'B'
-                                          : percentage >= 50
-                                            ? 'C'
-                                            : percentage >= 40
-                                              ? 'D'
-                                              : percentage >= 33
-                                                ? 'E'
-                                                : 'F';
-                                  })()}</span></p>
+                            const totalObtained = Object.values(row.obtainMarks).reduce(
+                              (sum, mark) => sum + (Number(mark) || 0),
+                              0
+                            );
+                            const totalMax = selectedCourse.semesters
+                              .flatMap((sem) => sem.subjects)
+                              .reduce((sum, subj) => sum + Number(subj.maxMarks || 0), 0);
+                            const percentage = totalMax > 0 ? (totalObtained / totalMax) * 100 : 0;
+                            return percentage >= 80
+                              ? 'A'
+                              : percentage >= 70
+                                ? 'B+'
+                                : percentage >= 60
+                                  ? 'B'
+                                  : percentage >= 50
+                                    ? 'C'
+                                    : percentage >= 40
+                                      ? 'D'
+                                      : percentage >= 33
+                                        ? 'E'
+                                        : 'F';
+                          })()}</span></p>
                                 </div>
                                 <div class="Format-footer">
                                   <p>🌐 RVTPS</p>
@@ -487,8 +478,8 @@ const Manualcerti = () => {
                               <div class="Format-section editable-section">
                                 <h2 class="Format-title">Edit Marks</h2>
                                 ${selectedCourse.semesters
-                                  .map(
-                                    (sem, i) => `
+                            .map(
+                              (sem, i) => `
                                     <div style="margin-bottom: 16px;">
                                       <strong style="color: green;">Semester: ${sem.semester}</strong>
                                       <table class="Format-table editable-table">
@@ -502,8 +493,8 @@ const Manualcerti = () => {
                                         </thead>
                                         <tbody>
                                           ${sem.subjects
-                                            .map(
-                                              (subj) => `
+                                  .map(
+                                    (subj) => `
                                               <tr>
                                                 <td>${subj.subject}</td>
                                                 <td>${subj.maxMarks}</td>
@@ -521,14 +512,14 @@ const Manualcerti = () => {
                                                 </td>
                                               </tr>
                                             `
-                                            )
-                                            .join('')}
+                                  )
+                                  .join('')}
                                         </tbody>
                                       </table>
                                     </div>
                                   `
-                                  )
-                                  .join('')}
+                            )
+                            .join('')}
                                 <button onclick="updateMarks()" class="Format-footer">Enter</button>
                               </div>
                             </div>
@@ -545,26 +536,8 @@ const Manualcerti = () => {
                                     delete marks[subject];
                                   }
                                 });
-                                const marksheetSection = document.querySelector('.Format-section:not(.editable-section)').outerHTML;
-                                const marksheetHTML = \`
-                                  <!DOCTYPE html>
-                                  <html>
-                                  <head>
-                                    <title>Marksheet</title>
-                                    <style>
-                                      ${document.querySelector('style').innerText}
-                                    </style>
-                                  </head>
-                                  <body>
-                                    <div class="Format-container">
-                                      \${marksheetSection}
-                                    </div>
-                                  </body>
-                                  </html>
-                                \`;
-                                console.log('Sending marks:', marks);
-                                console.log('Sending marksheetHTML:', marksheetHTML.slice(0, 50) + '...');
-                                window.opener.postMessage({ index: ${index}, marks, marksheetHTML }, '*');
+                                console.log('Sending marks to parent:', marks);
+                                window.opener.postMessage({ index: ${index}, marks }, '*');
                                 const subjects = ${JSON.stringify(selectedCourse.semesters.flatMap((sem) => sem.subjects))};
                                 subjects.forEach(subj => {
                                   document.getElementById('mark-' + subj.subject).textContent = marks[subj.subject] || 0;
@@ -572,8 +545,8 @@ const Manualcerti = () => {
                                 const totalMarks = Object.values(marks).reduce((sum, mark) => sum + (Number(mark) || 0), 0);
                                 document.getElementById('total-marks').textContent = totalMarks;
                                 const maxMarks = ${selectedCourse.semesters
-                                  .flatMap((sem) => sem.subjects)
-                                  .reduce((sum, subj) => sum + Number(subj.maxMarks || 0), 0) || 0};
+                            .flatMap((sem) => sem.subjects)
+                            .reduce((sum, subj) => sum + Number(subj.maxMarks || 0), 0) || 0};
                                 const percentage = maxMarks > 0 ? ((totalMarks / maxMarks) * 100).toFixed(2) : '0.00';
                                 document.getElementById('percentage').textContent = percentage + '%';
                                 const result = subjects.every(subj => {
@@ -594,7 +567,6 @@ const Manualcerti = () => {
                         `;
                         newTab.document.write(htmlContent);
                         newTab.document.close();
-                        newTab.onerror = (e) => console.error('Error in new tab:', e);
                       }}
                       style={{ color: 'blue', textDecoration: 'underline', cursor: 'pointer' }}
                     >
