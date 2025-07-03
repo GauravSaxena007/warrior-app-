@@ -1,14 +1,14 @@
 import React, { useState } from 'react';
 import axios from 'axios';
+import DOMPurify from 'dompurify';
 import './Certiverify.css';
-
 
 const Certiverify = () => {
   const [certificateNumber, setCertificateNumber] = useState('');
   const [matchedCertificate, setMatchedCertificate] = useState(null);
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
-  const [isManual, setIsManual] = useState(false); // Flag: manual vs issued
+  const [isManual, setIsManual] = useState(false);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -24,7 +24,6 @@ const Certiverify = () => {
     setLoading(true);
 
     try {
-      // Fetch issued certificates first
       const { data: issuedCertificates } = await axios.get(
         `${import.meta.env.VITE_API_URL}/api/admin-certi/issuedCertificates`
       );
@@ -38,7 +37,6 @@ const Certiverify = () => {
         setMatchedCertificate(issuedMatch);
         setIsManual(false);
       } else {
-        // If no issued match, check manual certificates
         const { data: manualCertificates } = await axios.get(
           `${import.meta.env.VITE_API_URL}/api/manualcerti`
         );
@@ -48,7 +46,7 @@ const Certiverify = () => {
         );
 
         if (manualMatch) {
-          console.log('Manual Certificate:', manualMatch);
+          console.log('Manual Certificate:', JSON.stringify(manualMatch, null, 2));
           setMatchedCertificate(manualMatch);
           setIsManual(true);
         } else {
@@ -56,14 +54,13 @@ const Certiverify = () => {
         }
       }
     } catch (err) {
-      console.error('Error verifying certificate:', err);
+      console.error('Error verifying certificate:', err.response?.data || err.message);
       setError('Failed to verify the certificate. Please try again later.');
     } finally {
       setLoading(false);
     }
   };
 
-  // Build full URL for certificate or marksheet file
   const buildFileUrl = (filePath) => {
     if (!filePath) {
       console.log('No filePath provided:', filePath);
@@ -77,68 +74,30 @@ const Certiverify = () => {
     }
   };
 
-  // Function to open marksheet HTML in a new tab
-  const openMarksheet = (htmlContent) => {
-    const newTab = window.open();
-    if (!newTab) {
-      alert('Please allow pop-ups to view the marksheet.');
-      return;
-    }
-    const logoUrl = `${window.location.origin}/main-logo.png`;
-    const updatedHtmlContent = htmlContent
-      ? htmlContent.replace(/src="main-logo\.png"/g, `src="${logoUrl}"`)
-      : `
-        <div class="Format-container">
-          <div class="Format-section">
-            <div class="Format-header">
-              <img src="${logoUrl}" alt="Institute Logo" class="Format-logo" />
+  const renderMarksheetHTML = (htmlContent) => {
+    if (!htmlContent) {
+      console.log('No marksheetHTML provided');
+      return (
+        <div className="marksheet-container">
+          <div className="marksheet-section">
+            <div className="marksheet-header">
+              <img src="https://via.placeholder.com/120" alt="Institute Logo" className="marksheet-logo" />
               <h2>राष्ट्रीय वाणिज्य एवं तकनीकी प्रशिक्षण संस्थान</h2>
               <h3>National Institute of Commerce and Technical Training</h3>
-              <h2 class="Format-title">Marksheet</h2>
+              <h2 className="marksheet-title">Marksheet</h2>
             </div>
             <p>No Marksheet Available</p>
           </div>
         </div>
-      `;
-    console.log('Rendering HTML:', updatedHtmlContent); // Debug log
-    newTab.document.write(`
-      <!DOCTYPE html>
-      <html>
-      <head>
-        <title>Marksheet</title>
-        <style>
-          body { font-family: 'Arial', sans-serif; background-color: #f4f4f9; margin: 0; padding: 20px; }
-          .Format-container { max-width: 900px; margin: 0 auto; background-color: #fff; padding: 30px; border-radius: 10px; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); }
-          .Format-section { border: 2px solid #004aad; padding: 20px; border-radius: 8px; }
-          .Format-header { text-align: center; margin-bottom: 20px; }
-          .Format-logo { width: 120px; height: auto; margin-bottom: 15px; }
-          .Format-header h2 { font-size: 24px; color: #004aad; margin: 5px 0; }
-          .Format-header h3 { font-size: 18px; color: #333; margin: 5px 0; font-weight: 500; }
-          .Format-title { font-size: 28px; color: #004aad; text-decoration: underline; font-weight: bold; margin-bottom: 20px; }
-          .Format-info { display: grid; grid-template-columns: 1fr; gap: 10px; margin-bottom: 20px; font-size: 16px; color: #333; }
-          .Format-info div { padding: 5px; }
-          .Format-table { width: 100%; border-collapse: collapse; margin-bottom: 20px; font-size: 15px; }
-          .Format-table th, .Format-table td { border: 1px solid #004aad; padding: 10px; text-align: center; color: #333; }
-          .Format-table th { background-color: #e6f0ff; font-weight: 600; }
-          .Format-table td { background-color: #fff; }
-          .total-row { font-weight: bold; background-color: #d4e6ff; }
-          .Format-summary { font-size: 16px; margin-bottom: 20px; }
-          .Format-summary p { margin: 8px 0; color: #333; }
-          .Format-footer { text-align: center; font-size: 14px; color: #555; margin-top: 30px; }
-          .Format-footer p { margin: 5px 0; }
-          @media print {
-            body { background-color: #fff; padding: 0; }
-            .Format-container { box-shadow: none; border: none; padding: 10px; }
-            .Format-section { border: none; padding: 0; }
-          }
-        </style>
-      </head>
-      <body>
-        ${updatedHtmlContent}
-      </body>
-      </html>
-    `);
-    newTab.document.close();
+      );
+    }
+
+    const logoUrl = `${window.location.origin}/main-logo.png`;
+    const sanitizedHTML = DOMPurify.sanitize(
+      htmlContent.replace(/src="main-logo\.png"/g, `src="${logoUrl}"`)
+    );
+    console.log('Rendering sanitized marksheetHTML:', sanitizedHTML.slice(0, 200) + '...');
+    return <div className="marksheet-container" dangerouslySetInnerHTML={{ __html: sanitizedHTML }} />;
   };
 
   return (
@@ -245,7 +204,7 @@ const Certiverify = () => {
                     {isManual && matchedCertificate.marksheetHTML ? (
                       <button
                         className="btn btn-outline-secondary btn-sm"
-                        onClick={() => openMarksheet(matchedCertificate.marksheetHTML)}
+                        onClick={() => renderMarksheetHTML(matchedCertificate.marksheetHTML)}
                         aria-label="View HTML Marksheet"
                       >
                         View
@@ -257,6 +216,7 @@ const Certiverify = () => {
                 </tr>
               </tbody>
             </table>
+            {isManual && matchedCertificate.marksheetHTML && renderMarksheetHTML(matchedCertificate.marksheetHTML)}
           </div>
         )}
       </div>
