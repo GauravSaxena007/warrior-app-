@@ -6,7 +6,7 @@ const ManualCertiSchema = new mongoose.Schema({
   courseName: { type: String, required: true },
   certificateNumber: { type: String, required: true },
   obtainMarks: [{ subject: String, maxMarks: Number, passingMarks: Number, obtained: Number }],
-  marksheetHTML: { type: String },
+  marksheetHTML: { type: String, required: true },
   certificateFile: { type: String },
   marksheetFile: { type: String },
 });

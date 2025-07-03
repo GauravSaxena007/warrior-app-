@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import './Manualcerti.css';
 
-const Manualcerti = ({ onMarksheetGenerated }) => {
+const Manualcerti = () => {
   const [rows, setRows] = useState([
     {
       studentName: '',
@@ -14,19 +14,40 @@ const Manualcerti = ({ onMarksheetGenerated }) => {
   ]);
   const [courses, setCourses] = useState([]);
   const [usedNumbers] = useState(new Set());
+  const [logoAvailable, setLogoAvailable] = useState(true);
 
   useEffect(() => {
     const fetchCourses = async () => {
       try {
         const res = await axios.get(`${import.meta.env.VITE_API_URL}/api/courses`);
+        console.log('Courses fetched in production:', JSON.stringify(res.data, null, 2));
         setCourses(res.data);
-        console.log('Courses fetched:', res.data);
       } catch (err) {
-        console.error('Error fetching courses:', err);
+        console.error('Error fetching courses:', err.response?.data || err.message);
         alert('Failed to fetch course data.');
       }
     };
+
+    const checkLogo = async () => {
+      try {
+        const response = await fetch(`${window.location.origin}/main-logo.png`, { method: 'HEAD' });
+        setLogoAvailable(response.ok);
+        console.log('Logo availability:', response.ok ? 'Available' : 'Not found');
+      } catch (err) {
+        console.error('Error checking logo:', err);
+        setLogoAvailable(false);
+      }
+    };
+
     fetchCourses();
+    checkLogo();
+
+    setRows((prevRows) =>
+      prevRows.map((row) => ({
+        ...row,
+        certificateNumber: row.certificateNumber || generateUniqueEnrollNo(),
+      }))
+    );
   }, []);
 
   const generateUniqueEnrollNo = () => {
@@ -72,7 +93,7 @@ const Manualcerti = ({ onMarksheetGenerated }) => {
         studentName: '',
         mobile: '',
         courseName: '',
-        certificateNumber: '',
+        certificateNumber: generateUniqueEnrollNo(),
         obtainMarks: {},
       },
     ]);
@@ -80,17 +101,18 @@ const Manualcerti = ({ onMarksheetGenerated }) => {
 
   const sendData = async (index) => {
     const row = rows[index];
-    if (!row.studentName || !row.mobile || !row.courseName) {
-      alert('Please fill all required fields: Student Name, Mobile, and Course Name.');
+    if (!row.studentName || !row.mobile || !row.courseName || !row.certificateNumber) {
+      alert('Please fill all required fields: Student Name, Mobile, Course Name, and Enrollment Number.');
       return;
     }
 
     if (Object.keys(row.obtainMarks).length === 0) {
-      alert('Please enter marks for the student.');
+      alert('Please enter marks via View & Edit Subjects & Marks.');
       return;
     }
 
     const selectedCourse = courses.find((c) => c.title === row.courseName);
+    console.log('Selected course:', JSON.stringify(selectedCourse, null, 2));
     let obtainMarksArray = [];
 
     if (selectedCourse?.semesters?.length > 0) {
@@ -104,33 +126,31 @@ const Manualcerti = ({ onMarksheetGenerated }) => {
           });
         });
       });
+    } else {
+      console.warn('No semesters/subjects for course:', row.courseName);
     }
 
-    const marksheetHTML = generateMarksheetHTML(index);
     const formData = new FormData();
     formData.append('studentName', row.studentName);
     formData.append('mobile', row.mobile);
     formData.append('courseName', row.courseName);
     formData.append('certificateNumber', row.certificateNumber);
     formData.append('obtainMarks', JSON.stringify(obtainMarksArray));
+    const marksheetHTML = generateMarksheetHTML(index);
     formData.append('marksheetHTML', marksheetHTML);
 
     console.log('FormData contents before send:');
-    for (let pair of formData.entries()) {
-      console.log(`${pair[0]}:`, typeof pair[1] === 'string' ? pair[1].slice(0, 50) + (pair[1].length > 50 ? '...' : '') : pair[1]);
+    for (let [key, value] of formData.entries()) {
+      console.log(`${key}:`, typeof value === 'string' ? value.slice(0, 100) + (value.length > 100 ? '...' : '') : value);
     }
-    console.log('Full marksheetHTML:', marksheetHTML);
-
-    // Pass marksheetHTML to parent component
-    if (onMarksheetGenerated) {
-      onMarksheetGenerated(marksheetHTML);
-    }
+    console.log('Full obtainMarksArray:', JSON.stringify(obtainMarksArray, null, 2));
+    console.log('Full marksheetHTML:', marksheetHTML.slice(0, 200) + (marksheetHTML.length > 200 ? '...' : ''));
 
     try {
       const response = await axios.post(`${import.meta.env.VITE_API_URL}/api/manualcerti`, formData, {
         headers: { 'Content-Type': 'multipart/form-data' },
       });
-      console.log('Backend response:', response.data);
+      console.log('Backend response:', JSON.stringify(response.data, null, 2));
       alert('Certificate sent successfully!');
       const newRows = [...rows];
       usedNumbers.delete(row.certificateNumber);
@@ -154,15 +174,37 @@ const Manualcerti = ({ onMarksheetGenerated }) => {
   const generateMarksheetHTML = (index) => {
     const row = rows[index];
     const selectedCourse = courses.find((c) => c.title === row.courseName);
-    const logoUrl = window.location.origin + '/main-logo.png';
+    const logoUrl = logoAvailable ? `${window.location.origin}/main-logo.png` : 'https://via.placeholder.com/100';
 
     if (!selectedCourse || !selectedCourse.semesters?.length) {
       console.warn('No course or subjects available for:', row.courseName);
-      return '<p>No subjects available</p>';
+      return `
+        <div class="Format-container">
+          <div class="Format-section">
+            <div class="Format-header">
+              <img src="${logoUrl}" alt="Institute Logo" class="Format-logo" />
+              <h2>राष्ट्रीय वाणिज्य एवं तकनीकी प्रशिक्षण संस्थान</h2>
+              <h3>National Institute of Commerce and Technical Training</h3>
+              <h2 class="Format-title">Marksheet</h2>
+            </div>
+            <div class="Format-info">
+              <div><strong>Student Name:</strong> ${row.studentName || 'N/A'}</div>
+              <div><strong>Enrollment No:</strong> ${row.certificateNumber || 'N/A'}</div>
+              <div><strong>Course Name:</strong> ${row.courseName || 'N/A'}</div>
+            </div>
+            <p>No subjects available</p>
+            <div class="Format-footer">
+              <p>🌐 RVTPS</p>
+              <p>📧 RVTPSedu@gmail.com</p>
+              <p>📞 +91 90572-75115</p>
+            </div>
+          </div>
+        </div>
+      `;
     }
 
     const subjects = selectedCourse.semesters.flatMap((sem) => sem.subjects);
-    console.log('Subjects for marksheet:', subjects);
+    console.log('Subjects for marksheet:', JSON.stringify(subjects, null, 2));
 
     return `
       <div class="Format-container">
@@ -259,13 +301,11 @@ const Manualcerti = ({ onMarksheetGenerated }) => {
     const handleMessage = (e) => {
       const { index, marks } = e.data;
       if (index !== undefined && marks) {
-        console.log('Received marks for index', index, ':', marks);
+        console.log('Received marks for index', index, ':', JSON.stringify(marks, null, 2));
         const newRows = [...rows];
         newRows[index].obtainMarks = { ...newRows[index].obtainMarks, ...marks };
-        // Generate enrollment number when marks are submitted
-        newRows[index].certificateNumber = generateUniqueEnrollNo();
         setRows(newRows);
-        console.log('Updated rows with marks and enrollment number:', newRows);
+        console.log('Updated rows after marks:', JSON.stringify(newRows, null, 2));
       }
     };
     window.addEventListener('message', handleMessage);
@@ -275,6 +315,9 @@ const Manualcerti = ({ onMarksheetGenerated }) => {
   return (
     <div className="manualcerti-container p-3">
       <h2 className="manualcerti-heading text-xl font-bold mb-4">Manual Certificate & Marksheet Upload</h2>
+      {!logoAvailable && (
+        <p className="text-red-500">Warning: Logo not found at {window.location.origin}/main-logo.png. Using placeholder.</p>
+      )}
       <table className="manualcerti-table table-auto border border-collapse w-full">
         <thead>
           <tr className="manualcerti-header bg-gray-200">
@@ -329,9 +372,13 @@ const Manualcerti = ({ onMarksheetGenerated }) => {
                       href=""
                       onClick={(e) => {
                         e.preventDefault();
-                        const newTab = window.open();
                         console.log('Opening marks editor for course:', row.courseName);
-                        const logoUrl = window.location.origin + '/main-logo.png';
+                        const newTab = window.open('', '_blank');
+                        if (!newTab) {
+                          alert('Failed to open marks editor. Please allow pop-ups.');
+                          return;
+                        }
+                        const logoUrl = logoAvailable ? `${window.location.origin}/main-logo.png` : 'https://via.placeholder.com/100';
                         const htmlContent = `
                           <!DOCTYPE html>
                           <html>
@@ -495,8 +542,8 @@ const Manualcerti = ({ onMarksheetGenerated }) => {
                                                 </td>
                                               </tr>
                                             `
-                                            )
-                                            .join('')}
+                                          )
+                                          .join('')}
                                         </tbody>
                                       </table>
                                     </div>
@@ -520,7 +567,12 @@ const Manualcerti = ({ onMarksheetGenerated }) => {
                                   }
                                 });
                                 console.log('Sending marks to parent:', marks);
-                                window.opener.postMessage({ index: ${index}, marks }, '*');
+                                try {
+                                  window.opener.postMessage({ index: ${index}, marks }, '*');
+                                } catch (e) {
+                                  console.error('Error sending postMessage:', e);
+                                  alert('Failed to send marks to main window. Please close this tab and try again.');
+                                }
                                 const subjects = ${JSON.stringify(selectedCourse.semesters.flatMap((sem) => sem.subjects))};
                                 subjects.forEach(subj => {
                                   document.getElementById('mark-' + subj.subject).textContent = marks[subj.subject] || 0;
@@ -561,7 +613,7 @@ const Manualcerti = ({ onMarksheetGenerated }) => {
                 </td>
                 <td className="manualcerti-td border px-2 py-1 max-w-xs break-words whitespace-normal">
                   <div className="break-all whitespace-normal w-full">
-                    {row.certificateNumber || 'Not Generated'}
+                    {row.certificateNumber}
                   </div>
                 </td>
                 <td className="manualcerti-td border px-2 py-1">

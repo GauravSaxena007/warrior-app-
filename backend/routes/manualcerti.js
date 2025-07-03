@@ -25,24 +25,56 @@ router.post('/', upload.fields([
     const certificateFile = req.files?.certificateFile?.[0];
     const marksheetFile = req.files?.marksheetFile?.[0];
 
+    console.log("🧾 marksheetHTML:", req.body.marksheetHTML);
+    console.log("🎯 obtainMarks:", req.body.obtainMarks);
+    // Validate required fields
+    if (
+      !req.body.studentName ||
+      !req.body.mobile ||
+      !req.body.courseName ||
+      !req.body.certificateNumber ||
+      !req.body.marksheetHTML
+    ) {
+      return res.status(400).json({ error: 'Missing required fields including marksheetHTML' });
+    }
+
+
+
+    let parsedMarks = [];
+    try {
+      parsedMarks = JSON.parse(req.body.obtainMarks || '[]');
+      if (!Array.isArray(parsedMarks)) {
+        return res.status(400).json({ error: 'obtainMarks must be an array' });
+      }
+    } catch (e) {
+      return res.status(400).json({ error: 'Invalid JSON in obtainMarks', details: e.message });
+    }
+
     const newCerti = new ManualCerti({
       studentName: req.body.studentName,
       mobile: req.body.mobile,
       courseName: req.body.courseName,
       certificateNumber: req.body.certificateNumber,
-      obtainMarks: JSON.parse(req.body.obtainMarks || '[]'),
+      obtainMarks: parsedMarks,
       marksheetHTML: req.body.marksheetHTML,
       certificateFile: certificateFile ? `Uploads/certificates/${certificateFile.filename}` : null,
       marksheetFile: marksheetFile ? `Uploads/certificates/${marksheetFile.filename}` : null,
     });
 
-    await newCerti.save();
-    res.status(201).json({
-      message: 'Manual certificate saved successfully',
-      data: newCerti,
-    });
+    const savedCerti = await newCerti.save();
+res.setHeader('Content-Type', 'application/json');
+const fullCerti = await ManualCerti.findById(savedCerti._id);
+
+
+res.status(201).json({
+  message: 'Manual certificate saved successfully',
+  data: fullCerti
+});
+
+
+
   } catch (error) {
-    console.error('Error saving manual certificate:', error);
+    console.error('Error saving manual certificate:', error.stack || error);
     res.status(500).json({ error: 'Internal server error' });
   }
 });
