@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import './Certiverify.css';
 
-
 const Certiverify = () => {
   const [certificateNumber, setCertificateNumber] = useState('');
   const [matchedCertificate, setMatchedCertificate] = useState(null);
@@ -79,19 +78,19 @@ const Certiverify = () => {
 
   // Function to open marksheet HTML in a new tab
   const openMarksheet = (htmlContent) => {
-    const newTab = window.open('about:blank', '_blank', 'noopener,noreferrer');
+    const newTab = window.open();
     if (!newTab) {
       alert('Please allow pop-ups to view the marksheet.');
       return;
     }
     const logoUrl = `${window.location.origin}/main-logo.png`;
     const updatedHtmlContent = htmlContent
-      ? htmlContent.replace(/src="main-logo\.png"/g, `src="${logoUrl}"`)
+      ? htmlContent.replace(/src="main-logo.png"/g, `src="main-logo.png"`)
       : `
         <div class="Format-container">
           <div class="Format-section">
             <div class="Format-header">
-              <img src="${logoUrl}" alt="Institute Logo" class="Format-logo" />
+              <img src="main-logo.png" alt="Institute Logo" class="Format-logo" />
               <h2>राष्ट्रीय वाणिज्य एवं तकनीकी प्रशिक्षण संस्थान</h2>
               <h3>National Institute of Commerce and Technical Training</h3>
               <h2 class="Format-title">Marksheet</h2>
@@ -172,8 +171,6 @@ const Certiverify = () => {
                   <th>Mobile</th>
                   <th>Course</th>
                   <th>Enrollment No.</th>
-                  <th>Certificate</th>
-                  <th>Marksheet</th>
                   <th>Marksheet HTML</th>
                 </tr>
               </thead>
@@ -195,52 +192,6 @@ const Certiverify = () => {
                       : matchedCertificate.course || 'N/A'}
                   </td>
                   <td>{matchedCertificate.certificateNumber || 'N/A'}</td>
-                  <td>
-                    {buildFileUrl(
-                      isManual
-                        ? matchedCertificate.certificateFile || matchedCertificate.file
-                        : matchedCertificate.certificatePath
-                    ) ? (
-                      <a
-                        href={buildFileUrl(
-                          isManual
-                            ? matchedCertificate.certificateFile || matchedCertificate.file
-                            : matchedCertificate.certificatePath
-                        )}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="btn btn-outline-secondary btn-sm"
-                        aria-label="View Certificate"
-                      >
-                        View
-                      </a>
-                    ) : (
-                      <span className="text-muted">Certificate Unavailable</span>
-                    )}
-                  </td>
-                  <td>
-                    {buildFileUrl(
-                      isManual
-                        ? matchedCertificate.marksheetFile || matchedCertificate.marksheetPath
-                        : matchedCertificate.marksheetPath
-                    ) ? (
-                      <a
-                        href={buildFileUrl(
-                          isManual
-                            ? matchedCertificate.marksheetFile || matchedCertificate.marksheetPath
-                            : matchedCertificate.marksheetPath
-                        )}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="btn btn-outline-secondary btn-sm"
-                        aria-label="View Marksheet"
-                      >
-                        View
-                      </a>
-                    ) : (
-                      <span className="text-muted">Marksheet Unavailable</span>
-                    )}
-                  </td>
                   <td>
                     {isManual && matchedCertificate.marksheetHTML ? (
                       <button
