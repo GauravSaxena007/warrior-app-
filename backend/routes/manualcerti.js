@@ -90,4 +90,21 @@ router.get('/', async (req, res) => {
   }
 });
 
+// GET: Serve marksheet HTML directly in a new tab
+router.get('/view/:id', async (req, res) => {
+  try {
+    const cert = await ManualCerti.findById(req.params.id);
+
+    if (!cert || !cert.marksheetHTML) {
+      return res.status(404).send('Marksheet not found');
+    }
+
+    res.set('Content-Type', 'text/html');
+    res.send(cert.marksheetHTML);
+  } catch (err) {
+    console.error('Error serving marksheet HTML:', err);
+    res.status(500).send('Internal Server Error');
+  }
+});
+
 module.exports = router;
