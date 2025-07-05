@@ -11,19 +11,15 @@ const StudentRegistration = () => {
     address: '',
     photo: null,
     course: '',
-    obtainMarks: {},
     registrationDate: '',
     courseCompletionDate: '',
     courseAmount: '',
-    franchiseeHead: '', // Added franchiseeHead field
+    franchiseeHead: '',
   });
 
   const [courses, setCourses] = useState([]);
-  const [franchiseeHead, setFranchiseeHead] = useState(''); // State to store franchiseeHead
-const obtainMarks = [
-  { subject: "Math", obtained: 85, maxMarks: 100 },
-  { subject: "English", obtained: 90, maxMarks: 100 }
-];
+  const [franchiseeHead, setFranchiseeHead] = useState('');
+
   // Fetch courses
   useEffect(() => {
     axios
@@ -42,10 +38,10 @@ const obtainMarks = [
             Authorization: `Bearer ${token}`,
           },
         });
-        setFranchiseeHead(res.data.centerHead); // Set franchiseeHead from centerHead
+        setFranchiseeHead(res.data.centerHead);
         setFormData((prevState) => ({
           ...prevState,
-          franchiseeHead: res.data.centerHead, // Initialize formData with franchiseeHead
+          franchiseeHead: res.data.centerHead,
         }));
       } catch (err) {
         console.error('Failed to load franchisee profile:', err);
@@ -70,45 +66,22 @@ const obtainMarks = [
       email: '',
       mobile: '',
       address: '',
-       obtainMarks: {}, 
       photo: null,
       course: '',
       registrationDate: '',
       courseCompletionDate: '',
       courseAmount: '',
-      franchiseeHead, // Reset to fetched franchiseeHead
+      franchiseeHead,
     });
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-
-       const selectedCourse = courses.find(c => c.title === formData.course);
-    
-    // Build obtainMarks array by matching course subjects and user inputs
-    let obtainMarksArray = [];
-
-    if (selectedCourse?.semesters?.length > 0) {
-      selectedCourse.semesters.forEach((sem) => {
-        sem.subjects.forEach((subj) => {
-          obtainMarksArray.push({
-            subject: subj.subject,
-            maxMarks: subj.maxMarks,
-            passingMarks: subj.passingMarks,
-            obtained: Number(formData.obtainMarks?.[subj.subject]) || 0,
-          });
-        });
-      });
-    }
-    
-       const data = new FormData();
-    for (const key in formData) {
-      if (key === 'obtainMarks') continue; // skip this
-      data.append(key, formData[key]);
-    }
-
-     data.append("obtainMarks", JSON.stringify(obtainMarksArray));
+      const data = new FormData();
+      for (const key in formData) {
+        data.append(key, formData[key]);
+      }
 
       const response = await axios.post(`${import.meta.env.VITE_API_URL}/api/students`, data, {
         headers: {
@@ -117,7 +90,7 @@ const obtainMarks = [
       });
 
       console.log('Student saved:', response.data);
-      handleReset(); // Clear form
+      handleReset();
     } catch (error) {
       console.error('Error saving student:', error);
     }
@@ -126,7 +99,9 @@ const obtainMarks = [
   return (
     <div>
       <h4
-        className="profile-header pro-h mx-auto text-left" style={{ width: '80%', marginTop: '5px' }}>
+        className="profile-header pro-h mx-auto text-left"
+        style={{ width: '80%', marginTop: '5px' }}
+      >
         Student Registration
       </h4>
       <div className="registration-container">
@@ -198,6 +173,7 @@ const obtainMarks = [
                   ))}
                 </select>
               </div>
+
               {formData.course && (
                 <>
                   {/* Semester display */}
@@ -206,9 +182,7 @@ const obtainMarks = [
                     <input
                       type="text"
                       className="form-input"
-                      value={
-                        courses.find((c) => c.title === formData.course)?.semester || ''
-                      }
+                      value={courses.find((c) => c.title === formData.course)?.semester || ''}
                       readOnly
                       disabled
                     />
@@ -228,7 +202,6 @@ const obtainMarks = [
                                   <th style={{ border: '1px solid #ccc', padding: '6px' }}>Subject</th>
                                   <th style={{ border: '1px solid #ccc', padding: '6px' }}>Max Marks</th>
                                   <th style={{ border: '1px solid #ccc', padding: '6px' }}>Passing Marks</th>
-                                  <th style={{ border: '1px solid #ccc', padding: '6px' }}>Obtain Marks</th>
                                 </tr>
                               </thead>
                               <tbody>
@@ -237,24 +210,6 @@ const obtainMarks = [
                                     <td style={{ border: '1px solid #ccc', padding: '6px' }}>{subj.subject}</td>
                                     <td style={{ border: '1px solid #ccc', padding: '6px' }}>{subj.maxMarks}</td>
                                     <td style={{ border: '1px solid #ccc', padding: '6px' }}>{subj.passingMarks}</td>
-                                    <td style={{ border: '1px solid #ccc', padding: '6px' }}>
-                                      <input
-                                        type="number"
-                                        min="0"
-                                        max={subj.maxMarks}
-                                        className="form-input"
-                                        value={formData.obtainMarks?.[subj.subject] || ''}
-                                        onChange={(e) =>
-                                          setFormData((prev) => ({
-                                            ...prev,
-                                            obtainMarks: {
-                                              ...prev.obtainMarks,
-                                              [subj.subject]: e.target.value
-                                            }
-                                          }))
-                                        }
-                                      />
-                                    </td>
                                   </tr>
                                 ))}
                               </tbody>
@@ -267,7 +222,6 @@ const obtainMarks = [
                   </div>
                 </>
               )}
-
 
               <div className="form-group">
                 <label htmlFor="registrationDate" className="form-label">

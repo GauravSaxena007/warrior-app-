@@ -78,67 +78,193 @@ const Certiverify = () => {
 
   // Function to open marksheet HTML in a new tab
   const openMarksheet = (htmlContent) => {
-    const newTab = window.open();
-    if (!newTab) {
-      alert('Please allow pop-ups to view the marksheet.');
-      return;
-    }
-    const logoUrl = `${window.location.origin}/main-logo.png`;
-    const updatedHtmlContent = htmlContent
-      ? htmlContent.replace(/src="main-logo.png"/g, `src="main-logo.png"`)
-      : `
-        <div class="Format-container">
-          <div class="Format-section">
-            <div class="Format-header">
-              <img src="main-logo.png" alt="Institute Logo" class="Format-logo" />
-              <h2>राष्ट्रीय वाणिज्य एवं तकनीकी प्रशिक्षण संस्थान</h2>
-              <h3>National Institute of Commerce and Technical Training</h3>
-              <h2 class="Format-title">Marksheet</h2>
-            </div>
-            <p>No Marksheet Available</p>
+  const newTab = window.open();
+  if (!newTab) {
+    alert('Please allow pop-ups to view the marksheet.');
+    return;
+  }
+
+  const logoUrl = `${window.location.origin}/main-logo.png`;
+  const updatedHtmlContent = htmlContent
+    ? htmlContent.replace(/src="main-logo.png"/g, `src="${logoUrl}"`)
+    : `
+      <div class="Format-container">
+        <div class="Format-section">
+          <div class="Format-header">
+            <img src="main-logo.png" alt="Institute Logo" class="Format-logo" />
+            <h2>राष्ट्रीय वाणिज्य एवं तकनीकी प्रशिक्षण संस्थान</h2>
+            <h3>National Institute of Commerce and Technical Training</h3>
+            <h2 class="Format-title">Marksheet</h2>
           </div>
+          <p>No Marksheet Available</p>
         </div>
-      `;
-    console.log('Rendering HTML:', updatedHtmlContent); // Debug log
-    newTab.document.write(`
-      <!DOCTYPE html>
-      <html>
-      <head>
-        <title>Marksheet</title>
-        <style>
-          body { font-family: 'Arial', sans-serif; background-color: #f4f4f9; margin: 0; padding: 20px; }
-          .Format-container { max-width: 900px; margin: 0 auto; background-color: #fff; padding: 30px; border-radius: 10px; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); }
-          .Format-section { border: 2px solid #004aad; padding: 20px; border-radius: 8px; }
-          .Format-header { text-align: center; margin-bottom: 20px; }
-          .Format-logo { width: 120px; height: auto; margin-bottom: 15px; }
-          .Format-header h2 { font-size: 24px; color: #004aad; margin: 5px 0; }
-          .Format-header h3 { font-size: 18px; color: #333; margin: 5px 0; font-weight: 500; }
-          .Format-title { font-size: 28px; color: #004aad; text-decoration: underline; font-weight: bold; margin-bottom: 20px; }
-          .Format-info { display: grid; grid-template-columns: 1fr; gap: 10px; margin-bottom: 20px; font-size: 16px; color: #333; }
-          .Format-info div { padding: 5px; }
-          .Format-table { width: 100%; border-collapse: collapse; margin-bottom: 20px; font-size: 15px; }
-          .Format-table th, .Format-table td { border: 1px solid #004aad; padding: 10px; text-align: center; color: #333; }
-          .Format-table th { background-color: #e6f0ff; font-weight: 600; }
-          .Format-table td { background-color: #fff; }
-          .total-row { font-weight: bold; background-color: #d4e6ff; }
-          .Format-summary { font-size: 16px; margin-bottom: 20px; }
-          .Format-summary p { margin: 8px 0; color: #333; }
-          .Format-footer { text-align: center; font-size: 14px; color: #555; margin-top: 30px; }
-          .Format-footer p { margin: 5px 0; }
-          @media print {
-            body { background-color: #fff; padding: 0; }
-            .Format-container { box-shadow: none; border: none; padding: 10px; }
-            .Format-section { border: none; padding: 0; }
+      </div>
+    `;
+
+  newTab.document.write(`
+    <!DOCTYPE html>
+    <html>
+    <head>
+      <title>Marksheet</title>
+      <meta name="viewport" content="width=device-width, initial-scale=1" />
+      <style>
+        body {
+          font-family: 'Arial', sans-serif;
+          background-color: #f4f4f9;
+          margin: 0;
+          padding: 20px;
+        }
+        .Format-container {
+          max-width: 900px;
+          margin: 0 auto;
+          background-color: #fff;
+          padding: 30px;
+          border-radius: 10px;
+          box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+        .Format-section {
+          border: 2px solid #004aad;
+          padding: 20px;
+          border-radius: 8px;
+        }
+        .Format-header {
+          text-align: center;
+          margin-bottom: 20px;
+        }
+        .Format-logo {
+          width: 120px;
+          height: auto;
+          margin-bottom: 15px;
+        }
+        .Format-header h2 {
+          font-size: 24px;
+          color: #004aad;
+          margin: 5px 0;
+        }
+        .Format-header h3 {
+          font-size: 18px;
+          color: #333;
+          margin: 5px 0;
+          font-weight: 500;
+        }
+        .Format-title {
+          font-size: 28px;
+          color: #004aad;
+          text-decoration: underline;
+          font-weight: bold;
+          margin-bottom: 20px;
+        }
+        .Format-info {
+          display: grid;
+          grid-template-columns: 1fr;
+          gap: 10px;
+          margin-bottom: 20px;
+          font-size: 16px;
+          color: #333;
+        }
+        .Format-info div {
+          padding: 5px;
+        }
+        .Format-table {
+          width: 100%;
+          border-collapse: collapse;
+          margin-bottom: 20px;
+          font-size: 15px;
+        }
+        .Format-table th, .Format-table td {
+          border: 1px solid #004aad;
+          padding: 10px;
+          text-align: center;
+          color: #333;
+        }
+        .Format-table th {
+          background-color: #e6f0ff;
+          font-weight: 600;
+        }
+        .Format-table td {
+          background-color: #fff;
+        }
+        .total-row {
+          font-weight: bold;
+          background-color: #d4e6ff;
+        }
+        .Format-summary {
+          font-size: 16px;
+          margin-bottom: 20px;
+        }
+        .Format-summary p {
+          margin: 8px 0;
+          color: #333;
+        }
+        .Format-footer {
+          text-align: center;
+          font-size: 14px;
+          color: #555;
+          margin-top: 30px;
+        }
+        .Format-footer p {
+          margin: 5px 0;
+        }
+
+        @media (max-width: 412px) {
+          body {
+            padding: 10px;
           }
-        </style>
-      </head>
-      <body>
-        ${updatedHtmlContent}
-      </body>
-      </html>
-    `);
-    newTab.document.close();
-  };
+          .Format-container {
+            padding: 15px;
+            font-size: 12px;
+          }
+          .Format-logo {
+            width: 80px;
+          }
+          .Format-header h2 {
+            font-size: 18px;
+          }
+          .Format-header h3 {
+            font-size: 14px;
+          }
+          .Format-title {
+            font-size: 20px;
+          }
+          .Format-info {
+            font-size: 14px;
+          }
+          .Format-table {
+            font-size: 12px;
+          }
+          .Format-summary {
+            font-size: 14px;
+          }
+          .Format-footer {
+            font-size: 12px;
+          }
+        }
+
+        @media print {
+          body {
+            background-color: #fff;
+            padding: 0;
+          }
+          .Format-container {
+            box-shadow: none;
+            border: none;
+            padding: 10px;
+          }
+          .Format-section {
+            border: none;
+            padding: 0;
+          }
+        }
+      </style>
+    </head>
+    <body>
+      ${updatedHtmlContent}
+    </body>
+    </html>
+  `);
+
+  newTab.document.close();
+};
 
   return (
     <div className="container-verify">
@@ -163,7 +289,7 @@ const Certiverify = () => {
 
         {matchedCertificate && (
           <div className="issued-certificates mt-4">
-            <h4>Issued Certificate & Marksheet</h4>
+            <h4>Issued Marksheet</h4>
             <table className="table table-bordered table-hover">
               <thead className="table-light">
                 <tr>
@@ -171,7 +297,7 @@ const Certiverify = () => {
                   <th>Mobile</th>
                   <th>Course</th>
                   <th>Enrollment No.</th>
-                  <th>Marksheet HTML</th>
+                  <th>Marksheet </th>
                 </tr>
               </thead>
               <tbody>

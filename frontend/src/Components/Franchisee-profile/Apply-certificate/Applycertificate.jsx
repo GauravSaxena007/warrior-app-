@@ -10,9 +10,18 @@ const Applycertificate = () => {
   const [centerHead, setCenterHead] = useState(null);
   const [topupAmount, setTopupAmount] = useState(0);
   const [chargePerApply, setChargePerApply] = useState(0);
-  const [processedStudents, setProcessedStudents] = useState([]);
+  const [processedStudents, setProcessedStudents] = useState(() => {
+    // Load processed students from localStorage on component mount
+    const saved = localStorage.getItem("processedStudents");
+    return saved ? JSON.parse(saved) : [];
+  });
 
   const isDisabled = topupAmount === 0;
+
+  useEffect(() => {
+    // Save processed students to localStorage whenever it changes
+    localStorage.setItem("processedStudents", JSON.stringify(processedStudents));
+  }, [processedStudents]);
 
   useEffect(() => {
     const fetchTopupData = async () => {
@@ -95,10 +104,6 @@ const Applycertificate = () => {
   };
 
   const handleRequest = async () => {
-
-    setProcessedStudents((prev) => [...prev, ...selectedStudents]);
-    setSelectedStudents([]);
-
     try {
       if (selectedStudents.length === 0) {
         alert("Please select at least one student.");
@@ -128,10 +133,11 @@ const Applycertificate = () => {
         });
 
         setTopupAmount(deductResponse.data.topupAmount);
+        // Add selected students to processedStudents and persist
+        setProcessedStudents((prev) => [...prev, ...selectedStudents]);
+        setSelectedStudents([]);
+        window.dispatchEvent(new Event("topupChanged"));
       }
-
-      setSelectedStudents([]);
-      window.dispatchEvent(new Event("topupChanged"));
     } catch (err) {
       console.error("Error processing certificate request:", err);
       alert("An error occurred while requesting certificates.");
@@ -142,6 +148,8 @@ const Applycertificate = () => {
     try {
       await axios.delete(`${import.meta.env.VITE_API_URL}/api/students/${id}`);
       setData((prev) => prev.filter((item) => item._id !== id));
+      // Optionally remove from processedStudents if deleted
+      setProcessedStudents((prev) => prev.filter((studentId) => studentId !== id));
     } catch (err) {
       console.error("Error deleting student:", err);
     }
@@ -213,7 +221,7 @@ const Applycertificate = () => {
               <td data-label="Sr. No.">{index + 1}</td>
               <td data-label="Select">
                 {processedStudents.includes(row._id) ? (
-                  <span>✓</span> // Or leave empty or show a tick icon
+                  <span className="text-green-500 font-bold">✓</span>
                 ) : (
                   <input
                     type="checkbox"
@@ -222,7 +230,6 @@ const Applycertificate = () => {
                     disabled={isDisabled}
                   />
                 )}
-
               </td>
               <td data-label="Student Name">{row.name}</td>
               <td data-label="Mobile">{row.mobile}</td>

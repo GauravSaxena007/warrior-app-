@@ -1,83 +1,286 @@
-.form-control{
-    width: 100px;
+/* Container for the certificate issuance table */
+.container-iss-certi-adm {
+  transform: translateX(-90px); /* Maintain original left shift */
+  padding: 12px; /* Slightly increased for better spacing */
+  background-color: #fff; /* White background, as implied in original */
+  border-radius: 6px; /* Subtle rounded corners */
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08); /* Lighter shadow for depth */
+  max-width: 1200px; /* Constrain width */
+  margin: 0 auto; /* Center container */
 }
-.form-control-isa{
-    width: 190px;
-}
-.container-iss-certi-adm{
-    margin-left: -75px;
-}
-/* Issuecerti.css */
 
-/* Adjust the width of the table columns */
+/* Table styling */
 .container-iss-certi-adm table {
-    width: 100%;
-  }
-  
-  /* Reducing the width of the 'Sr. No.' column */
-  .container-iss-certi-adm table th:nth-child(1),
-  .container-iss-certi-adm table td:nth-child(1) {
-    width: 5%;
-  }
-  
-  .container-iss-certi-adm table th:nth-child(7),
-  .container-iss-certi-adm table td:nth-child(7) {
-    width: 13%;
-  }
-  .container-iss-certi-adm table th:nth-child(3),
-  .container-iss-certi-adm table td:nth-child(3) {
-    width: 9%;
-  }
+  width: 95%; /* Original reduced width */
+  max-width: 1100px; /* Consistent max-width */
+  margin: 0 auto; /* Center table */
+  border-collapse: collapse; /* Maintain original collapse */
+  background-color: #fff; /* White table background */
+  border: 1px solid #ced4da; /* Original border color */
+}
 
-  .container-iss-certi-adm table th:nth-child(2),
-  .container-iss-certi-adm table td:nth-child(2) {
-    width: 9%;
-  }
+/* Table header styling */
+.container-iss-certi-adm table th {
+  background-color: #343a40; /* Original dark header (from table-dark) */
+  color: #fff; /* White text for contrast */
+  font-weight: 600; /* Bolder for emphasis */
+  padding: 8px 6px; /* Slightly increased vertical padding */
+  font-size: 14px; /* Original font size */
+  border: 1px solid #ced4da; /* Original border color */
+}
 
-  .container-iss-certi-adm table th:nth-child(5),
-  .container-iss-certi-adm table td:nth-child(5) {
-    width: 9%;
-  }
+/* Table cell styling */
+.container-iss-certi-adm table td {
+  padding: 8px 6px; /* Slightly increased for comfort */
+  font-size: 14px; /* Original font size */
+  border: 1px solid #ced4da; /* Original border color */
+  text-align: center; /* Maintain centered text */
+  color: #212529; /* Dark text for readability */
+}
 
-  /* Increasing the width of the 'Assign Certificate Number' column */
-  .container-iss-certi-adm table th:nth-child(6),
-  .container-iss-certi-adm table td:nth-child(6) {
-    width: 15%;
-  }
-  
-  /* Optional: Adding some padding for better readability */
-  .container-iss-certi-adm table td,
-  .container-iss-certi-adm table th {
-    padding: 10px;
-    text-align: center;
-  }
-  
-  /* Adjusting file input width */
-  .container-iss-certi-adm table td input[type="file"] {
-    width: 100%;
-  }
-  
-  /* Add a little space between the 'Send' and 'Delete' buttons */
-  .container-iss-certi-adm table td button {
-    margin: 0 5px;
-  }
+/* Hover effect for table rows */
+.container-iss-certi-adm table tbody tr:hover {
+  background-color: #f8f9fa; /* Light gray hover, close to original */
+}
 
-  .form-control-isa{
-  padding: 3px;
-  }
-  /* Target the Action column buttons/inputs */
+/* Column widths (unchanged from original) */
+.container-iss-certi-adm table th:nth-child(1),
+.container-iss-certi-adm table td:nth-child(1) {
+  width: 4%; /* Sr. No. */
+}
+
+.container-iss-certi-adm table th:nth-child(2),
+.container-iss-certi-adm table td:nth-child(2) {
+  width: 8%; /* Name */
+}
+
+.container-iss-certi-adm table th:nth-child(3),
+.container-iss-certi-adm table td:nth-child(3) {
+  width: 8%; /* Mobile */
+}
+
+.container-iss-certi-adm table th:nth-child(4),
+.container-iss-certi-adm table td:nth-child(4) {
+  width: 10%; /* Course Name */
+}
+
+.container-iss-certi-adm table th:nth-child(5),
+.container-iss-certi-adm table td:nth-child(5) {
+  width: 8%; /* Franchisee Head */
+}
+
+.container-iss-certi-adm table th:nth-child(6),
+.container-iss-certi-adm table td:nth-child(6) {
+  width: 8%; /* Semester */
+}
+
+.container-iss-certi-adm table th:nth-child(7),
+.container-iss-certi-adm table td:nth-child(7) {
+  width: 12%; /* Subjects & Marks */
+}
+
+.container-iss-certi-adm table th:nth-child(8),
+.container-iss-certi-adm table td:nth-child(8) {
+  width: 12%; /* Enrollment Number */
+}
+
+.container-iss-certi-adm table th:nth-child(9),
+.container-iss-certi-adm table td:nth-child(9) {
+  width: 12%; /* Upload Certificate */
+}
+
+.container-iss-certi-adm table th:nth-child(10),
+.container-iss-certi-adm table td:nth-child(10) {
+  width: 12%; /* Upload Marksheet */
+}
+
+.container-iss-certi-adm table th:nth-child(11),
+.container-iss-certi-adm table td:nth-child(11) {
+  width: 10%; /* Action */
+}
+
+/* Read-only enrollment number styling */
+.form-control {
+  width: 100%; /* Full column width */
+  padding: 4px 6px; /* Original padding */
+  background-color: #f0f0f0; /* Original light gray */
+  border: 1px solid #ced4da; /* Original border */
+  border-radius: 4px; /* Original rounded corners */
+  font-size: 14px; /* Original font size */
+  text-align: center; /* Centered text */
+  color: #495057; /* Slightly darker text for contrast */
+  cursor: not-allowed; /* Indicate read-only */
+}
+
+/* File input styling */
+.form-control-isa {
+  width: 100%; /* Full column width */
+  padding: 4px; /* Slightly increased from 2px for balance */
+  font-size: 14px; /* Original font size */
+  border: 1px solid #ced4da; /* Original border */
+  border-radius: 4px; /* Original rounded corners */
+  background-color: #fff; /* White background */
+  transition: border-color 0.2s; /* Smooth border transition */
+}
+
+/* File input hover and focus states */
+.form-control-isa:hover {
+  border-color: #007bff; /* Original Bootstrap blue */
+}
+
+.form-control-isa:focus {
+  outline: none; /* Remove default outline */
+  border-color: #007bff; /* Original blue */
+  box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.2); /* Subtle focus ring */
+}
+
+/* Action column buttons */
 .stack-buttons {
   display: flex;
-  flex-direction: column;
-  gap: 8px;       /* space between buttons */
-  align-items: flex-start; /* align buttons left, change if needed */
+  flex-direction: column; /* Maintain vertical stack */
+  gap: 8px; /* Increased from 6px for clarity */
+  justify-content: center; /* Center vertically */
+  padding-right: 8px; /* Space from right edge */
+  min-height: 5%; /* Ensure consistent height for symmetry */
+  background-color: transparent; /* Remove any background */
 }
 
+
+
+/* Button styling */
 .stack-buttons button {
-  width: 100px;    /* fixed width for buttons */
-  height: 36px;    /* increase height */
-  padding: 6px 12px;
-  font-size: 14px;
+  width: 80px; /* Original width for consistency */
+  height: 32px; /* Original height for symmetry */
+  padding: 4px 8px; /* Original padding */
+  font-size: 13px; /* Original font size */
+  border-radius: 4px; /* Original rounded corners */
+  border: none; /* Remove default border */
+  display: flex; /* Ensure content is centered */
+  align-items: center; /* Center text vertically */
+  justify-content: center; /* Center text horizontally */
+  transition: background-color 0.2s, transform 0.1s; /* Smooth transitions */
 }
 
+/* Success button (Send) */
+.stack-buttons .btn-success {
+  background-color: #28a745; /* Original green */
+  color: #fff; /* White text */
+}
 
+/* Danger button (Delete) */
+.stack-buttons .btn-danger {
+  background-color: #dc3545; /* Original red */
+  color: #fff; /* White text */
+}
+
+/* Button hover effects */
+.stack-buttons .btn-success:hover {
+  background-color: #218838; /* Original darker green */
+  transform: translateY(-1px); /* Subtle lift */
+}
+
+.stack-buttons .btn-danger:hover {
+  background-color: #c82333; /* Original darker red */
+  transform: translateY(-1px); /* Subtle lift */
+}
+
+/* Button focus states */
+.stack-buttons button:focus {
+  outline: none; /* Remove default outline */
+  box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.2); /* Subtle blue ring */
+}
+
+/* Button active states */
+.stack-buttons button:active {
+  transform: translateY(0); /* Reset lift on click */
+}
+
+/* Ensure table doesn't overflow */
+.container-iss-certi-adm table td input[type="file"] {
+  width: 100%;
+  font-size: 14px; /* Original font size */
+}
+
+/* Heading styling */
+.container-iss-certi-adm h4 {
+  font-size: 1.25rem; /* Slightly smaller for balance */
+  font-weight: 600; /* Bolder for emphasis */
+  color: #343a40; /* Match table header */
+  margin-bottom: 1rem; /* Consistent spacing */
+  text-align: center; /* Center heading */
+}
+
+/* Responsive adjustments */
+@media (max-width: 992px) {
+  .container-iss-certi-adm {
+    transform: translateX(-30px); /* Reduce shift for medium screens */
+    padding: 8px;
+  }
+  .container-iss-certi-adm table {
+    width: 98%; /* Slightly wider */
+    font-size: 13px; /* Slightly smaller */
+  }
+  .stack-buttons {
+    min-height: 70px; /* Adjust for smaller screens */
+    padding-right: 6px; /* Maintain right alignment */
+  }
+  .stack-buttons button {
+    width: 75px; /* Slightly smaller */
+    height: 30px;
+    font-size: 12px;
+  }
+}
+
+@media (max-width: 768px) {
+  .container-iss-certi-adm {
+    transform: translateX(0); /* Remove shift on small screens */
+    padding: 6px;
+  }
+  .container-iss-certi-adm table {
+    width: 100%; /* Full width */
+    font-size: 12px; /* Smaller font */
+  }
+  .container-iss-certi-adm table th,
+  .container-iss-certi-adm table td {
+    padding: 4px; /* Original tighter padding */
+  }
+  .stack-buttons {
+    min-height: 60px; /* Smaller height */
+    gap: 6px; /* Original spacing */
+    padding-right: 4px; /* Adjust for smaller screens */
+  }
+  .stack-buttons button {
+    width: 70px; /* Original mobile size */
+    height: 28px;
+    font-size: 11px;
+  }
+  .form-control,
+  .form-control-isa {
+    font-size: 12px; /* Smaller inputs */
+    padding: 3px 5px;
+  }
+}
+
+@media (max-width: 576px) {
+  .container-iss-certi-adm table {
+    font-size: 11px; /* Smallest font */
+  }
+  .container-iss-certi-adm table th:nth-child(5),
+  .container-iss-certi-adm table td:nth-child(5),
+  .container-iss-certi-adm table th:nth-child(6),
+  .container-iss-certi-adm table td:nth-child(6) {
+    display: none; /* Hide Franchisee Head and Semester */
+  }
+  .stack-buttons {
+    flex-direction: row; /* Horizontal for mobile */
+    justify-content: flex-end; /* Maintain right alignment */
+    gap: 4px; /* Tighter spacing */
+    min-height: auto; /* Remove fixed height */
+    padding-right: 4px; /* Adjust for mobile */
+  }
+  .stack-buttons button {
+    width: 60px; /* Original tiny buttons */
+    height: 26px;
+    font-size: 10px;
+  }
+}
