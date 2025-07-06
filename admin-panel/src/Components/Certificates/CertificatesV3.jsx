@@ -149,66 +149,16 @@ const CertificatesV3 = () => {
 </button>
 </div>
       {issuedCerts.length === 0 ? (
-        <p>No certificates issued yet.</p>
+       null
       ) : (
         <table className="table table-bordered table-hover">
-          <thead className="table-light">
-            <tr>
-              <th>Sr. No.</th>
-              <th>Student Name</th>
-              <th>Mobile</th>
-              <th>Course</th>
-              <th>Enrollment No.</th>
-              <th>View Certificate</th>
-              <th>View Marksheet</th>
-            </tr>
-          </thead>
-          <tbody>
-            {issuedCerts.map((cert, i) => (
-              <tr key={cert._id}>
-                <td>{i + 1}</td>
-                <td>{cert.studentId?.name || 'N/A'}</td>
-                <td>{cert.studentId?.mobile || 'N/A'}</td>
-                <td>{cert.course || 'N/A'}</td>
-                <td>{cert.certificateNumber || 'N/A'}</td>
-                <td>
-                  {cert.filePath ? (
-                    <a
-                      href={getFileUrl(cert.filePath)}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="btn btn-outline-primary btn-sm"
-                    >
-                      View
-                    </a>
-                  ) : (
-                    <span className="text-muted">N/A</span>
-                  )}
-                </td>
-                <td>
-                  {cert.marksheetPath ? (
-                    <a
-                      href={getFileUrl(cert.marksheetPath)}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="btn btn-outline-secondary btn-sm"
-                    >
-                      View
-                    </a>
-                  ) : (
-                    <span className="text-muted">N/A</span>
-                  )}
-                </td>
-              </tr>
-            ))}
-          </tbody>
         </table>
       )}
 
-      <h5 className="mt-5">Manually Added Certificates & Marksheets - (Paid) </h5>
+      <h5 className="mt-5">--- Data of All Issued Certificates & Marksheets ---</h5>
 
       {manualCerts.length === 0 ? (
-        <p>No manual certificates added yet.</p>
+        <p>No Certificates / Marksheet Added Yet.</p>
       ) : (
         <table className="manualcerti-table table-bordered table-hover">
           <thead className="manualcerti-thead table-light">
