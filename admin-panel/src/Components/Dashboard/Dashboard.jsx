@@ -39,22 +39,28 @@ const Dashboard = () => {
   useEffect(() => {
     const fetchCounts = async () => {
       setLoading(true);
+       const token = localStorage.getItem('token');
+       const config = {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    };
       try {
-        const franchiseeRes = await axios.get(`${import.meta.env.VITE_API_URL}/api/franchisee/count`);
-        setFranchiseeCount(Number(franchiseeRes.data.count || 0));
+        const franchiseeRes = await axios.get(`${import.meta.env.VITE_API_URL}/api/franchisee/count`, config);
+      setFranchiseeCount(Number(franchiseeRes.data.count || 0));
 
-        const pendingRes = await axios.get(`${import.meta.env.VITE_API_URL}/api/admin-certi/status/pending`);
-        setPendingCertificates(Number(pendingRes.data.count || pendingRes.data.total || 0));
-        
-        const issuedRes = await axios.get(`${import.meta.env.VITE_API_URL}/api/admin-certi/issuedCertificates`);
-        setIssuedCertificates(issuedRes.data.length);
+      const pendingRes = await axios.get(`${import.meta.env.VITE_API_URL}/api/admin-certi/status/pending`, config);
+      setPendingCertificates(Number(pendingRes.data.count || pendingRes.data.total || 0));
 
-        const transactionRes = await axios.get(`${import.meta.env.VITE_API_URL}/api/transactions/all`);
-        const totalAmount = transactionRes.data.reduce((sum, t) => sum + Number(t.amount || 0), 0);
-        setTotalTransactionAmount(totalAmount);
+      const issuedRes = await axios.get(`${import.meta.env.VITE_API_URL}/api/admin-certi/issuedCertificates`, config);
+      setIssuedCertificates(issuedRes.data.length);
 
-        const coursesRes = await axios.get(`${import.meta.env.VITE_API_URL}/api/courses`);
-        setTotalCourses(coursesRes.data.length || 0);
+      const transactionRes = await axios.get(`${import.meta.env.VITE_API_URL}/api/transactions/all`, config);
+      const totalAmount = transactionRes.data.reduce((sum, t) => sum + Number(t.amount || 0), 0);
+      setTotalTransactionAmount(totalAmount);
+
+      const coursesRes = await axios.get(`${import.meta.env.VITE_API_URL}/api/courses`, config);
+      setTotalCourses(coursesRes.data.length || 0);
 
         setError(null);
       } catch (err) {

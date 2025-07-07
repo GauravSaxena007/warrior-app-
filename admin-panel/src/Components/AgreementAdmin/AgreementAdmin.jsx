@@ -33,6 +33,7 @@ const AgreementAdmin = () => {
 
   // Function to save the agreement by sending a POST request to the backend
   const saveAgreement = async () => {
+       const token = localStorage.getItem("token");
     try {
       const response = await axios.post(`${import.meta.env.VITE_API_URL}/api/agreement/save`, {
         welcomeTitle,
@@ -40,7 +41,12 @@ const AgreementAdmin = () => {
         content,
         points,
         courses
-      });
+      },{
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+    );
       alert('Agreement saved successfully!');
       console.log(response.data); // Log the response data for debugging
     } catch (error) {

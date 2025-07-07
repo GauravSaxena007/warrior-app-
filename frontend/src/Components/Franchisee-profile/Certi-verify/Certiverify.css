@@ -282,20 +282,43 @@ thead.table-light th {
     display: block;
     padding: 0.455rem;
   }
-  th:nth-child(3) {
+  th:nth-child(1) {
+  height: 60px; /* or any height you want */
+  vertical-align: middle; /* optional, to center text vertically */
+}
+ td:nth-child(1) {
+  height: 60px; /* or any height you want */
+  vertical-align: middle; /* optional, to center text vertically */
+}
+ th:nth-child(2) {
+  height: 60px; /* or any height you want */
+  vertical-align: middle; /* optional, to center text vertically */
+}
+ td:nth-child(2) {
+  height: 60px; /* or any height you want */
+  vertical-align: middle; /* optional, to center text vertically */
+}
+th:nth-child(3),
+td:nth-child(3) {
+  vertical-align: middle;
+  text-align: center;
+  padding: 1rem;
+  min-height: 170px;
+}
+ th:nth-child(4) {
+  height: 60px; /* or any height you want */
+  vertical-align: middle; /* optional, to center text vertically */
+}
+ td:nth-child(4) {
   height: 60px; /* or any height you want */
   vertical-align: middle; /* optional, to center text vertically */
 }
  th:nth-child(5) {
-  height: 55px; /* or any height you want */
+  height: 60px; /* or any height you want */
   vertical-align: middle; /* optional, to center text vertically */
 }
  td:nth-child(5) {
-  height: 55px; /* or any height you want */
-  vertical-align: middle; /* optional, to center text vertically */
-}
-td:nth-child(6) {
-  height: 61px; /* or any height you want */
+  height: 60px; /* or any height you want */
   vertical-align: middle; /* optional, to center text vertically */
 }
 }

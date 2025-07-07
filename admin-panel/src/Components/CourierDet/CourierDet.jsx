@@ -12,6 +12,14 @@ const CourierDet = () => {
     franchiseeHead: '',
   });
 
+   // 🔐 Get token from localStorage
+  const token = localStorage.getItem('token');
+  const authHeader = {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  };
+
   useEffect(() => {
     fetchFranchisees();
     fetchCouriers();
@@ -19,7 +27,8 @@ const CourierDet = () => {
 
   const fetchFranchisees = async () => {
     try {
-      const res = await axios.get(`${import.meta.env.VITE_API_URL}/api/franchisee`);
+      const res = await axios.get(`${import.meta.env.VITE_API_URL}/api/franchisee`,
+        authHeader);
       console.log('Franchisees:', res.data);
       setFranchisees(res.data);
     } catch (err) {
@@ -30,7 +39,8 @@ const CourierDet = () => {
 
   const fetchCouriers = async () => {
     try {
-      const res = await axios.get(`${import.meta.env.VITE_API_URL}/api/courier`);
+      const res = await axios.get(`${import.meta.env.VITE_API_URL}/api/courier`,
+        authHeader);
       console.log('Couriers:', res.data);
       setCouriers(res.data);
     } catch (err) {
@@ -47,7 +57,8 @@ const CourierDet = () => {
     e.preventDefault();
     try {
       console.log('Submitting form:', form);
-      const res = await axios.post(`${import.meta.env.VITE_API_URL}/api/courier`, form);
+      const res = await axios.post(`${import.meta.env.VITE_API_URL}/api/courier`, form ,
+        authHeader);
       console.log('POST response:', res.data);
       setCouriers([...couriers, res.data]);
       setForm({
@@ -64,7 +75,8 @@ const CourierDet = () => {
 
   const handleDelete = async (id) => {
     try {
-      const res = await axios.delete(`${import.meta.env.VITE_API_URL}/api/courier/${id}`);
+      const res = await axios.delete(`${import.meta.env.VITE_API_URL}/api/courier/${id}`,
+        authHeader);
       console.log('DELETE response:', res.data);
       setCouriers(couriers.filter(courier => courier._id !== id));
     } catch (err) {

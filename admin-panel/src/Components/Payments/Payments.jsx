@@ -10,6 +10,13 @@ const Payments = () => {
   const [message, setMessage] = useState("");
   const [payments, setPayments] = useState([]);
 
+    const token = localStorage.getItem('token');
+  const config = {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  };
+
   useEffect(() => {
     fetchFranchisees();
     fetchPayments();
@@ -17,14 +24,14 @@ const Payments = () => {
 
   const fetchFranchisees = () => {
     axios
-      .get(`${import.meta.env.VITE_API_URL}/api/franchisee`)
+      .get(`${import.meta.env.VITE_API_URL}/api/franchisee` , config)
       .then((res) => setFranchisees(res.data))
       .catch((err) => console.error("Error fetching franchisees:", err));
   };
 
   const fetchPayments = () => {
     axios
-      .get(`${import.meta.env.VITE_API_URL}/api/payments`)
+      .get(`${import.meta.env.VITE_API_URL}/api/payments` , config)
       .then((res) => setPayments(res.data))
       .catch((err) => console.error("Error fetching payments:", err));
   };

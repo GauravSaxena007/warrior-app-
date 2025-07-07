@@ -23,10 +23,18 @@ const FranchiseeManagement = () => {
   const [editingIndex, setEditingIndex] = useState(null);
   const [isDialogOpen, setIsDialogOpen] = useState(false);
 
+ const token = localStorage.getItem("token");
+
+  const getAuthHeaders = () => ({
+    Authorization: `Bearer ${token}`,
+  });
+
   useEffect(() => {
     const fetchFranchisees = async () => {
       try {
-        const res = await fetch(`${import.meta.env.VITE_API_URL}/api/franchisee`);
+        const res = await fetch(`${import.meta.env.VITE_API_URL}/api/franchisee`, {
+          headers: getAuthHeaders(),
+        });
   
         // Step 4: Handle HTML error responses
         if (!res.ok) {
@@ -104,7 +112,8 @@ const FranchiseeManagement = () => {
 
     try {
       const response = await fetch(url, {
-        method,
+         method,
+        headers: getAuthHeaders(), // ✅ Add token here
         body: data,
       });
 
@@ -168,6 +177,7 @@ const FranchiseeManagement = () => {
     try {
       const response = await fetch(`${import.meta.env.VITE_API_URL}/api/franchisee/${toDelete._id}`, {
         method: "DELETE",
+         headers: getAuthHeaders(), 
       });
 
       const result = await response.json();

@@ -13,20 +13,31 @@ const CertificatesV3 = () => {
     fetchManualCertificates();
   }, []);
 
-  const fetchIssuedCertificates = async () => {
-    try {
-      const res = await axios.get(`${import.meta.env.VITE_API_URL}/api/admin-certi/issuedCertificates`);
-      setIssuedCerts(res.data);
-    } catch (error) {
-      console.error('Failed to fetch issued certificates:', error);
-      alert('Failed to fetch issued certificates.');
-    }
-  };
+const fetchIssuedCertificates = async () => {
+  try {
+    const token = localStorage.getItem('token');
+    const res = await axios.get(`${import.meta.env.VITE_API_URL}/api/admin-certi/issuedCertificates`, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+    setIssuedCerts(res.data);
+  } catch (error) {
+    console.error('Failed to fetch issued certificates:', error);
+    alert('Failed to fetch issued certificates.');
+  }
+};
+
 
   const fetchManualCertificates = async () => {
     try {
-      const res = await axios.get(`${import.meta.env.VITE_API_URL}/api/manualcerti`);
-      setManualCerts(res.data);
+       const token = localStorage.getItem('token'); // or sessionStorage.getItem('token')
+    const res = await axios.get(`${import.meta.env.VITE_API_URL}/api/manualcerti`, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+    setManualCerts(res.data);
     } catch (error) {
       console.error('Failed to fetch manual certificates:', error);
       alert('Failed to fetch manual certificates.');

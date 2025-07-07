@@ -8,10 +8,17 @@ const Issuecerti = ({ onMarksheetGenerated }) => {
   const [courses, setCourses] = useState([]);
   const [usedNumbers] = useState(new Set());
 
+  const token = localStorage.getItem('token');
+  const config = {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  };
+  
   useEffect(() => {
     const fetchCourses = async () => {
       try {
-        const res = await axios.get(`${import.meta.env.VITE_API_URL}/api/courses`);
+        const res = await axios.get(`${import.meta.env.VITE_API_URL}/api/courses`, config);
         setCourses(res.data);
         console.log('Courses fetched:', res.data);
       } catch (err) {
@@ -25,7 +32,7 @@ const Issuecerti = ({ onMarksheetGenerated }) => {
   useEffect(() => {
     const fetchRequests = async () => {
       try {
-        const res = await axios.get(`${import.meta.env.VITE_API_URL}/api/admin-certi/certificateRequests`);
+        const res = await axios.get(`${import.meta.env.VITE_API_URL}/api/admin-certi/certificateRequests` , config);
         setRequests(res.data);
         setCertData(res.data.map(() => ({ certNo: '', file: null, marksheet: null, obtainMarks: {} })));
       } catch (err) {
@@ -130,7 +137,7 @@ const Issuecerti = ({ onMarksheetGenerated }) => {
       console.log('Backend response:', response.data);
 
       // Delete the request after sending
-      await axios.delete(`${import.meta.env.VITE_API_URL}/api/admin-certi/certificateRequests/${request._id}`);
+      await axios.delete(`${import.meta.env.VITE_API_URL}/api/admin-certi/certificateRequests/${request._id}`, config);
       
       alert('Certificate sent successfully!');
       usedNumbers.delete(certInfo.certNo);

@@ -103,6 +103,7 @@ const Certiverify = () => {
 
   newTab.document.write(`
     <!DOCTYPE html>
+    
     <html>
     <head>
       <title>Marksheet</title>
@@ -206,56 +207,61 @@ const Certiverify = () => {
           margin: 5px 0;
         }
 
-        @media (max-width: 412px) {
-          body {
-            padding: 10px;
-          }
-          .Format-container {
-            padding: 15px;
-            font-size: 12px;
-          }
-          .Format-logo {
-            width: 80px;
-          }
-          .Format-header h2 {
-            font-size: 18px;
-          }
-          .Format-header h3 {
-            font-size: 14px;
-          }
-          .Format-title {
-            font-size: 20px;
-          }
-          .Format-info {
-            font-size: 14px;
-          }
-          .Format-table {
-            font-size: 12px;
-          }
-          .Format-summary {
-            font-size: 14px;
-          }
-          .Format-footer {
-            font-size: 12px;
-          }
-        }
+    @media (max-width: 480px) {
+      body {
+        padding: 5px;
+      }
+      .Format-container {
+        padding: 10px;
+        font-size: 0.8rem;
+      }
+      .Format-logo {
+        width: 80px;
+      }
+      .Format-header h2 {
+        font-size 1rem;
+      }
+      .Format-header h3 {
+        font-size: 0.75rem;
+      }
+      .Format-title {
+        font-size: 1.25rem;
+      }
+      .Format-info {
+        font-size: 0.75rem;
+      }
+      .Format-table {
+        font-size: 0.7rem;
+      }
+      .Format-summary {
+        font-size: 0.75rem;
+      }
+      .Format-footer {
+        font-size: 0.7rem;
+      }
+    }
 
-        @media print {
-          body {
-            background-color: #fff;
-            padding: 0;
-          }
-          .Format-container {
-            box-shadow: none;
-            border: none;
-            padding: 10px;
-          }
-          .Format-section {
-            border: none;
-            padding: 0;
-          }
-        }
-      </style>
+    @media print {
+      body {
+        background-color: #fff;
+        padding: 0;
+      }
+      .Format-container {
+        box-shadow: none;
+        border: none;
+        padding: 10px;
+      }
+      .Format-section {
+        border: none;
+        padding: 0;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Add your content here, e.g., header, table, summary, etc. -->
+</body>
+</html>
     </head>
     <body>
       ${updatedHtmlContent}
