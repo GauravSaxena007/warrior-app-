@@ -22,19 +22,11 @@ const Certiverify = () => {
     setIsManual(false);
     setLoading(true);
 
-    const token = localStorage.getItem('token'); // Retrieve token
-    const config = {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    };
-
+    
     try {
       // Fetch issued certificates first
       const { data: issuedCertificates } = await axios.get(
-        `${import.meta.env.VITE_API_URL}/api/admin-certi/issuedCertificates` 
-        ,
-        config
+        `${import.meta.env.VITE_API_URL}/api/admin-certi/issuedCertificates`
       );
 
       const issuedMatch = issuedCertificates.find(
@@ -49,8 +41,6 @@ const Certiverify = () => {
         // If no issued match, check manual certificates
         const { data: manualCertificates } = await axios.get(
           `${import.meta.env.VITE_API_URL}/api/manualcerti`
-          ,
-        config
         );
 
         const manualMatch = manualCertificates.find(

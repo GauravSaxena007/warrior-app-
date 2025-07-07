@@ -127,15 +127,9 @@ const Manualcerti = ({ onMarksheetGenerated }) => {
     }
 
     try {
-      const token = localStorage.getItem('token'); // or sessionStorage.getItem('token')
-
-const response = await axios.post(`${import.meta.env.VITE_API_URL}/api/manualcerti`, formData, {
-  headers: {
-    'Content-Type': 'multipart/form-data',
-    'Authorization': `Bearer ${token}`,
-  },
-});
-
+      const response = await axios.post(`${import.meta.env.VITE_API_URL}/api/manualcerti`, formData, {
+        headers: { 'Content-Type': 'multipart/form-data' },
+      });
       console.log('Backend response:', response.data);
       alert('Certificate sent successfully!');
       const newRows = [...rows];

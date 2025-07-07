@@ -91,26 +91,26 @@ const manualCertiRoute = require('./routes/manualcerti');
 const paymentsRoutes = require('./routes/payments');
 
 // API Endpoints
-app.use("/api/franchisee",authMiddleware, franchiseeRoutes);
+app.use("/api/franchisee", franchiseeRoutes);
 app.use("/api/courses", courseRoutes);
 app.use("/api/enquiries", enquiryRoutes);
 app.use("/api/auth", authRoutes);
-app.use("/api/students",authMiddleware, studentRoutes);
+app.use("/api/students", studentRoutes);
 app.use("/api/transactions", transactionRoutes);
-app.use("/api/certificateRequests" ,authMiddleware, certificateRequestRoutes);
-app.use("/api/issuedCertificates",authMiddleware, issuedCertificatesRoutes);
-app.use("/api/admin-certi",authMiddleware, adminCertiRoutes);
+app.use("/api/certificateRequests" , certificateRequestRoutes);
+app.use("/api/issuedCertificates", issuedCertificatesRoutes);
+app.use("/api/admin-certi", adminCertiRoutes);
 app.use("/api/settings" , settingsRoutes);
 app.use('/api/courier', courierRoutes);
-app.use("/api/fra-certificates",authMiddleware, fraCertificateRoute);
+app.use("/api/fra-certificates", fraCertificateRoute);
 app.use('/api/marquee', marqueeRoutes);
 app.use('/api/cards', cardRoutes);
 app.use('/api/contact', contactRoutes);
 app.use('/api/reset', resetRoute);
 app.use('/api/carousel', carouselRoute);
-app.use('/api/agreement',authMiddleware, agreementRoutes);
-app.use('/api/manualcerti',authMiddleware, manualCertiRoute);
-app.use('/api/payments',authMiddleware, paymentsRoutes);
+app.use('/api/agreement', agreementRoutes);
+app.use('/api/manualcerti', manualCertiRoute);
+app.use('/api/payments', paymentsRoutes);
 
 // Serve Frontend Build
 app.use('/', express.static(path.join(__dirname, 'dist-frontend')));
