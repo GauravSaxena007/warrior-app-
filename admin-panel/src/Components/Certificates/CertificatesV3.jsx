@@ -147,7 +147,7 @@ const fetchIssuedCertificates = async () => {
 
   return (
     <div className="container mt-4">
-      <h4 className="mb-3">Issued Certificates (Given To Franchisee)</h4>
+      <h4 className="mb-3">List Of All Issued Marksheets</h4>
       <div className="button-group-cer">
       <button onClick={downloadZIP} className="btn btn-success-cer mb-3">
         Download All Data (ZIP)

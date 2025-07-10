@@ -56,6 +56,25 @@ app.use(
 app.use(express.json({ limit: '50mb' }));
 app.use(express.urlencoded({ extended: true, limit: '50mb' }));
 
+// Middleware to redirect or block unauthorized /api requests
+app.use('/api', (req, res, next) => {
+  const origin = req.headers.origin;
+  const referer = req.headers.referer;
+
+  console.log('Request Origin:', origin, 'Referer:', referer);
+
+  const isAllowed = allowedOrigins.some(allowedOrigin => 
+    origin === allowedOrigin || (referer && referer.startsWith(allowedOrigin))
+  );
+
+  if (!isAllowed) {
+    console.log('Redirecting unauthorized API access to frontend');
+    return res.redirect('https://www.rvtps.com/');
+  }
+
+  next();
+});
+
 // MongoDB Connection
 mongoose
   .connect(process.env.MONGO_URI, {

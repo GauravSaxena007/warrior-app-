@@ -20,8 +20,17 @@
   margin-bottom: 15px;
   margin-top: 5px;
   text-align: center;
-  text-transform: uppercase;
+  color: bisque;
   animation: fadeIn 0.6s ease-in; /* Subtle title fade-in */
+}
+
+.menu-link1 {
+  background-color: #00b344; /* light green */
+  padding: 1px 1px;
+  border-radius: 8px;
+  color: #ffffff; /* darker green text */
+  text-decoration: none;
+ 
 }
 
 /* Sidebar Menu */
