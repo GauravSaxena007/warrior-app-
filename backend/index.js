@@ -30,8 +30,7 @@ const allowedOrigins = [
   'http://168.231.102.114',
   'https://168.231.102.114',
   'http://192.168.29.156:5000',
-  'https://rvtps.onrender.com',
-
+  'https://rvtps-web.onrender.com',
 ];
 
 app.use(
