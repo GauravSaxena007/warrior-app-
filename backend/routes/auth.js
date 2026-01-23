@@ -8,8 +8,8 @@ const Franchisee = require('../models/Franchisee'); // Adjust path accordingly
 // admin user 
 const adminUser = {
   email: 'admin@login.com',
-  password: '123456', // plain password
-  role: 'admin1',
+  password: '1234567', // plain password
+  role: 'admin',
 };
 
 // POST /api/auth/adminlogin (Admin Login)

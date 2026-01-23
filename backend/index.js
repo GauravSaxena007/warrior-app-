@@ -70,7 +70,7 @@ app.use('/api', (req, res, next) => {
 
   if (!isAllowed) {
     console.log('Redirecting unauthorized API access to frontend');
-    return res.redirect('https://rvtps-web.onrender.com/');
+    return res.redirect('https://rvtps-web.onrender.com');
   }
 
   next();

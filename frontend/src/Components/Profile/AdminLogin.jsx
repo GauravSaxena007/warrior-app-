@@ -9,10 +9,13 @@ const AdminLogin = () => {
 
   const handleLogin = async (e) => {
     e.preventDefault();
+
+    console.log("API URL:", import.meta.env.VITE_API_URL); 
+
     try {
       const response = await axios.post(`${import.meta.env.VITE_API_URL}/api/auth/adminlogin`,{
-        email,
-        password,
+        email: email.trim().toLowerCase(),
+  password: password.trim(),
       });
 
       const { token, user } = response.data;
@@ -22,10 +25,10 @@ const AdminLogin = () => {
 
       alert('Login successful!');
       // Redirect to admin panel with token in URL
-      window.location.href = `${import.meta.env.VITE_ADMIN_URL}/dashboard/dashboard?token=${token}`;
+      window.location.href = `${import.meta.env.VITE_ADMIN_URL}/dashboard/dashboard?token=${token}`; 
     } catch (error) {
       console.error('Login failed:', error);
-      alert('Invalid email or password');
+      alert('Invalid email or password yr');
     }
   };
 
