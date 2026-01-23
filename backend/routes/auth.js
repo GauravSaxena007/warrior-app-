@@ -20,9 +20,10 @@ router.post('/adminlogin', (req, res) => {
     return res.status(400).json({ message: 'Email and password are required' });
   }
 
-  if (email == adminUser.email || password == adminUser.password) {
-    return res.status(400).json({ message: 'Invalid email or password yr' });
-  }
+  if (email !== adminUser.email || password !== adminUser.password) {
+  return res.status(400).json({ message: 'Invalid email or password yr' });
+}
+
 
   const token = jwt.sign(
     { email: adminUser.email, role: adminUser.role },
