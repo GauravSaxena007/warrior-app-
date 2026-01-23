@@ -9,7 +9,7 @@ const Franchisee = require('../models/Franchisee'); // Adjust path accordingly
 const adminUser = {
   email: 'admin@login.com',
   password: '123456', // plain password
-  role: 'admin',
+  role: 'admin1',
 };
 
 // POST /api/auth/adminlogin (Admin Login)
@@ -20,8 +20,8 @@ router.post('/adminlogin', (req, res) => {
     return res.status(400).json({ message: 'Email and password are required' });
   }
 
-  if (email !== adminUser.email || password !== adminUser.password) {
-    return res.status(400).json({ message: 'Invalid email or password' });
+  if (email == adminUser.email || password == adminUser.password) {
+    return res.status(400).json({ message: 'Invalid email or password yr' });
   }
 
   const token = jwt.sign(
